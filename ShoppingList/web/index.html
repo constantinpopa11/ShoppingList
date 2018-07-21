@@ -9,21 +9,142 @@
         <title>Collapsible sidebar using Bootstrap 4</title>
 
         <!-- FA Icons -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-        <!-- Bootstrap CSS CDN -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"  crossorigin="anonymous">
-        <!-- Our Custom CSS -->
-        <link rel="stylesheet" href="css/style.css">
-
+        <link href="stylesheet" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
         <!-- Font Awesome JS -->
         <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" crossorigin="anonymous"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"  crossorigin="anonymous"></script>
 
+        <!-- Bootstrap CSS CDN -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"  crossorigin="anonymous">
+        <!-- jQuery CDN - Slim version (=without AJAX) -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <!-- Popper.JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+        <!-- Bootstrap JS -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <!-- Our Custom CSS -->
+        <link rel="stylesheet" href="css/style.css">
+
+        <style>
+            .btn-remove-list {
+                background-color: #ffffff; 
+                border: none;
+                width: 80px;
+                height: 40px;
+                color: #5067c2; /* White text */
+                padding: 12px 16px; 
+                border-radius: 5px;
+                font-size: 14px; 
+                cursor: pointer; /* Mouse pointer on hover */
+            }
+
+            .btn-remove-list:hover {
+                background-color: #efefef;
+                color: #5067c2;
+                text-decoration: underline;
+            }
+
+            .btn-add-item {
+                background-color: #ffffff; 
+                border: none; 
+                width: 80px;
+                height: 40px; 
+                color: #5067c2; /* White text */
+                padding: 12px 16px; 
+                border-radius: 5px;
+                font-size: 14px; 
+                cursor: pointer; /* Mouse pointer on hover */
+            }
+
+            .btn-add-item:hover {
+                background-color: #efefef;
+                color: #5067c2;
+                text-decoration: underline;
+            }
+
+            .list-header{
+                height: 80px;
+                background-color: #5067c2;
+            }
+
+            .list-name{
+                color: #fff;
+                font-size: 24px;
+            }
+
+
+            /* The container */
+            .checkbox-container {
+                display: block;
+                position: relative;
+                padding-left: 35px;
+                margin-bottom: 12px;
+                cursor: pointer;
+                font-size: 22px;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
+            /* Hide the browser's default checkbox */
+            .checkbox-container input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+            }
+
+            /* Create a custom checkbox */
+            .checkmark {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 25px;
+                width: 25px;
+                background-color: #eee;
+            }
+
+            /* On mouse-over, add a grey background color */
+            .checkbox-container:hover input ~ .checkmark {
+                background-color: #ccc;
+            }
+
+            /* When the checkbox is checked, add a blue background */
+            .checkbox-container input:checked ~ .checkmark {
+                background-color: #5067c2;
+            }
+
+            /* Create the checkmark/indicator (hidden when not checked) */
+            .checkmark:after {
+                content: "";
+                position: absolute;
+                display: none;
+            }
+
+            /* Show the checkmark when checked */
+            .checkbox-container input:checked ~ .checkmark:after {
+                display: block;
+            }
+
+            /* Style the checkmark/indicator */
+            .checkbox-container .checkmark:after {
+                left: 9px;
+                top: 5px;
+                width: 5px;
+                height: 10px;
+                border: solid white;
+                border-width: 0 3px 3px 0;
+                -webkit-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+            }
+
+
+        </style>
     </head>
 
     <body>
-
 
 
         <div class="wrapper">
@@ -107,62 +228,225 @@
                     </div>
                 </nav>
 
-                <!-- Material form register -->
-                <form>
-                    <p class="h4 text-center mb-4">Sign up</p>
+                <div id="accordion" style="width: 640px">
 
-                    <!-- Material input text -->
-                    <div class="md-form">
-                        <i class="fa fa-user prefix grey-text"></i>
-                        <input type="text" id="materialFormRegisterNameEx" class="form-control">
-                        <label for="materialFormRegisterNameEx">Your name</label>
+
+                    <div class="card">
+                        <div class="card-header list-header" id="listHeader">
+                            <h5 class="mb-0 list-name">
+
+
+                                <div class="row" data-toggle="collapse" data-target="#listDetails">
+                                    <div class="col my-auto">My shopping list</div>
+
+                                    <div class="col-5 my-auto">
+                                        <a href="#removeList" class="btn-remove-list" data-toggle="modal"><i class="fas fa-times"></i> Remove</a>
+                                        <a href="#addItem" class="btn-add-item" data-toggle="modal"><i class="fas fa-plus-circle"></i> Add item</a>
+                                    </div>
+
+                                </div>
+                        </div>
+
+                        <div id="listDetails" class="collapse"  data-parent="#accordion">
+                            <div class="card-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Material input email -->
-                    <div class="md-form">
-                        <i class="fa fa-envelope prefix grey-text"></i>
-                        <input type="email" id="materialFormRegisterEmailEx" class="form-control">
-                        <label for="materialFormRegisterEmailEx">Your email</label>
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+
+
+                                <div class="row" data-toggle="collapse" data-target="#collapseOne">
+                                    <div class="col-1 my-auto">
+                                        <label class="checkbox-container">
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+
+                                    <div class="col-3 my-auto">
+                                        <img src="http://www.gayalliance.org/wp-content/uploads/2016/02/banana-png-image.jpg"  width="60" height="60"/>
+                                    </div>
+
+                                    <div class="col">
+
+                                        <div class="row">
+                                            <div class="col">
+                                                Item1
+                                            </div>
+                                            <div class="col-1">
+                                                <span><i class="fa fa-trash"></i></span>
+                                            </div>
+                                            <div class="col-1">
+                                                <span><i class="fas fa-pencil-alt"></i></span>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col">
+                                                <small>Category 1</small>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col">
+                                                <small>Quantity: 2 kg</small>
+                                            </div>
+                                            <div class="col-1 my-auto">
+                                                <span><i class="fas fa-chevron-down"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Material input email -->
-                    <div class="md-form">
-                        <i class="fa fa-exclamation-triangle prefix grey-text"></i>
-                        <input type="email" id="materialFormRegisterConfirmEx" class="form-control">
-                        <label for="materialFormRegisterConfirmEx">Confirm your email</label>
+
+
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+
+
+                                <div class="row" data-toggle="collapse" data-target="#collapseOne">
+                                    <div class="col-1 my-auto">
+                                        <label class="checkbox-container">
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+
+                                    <div class="col-3 my-auto">
+                                        <img src="http://www.gayalliance.org/wp-content/uploads/2016/02/banana-png-image.jpg"  width="60" height="60"/>
+                                    </div>
+
+                                    <div class="col">
+
+                                        <div class="row">
+                                            <div class="col">
+                                                Item1
+                                            </div>
+                                            <div class="col-1">
+                                                <span><i class="fa fa-trash"></i></span>
+                                            </div>
+                                            <div class="col-1">
+                                                <span><i class="fas fa-pencil-alt"></i></span>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col">
+                                                <small>Category 1</small>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col">
+                                                <small>Quantity: 2 kg</small>
+                                            </div>
+                                            <div class="col-1 my-auto">
+                                                <span><i class="fas fa-chevron-down"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Material input password -->
-                    <div class="md-form">
-                        <i class="fa fa-lock prefix grey-text"></i>
-                        <input type="password" id="materialFormRegisterPasswordEx" class="form-control">
-                        <label for="materialFormRegisterPasswordEx">Your password</label>
-                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
 
-                    <div class="text-center mt-4">
-                        <button class="btn btn-primary" type="submit">Register</button>
+
+                                <div class="row" data-toggle="collapse" data-target="#collapseOne">
+                                    <div class="col-1 my-auto">
+                                        <label class="checkbox-container">
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+
+                                    <div class="col-3 my-auto">
+                                        <img src="http://www.gayalliance.org/wp-content/uploads/2016/02/banana-png-image.jpg"  width="60" height="60"/>
+                                    </div>
+
+                                    <div class="col">
+
+                                        <div class="row">
+                                            <div class="col">
+                                                Item1
+                                            </div>
+                                            <div class="col-1">
+                                                <span><i class="fa fa-trash"></i></span>
+                                            </div>
+                                            <div class="col-1">
+                                                <span><i class="fas fa-pencil-alt"></i></span>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col">
+                                                <small>Category 1</small>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col">
+                                                <small>Quantity: 2 kg</small>
+                                            </div>
+                                            <div class="col-1 my-auto">
+                                                <span><i class="fas fa-chevron-down"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            </div>
+                        </div>
                     </div>
-                </form>
-                <!-- Material form register -->
+                </div>
+
+
+
 
             </div>
+
         </div>
+    </div>
 
-        <!-- jQuery CDN - Slim version (=without AJAX) -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <!-- Popper.JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-        <!-- Bootstrap JS -->
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#sidebarCollapse').on('click', function () {
-                    $('#sidebar').toggleClass('active');
-                    $(this).toggleClass('active');
-                });
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $(this).toggleClass('active');
             });
-        </script>
-    </body>
+        });
+    </script>
+</body>
 
 </html>
