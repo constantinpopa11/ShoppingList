@@ -107,13 +107,23 @@
                     <div class="navbar-collapse justify-content-end collapse">
 
                         <ul class="navbar-nav pt-1">
-                            <li class="nav-item">
-                                <a class="nav-link" href="login.jsp">Log In</a>
-                            </li>
+                            <c:set var = "user" scope = "page" value = "${sessionScope.user}"/>
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="signup.jsp">Sign Up</a>
-                            </li>
+                            <c:if test="${user != null}">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="LogOut"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                                </li>
+                            </c:if>
+
+                            <c:if test="${user == null}">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="login.jsp"><i class="fas fa-sign-in-alt"></i> Log In</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="signup.jsp"><i class="fas fa-user-edit"></i> Sign Up</a>
+                                </li>
+                            </c:if>
                         </ul>
                     </div>
                 </nav>
@@ -130,7 +140,7 @@
                         <p class="text-center login-tip">Registered members can access extra features</p>
 
                         <hr>
-                        
+
                         <!--TODO css-->
                         <c:if test="${wrongEmail != null}">
                             <div class="error-msg">${wrongEmail}</div>
@@ -142,7 +152,7 @@
                             <!--<a href="forgot.jsp"><span class="text-center"><u>Forgot password?</u></span></a>-->
                         </c:if>
 
-                        
+
 
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">

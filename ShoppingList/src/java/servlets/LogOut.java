@@ -14,32 +14,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import other.Utils;
 
 /**
  * Servlet implementation class LogoutServlet
  */
 public class LogOut extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	
-        response.setContentType("text/html");
-    	Cookie[] cookies = request.getCookies();
-    	if(cookies != null){
-    	for(Cookie cookie : cookies){
-    		if(cookie.getName().equals("JSESSIONID")){
-    			System.out.println("JSESSIONID=" + cookie.getValue() + " logged out");
-    			break;
-    		}
-    	}
-    	}
-    	//invalidate the session
-    	HttpSession session = request.getSession(false);
-    	System.out.println("User = " + session.getAttribute("user") + " logged out");
-    	if(session != null){
-    		session.invalidate();
-    	}
-    	response.sendRedirect("login.jsp");
-    }
 
+    private static final long serialVersionUID = 1L;
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        response.setContentType("text/html");
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("JSESSIONID")) {
+                    System.out.println("JSESSIONID=" + cookie.getValue() + " logged out");
+                    break;
+                }
+            }
+        }
+        
+        HttpSession session = request.getSession(false);
+        System.out.println("User = " + session.getAttribute("user") + " logged out");
+        session.removeAttribute(Utils.USER_COOKIE);
+        response.sendRedirect("login.jsp");
+    }
+    
 }

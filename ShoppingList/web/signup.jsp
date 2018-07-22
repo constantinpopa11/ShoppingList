@@ -11,9 +11,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
         <title>Sign Up</title>
-        
+
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
-        
+
         <!-- jQuery CDN - Slim version (=without AJAX) -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <!-- Popper.JS -->
@@ -30,8 +30,8 @@
         <!-- Font Awesome JS -->
         <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" crossorigin="anonymous"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"  crossorigin="anonymous"></script>
-        
-        
+
+
         <link rel="stylesheet" href="css/signup.css">
     </head>
 
@@ -105,15 +105,24 @@
                     </button>
 
                     <div class="navbar-collapse justify-content-end collapse">
-
                         <ul class="navbar-nav pt-1">
-                            <li class="nav-item">
-                                <a class="nav-link" href="login.jsp">Log In</a>
-                            </li>
+                            <c:set var = "user" scope = "page" value = "${sessionScope.user}"/>
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="signup.jsp">Sign Up</a>
-                            </li>
+                            <c:if test="${user != null}">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="LogOut"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                                </li>
+                            </c:if>
+
+                            <c:if test="${user == null}">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="login.jsp"><i class="fas fa-sign-in-alt"></i> Log In</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="signup.jsp"><i class="fas fa-user-edit"></i> Sign Up</a>
+                                </li>
+                            </c:if>
                         </ul>
                     </div>
                 </nav>
@@ -136,7 +145,7 @@
                         <!--TODO css-->
                         <div class="error-msg">${errorMessage}</div>
 
-                        
+
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-user"></i></span>
@@ -176,14 +185,14 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-envelope"></i><i class="fa fa-check" id="mail-check"></i></i></span>
                             </div>
-                            
+
                             <c:if test="${confirmEmail != null}">
                                 <input type="email" name="confirmEmail" value="${confirmEmail}" class="form-control" required>
                             </c:if>
                             <c:if test="${confirmEmail == null}">
                                 <input type="email" class="form-control" name="confirmEmail" placeholder="Confirm Email Address" required="required">
                             </c:if>
-                            
+
                         </div>
 
                         <div class="input-group mb-3">
@@ -214,7 +223,7 @@
 
                 </div>
 
-                
+
 
             </div>
         </div>

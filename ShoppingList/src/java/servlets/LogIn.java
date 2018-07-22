@@ -103,24 +103,20 @@ public class LogIn extends HttpServlet {
         HttpSession session = request.getSession();
         session.setAttribute(Utils.USER_COOKIE, email);
         
-        Cookie userCookie = new Cookie(Utils.USER_COOKIE, email);
         
         if(rememberMe){
             session.setMaxInactiveInterval(Utils.REMEMBER_ME_MAX_INACTIVE_INTERVAL);
-            userCookie.setMaxAge(Utils.REMEMBER_ME_MAX_INACTIVE_INTERVAL);
         } else {
             session.setMaxInactiveInterval(Utils.NO_REMEMBER_ME_MAX_INACTIVE_INTERVAL);
-            userCookie.setMaxAge(Utils.NO_REMEMBER_ME_MAX_INACTIVE_INTERVAL);
         }
         
-        response.addCookie(userCookie);
-        //TODO:response.sendRedirect("LoginSuccess.jsp");
+        response.sendRedirect("home.jsp");
 
         out.println("<b>Email :</b> " + email);
         out.println("<br/>");
         out.println("<b>Password :</b> " + passwordHash);
         out.println("<br/>");
-        out.println("<b>Remember Me :</b> " + rememberMe + " " + userCookie.getMaxAge());
+        out.println("<b>Remember Me :</b> " + rememberMe + " " + session.getMaxInactiveInterval());
         out.println("<br/>");
 
         out.println("</body>");

@@ -25,6 +25,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import other.Utils;
 
 
 
@@ -48,9 +49,10 @@ public class AuthenticationFilter implements Filter {
 
         HttpSession session = req.getSession(true);
 
-        if ((uri.endsWith("myaccount"))) {
-            System.out.println("Unauthorized access request");
-            res.sendRedirect("login.jsp");
+        if (session.getAttribute(Utils.USER_COOKIE) != null  
+                && (uri.endsWith("login.jsp") || uri.endsWith("signup.jsp"))) {
+            
+            res.sendRedirect("home.jsp");
         } else {
             // pass the request along the filter chain
             chain.doFilter(request, response);
