@@ -8,9 +8,11 @@ package servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import other.Utils;
 
 /**
@@ -84,9 +86,10 @@ public class LogIn extends HttpServlet {
         out.println("</head>");
         out.println("<body bgcolor=\"white\">");
 
-        String email = request.getParameter(Utils.SIGNUP_EMAIL_FIELD);
-        String passwordHash = request.getParameter(Utils.SIGNUP_PASSWORD_FIELD);
-        
+        String email = request.getParameter(Utils.LOGIN_EMAIL_FIELD);
+        String passwordHash = request.getParameter(Utils.LOGIN_PASSWORD_FIELD);
+        boolean rememberMe = request.getParameter(Utils.LOGIN_REMEMBER_ME_FLAG) == null ? false : true;
+
         if (!email.equals("mario@rossi.com")) {
             //TODO: Check if email exists
             request.setAttribute("wrongEmail", "There's no account associated to this email address");
@@ -96,12 +99,30 @@ public class LogIn extends HttpServlet {
             request.setAttribute("wrongPassword", "Wrong password");
             request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
+
+        HttpSession session = request.getSession();
+        session.setAttribute(Utils.USER_COOKIE, email);
         
+        Cookie userCookie = new Cookie(Utils.USER_COOKIE, email);
+        
+        if(rememberMe){
+            session.setMaxInactiveInterval(Utils.REMEMBER_ME_MAX_INACTIVE_INTERVAL);
+            userCookie.setMaxAge(Utils.REMEMBER_ME_MAX_INACTIVE_INTERVAL);
+        } else {
+            session.setMaxInactiveInterval(Utils.NO_REMEMBER_ME_MAX_INACTIVE_INTERVAL);
+            userCookie.setMaxAge(Utils.NO_REMEMBER_ME_MAX_INACTIVE_INTERVAL);
+        }
+        
+        response.addCookie(userCookie);
+        //TODO:response.sendRedirect("LoginSuccess.jsp");
+
         out.println("<b>Email :</b> " + email);
         out.println("<br/>");
         out.println("<b>Password :</b> " + passwordHash);
         out.println("<br/>");
-     
+        out.println("<b>Remember Me :</b> " + rememberMe + " " + userCookie.getMaxAge());
+        out.println("<br/>");
+
         out.println("</body>");
         out.println("</html>");
         out.close();

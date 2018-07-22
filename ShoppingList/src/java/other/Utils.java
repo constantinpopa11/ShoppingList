@@ -20,5 +20,11 @@ public class Utils {
     
     public static final String LOGIN_EMAIL_FIELD = "email";
     public static final String LOGIN_PASSWORD_FIELD = "password";
+    public static final String LOGIN_REMEMBER_ME_FLAG = "rememberMe";
+    
+    public static final int REMEMBER_ME_MAX_INACTIVE_INTERVAL = 7 * 24 * 60 * 60; // 7 days
+    public static final int NO_REMEMBER_ME_MAX_INACTIVE_INTERVAL = 6 * 60 * 60; // 6 hours
+    public static final int ANONYMOUS_USER_MAX_INACTIVE_INTERVAL = 3 * 24 * 60 * 60; // 3 days
+    public static final String USER_COOKIE = "user";
     
 }

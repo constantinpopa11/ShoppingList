@@ -164,7 +164,9 @@
                         </div>
 
                         <div class="clearfix mb-4">
-                            <label class="pull-left checkbox-inline" id="remember-me"><input type="checkbox"> Remember me</label>
+                            <label class="pull-left checkbox-inline" id="remember-me">
+                                <input type="checkbox" name="rememberMe"> Remember me</input>
+                            </label>
                             <a href="#" class="pull-right">Forgot Password?</a>
                         </div>
 

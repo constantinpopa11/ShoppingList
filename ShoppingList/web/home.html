@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <title>Collapsible sidebar using Bootstrap 4</title>
+        <title>Shopping List App</title>
 
         <!-- FA Icons -->
         <link href="stylesheet" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
@@ -27,16 +27,17 @@
         <link rel="stylesheet" href="css/style.css">
 
         <style>
+            /*
             .btn-remove-list {
                 background-color: #ffffff; 
                 border: none;
                 width: 80px;
                 height: 40px;
-                color: #5067c2; /* White text */
+                color: #5067c2; 
                 padding: 12px 16px; 
                 border-radius: 5px;
                 font-size: 14px; 
-                cursor: pointer; /* Mouse pointer on hover */
+                cursor: pointer; 
             }
 
             .btn-remove-list:hover {
@@ -50,11 +51,11 @@
                 border: none; 
                 width: 80px;
                 height: 40px; 
-                color: #5067c2; /* White text */
+                color: #5067c2; 
                 padding: 12px 16px; 
                 border-radius: 5px;
                 font-size: 14px; 
-                cursor: pointer; /* Mouse pointer on hover */
+                cursor: pointer; 
             }
 
             .btn-add-item:hover {
@@ -63,6 +64,8 @@
                 text-decoration: underline;
             }
 
+            */
+            
             .list-header{
                 height: 80px;
                 background-color: #5067c2;
@@ -71,6 +74,11 @@
             .list-name{
                 color: #fff;
                 font-size: 24px;
+            }
+
+            .list-name:hover{
+                text-decoration: underline;
+                cursor: pointer;
             }
 
 
@@ -138,6 +146,42 @@
                 -webkit-transform: rotate(45deg);
                 -ms-transform: rotate(45deg);
                 transform: rotate(45deg);
+            }
+            
+            .item-action-ic{
+                color: #727272;
+            }
+            
+            .item-action-ic:hover{
+                color: #3d3d3d;
+                cursor: pointer;
+            }
+            
+            .list-action-ic{
+                color: #f7f7f7;
+                font-size: 24px;
+                margin-left: 6px;
+                margin-right: 6px;
+            }
+            
+            .list-action-ic:hover{
+                color: #e5e5e5;
+                cursor: pointer;
+            }
+            
+            .item-expand-ic{
+                color: #969696;
+                font-size: 16px;
+            } 
+            
+            .item-expand-ic:hover{
+                color: #3d3d3d;
+                cursor: pointer;
+            }
+            
+            .list-expand-ic{
+                color: #fff; 
+                font-size: 16px;
             }
 
 
@@ -233,18 +277,22 @@
 
                     <div class="card">
                         <div class="card-header list-header" id="listHeader">
-                            <h5 class="mb-0 list-name">
 
-
-                                <div class="row" data-toggle="collapse" data-target="#listDetails">
-                                    <div class="col my-auto">My shopping list</div>
-
-                                    <div class="col-5 my-auto">
-                                        <a href="#removeList" class="btn-remove-list" data-toggle="modal"><i class="fas fa-times"></i> Remove</a>
-                                        <a href="#addItem" class="btn-add-item" data-toggle="modal"><i class="fas fa-plus-circle"></i> Add item</a>
-                                    </div>
-
+                            <div class="row" data-toggle="collapse" data-target="#listDetails">
+                                <div class="col my-auto">
+                                    <h5 class="mb-0 list-name">
+                                        My shopping list <i class="fas fa-chevron-down list-expand-ic"></i>
+                                    </h5>
                                 </div>
+
+                                <div class="col-4 my-auto">
+                                    <a href="#removeList" data-toggle="modal"><i class="fas fa-trash list-action-ic"></i></a>
+                                    <a href="#addItem" data-toggle="modal"><i class="fas fa-plus-circle list-action-ic"></i></a>
+                                    <a href="#addItem" data-toggle="modal"><i class="fas fa-cart-plus list-action-ic"></i></a>
+                                    <a href="#addItem" data-toggle="modal"><i class="fas fa-check-square list-action-ic"></i></a>
+                                </div>
+
+                            </div>
                         </div>
 
                         <div id="listDetails" class="collapse"  data-parent="#accordion">
@@ -273,15 +321,15 @@
 
                                     <div class="col">
 
-                                        <div class="row">
+                                        <div class="row" >
                                             <div class="col">
                                                 Item1
                                             </div>
                                             <div class="col-1">
-                                                <span><i class="fa fa-trash"></i></span>
+                                                <span><i class="fas fa-pencil-alt item-action-ic"></i></span>
                                             </div>
                                             <div class="col-1">
-                                                <span><i class="fas fa-pencil-alt"></i></span>
+                                                <span><i class="fas fa-times item-action-ic"></i></span>
                                             </div>
 
                                         </div>
@@ -298,7 +346,7 @@
                                                 <small>Quantity: 2 kg</small>
                                             </div>
                                             <div class="col-1 my-auto">
-                                                <span><i class="fas fa-chevron-down"></i></span>
+                                                <span><i class="fas fa-chevron-down item-expand-ic"></i></span>
                                             </div>
                                         </div>
                                     </div>
@@ -338,12 +386,11 @@
                                                 Item1
                                             </div>
                                             <div class="col-1">
-                                                <span><i class="fa fa-trash"></i></span>
+                                                <span><i class="fas fa-pencil-alt item-action-ic"></i></span>
                                             </div>
                                             <div class="col-1">
-                                                <span><i class="fas fa-pencil-alt"></i></span>
+                                                <span><i class="fas fa-times item-action-ic"></i></span>
                                             </div>
-
                                         </div>
 
                                         <div class="row">
@@ -358,7 +405,7 @@
                                                 <small>Quantity: 2 kg</small>
                                             </div>
                                             <div class="col-1 my-auto">
-                                                <span><i class="fas fa-chevron-down"></i></span>
+                                                <span><i class="fas fa-chevron-down item-expand-ic"></i></span>
                                             </div>
                                         </div>
                                     </div>
@@ -396,12 +443,11 @@
                                                 Item1
                                             </div>
                                             <div class="col-1">
-                                                <span><i class="fa fa-trash"></i></span>
+                                                <span><i class="fas fa-pencil-alt item-action-ic"></i></span>
                                             </div>
                                             <div class="col-1">
-                                                <span><i class="fas fa-pencil-alt"></i></span>
+                                                <span><i class="fas fa-times item-action-ic"></i></span>
                                             </div>
-
                                         </div>
 
                                         <div class="row">
@@ -416,7 +462,7 @@
                                                 <small>Quantity: 2 kg</small>
                                             </div>
                                             <div class="col-1 my-auto">
-                                                <span><i class="fas fa-chevron-down"></i></span>
+                                                <span><i class="fas fa-chevron-down item-expand-ic"></i></span>
                                             </div>
                                         </div>
                                     </div>
