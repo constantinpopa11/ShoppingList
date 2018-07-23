@@ -29,165 +29,6 @@
         <!-- Our Custom CSS -->
         <link rel="stylesheet" href="css/home.css">
 
-        <style>
-            /*
-            .btn-remove-list {
-                background-color: #ffffff;
-                border: none;
-                width: 80px;
-                height: 40px;
-                color: #5067c2;
-                padding: 12px 16px;
-                border-radius: 5px;
-                font-size: 14px;
-                cursor: pointer;
-            }
-
-            .btn-remove-list:hover {
-                background-color: #efefef;
-                color: #5067c2;
-                text-decoration: underline;
-            }
-
-            .btn-add-item {
-                background-color: #ffffff;
-                border: none;
-                width: 80px;
-                height: 40px;
-                color: #5067c2;
-                padding: 12px 16px;
-                border-radius: 5px;
-                font-size: 14px;
-                cursor: pointer;
-            }
-
-            .btn-add-item:hover {
-                background-color: #efefef;
-                color: #5067c2;
-                text-decoration: underline;
-            }
-
-            */
-
-            .list-header{
-                height: 80px;
-                background-color: #5067c2;
-            }
-
-            .list-name{
-                color: #fff;
-                font-size: 24px;
-            }
-
-            .list-name:hover{
-                text-decoration: underline;
-                cursor: pointer;
-            }
-
-
-            /* The container */
-            .checkbox-container {
-                display: block;
-                position: relative;
-                padding-left: 35px;
-                margin-bottom: 12px;
-                cursor: pointer;
-                font-size: 22px;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                user-select: none;
-            }
-
-            /* Hide the browser's default checkbox */
-            .checkbox-container input {
-                position: absolute;
-                opacity: 0;
-                cursor: pointer;
-            }
-
-            /* Create a custom checkbox */
-            .checkmark {
-                position: absolute;
-                top: 0;
-                left: 0;
-                height: 25px;
-                width: 25px;
-                background-color: #eee;
-            }
-
-            /* On mouse-over, add a grey background color */
-            .checkbox-container:hover input ~ .checkmark {
-                background-color: #ccc;
-            }
-
-            /* When the checkbox is checked, add a blue background */
-            .checkbox-container input:checked ~ .checkmark {
-                background-color: #5067c2;
-            }
-
-            /* Create the checkmark/indicator (hidden when not checked) */
-            .checkmark:after {
-                content: "";
-                position: absolute;
-                display: none;
-            }
-
-            /* Show the checkmark when checked */
-            .checkbox-container input:checked ~ .checkmark:after {
-                display: block;
-            }
-
-            /* Style the checkmark/indicator */
-            .checkbox-container .checkmark:after {
-                left: 9px;
-                top: 5px;
-                width: 5px;
-                height: 10px;
-                border: solid white;
-                border-width: 0 3px 3px 0;
-                -webkit-transform: rotate(45deg);
-                -ms-transform: rotate(45deg);
-                transform: rotate(45deg);
-            }
-
-            .item-action-ic{
-                color: #727272;
-            }
-
-            .item-action-ic:hover{
-                color: #3d3d3d;
-                cursor: pointer;
-            }
-
-            .list-action-ic{
-                color: #f7f7f7;
-                font-size: 24px;
-                margin-left: 10px;
-                margin-right: 10px;
-            }
-
-            .list-action-ic:hover{
-                color: #e5e5e5;
-                cursor: pointer;
-            }
-
-            .item-expand-ic{
-                color: #969696;
-                font-size: 16px;
-            }
-
-            .item-expand-ic:hover{
-                color: #3d3d3d;
-                cursor: pointer;
-            }
-
-            .list-expand-ic{
-                color: #fff;
-                font-size: 16px;
-            }
-
-        </style>
     </head>
 
     <body>
@@ -329,9 +170,7 @@
                                     </div>
 
                                     <div class="col-3 my-auto">
-                                        <a class="collapsed font-weight-bold white-text" data-toggle="collapse" href="#collapse1" aria-expanded="false" aria-controls="collapse98">
-					  <img src="http://www.gayalliance.org/wp-content/uploads/2016/02/banana-png-image.jpg"  width="60" height="60"/>
-                			</a>
+                                        <img src="http://www.gayalliance.org/wp-content/uploads/2016/02/banana-png-image.jpg"  width="60" height="60"/>
                                     </div>
 
                                     <div class="col">
@@ -361,16 +200,14 @@
                                                 <small>Quantity: 2 kg</small>
                                             </div>
                                             <div class="col-1 my-auto">
-                                                <span> <a class="collapsed font-weight-bold white-text" data-toggle="collapse" href="#collapse1" aria-expanded="false" aria-controls="collapse98">
-						       <i class="fas fa-chevron-down  "></i> 
-                				      </a></i></span>
+                                                <span><i class="fas fa-chevron-down item-expand-ic"></i></span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                         </div>
 
-                        <div id="collapse1" class="collapse" role="tabpanel" aria-labelledby="heading98" data-parent="#accordionEx23">
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="card-body">
                                 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                             </div>
@@ -379,7 +216,6 @@
 
 
 
-                   
                     <div class="card">
                         <div class="card-header" id="headingOne">
                             <h5 class="mb-0">
@@ -394,14 +230,12 @@
                                     </div>
 
                                     <div class="col-3 my-auto">
-                                        <a class="collapsed font-weight-bold white-text" data-toggle="collapse" href="#collapse2" aria-expanded="false" aria-controls="collapse98">
-					  <img src="http://www.gayalliance.org/wp-content/uploads/2016/02/banana-png-image.jpg"  width="60" height="60"/>
-                			</a>
+                                        <img src="http://www.gayalliance.org/wp-content/uploads/2016/02/banana-png-image.jpg"  width="60" height="60"/>
                                     </div>
 
                                     <div class="col">
 
-                                        <div class="row" >
+                                        <div class="row">
                                             <div class="col">
                                                 Item1
                                             </div>
@@ -411,7 +245,6 @@
                                             <div class="col-1">
                                                 <span><i class="fas fa-times item-action-ic"></i></span>
                                             </div>
-
                                         </div>
 
                                         <div class="row">
@@ -426,24 +259,20 @@
                                                 <small>Quantity: 2 kg</small>
                                             </div>
                                             <div class="col-1 my-auto">
-                                                <span> <a class="collapsed font-weight-bold white-text" data-toggle="collapse" href="#collapse2" aria-expanded="false" aria-controls="collapse98">
-						       <i class="fas fa-chevron-down  "></i> 
-                				      </a></i></span>
+                                                <span><i class="fas fa-chevron-down item-expand-ic"></i></span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                         </div>
 
-                        <div id="collapse2" class="collapse" role="tabpanel" aria-labelledby="heading98" data-parent="#accordionEx23">
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="card-body">
                                 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                             </div>
                         </div>
                     </div>
 
-
-                   
                     <div class="card">
                         <div class="card-header" id="headingOne">
                             <h5 class="mb-0">
@@ -458,14 +287,12 @@
                                     </div>
 
                                     <div class="col-3 my-auto">
-                                        <a class="collapsed font-weight-bold white-text" data-toggle="collapse" href="#collapse3" aria-expanded="false" aria-controls="collapse98">
-					  <img src="http://www.gayalliance.org/wp-content/uploads/2016/02/banana-png-image.jpg"  width="60" height="60"/>
-                			</a>
+                                        <img src="http://www.gayalliance.org/wp-content/uploads/2016/02/banana-png-image.jpg"  width="60" height="60"/>
                                     </div>
 
                                     <div class="col">
 
-                                        <div class="row" >
+                                        <div class="row">
                                             <div class="col">
                                                 Item1
                                             </div>
@@ -475,7 +302,6 @@
                                             <div class="col-1">
                                                 <span><i class="fas fa-times item-action-ic"></i></span>
                                             </div>
-
                                         </div>
 
                                         <div class="row">
@@ -490,21 +316,20 @@
                                                 <small>Quantity: 2 kg</small>
                                             </div>
                                             <div class="col-1 my-auto">
-                                                <span> <a class="collapsed font-weight-bold white-text" data-toggle="collapse" href="#collapse3" aria-expanded="false" aria-controls="collapse98">
-						       <i class="fas fa-chevron-down  "></i> 
-                				      </a></i></span>
+                                                <span><i class="fas fa-chevron-down item-expand-ic"></i></span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                         </div>
 
-                        <div id="collapse3" class="collapse" role="tabpanel" aria-labelledby="heading98" data-parent="#accordionEx23">
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="card-body">
                                 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                             </div>
                         </div>
                     </div>
+                </div>
 
 
 
