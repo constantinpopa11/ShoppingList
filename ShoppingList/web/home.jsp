@@ -1,5 +1,4 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="other.Utils" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
 <!DOCTYPE html>
@@ -28,7 +27,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <!-- Our Custom CSS -->
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/home.css">
 
         <style>
             /*
@@ -163,9 +162,9 @@
 
             .list-action-ic{
                 color: #f7f7f7;
-                font-size: 24px;
-                margin-left: 6px;
-                margin-right: 6px;
+                font-size: 32px;
+                margin-left: 10px;
+                margin-right: 10px;
             }
 
             .list-action-ic:hover{
@@ -300,10 +299,9 @@
                                 </div>
 
                                 <div class="col-4 my-auto">
-                                    <a href="#removeList" data-toggle="modal"><i class="fas fa-trash list-action-ic"></i></a>
-                                    <a href="#addItem" data-toggle="modal"><i class="fas fa-plus-circle list-action-ic"></i></a>
                                     <a href="#addItem" data-toggle="modal"><i class="fas fa-cart-plus list-action-ic"></i></a>
-                                    <a href="#addItem" data-toggle="modal"><i class="fas fa-check-square list-action-ic"></i></a>
+                                    <a href="#addItem" data-toggle="modal"><i class="fas fa-file-medical list-action-ic"></i></a>
+                                    <a href="#removeList" data-toggle="modal"><i class="fas fa-trash list-action-ic"></i></a>
                                 </div>
 
                             </div>

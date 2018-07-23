@@ -5,6 +5,9 @@
  */
 package servlets;
 
+import constants.FormFields;
+import constants.LoginStatus;
+import database.DBConnectionManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,7 +16,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import other.Utils;
+import constants.Utils;
+import database.DBConnectionManager;
+import database.UserQueries;
+import java.sql.Connection;
 
 /**
  *
@@ -86,42 +92,43 @@ public class LogIn extends HttpServlet {
         out.println("</head>");
         out.println("<body bgcolor=\"white\">");
 
-        String email = request.getParameter(Utils.LOGIN_EMAIL_FIELD);
-        String passwordHash = request.getParameter(Utils.LOGIN_PASSWORD_FIELD);
-        boolean rememberMe = request.getParameter(Utils.LOGIN_REMEMBER_ME_FLAG) == null ? false : true;
+        String email = request.getParameter(FormFields.LOGIN_EMAIL_FIELD);
+        String passwordHash = request.getParameter(FormFields.LOGIN_PASSWORD_FIELD);
+        boolean rememberMe = request.getParameter(FormFields.LOGIN_REMEMBER_ME_FLAG) == null ? false : true;
 
-        if (!email.equals("mario@rossi.com")) {
-            //TODO: Check if email exists
+        DBConnectionManager dbManager = (DBConnectionManager)getServletContext().getAttribute("DBManager");
+        Connection conn = dbManager.getConnection();
+        
+        int status = UserQueries.verifyUserQuery(conn, email, passwordHash);
+
+        if (status == LoginStatus.WRONG_EMAIL) {
             request.setAttribute("wrongEmail", "There's no account associated to this email address");
             request.getRequestDispatcher("/login.jsp").forward(request, response);
-        } else if (!passwordHash.equals("123")) {
-            //TODO: Check if password is correct
+        } else if (status == LoginStatus.WRONG_PASSWORD) {
             request.setAttribute("wrongPassword", "Wrong password");
             request.getRequestDispatcher("/login.jsp").forward(request, response);
+        } else if (status == LoginStatus.CORRECT_LOGIN_DETAILS) {
+            HttpSession session = request.getSession();
+            session.setAttribute(Utils.USER_COOKIE, email);
+
+            if (rememberMe) {
+                session.setMaxInactiveInterval(Utils.REMEMBER_ME_MAX_INACTIVE_INTERVAL);
+            } else {
+                session.setMaxInactiveInterval(Utils.NO_REMEMBER_ME_MAX_INACTIVE_INTERVAL);
+            }
+
+            response.sendRedirect("home.jsp");
+            out.println("<b>Email :</b> " + email);
+            out.println("<br/>");
+            out.println("<b>Password :</b> " + passwordHash);
+            out.println("<br/>");
+            out.println("<b>Remember Me :</b> " + rememberMe + " " + session.getMaxInactiveInterval());
+            out.println("<br/>");
+
+            out.println("</body>");
+            out.println("</html>");
+            out.close();
         }
-
-        HttpSession session = request.getSession();
-        session.setAttribute(Utils.USER_COOKIE, email);
-        
-        
-        if(rememberMe){
-            session.setMaxInactiveInterval(Utils.REMEMBER_ME_MAX_INACTIVE_INTERVAL);
-        } else {
-            session.setMaxInactiveInterval(Utils.NO_REMEMBER_ME_MAX_INACTIVE_INTERVAL);
-        }
-        
-        response.sendRedirect("home.jsp");
-
-        out.println("<b>Email :</b> " + email);
-        out.println("<br/>");
-        out.println("<b>Password :</b> " + passwordHash);
-        out.println("<br/>");
-        out.println("<b>Remember Me :</b> " + rememberMe + " " + session.getMaxInactiveInterval());
-        out.println("<br/>");
-
-        out.println("</body>");
-        out.println("</html>");
-        out.close();
 
     }
 

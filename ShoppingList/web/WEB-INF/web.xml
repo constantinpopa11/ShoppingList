@@ -3,9 +3,25 @@
     <welcome-file-list>
         <welcome-file>home.jsp</welcome-file>
     </welcome-file-list>
+    <context-param>
+        <param-name>DBUSER</param-name>
+        <param-value>sldb_user</param-value>
+    </context-param>
+    <context-param>
+        <param-name>DBPWD</param-name>
+        <param-value/>
+    </context-param>
+    <context-param>
+        <param-name>DBURL</param-name>
+        <param-value>jdbc:mysql://108.61.205.105/sldb</param-value>
+    </context-param>
     <listener>
         <description>HttpSessionListener</description>
         <listener-class>listeners.HttpSessionListenerImpl</listener-class>
+    </listener>
+    <listener>
+        <description>ServletContextListener</description>
+        <listener-class>listeners.AppContextListener</listener-class>
     </listener>
     <servlet>
         <servlet-name>SignUp</servlet-name>

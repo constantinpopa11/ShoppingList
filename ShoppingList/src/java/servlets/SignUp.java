@@ -5,7 +5,8 @@ package servlets;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import other.Utils;
+import constants.FormFields;
+import constants.Utils;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -83,12 +84,12 @@ public class SignUp extends HttpServlet {
         out.println("</head>");
         out.println("<body bgcolor=\"white\">");
 
-        String name = request.getParameter(Utils.SIGNUP_NAME_FIELD);
-        String surname = request.getParameter(Utils.SIGNUP_SURNAME_FIELD);
-        String email = request.getParameter(Utils.SIGNUP_EMAIL_FIELD);
-        String emailConfirm = request.getParameter(Utils.SIGNUP_EMAIL_CONFIRM_FIELD);
-        String passwordHash = request.getParameter(Utils.SIGNUP_PASSWORD_FIELD);
-        String passwordConfirmHash = request.getParameter(Utils.SIGNUP_PASSWORD_CONFIRM_FIELD);
+        String name = request.getParameter(FormFields.SIGNUP_NAME_FIELD);
+        String surname = request.getParameter(FormFields.SIGNUP_SURNAME_FIELD);
+        String email = request.getParameter(FormFields.SIGNUP_EMAIL_FIELD);
+        String emailConfirm = request.getParameter(FormFields.SIGNUP_EMAIL_CONFIRM_FIELD);
+        String passwordHash = request.getParameter(FormFields.SIGNUP_PASSWORD_FIELD);
+        String passwordConfirmHash = request.getParameter(FormFields.SIGNUP_PASSWORD_CONFIRM_FIELD);
 
         out.println("<b>First name entered:</b> " + name);
         out.println("<br/>");
