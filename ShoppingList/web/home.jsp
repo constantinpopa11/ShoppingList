@@ -162,7 +162,7 @@
 
             .list-action-ic{
                 color: #f7f7f7;
-                font-size: 32px;
+                font-size: 24px;
                 margin-left: 10px;
                 margin-right: 10px;
             }
@@ -298,10 +298,12 @@
                                     </h5>
                                 </div>
 
-                                <div class="col-4 my-auto">
+                                <div class="col-5 my-auto">
                                     <a href="#addItem" data-toggle="modal"><i class="fas fa-cart-plus list-action-ic"></i></a>
                                     <a href="#addItem" data-toggle="modal"><i class="fas fa-file-medical list-action-ic"></i></a>
+                                    <a href="#removeList" data-toggle="modal"><i class="fas fa-share-alt list-action-ic"></i></a>
                                     <a href="#removeList" data-toggle="modal"><i class="fas fa-trash list-action-ic"></i></a>
+                                    
                                 </div>
 
                             </div>
