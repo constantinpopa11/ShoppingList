@@ -23,8 +23,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <!-- Bootstrap CSS CDN -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"  crossorigin="anonymous">
-        <!-- Our Custom CSS -->
-        <link rel="stylesheet" href="css/home.css">
 
         <!-- Font Awesome JS -->
         <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" crossorigin="anonymous"></script>
@@ -32,6 +30,9 @@
 
 
         <link rel="stylesheet" href="css/login.css">
+        <link rel="stylesheet" href="css/sidebar.css">
+        <link rel="stylesheet" href="css/navbar.css">
+        
     </head>
 
     <body>
