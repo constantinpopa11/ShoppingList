@@ -207,8 +207,16 @@
                             </div>
                             <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password" required="required">
                         </div>
-
-
+                        
+                        <!--
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fas fa-image"></i></i></span></span>
+                                                    </div>
+                                                    <input type="file" class="form-control" name="profilePic" placeholder="Profile Picture (Optiona)">
+                                                </div>
+                        -->
+                        
                         <div class="form-group text-center">
                             <label class="checkbox-inline"><input name="acceptCheckbox" type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
                         </div>

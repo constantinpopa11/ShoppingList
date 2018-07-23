@@ -6,9 +6,13 @@ package servlets;
  * and open the template in the editor.
  */
 import constants.FormFields;
+import constants.SignupStatus;
 import constants.Utils;
+import database.DBConnectionManager;
+import database.UserQueries;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,20 +36,6 @@ public class SignUp extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        /*
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SignUp</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SignUp at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-         */
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -60,7 +50,7 @@ public class SignUp extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.sendRedirect("signup.jsp");
     }
 
     /**
@@ -75,52 +65,60 @@ public class SignUp extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-
-        out.println("<html>");
-        out.println("<head>");
-        out.println("<title>Servlets and forms: Exercise 1</title>");
-        out.println("</head>");
-        out.println("<body bgcolor=\"white\">");
-
-        String name = request.getParameter(FormFields.SIGNUP_NAME_FIELD);
-        String surname = request.getParameter(FormFields.SIGNUP_SURNAME_FIELD);
+        String firstName = request.getParameter(FormFields.SIGNUP_FIRST_NAME_FIELD);
+        String lastName = request.getParameter(FormFields.SIGNUP_LAST_NAME_FIELD);
         String email = request.getParameter(FormFields.SIGNUP_EMAIL_FIELD);
         String emailConfirm = request.getParameter(FormFields.SIGNUP_EMAIL_CONFIRM_FIELD);
         String passwordHash = request.getParameter(FormFields.SIGNUP_PASSWORD_FIELD);
         String passwordConfirmHash = request.getParameter(FormFields.SIGNUP_PASSWORD_CONFIRM_FIELD);
 
-        out.println("<b>First name entered:</b> " + name);
-        out.println("<br/>");
-        out.println("<b>Last name entered :</b> " + surname);
-        out.println("<br/>");
-        out.println("<b>Email :</b> " + email);
-        out.println("<br/>");
-        out.println("<b>Email confirm:</b> " + emailConfirm);
-        out.println("<br/>");
-        out.println("<b>Password :</b> " + passwordHash);
-        out.println("<br/>");
-        out.println("<b>Password Confirm:</b> " + passwordHash);
-        out.println("<br/>");
-
         if (!email.equals(emailConfirm)) {
-            request.setAttribute("errorMessage", "The confirmation Email doesn't match.");
+            request.setAttribute("errorMessage", "The confirmation email doesn't match.");
             request.getRequestDispatcher("/signup.jsp").forward(request, response);
-        
-        } else if (!email.equals("mario@rossi.com")) {
-            //TODO: Check if email exists
-            request.setAttribute("errorMessage", "The email provided is already associated to another account");
-            request.getRequestDispatcher("/signup.jsp").forward(request, response);
-        
+
         } else if (!passwordHash.equals(passwordConfirmHash)) {
             request.setAttribute("errorMessage", "The confirmation password doesn't match.");
             request.getRequestDispatcher("/signup.jsp").forward(request, response);
         }
 
-        out.println("</body>");
-        out.println("</html>");
-        out.close();
+        DBConnectionManager dbManager = (DBConnectionManager) getServletContext().getAttribute("DBManager");
+        Connection conn = dbManager.getConnection();
+        int status = UserQueries.checkIfEmailAlreadyExists(conn, firstName, lastName, email, passwordHash);
+
+        if (status == SignupStatus.ALREADY_REGISTERED) {
+            request.setAttribute("errorMessage", "The email provided is already associated to another account");
+            request.getRequestDispatcher("/signup.jsp").forward(request, response);
+
+        } else if (status == SignupStatus.SIGNUP_SUCCESS) {
+
+            UserQueries.insertUser(conn, email, firstName, lastName, null, passwordHash, Utils.STANDARD_USER_PRIVILEGES);
+
+            response.setContentType("text/html");
+            PrintWriter out = response.getWriter();
+
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlets and forms: Exercise 1</title>");
+            out.println("</head>");
+            out.println("<body bgcolor=\"white\">");
+            out.println("<b>First name entered:</b> " + firstName);
+            out.println("<br/>");
+            out.println("<b>Last name entered :</b> " + lastName);
+            out.println("<br/>");
+            out.println("<b>Email :</b> " + email);
+            out.println("<br/>");
+            out.println("<b>Email confirm:</b> " + emailConfirm);
+            out.println("<br/>");
+            out.println("<b>Password :</b> " + passwordHash);
+            out.println("<br/>");
+            out.println("<b>Password Confirm:</b> " + passwordHash);
+            out.println("<br/>");
+
+            out.println("</body>");
+            out.println("</html>");
+            out.close();
+
+        }
 
     }
 
