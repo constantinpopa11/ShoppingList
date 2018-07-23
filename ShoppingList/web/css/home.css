@@ -70,14 +70,7 @@ a, a:hover, a:focus {
     margin-left: -250px;
     transform: rotateY(100deg);
 }
-#buttonx {
-    padding-right: -10px;
-}
 
-#buttons {
-
-
-}
 
 #sidebar .sidebar-header {
     padding: 20px;
@@ -332,6 +325,10 @@ a.article, a.article:hover {
 #sidebarCollapse span:last-of-type {
     transform: rotate(-45deg) translate(1px, -1px);
 }
+#buttons  {
+    padding-right: 13px;
+}
+
 
 
 #sidebarCollapse.active span {
@@ -374,7 +371,6 @@ a.article, a.article:hover {
 
 }
 
-//new added
 .list-header{
     height: 80px;
     background-color: #5067c2;
