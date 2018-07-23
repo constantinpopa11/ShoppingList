@@ -187,17 +187,6 @@
                 font-size: 16px;
             }
 
-            a:link, a:visited {
-            text-decoration: underline;
-            color: #7c7c7d;
-            background-color: transparent;
-        }
-        a:hover, a:active {
-            text-decoration: underline overline;
-            color: #7c7c7d;
-        }
-
-
         </style>
     </head>
 
