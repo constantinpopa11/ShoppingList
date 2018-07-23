@@ -45,24 +45,23 @@
                 <jsp:include page="navbar.jsp" />
 
                 <div id="accordion" >
-
-
+                  <!--  contenitore  roba comune STUFF -->
                     <div class="card">
                         <div class="card-header list-header" id="listHeader">
-
-                            <div class="row" data-toggle="collapse" data-target="#listDetails">
+                            <div class="row">
                                 <div class="col my-auto">
-                                    <h5 class="mb-0 list-name">
+                                    <h5 class="mb-0 list-name" data-toggle="" >
                                         My shopping list <i class="fas fa-chevron-down list-expand-ic"></i>
                                     </h5>
                                 </div>
+                                <div class="col-5" data-toggle="collapse" data-target="#listDetails">
+                                </div>
 
-                                <div class="col-">
+                                <div class="col-" id="buttons">
                                     <a href="#addItem" data-toggle="modal"><i class="fas fa-cart-plus list-action-ic"></i></a>
                                     <a href="#addItem" data-toggle="modal"><i class="fas fa-file-medical list-action-ic"></i></a>
                                     <a href="#removeList" data-toggle="modal"><i class="fas fa-share-alt list-action-ic"></i></a>
                                     <a href="#removeList" data-toggle="modal"><i class="fas fa-trash list-action-ic"></i></a>
-
                                 </div>
 
                             </div>
@@ -74,54 +73,51 @@
                             </div>
                         </div>
                     </div>
-
+                    <!--  first elemnt  -->
                     <div class="card">
                         <div class="card-header" id="headingOne">
                             <h5 class="mb-0">
-
-
-                                <div class="row" data-toggle="collapse" data-target="#collapseOne">
+                                <div class="row" >
                                     <div class="col-1 my-auto">
                                         <label class="checkbox-container">
                                             <input type="checkbox">
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>
-
-                                    <div class="col-3 my-auto">
+                                    <!--  banana pic -->
+                                    <div class="col-2"  data-toggle="collapse" data-target="#collapseOne">
                                         <img src="http://www.gayalliance.org/wp-content/uploads/2016/02/banana-png-image.jpg"  width="60" height="60"/>
                                     </div>
 
-                                    <div class="col">
+                                    <div class="col"  >
+                                        <div class="row" >
+                                            <div class="col"  data-toggle="collapse" data-target="#collapseOne">
+                                                Item1
+                                            </div>
+                                            <div class="col-1">
+                                                <span><i class="fas fa-pencil-alt item-action-ic"></i></span>
+                                            </div>
+                                            <div class="col-1">
+                                                <span><i class="fas fa-times item-action-ic"></i></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row"  data-toggle="collapse" data-target="#collapseOne">
+                                            <div class="col">
+                                                <small>Category 1</small>
+                                            </div>
+
+                                        </div>
 
                                         <div class="row" >
-                                            <div class="col">
-                                                Item1
-                                            </div>
-                                            <div class="col-1">
-                                                <span><i class="fas fa-pencil-alt item-action-ic"></i></span>
-                                            </div>
-                                            <div class="col-1">
-                                                <span><i class="fas fa-times item-action-ic"></i></span>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col">
-                                                <small>Category 1</small>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col">
+                                            <div class="col"  data-toggle="collapse" data-target="#collapseOne">
                                                 <small>Quantity: 2 kg</small>
                                             </div>
-                                            <div class="col-1 my-auto">
+                                            <div class="col-1 my-auto"  data-toggle="collapse" data-target="#collapseOne">
                                                 <span><i class="fas fa-chevron-down item-expand-ic"></i></span>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                         </div>
@@ -132,30 +128,25 @@
                             </div>
                         </div>
                     </div>
-
-
-
+                    <!--  second elemnt  -->
                     <div class="card">
                         <div class="card-header" id="headingOne">
                             <h5 class="mb-0">
-
-
-                                <div class="row" data-toggle="collapse" data-target="#collapseOne">
+                                <div class="row" >
                                     <div class="col-1 my-auto">
                                         <label class="checkbox-container">
                                             <input type="checkbox">
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>
-
-                                    <div class="col-3 my-auto">
+                                    <!--  banana pic -->
+                                    <div class="col-2"  data-toggle="collapse" data-target="#collapseOne">
                                         <img src="http://www.gayalliance.org/wp-content/uploads/2016/02/banana-png-image.jpg"  width="60" height="60"/>
                                     </div>
 
-                                    <div class="col">
-
-                                        <div class="row">
-                                            <div class="col">
+                                    <div class="col"  >
+                                        <div class="row" >
+                                            <div class="col"  data-toggle="collapse" data-target="#collapseOne">
                                                 Item1
                                             </div>
                                             <div class="col-1">
@@ -166,21 +157,22 @@
                                             </div>
                                         </div>
 
-                                        <div class="row">
+                                        <div class="row"  data-toggle="collapse" data-target="#collapseOne">
                                             <div class="col">
                                                 <small>Category 1</small>
                                             </div>
 
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col">
+                                        <div class="row" >
+                                            <div class="col"  data-toggle="collapse" data-target="#collapseOne">
                                                 <small>Quantity: 2 kg</small>
                                             </div>
-                                            <div class="col-1 my-auto">
+                                            <div class="col-1 my-auto"  data-toggle="collapse" data-target="#collapseOne">
                                                 <span><i class="fas fa-chevron-down item-expand-ic"></i></span>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                         </div>
@@ -191,28 +183,25 @@
                             </div>
                         </div>
                     </div>
-
+                    <!--  third elemnt  -->
                     <div class="card">
                         <div class="card-header" id="headingOne">
                             <h5 class="mb-0">
-
-
-                                <div class="row" data-toggle="collapse" data-target="#collapseOne">
+                                <div class="row" >
                                     <div class="col-1 my-auto">
                                         <label class="checkbox-container">
                                             <input type="checkbox">
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>
-
-                                    <div class="col-3 my-auto">
+                                    <!--  banana pic -->
+                                    <div class="col-2"  data-toggle="collapse" data-target="#collapseOne">
                                         <img src="http://www.gayalliance.org/wp-content/uploads/2016/02/banana-png-image.jpg"  width="60" height="60"/>
                                     </div>
 
-                                    <div class="col">
-
-                                        <div class="row">
-                                            <div class="col">
+                                    <div class="col"  >
+                                        <div class="row" >
+                                            <div class="col"  data-toggle="collapse" data-target="#collapseOne">
                                                 Item1
                                             </div>
                                             <div class="col-1">
@@ -223,21 +212,22 @@
                                             </div>
                                         </div>
 
-                                        <div class="row">
+                                        <div class="row"  data-toggle="collapse" data-target="#collapseOne">
                                             <div class="col">
                                                 <small>Category 1</small>
                                             </div>
 
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col">
+                                        <div class="row" >
+                                            <div class="col"  data-toggle="collapse" data-target="#collapseOne">
                                                 <small>Quantity: 2 kg</small>
                                             </div>
-                                            <div class="col-1 my-auto">
+                                            <div class="col-1 my-auto"  data-toggle="collapse" data-target="#collapseOne">
                                                 <span><i class="fas fa-chevron-down item-expand-ic"></i></span>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                         </div>
@@ -248,13 +238,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
 
 
-
+                </div> <!--  end accordion -->
             </div>
-
         </div>
 
         <script type="text/javascript">

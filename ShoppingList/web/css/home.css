@@ -20,15 +20,6 @@ p {
     margin: 0 !important;
 }
 
-#buttonx {
-    padding-right: -10px;
-}
-
-#buttons {
-
-
-}
-
 .list-header{
     padding-right: 20px;
     height: 80px;
@@ -153,11 +144,4 @@ p {
     color: #3d3d3d;
     cursor: pointer;
 }
-
-
-
-
-/* ---------------------------------------------------
-    CONTENT STYLE
------------------------------------------------------ */
 
