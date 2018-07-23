@@ -269,6 +269,7 @@
                 </nav>
                 <!-- CARD FOR SHOPPING LIST -->
                 <div id="accordion">
+                  
                     <div class="card">
                         <div class="card-header list-header" id="listHeader">
 
