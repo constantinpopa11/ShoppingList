@@ -17,6 +17,9 @@ public class Utils {
     public static final int NO_REMEMBER_ME_MAX_INACTIVE_INTERVAL = 6 * 60 * 60; // 6 hours
     public static final int ANONYMOUS_USER_MAX_INACTIVE_INTERVAL = 3 * 24 * 60 * 60; // 3 days
     public static final String USER_COOKIE = "user";
+    public static final int STANDARD_USER_PRIVILEGES = 1;
+    public static final int ADMIN_PRIVILEGES = 0;
+    public static final String DEFAULT_AVATAR_PATH = "../profilePictures/default_avatar.jpg";
 
     
 }

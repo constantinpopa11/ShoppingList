@@ -27,6 +27,7 @@ import java.sql.Connection;
  */
 public class LogIn extends HttpServlet {
 
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,20 +40,7 @@ public class LogIn extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        /*
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LogIn</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LogIn at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-         */
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -67,7 +55,8 @@ public class LogIn extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        response.sendRedirect("login.jsp");
     }
 
     /**
@@ -81,25 +70,15 @@ public class LogIn extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-
-        out.println("<html>");
-        out.println("<head>");
-        out.println("<title>Servlets and forms: Exercise 1</title>");
-        out.println("</head>");
-        out.println("<body bgcolor=\"white\">");
 
         String email = request.getParameter(FormFields.LOGIN_EMAIL_FIELD);
         String passwordHash = request.getParameter(FormFields.LOGIN_PASSWORD_FIELD);
         boolean rememberMe = request.getParameter(FormFields.LOGIN_REMEMBER_ME_FLAG) == null ? false : true;
 
-        DBConnectionManager dbManager = (DBConnectionManager)getServletContext().getAttribute("DBManager");
+        DBConnectionManager dbManager = (DBConnectionManager) getServletContext().getAttribute("DBManager");
         Connection conn = dbManager.getConnection();
-        
-        int status = UserQueries.verifyUserQuery(conn, email, passwordHash);
+
+        int status = UserQueries.verifyUserCredentials(conn, email, passwordHash);
 
         if (status == LoginStatus.WRONG_EMAIL) {
             request.setAttribute("wrongEmail", "There's no account associated to this email address");
@@ -118,16 +97,6 @@ public class LogIn extends HttpServlet {
             }
 
             response.sendRedirect("home.jsp");
-            out.println("<b>Email :</b> " + email);
-            out.println("<br/>");
-            out.println("<b>Password :</b> " + passwordHash);
-            out.println("<br/>");
-            out.println("<b>Remember Me :</b> " + rememberMe + " " + session.getMaxInactiveInterval());
-            out.println("<br/>");
-
-            out.println("</body>");
-            out.println("</html>");
-            out.close();
         }
 
     }

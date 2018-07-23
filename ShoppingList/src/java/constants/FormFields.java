@@ -11,8 +11,8 @@ package constants;
  */
 public class FormFields {
 
-    public static final String SIGNUP_NAME_FIELD = "firstName";
-    public static final String SIGNUP_SURNAME_FIELD = "lastName";
+    public static final String SIGNUP_FIRST_NAME_FIELD = "firstName";
+    public static final String SIGNUP_LAST_NAME_FIELD = "lastName";
     public static final String SIGNUP_EMAIL_FIELD = "email";
     public static final String SIGNUP_EMAIL_CONFIRM_FIELD = "confirmEmail";
     public static final String SIGNUP_PASSWORD_FIELD = "password";

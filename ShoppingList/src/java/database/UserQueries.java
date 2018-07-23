@@ -8,7 +8,10 @@ package database;
 import constants.DBColumns;
 import constants.DBTables;
 import constants.LoginStatus;
+import constants.SignupStatus;
+import constants.Utils;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,7 +22,7 @@ import java.sql.Statement;
  */
 public class UserQueries {
 
-    public static int verifyUserQuery(Connection conn, String email, String password) {
+    public static int verifyUserCredentials(Connection conn, String email, String password) {
         Statement stmt = null;
 
         int result = LoginStatus.WRONG_EMAIL;
@@ -28,12 +31,12 @@ public class UserQueries {
 
             stmt = conn.createStatement();
             String queryStr;
-            queryStr = "SELECT " + DBColumns.USERS_EMAIL_COL 
-                    + ", " + DBColumns.USERS_PASSWORD_COL 
+            queryStr = "SELECT " + DBColumns.USERS_EMAIL_COL
+                    + ", " + DBColumns.USERS_PASSWORD_COL
                     + " FROM " + DBTables.USERS_TABLE
-                    + " WHERE " 
+                    + " WHERE "
                     + DBColumns.USERS_EMAIL_COL + "='" + email + "';";
-            
+
             ResultSet rs = stmt.executeQuery(queryStr);
 
             //Extract data from result set
@@ -69,5 +72,101 @@ public class UserQueries {
         }//end try
 
         return result;
+    }
+
+    public static int checkIfEmailAlreadyExists(Connection conn, String firstName, String lastName, String email, String password) {
+        Statement stmt = null;
+
+        int result = SignupStatus.SIGNUP_SUCCESS;
+
+        try {
+
+            stmt = conn.createStatement();
+            String queryStr;
+            queryStr = "SELECT " + DBColumns.USERS_EMAIL_COL
+                    + " FROM " + DBTables.USERS_TABLE
+                    + " WHERE "
+                    + DBColumns.USERS_EMAIL_COL + "='" + email + "';";
+
+            ResultSet rs = stmt.executeQuery(queryStr);
+
+            //If this executes it means there is already an account associated to the email adress
+            while (rs.next()) {
+                result = SignupStatus.ALREADY_REGISTERED;
+            }
+            //Clean-up environment
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+
+        return result;
+    }
+
+    public static void insertUser(Connection conn, String email, String firstName, String lastName,
+            String avatarPath, String password, int privileges) {
+
+        PreparedStatement preparedStmt = null;
+
+        try {
+
+
+            String queryStr = " INSERT INTO " + DBTables.USERS_TABLE
+                    + " (" + DBColumns.USERS_EMAIL_COL
+                    + ", " + DBColumns.USERS_FIRST_NAME_COL
+                    + ", " + DBColumns.USERS_LAST_NAME_COL
+                    + ", " + DBColumns.USERS_AVATAR_PATH_COL
+                    + ", " + DBColumns.USERS_PASSWORD_COL
+                    + ", " + DBColumns.USERS_PRIVILEGES_COL
+                    + ") VALUES (?, ?, ?, ?, ?, ?)";
+
+            // create the mysql insert preparedstatement
+            preparedStmt = conn.prepareStatement(queryStr);
+            preparedStmt.setString(1, email);
+            preparedStmt.setString(2, firstName);
+            preparedStmt.setString(3, lastName);
+
+            if (avatarPath == null) {
+                preparedStmt.setString(4, Utils.DEFAULT_AVATAR_PATH);
+            } else {
+                //TODO
+            }
+
+            preparedStmt.setString(5, password);
+            preparedStmt.setInt(6, privileges);
+
+            // execute the preparedstatement
+            preparedStmt.execute();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (preparedStmt != null) {
+                    preparedStmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+
     }
 }
