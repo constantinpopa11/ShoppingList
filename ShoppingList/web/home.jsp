@@ -330,7 +330,9 @@
                                     </div>
 
                                     <div class="col-3 my-auto">
-                                        <img src="http://www.gayalliance.org/wp-content/uploads/2016/02/banana-png-image.jpg"  width="60" height="60"/>
+                                        <a class="collapsed font-weight-bold white-text" data-toggle="collapse" href="#collapse1" aria-expanded="false" aria-controls="collapse98">
+					  <img src="http://www.gayalliance.org/wp-content/uploads/2016/02/banana-png-image.jpg"  width="60" height="60"/>
+                			</a>
                                     </div>
 
                                     <div class="col">
@@ -360,14 +362,16 @@
                                                 <small>Quantity: 2 kg</small>
                                             </div>
                                             <div class="col-1 my-auto">
-                                                <span><i class="fas fa-chevron-down item-expand-ic"></i></span>
+                                                <span> <a class="collapsed font-weight-bold white-text" data-toggle="collapse" href="#collapse1" aria-expanded="false" aria-controls="collapse98">
+						       <i class="fas fa-chevron-down  "></i> 
+                				      </a></i></span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                         </div>
 
-                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div id="collapse1" class="collapse" role="tabpanel" aria-labelledby="heading98" data-parent="#accordionEx23">
                             <div class="card-body">
                                 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                             </div>
@@ -376,6 +380,7 @@
 
 
 
+                   
                     <div class="card">
                         <div class="card-header" id="headingOne">
                             <h5 class="mb-0">
@@ -390,12 +395,14 @@
                                     </div>
 
                                     <div class="col-3 my-auto">
-                                        <img src="http://www.gayalliance.org/wp-content/uploads/2016/02/banana-png-image.jpg"  width="60" height="60"/>
+                                        <a class="collapsed font-weight-bold white-text" data-toggle="collapse" href="#collapse2" aria-expanded="false" aria-controls="collapse98">
+					  <img src="http://www.gayalliance.org/wp-content/uploads/2016/02/banana-png-image.jpg"  width="60" height="60"/>
+                			</a>
                                     </div>
 
                                     <div class="col">
 
-                                        <div class="row">
+                                        <div class="row" >
                                             <div class="col">
                                                 Item1
                                             </div>
@@ -405,6 +412,7 @@
                                             <div class="col-1">
                                                 <span><i class="fas fa-times item-action-ic"></i></span>
                                             </div>
+
                                         </div>
 
                                         <div class="row">
@@ -419,20 +427,24 @@
                                                 <small>Quantity: 2 kg</small>
                                             </div>
                                             <div class="col-1 my-auto">
-                                                <span><i class="fas fa-chevron-down item-expand-ic"></i></span>
+                                                <span> <a class="collapsed font-weight-bold white-text" data-toggle="collapse" href="#collapse2" aria-expanded="false" aria-controls="collapse98">
+						       <i class="fas fa-chevron-down  "></i> 
+                				      </a></i></span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                         </div>
 
-                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div id="collapse2" class="collapse" role="tabpanel" aria-labelledby="heading98" data-parent="#accordionEx23">
                             <div class="card-body">
                                 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                             </div>
                         </div>
                     </div>
 
+
+                   
                     <div class="card">
                         <div class="card-header" id="headingOne">
                             <h5 class="mb-0">
@@ -447,12 +459,14 @@
                                     </div>
 
                                     <div class="col-3 my-auto">
-                                        <img src="http://www.gayalliance.org/wp-content/uploads/2016/02/banana-png-image.jpg"  width="60" height="60"/>
+                                        <a class="collapsed font-weight-bold white-text" data-toggle="collapse" href="#collapse3" aria-expanded="false" aria-controls="collapse98">
+					  <img src="http://www.gayalliance.org/wp-content/uploads/2016/02/banana-png-image.jpg"  width="60" height="60"/>
+                			</a>
                                     </div>
 
                                     <div class="col">
 
-                                        <div class="row">
+                                        <div class="row" >
                                             <div class="col">
                                                 Item1
                                             </div>
@@ -462,6 +476,7 @@
                                             <div class="col-1">
                                                 <span><i class="fas fa-times item-action-ic"></i></span>
                                             </div>
+
                                         </div>
 
                                         <div class="row">
@@ -476,20 +491,21 @@
                                                 <small>Quantity: 2 kg</small>
                                             </div>
                                             <div class="col-1 my-auto">
-                                                <span><i class="fas fa-chevron-down item-expand-ic"></i></span>
+                                                <span> <a class="collapsed font-weight-bold white-text" data-toggle="collapse" href="#collapse3" aria-expanded="false" aria-controls="collapse98">
+						       <i class="fas fa-chevron-down  "></i> 
+                				      </a></i></span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                         </div>
 
-                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div id="collapse3" class="collapse" role="tabpanel" aria-labelledby="heading98" data-parent="#accordionEx23">
                             <div class="card-body">
                                 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                             </div>
                         </div>
                     </div>
-                </div>
 
 
 
