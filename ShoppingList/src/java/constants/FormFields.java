@@ -17,8 +17,11 @@ public class FormFields {
     public static final String SIGNUP_EMAIL_CONFIRM_FIELD = "confirmEmail";
     public static final String SIGNUP_PASSWORD_FIELD = "password";
     public static final String SIGNUP_PASSWORD_CONFIRM_FIELD = "confirmPassword";
+    public static final String SIGNUP_SUBMIT_BUTTON = "signupBtn";
 
     public static final String LOGIN_EMAIL_FIELD = "email";
     public static final String LOGIN_PASSWORD_FIELD = "password";
     public static final String LOGIN_REMEMBER_ME_FLAG = "rememberMe";
+    public static final String LOGIN_SUBMIT_BUTTON = "loginBtn";
+    
 }

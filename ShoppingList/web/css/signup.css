@@ -61,29 +61,35 @@ body {
 .signup-form .btn-submit{        
 
     background: #6D7FCC;
-    border: solid 1px;
+    color: white;
     min-width: 140px;
 }
 
 .signup-form .btn-cancel{        
     background: #f7f7f7;
-    color: #6D7FCC;
+    color: #5067C2;
     border-color: #6D7FCC;
 }
 
 .signup-form .btn-submit:hover, .signup-form .btn-submit:focus{
     background: #5067C2;
     outline: none;
+    cursor: pointer;
 }
 
 .signup-form .btn-submit:active{
-    background: #yellow;
-    outline: none;
+    background: #4156a8;
 }
 
-.signup-form .btn-cancel:hover, .signup-form .btn-cancel:focus, .signup-form .btn-cancel:active {
-    background: green;
+
+.signup-form .btn-cancel:hover, .signup-form .btn-cancel:focus {
+    background: #ededed;
     outline: none;
+    cursor: pointer;
+}
+
+.signup-form .btn-cancel:active{
+    background: #e2e2e2;
 }
 
 .signup-form a {

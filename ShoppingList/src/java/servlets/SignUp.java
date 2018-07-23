@@ -65,59 +65,75 @@ public class SignUp extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String firstName = request.getParameter(FormFields.SIGNUP_FIRST_NAME_FIELD);
-        String lastName = request.getParameter(FormFields.SIGNUP_LAST_NAME_FIELD);
-        String email = request.getParameter(FormFields.SIGNUP_EMAIL_FIELD);
-        String emailConfirm = request.getParameter(FormFields.SIGNUP_EMAIL_CONFIRM_FIELD);
-        String passwordHash = request.getParameter(FormFields.SIGNUP_PASSWORD_FIELD);
-        String passwordConfirmHash = request.getParameter(FormFields.SIGNUP_PASSWORD_CONFIRM_FIELD);
+        String action = request.getParameter(FormFields.SIGNUP_SUBMIT_BUTTON);
 
-        if (!email.equals(emailConfirm)) {
-            request.setAttribute("errorMessage", "The confirmation email doesn't match.");
-            request.getRequestDispatcher("/signup.jsp").forward(request, response);
+        if (action == null) {
+            response.sendRedirect("signup.jsp");
 
-        } else if (!passwordHash.equals(passwordConfirmHash)) {
-            request.setAttribute("errorMessage", "The confirmation password doesn't match.");
-            request.getRequestDispatcher("/signup.jsp").forward(request, response);
-        }
+        } else if (action.equals("cancel")) { //cancel was pressed
 
-        DBConnectionManager dbManager = (DBConnectionManager) getServletContext().getAttribute("DBManager");
-        Connection conn = dbManager.getConnection();
-        int status = UserQueries.checkIfEmailAlreadyExists(conn, firstName, lastName, email, passwordHash);
+            String prevPage = request.getParameter("prevPage");
+            if (prevPage == null || prevPage.equals("")) { //signup.jsp is first visited page
+                response.sendRedirect("home.jsp");
+            } else {
+                response.sendRedirect(prevPage); //there is a prev page before signup was accessed
+            }
 
-        if (status == SignupStatus.ALREADY_REGISTERED) {
-            request.setAttribute("errorMessage", "The email provided is already associated to another account");
-            request.getRequestDispatcher("/signup.jsp").forward(request, response);
+        } else if (action.equals("signup")) { //signup was pressed
+            String firstName = request.getParameter(FormFields.SIGNUP_FIRST_NAME_FIELD);
+            String lastName = request.getParameter(FormFields.SIGNUP_LAST_NAME_FIELD);
+            String email = request.getParameter(FormFields.SIGNUP_EMAIL_FIELD);
+            String emailConfirm = request.getParameter(FormFields.SIGNUP_EMAIL_CONFIRM_FIELD);
+            String passwordHash = request.getParameter(FormFields.SIGNUP_PASSWORD_FIELD);
+            String passwordConfirmHash = request.getParameter(FormFields.SIGNUP_PASSWORD_CONFIRM_FIELD);
 
-        } else if (status == SignupStatus.SIGNUP_SUCCESS) {
+            if (!email.equals(emailConfirm)) {
+                request.setAttribute("errorMessage", "The confirmation email doesn't match.");
+                request.getRequestDispatcher("/signup.jsp").forward(request, response);
 
-            UserQueries.insertUser(conn, email, firstName, lastName, null, passwordHash, Utils.STANDARD_USER_PRIVILEGES);
+            } else if (!passwordHash.equals(passwordConfirmHash)) {
+                request.setAttribute("errorMessage", "The confirmation password doesn't match.");
+                request.getRequestDispatcher("/signup.jsp").forward(request, response);
+            }
 
-            response.setContentType("text/html");
-            PrintWriter out = response.getWriter();
+            DBConnectionManager dbManager = (DBConnectionManager) getServletContext().getAttribute("DBManager");
+            Connection conn = dbManager.getConnection();
+            int status = UserQueries.checkIfEmailAlreadyExists(conn, firstName, lastName, email, passwordHash);
 
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlets and forms: Exercise 1</title>");
-            out.println("</head>");
-            out.println("<body bgcolor=\"white\">");
-            out.println("<b>First name entered:</b> " + firstName);
-            out.println("<br/>");
-            out.println("<b>Last name entered :</b> " + lastName);
-            out.println("<br/>");
-            out.println("<b>Email :</b> " + email);
-            out.println("<br/>");
-            out.println("<b>Email confirm:</b> " + emailConfirm);
-            out.println("<br/>");
-            out.println("<b>Password :</b> " + passwordHash);
-            out.println("<br/>");
-            out.println("<b>Password Confirm:</b> " + passwordHash);
-            out.println("<br/>");
+            if (status == SignupStatus.ALREADY_REGISTERED) {
+                request.setAttribute("errorMessage", "The email provided is already associated to another account");
+                request.getRequestDispatcher("/signup.jsp").forward(request, response);
 
-            out.println("</body>");
-            out.println("</html>");
-            out.close();
+            } else if (status == SignupStatus.SIGNUP_SUCCESS) {
 
+                UserQueries.insertUser(conn, email, firstName, lastName, null, passwordHash, Utils.STANDARD_USER_PRIVILEGES);
+
+                response.setContentType("text/html");
+                PrintWriter out = response.getWriter();
+
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Servlets and forms: Exercise 1</title>");
+                out.println("</head>");
+                out.println("<body bgcolor=\"white\">");
+                out.println("<b>First name entered:</b> " + firstName);
+                out.println("<br/>");
+                out.println("<b>Last name entered :</b> " + lastName);
+                out.println("<br/>");
+                out.println("<b>Email :</b> " + email);
+                out.println("<br/>");
+                out.println("<b>Email confirm:</b> " + emailConfirm);
+                out.println("<br/>");
+                out.println("<b>Password :</b> " + passwordHash);
+                out.println("<br/>");
+                out.println("<b>Password Confirm:</b> " + passwordHash);
+                out.println("<br/>");
+
+                out.println("</body>");
+                out.println("</html>");
+                out.close();
+
+            }
         }
 
     }
