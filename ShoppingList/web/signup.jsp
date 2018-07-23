@@ -222,7 +222,8 @@
                         </div>
 
                         <div class="form-group text-center">
-                            <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
+                            <button type="submit" class="btn-submit btn-primary btn-lg">Sign Up</button>
+                            <button type="submit" class="btn-cancel btn-primary btn-lg">Cancel</button>
                         </div>
 
                         <div class="text-center">Already have an account? <a href="login.jsp">Log In here</a></div>

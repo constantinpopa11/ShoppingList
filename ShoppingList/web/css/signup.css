@@ -6,9 +6,19 @@ body {
 .form-control, .form-control:focus, .input-group-addon {
     border-color: #e1e1e1;
 }
-.form-control, .btn {        
+.form-control, .btn-submit, .btn-cancel {        
     border-radius: 3px;
 }
+
+.btn-submit, .btn-cancel{
+    margin-left: 8px;
+    margin-right: 8px;
+    min-width: 140px;
+    border: solid 1px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
 .signup-form {
     width: 460px;
     margin: 0 auto;
@@ -48,17 +58,34 @@ body {
 .signup-form input[type="checkbox"] {
     margin-top: 2px;
 }   
-.signup-form .btn{        
-    font-size: 16px;
-    font-weight: bold;
+.signup-form .btn-submit{        
+
     background: #6D7FCC;
-    border: none;
+    border: solid 1px;
     min-width: 140px;
 }
-.signup-form .btn:hover, .signup-form .btn:focus {
+
+.signup-form .btn-cancel{        
+    background: #f7f7f7;
+    color: #6D7FCC;
+    border-color: #6D7FCC;
+}
+
+.signup-form .btn-submit:hover, .signup-form .btn-submit:focus{
     background: #5067C2;
     outline: none;
 }
+
+.signup-form .btn-submit:active{
+    background: #yellow;
+    outline: none;
+}
+
+.signup-form .btn-cancel:hover, .signup-form .btn-cancel:focus, .signup-form .btn-cancel:active {
+    background: green;
+    outline: none;
+}
+
 .signup-form a {
     color: #2D2D2D;	
     text-decoration: underline;

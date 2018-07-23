@@ -181,8 +181,8 @@
 
 
                         <div class="form-group text-center mb-3">
-                            <button type="submit" class="btn btn-primary btn-lg">Log In</button>
-                            <button type="submit" class="btn btn-primary btn-lg">Cancel</button>
+                            <button type="submit" class="btn-submit btn-primary btn-lg">Log In</button>
+                            <button type="submit" class="btn-cancel btn-primary btn-lg">Cancel</button>
                         </div>
 
 

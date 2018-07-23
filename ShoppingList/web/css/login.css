@@ -6,9 +6,19 @@ body {
 .form-control, .form-control:focus, .input-group-addon {
     border-color: #e1e1e1;
 }
-.form-control, .btn {        
-    border-radius: 10px;
+.form-control, .btn-submit, .btn-cancel {        
+    border-radius: 3px;
 }
+
+.btn-submit, .btn-cancel{
+    margin-left: 8px;
+    margin-right: 8px;
+    min-width: 140px;
+    border: solid 1px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
 .login-form {
     width: 420px;
     margin: 0 auto;
@@ -48,17 +58,29 @@ body {
 .login-form input[type="checkbox"] {
     margin-top: 2px;
 }   
-.login-form .btn{        
-    font-size: 16px;
-    font-weight: bold;
+.login-form .btn-submit{        
+
     background: #6D7FCC;
-    border: none;
+    border: solid 1px;
     min-width: 140px;
 }
-.login-form .btn:hover, .login-form .btn:focus {
+
+.login-form .btn-cancel{        
+    background: #f7f7f7;
+    color: #6D7FCC;
+    border-color: #6D7FCC;
+}
+
+.login-form .btn-submit:hover, .login-form .btn-submit:focus {
     background: #5067C2;
     outline: none;
 }
+
+.login-form .btn-cancel:hover, .login-form .btn-cancel:focus {
+    background: #ededed;
+    outline: none;
+}
+
 .login-form a {
     color: #2D2D2D;	
     text-decoration: underline;
@@ -94,4 +116,3 @@ body {
     padding-bottom: 16px;
     text-align: center;
 }
-
