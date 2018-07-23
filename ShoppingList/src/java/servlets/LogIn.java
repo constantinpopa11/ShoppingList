@@ -27,7 +27,6 @@ import java.sql.Connection;
  */
 public class LogIn extends HttpServlet {
 
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,7 +39,6 @@ public class LogIn extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -55,7 +53,7 @@ public class LogIn extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         response.sendRedirect("login.jsp");
     }
 
@@ -71,32 +69,49 @@ public class LogIn extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String email = request.getParameter(FormFields.LOGIN_EMAIL_FIELD);
-        String passwordHash = request.getParameter(FormFields.LOGIN_PASSWORD_FIELD);
-        boolean rememberMe = request.getParameter(FormFields.LOGIN_REMEMBER_ME_FLAG) == null ? false : true;
+        String action = request.getParameter(FormFields.LOGIN_SUBMIT_BUTTON);
 
-        DBConnectionManager dbManager = (DBConnectionManager) getServletContext().getAttribute("DBManager");
-        Connection conn = dbManager.getConnection();
+        if (action == null) {
+            response.sendRedirect("login.jsp");
 
-        int status = UserQueries.verifyUserCredentials(conn, email, passwordHash);
-
-        if (status == LoginStatus.WRONG_EMAIL) {
-            request.setAttribute("wrongEmail", "There's no account associated to this email address");
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
-        } else if (status == LoginStatus.WRONG_PASSWORD) {
-            request.setAttribute("wrongPassword", "Wrong password");
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
-        } else if (status == LoginStatus.CORRECT_LOGIN_DETAILS) {
-            HttpSession session = request.getSession();
-            session.setAttribute(Utils.USER_COOKIE, email);
-
-            if (rememberMe) {
-                session.setMaxInactiveInterval(Utils.REMEMBER_ME_MAX_INACTIVE_INTERVAL);
+        } else if (action.equals("cancel")) { //cancel was pressed
+            
+            String prevPage = request.getParameter("prevPage");
+            if (prevPage == null || prevPage.equals("")) { //login.jsp is first visited page
+                response.sendRedirect("home.jsp");
             } else {
-                session.setMaxInactiveInterval(Utils.NO_REMEMBER_ME_MAX_INACTIVE_INTERVAL);
+                response.sendRedirect(prevPage); //there is a prev page before login was accessed
             }
 
-            response.sendRedirect("home.jsp");
+        } else if (action.equals("login")) { //login was pressed
+
+            String email = request.getParameter(FormFields.LOGIN_EMAIL_FIELD);
+            String passwordHash = request.getParameter(FormFields.LOGIN_PASSWORD_FIELD);
+            boolean rememberMe = request.getParameter(FormFields.LOGIN_REMEMBER_ME_FLAG) == null ? false : true;
+
+            DBConnectionManager dbManager = (DBConnectionManager) getServletContext().getAttribute("DBManager");
+            Connection conn = dbManager.getConnection();
+
+            int status = UserQueries.verifyUserCredentials(conn, email, passwordHash);
+
+            if (status == LoginStatus.WRONG_EMAIL) {
+                request.setAttribute("wrongEmail", "There's no account associated to this email address");
+                request.getRequestDispatcher("/login.jsp").forward(request, response);
+            } else if (status == LoginStatus.WRONG_PASSWORD) {
+                request.setAttribute("wrongPassword", "Wrong password");
+                request.getRequestDispatcher("/login.jsp").forward(request, response);
+            } else if (status == LoginStatus.CORRECT_LOGIN_DETAILS) {
+                HttpSession session = request.getSession();
+                session.setAttribute(Utils.USER_COOKIE, email);
+
+                if (rememberMe) {
+                    session.setMaxInactiveInterval(Utils.REMEMBER_ME_MAX_INACTIVE_INTERVAL);
+                } else {
+                    session.setMaxInactiveInterval(Utils.NO_REMEMBER_ME_MAX_INACTIVE_INTERVAL);
+                }
+
+                response.sendRedirect("home.jsp");
+            }
         }
 
     }

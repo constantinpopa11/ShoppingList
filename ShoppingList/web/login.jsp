@@ -133,8 +133,9 @@
                     <c:set var = "wrongPassword" scope = "page" value = "${param.wrongPassword}"/>
                     <c:set var = "email" scope = "page" value = "${param.email}"/>
 
-
                     <form action="LogIn" method="POST">
+                        <input name="prevPage" value="${header.referer}" type="hidden"/>
+
                         <h2 class="text-center">Log In</h2>
                         <p class="text-center login-tip">Registered members can access extra features</p>
 
@@ -181,8 +182,8 @@
 
 
                         <div class="form-group text-center mb-3">
-                            <button type="submit" class="btn-submit btn-primary btn-lg">Log In</button>
-                            <button type="submit" class="btn-cancel btn-primary btn-lg">Cancel</button>
+                            <button name="loginBtn" value="login" type="submit" class="btn-submit btn-lg">Log In</button>
+                            <button name="loginBtn" value="cancel" type="submit" class="btn-cancel btn-lg" formnovalidate="formnovalidate">Cancel</button>
                         </div>
 
 

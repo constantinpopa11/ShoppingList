@@ -194,7 +194,7 @@
         }
         a:hover, a:active {
             text-decoration: underline overline;
-            color: ##7c7c7d;
+            color: #7c7c7d;
         }
 
 

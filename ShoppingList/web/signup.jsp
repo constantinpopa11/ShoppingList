@@ -136,6 +136,9 @@
 
 
                     <form action="SignUp" method="POST">
+                        
+                        <input name="prevPage" value="${header.referer}" type="hidden"/>
+                        
                         <h2 class="text-center">Sign Up</h2>
                         <p class="text-center signup-tip">Create your account. It's free and only takes a minute.</p>
 
@@ -207,7 +210,7 @@
                             </div>
                             <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password" required="required">
                         </div>
-                        
+
                         <!--
                                                 <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
@@ -216,14 +219,14 @@
                                                     <input type="file" class="form-control" name="profilePic" placeholder="Profile Picture (Optiona)">
                                                 </div>
                         -->
-                        
+
                         <div class="form-group text-center">
                             <label class="checkbox-inline"><input name="acceptCheckbox" type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
                         </div>
 
                         <div class="form-group text-center">
-                            <button type="submit" class="btn-submit btn-primary btn-lg">Sign Up</button>
-                            <button type="submit" class="btn-cancel btn-primary btn-lg">Cancel</button>
+                            <button name="signupBtn" value="signup" type="submit" class="btn-submit btn-lg">Sign Up</button>
+                            <button name="signupBtn" value="cancel" type="submit" class="btn-cancel btn-lg" formnovalidate="formnovalidate">Cancel</button>
                         </div>
 
                         <div class="text-center">Already have an account? <a href="login.jsp">Log In here</a></div>
