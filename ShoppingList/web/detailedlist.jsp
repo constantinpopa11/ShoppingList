@@ -267,8 +267,9 @@
                         </ul>
                     </div>
                 </nav>
-
+                <!-- CARD FOR SHOPPING LIST -->
                 <div id="accordion">
+                  
                     <div class="card">
                         <div class="card-header list-header" id="listHeader">
 
@@ -279,11 +280,11 @@
                                     </h5>
                                 </div>
 
-                                <div class="col-4 my-auto">
-                                    <a href="#removeList" data-toggle="modal"><i class="fas fa-trash list-action-ic"></i></a>
-                                    <a href="#addItem" data-toggle="modal"><i class="fas fa-plus-circle list-action-ic"></i></a>
-                                    <a href="#addItem" data-toggle="modal"><i class="fas fa-cart-plus list-action-ic"></i></a>
-                                    <a href="#addItem" data-toggle="modal"><i class="fas fa-check-square list-action-ic"></i></a>
+                                <div class="col-md-">
+                                    <a href="#" data-toggle="modal"><i class="fas fa-trash list-action-ic"></i></a></div>
+                                  <div class="col-md-">  <a href="#" data-toggle="modal"><i class="fas fa-plus-circle list-action-ic"></i></a></div>
+                                  <div class="col-md-">  <a href="#" data-toggle="modal"><i class="fas fa-cart-plus list-action-ic"></i></a></div>
+                                  <div class="col-md-">  <a href="#" data-toggle="modal"><i class="fas fa-check-square list-action-ic"></i></a>
                                 </div>
 
                             </div>
@@ -299,8 +300,6 @@
                     <div class="card">
                         <div class="card-header" id="headingOne">
                             <h5 class="mb-0">
-
-
                                 <div class="row" data-toggle="collapse" data-target="#collapseOne">
                                     <div class="col-1 my-auto">
                                         <label class="checkbox-container">
@@ -314,7 +313,6 @@
                                     </div>
 
                                     <div class="col">
-
                                         <div class="row" >
                                             <div class="col">
                                                 Item1

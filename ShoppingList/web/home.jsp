@@ -32,15 +32,15 @@
         <style>
             /*
             .btn-remove-list {
-                background-color: #ffffff; 
+                background-color: #ffffff;
                 border: none;
                 width: 80px;
                 height: 40px;
-                color: #5067c2; 
-                padding: 12px 16px; 
+                color: #5067c2;
+                padding: 12px 16px;
                 border-radius: 5px;
-                font-size: 14px; 
-                cursor: pointer; 
+                font-size: 14px;
+                cursor: pointer;
             }
 
             .btn-remove-list:hover {
@@ -50,15 +50,15 @@
             }
 
             .btn-add-item {
-                background-color: #ffffff; 
-                border: none; 
+                background-color: #ffffff;
+                border: none;
                 width: 80px;
-                height: 40px; 
-                color: #5067c2; 
-                padding: 12px 16px; 
+                height: 40px;
+                color: #5067c2;
+                padding: 12px 16px;
                 border-radius: 5px;
-                font-size: 14px; 
-                cursor: pointer; 
+                font-size: 14px;
+                cursor: pointer;
             }
 
             .btn-add-item:hover {
@@ -175,7 +175,7 @@
             .item-expand-ic{
                 color: #969696;
                 font-size: 16px;
-            } 
+            }
 
             .item-expand-ic:hover{
                 color: #3d3d3d;
@@ -183,7 +183,7 @@
             }
 
             .list-expand-ic{
-                color: #fff; 
+                color: #fff;
                 font-size: 16px;
             }
 
@@ -285,7 +285,7 @@
                     </div>
                 </nav>
 
-                <div id="accordion" style="width: 620px; margin: 0 auto;">
+                <div id="accordion" >
 
 
                     <div class="card">
@@ -298,12 +298,12 @@
                                     </h5>
                                 </div>
 
-                                <div class="col-5 my-auto">
+                                <div class="col-">
                                     <a href="#addItem" data-toggle="modal"><i class="fas fa-cart-plus list-action-ic"></i></a>
                                     <a href="#addItem" data-toggle="modal"><i class="fas fa-file-medical list-action-ic"></i></a>
                                     <a href="#removeList" data-toggle="modal"><i class="fas fa-share-alt list-action-ic"></i></a>
                                     <a href="#removeList" data-toggle="modal"><i class="fas fa-trash list-action-ic"></i></a>
-                                    
+
                                 </div>
 
                             </div>
