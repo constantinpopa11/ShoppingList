@@ -60,10 +60,11 @@
 
                                 <div class="col-3 my-auto nopadding" id="buttons">
                                     <div>
-                                        <a class="float-right" href="#removeList" data-toggle="modal"><i class="fas fa-trash list-action-ic last-ic"></i></a>
+                                        <a class="float-right" href="detailedlist.jsp" ><i class="fas fa-list list-action-ic last-ic"></i></a>
                                         <a class="float-right" href="#removeList" data-toggle="modal"><i class="fas fa-share-alt list-action-ic"></i></a>
                                         <a class="float-right" href="#addItem" data-toggle="modal"><i class="fas fa-cart-plus list-action-ic"></i></a>
                                         <a class="float-right" href="#addItem" data-toggle="modal"><i class="fas fa-file-medical list-action-ic"></i></a>
+
                                     </div>
 
                                 </div>
