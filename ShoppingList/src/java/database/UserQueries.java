@@ -8,6 +8,7 @@ package database;
 import constants.DBColumns;
 import constants.DBTables;
 import constants.LoginStatus;
+import constants.ResetPwdStatus;
 import constants.SignupStatus;
 import constants.Utils;
 import java.sql.Connection;
@@ -124,7 +125,6 @@ public class UserQueries {
 
         try {
 
-
             String queryStr = " INSERT INTO " + DBTables.USERS_TABLE
                     + " (" + DBColumns.USERS_EMAIL_COL
                     + ", " + DBColumns.USERS_FIRST_NAME_COL
@@ -168,5 +168,53 @@ public class UserQueries {
             }// nothing we can do
         }//end try
 
+    }
+
+    public static int resetPassword(Connection conn, String email) {
+        Statement stmt = null;
+
+        int result = ResetPwdStatus.WRONG_EMAIL;
+
+        try {
+
+            stmt = conn.createStatement();
+            String queryStr;
+            queryStr = "SELECT " + DBColumns.USERS_EMAIL_COL
+                    + " FROM " + DBTables.USERS_TABLE
+                    + " WHERE "
+                    + DBColumns.USERS_EMAIL_COL + "='" + email + "';";
+
+            ResultSet rs = stmt.executeQuery(queryStr);
+
+            //Extract data from result set
+            while (rs.next()) {
+                //Retrieve by column name, q indicates query result and not actual website input
+                String qEmail = rs.getString(DBColumns.USERS_EMAIL_COL);
+                
+                if (email.equals(qEmail)) {
+                    result = ResetPwdStatus.CORRECT_EMAIL;
+                } 
+            }
+            //Clean-up environment
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+
+        return result;
     }
 }

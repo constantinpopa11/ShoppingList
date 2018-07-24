@@ -1,0 +1,144 @@
+body {
+    color: red;
+    background: #fff;
+    font-family: 'Roboto', sans-serif;
+}
+
+.form-control, .form-control:focus, .input-group-addon {
+    border-color: #e1e1e1;
+}
+.form-control, .btn-submit, .btn-cancel {        
+    border-radius: 3px;
+}
+
+.btn-submit, .btn-cancel{
+    margin-left: 4px;
+    margin-right: 4px;
+    border: solid 1px;
+    min-width: 100px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+@media (min-width:641px)  { 
+    .btn-submit, .btn-cancel{
+        margin-left: 8px;
+        margin-right: 8px;
+        font-size: 16px;
+        min-width: 120px;
+    }
+}
+
+.resetpwd-form {
+    width: 100%;
+    margin: 0 auto;
+    padding: 30px 0;
+}
+
+@media (min-width:641px)  { 
+    .resetpwd-form {
+        width: 40%;
+        margin: 0 auto;
+        padding: 30px 0;
+    }
+}
+
+.resetpwd-form form {
+    color: #999;
+    border-radius: 3px;
+    margin-bottom: 15px;
+    background: #F9F9F9;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+}
+.resetpwd-form h2 {
+    color: #333;
+    font-weight: bold;
+    margin-top: 0;
+}
+.resetpwd-form hr {
+    margin: 0 -30px 20px;
+}
+.resetpwd-form .form-group {
+    margin-bottom: 20px;
+}
+.resetpwd-form label {
+    font-weight: normal;
+    font-size: 13px;
+}
+.resetpwd-form .form-control {
+    min-height: 38px;
+    box-shadow: none !important;
+}	
+.resetpwd-form .input-group-addon {
+    max-width: 42px;
+    text-align: center;
+}
+.resetpwd-form input[type="checkbox"] {
+    margin-top: 2px;
+}   
+.resetpwd-form .btn-submit{        
+
+    background: #6D7FCC;
+    color: white;
+}
+
+.resetpwd-form .btn-cancel{        
+    background: #f7f7f7;
+    color: #5067C2;
+    border-color: #6D7FCC;
+}
+
+.resetpwd-form .btn-submit:hover, .resetpwd-form .btn-submit:focus{
+    background: #5067C2;
+    outline: none;
+    cursor: pointer;
+}
+
+.resetpwd-form .btn-submit:active{
+    background: #4156a8;
+}
+
+
+.resetpwd-form .btn-cancel:hover, .resetpwd-form .btn-cancel:focus {
+    background: #ededed;
+    outline: none;
+    cursor: pointer;
+}
+
+.resetpwd-form .btn-cancel:active{
+    background: #e2e2e2;
+}
+
+.resetpwd-form a {
+    color: #2D2D2D;	
+    text-decoration: underline;
+}
+.resetpwd-form a:hover {
+    text-decoration: none;
+}
+.resetpwd-form form a {
+    color: #5067C2;
+    text-decoration: none;
+}	
+.resetpwd-form form a:hover {
+    text-decoration: underline;
+}
+.resetpwd-form .fa {
+    font-size: 21px;
+}
+.resetpwd-form .fa-envelope {
+    font-size: 15px;
+}
+
+.resetpwd-tip{
+    font-size: 14px;
+}
+
+
+.error-msg{
+    font-size: 14px;
+    color: #af2424;
+    padding-bottom: 16px;
+    text-align: center;
+}

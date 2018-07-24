@@ -24,4 +24,8 @@ public class FormFields {
     public static final String LOGIN_REMEMBER_ME_FLAG = "rememberMe";
     public static final String LOGIN_SUBMIT_BUTTON = "loginBtn";
     
+    public static final String RESET_PWD_EMAIL_FIELD = "email";
+    public static final String RESET_PWD_SUBMIT_BUTTON = "resetBtn";
+    
+    
 }

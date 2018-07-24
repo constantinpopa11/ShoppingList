@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <title>Log In</title>
+        <title>Reset Password</title>
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 
@@ -29,7 +29,7 @@
         <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"  crossorigin="anonymous"></script>
 
 
-        <link rel="stylesheet" href="css/login.css">
+        <link rel="stylesheet" href="css/resetpwd.css">
         <link rel="stylesheet" href="css/sidebar.css">
         <link rel="stylesheet" href="css/navbar.css">
 
@@ -43,68 +43,39 @@
             <!-- Page Content Holder -->
             <div id="content">
 
-              <!-- navbar Content Holder -->
-              <jsp:include page="navbar.jsp" />
+                <!-- navbar Content Holder -->
+                <jsp:include page="navbar.jsp" />
 
-                <div class="login-form">
+                <div class="resetpwd-form">
                     <c:set var = "wrongEmail" scope = "page" value = "${param.wrongEmail}"/>
-                    <c:set var = "wrongPassword" scope = "page" value = "${param.wrongPassword}"/>
-                    <c:set var = "email" scope = "page" value = "${param.email}"/>
 
-                    <form action="LogIn" method="POST">
+
+                    <form action="ResetPwd" method="POST">
                         <input name="prevPage" value="${header.referer}" type="hidden"/>
 
-                        <h2 class="text-center">Log In</h2>
-                        <p class="text-center login-tip">Registered members can access extra features</p>
+                        <h2 class="text-center">Forgot Password?</h2>
+                        <p class="text-center resetpwd-tip">You can reset your password here.</p>
 
                         <hr>
-
+                        
                         <c:if test="${wrongEmail != null}">
                             <div class="error-msg">${wrongEmail}</div>
                             <!--<a href="signup.jsp"><span class="text-center"><u>Click here to Sign Up</u></span></a>-->
                         </c:if>
 
-                        <c:if test="${wrongPassword != null}">
-                            <div class="error-msg">${wrongPassword}</div>
-                            <!--<a href="forgot.jsp"><span class="text-center"><u>Forgot password?</u></span></a>-->
-                        </c:if>
 
-
-
-                        <div class="input-group mb-3">
+                        <div class="input-group mb-4">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-envelope"></i></span>
                             </div>
-                            <c:if test="${email != null}">
-                                <input type="email" name="email" value="${email}" class="form-control" required>
-                            </c:if>
-                            <c:if test="${email == null}">
-                                <input type="email" class="form-control" name="email" placeholder="Email Address" required="required">
-                            </c:if>
-                        </div>
+                            <input type="email" class="form-control" name="email" placeholder="Email Address" required="required">
 
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa fa-lock"></i></span></span>
-                            </div>
-                            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
                         </div>
-
-                        <div class="clearfix mb-4">
-                            <label class="pull-left checkbox-inline" id="remember-me">
-                                <input type="checkbox" name="rememberMe"> Remember me</input>
-                            </label>
-                            <a href="resetpwd.jsp" class="pull-right">Forgot Password?</a>
-                        </div>
-
 
                         <div class="form-group text-center mb-3">
-                            <button name="loginBtn" value="login" type="submit" class="btn-submit btn-lg">Log In</button>
-                            <button name="loginBtn" value="cancel" type="submit" class="btn-cancel btn-lg" formnovalidate="formnovalidate">Cancel</button>
+                            <button name="resetBtn" value="reset" type="submit" class="btn-submit btn-lg">Reset</button>
+                            <button name="resetBtn" value="cancel" type="submit" class="btn-cancel btn-lg" formnovalidate="formnovalidate">Cancel</button>
                         </div>
-
-
-                        <div class="text-center">Don't have an account? <a href="signup.jsp">Sign Up here</a></div>
 
                     </form>
 
