@@ -17,12 +17,10 @@ p {
 
 .nopadding {
     padding: 0 !important;
-    margin: 0 !important;
 }
 
 .list-header{
-    padding-right: 20px;
-    height: 80px;
+    padding: 3%;
     background-color: #5067c2;
 }
 
@@ -35,6 +33,14 @@ p {
     text-decoration: underline;
     cursor: pointer;
 }
+
+.list-item{
+    padding-right: 3%;
+    padding-left: 3%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
 
 
 /* The container */
@@ -105,6 +111,8 @@ p {
 
 .item-action-ic{
     color: #727272;
+    font-size: 18px;
+    margin-left: 12px
 }
 
 .item-action-ic:hover{
@@ -115,16 +123,15 @@ p {
 .list-action-ic{
     color: #f7f7f7;
     font-size: 24px;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 16px;
 }
-.list-action-ic-last{
-    color: #f7f7f7;
-    font-size: 24px;
-    margin-left: 10px;
-    margin-right: 00px;
+.last-ic{
+    margin-right: 18px;
 }
 
+.first-child{
+    margin-left: 18px;
+}
 
 .list-action-ic:hover{
     color: #e5e5e5;
@@ -133,7 +140,7 @@ p {
 
 .item-expand-ic{
     color: #969696;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .list-expand-ic{
