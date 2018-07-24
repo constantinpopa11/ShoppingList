@@ -43,7 +43,7 @@
 
             <div id="content">
                 <!-- navbar Content Holder -->
-              <jsp:include page="navbar.jsp" />
+                <jsp:include page="navbar.jsp" />
 
                 <div id="accordion" >
                     <!--  contenitore  roba comune STUFF -->
@@ -82,7 +82,8 @@
                     <div class="card">
                         <div class="card-header list-item " id="headingOne">
 
-                            <div class="row h-100" >
+                            <div class="row" >
+                                <!-- checkbox -->
                                 <div class="col-1 nopadding my-auto first-child">
                                     <label class="checkbox-container">
                                         <input type="checkbox">
@@ -90,42 +91,66 @@
                                     </label>
                                 </div>
                                 <!--  banana pic -->
-                                <div class="col-2 my-auto"  data-toggle="collapse" data-target="#collapseOne">
+                                <div class="col-2 nopadding my-auto"  data-toggle="collapse" data-target="#collapseOne">
                                     <img src="http://www.gayalliance.org/wp-content/uploads/2016/02/banana-png-image.jpg"  width="60" height="60"/>
                                 </div>
 
-                                <div class="col"  >
-                                    <div class="row" >
-                                        <div class="col nopadding"  data-toggle="collapse" data-target="#collapseOne">
+                                <div class="col nopadding my-auto">
+                                    <div class="row">
+                                        <div class="col nopadding" data-toggle="collapse" data-target="#collapseOne">
                                             <h5>Item1</h5>
-                                        </div>
-                                        <div class="col-2 nopadding">
-                                            <span><i class="fas fa-pencil-alt item-action-ic last-ic float-right"></i></span>
-                                            <span><i class="fas fa-times item-action-ic float-right"></i></span>
                                         </div>
                                     </div>
 
-                                    <div class="row"  data-toggle="collapse" data-target="#collapseOne">
-                                        <div class="col nopadding">
+                                    <div class="row " >
+                                        <div class="col nopadding" data-toggle="collapse" data-target="#collapseOne"">
                                             <small>Category 1</small>
                                         </div>
 
                                     </div>
 
-                                    <div class="row" >
-                                        <div class="col nopadding"  data-toggle="collapse" data-target="#collapseOne">
+                                    <div class="row ">
+                                        <div class="col nopadding" data-toggle="collapse" data-target="#collapseOne">
                                             <small>Quantity: 2 kg</small>
                                         </div>
-                                        <div class="col-1 nopadding my-auto"  data-toggle="collapse" data-target="#collapseOne">
+                                    </div>
+
+                                </div>
+
+                                <div class="col-2 my-auto">
+                                    <div class="row ">
+                                        <div class="col nopadding">
+                                            <h5 class="float-right">
+                                                <a href="edit">
+                                                    <i class="fas fa-pencil-alt item-action-ic last-ic float-right"></i>
+                                                </a>
+                                                <a href="remove">
+                                                    <i class="fas fa-times item-action-ic float-right"></i>
+                                                </a>
+                                            </h5>
+                                        </div>
+                                    </div>
+
+                                    <div class="row " data-toggle="collapse" data-target="#collapseOne">
+                                        <div class="col nopadding">
+                                            <small class="float-right">&nbsp;</small>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col nopadding"  data-toggle="collapse" data-target="#collapseOne">
                                             <span><i class="fas fa-chevron-down item-expand-ic last-ic float-right"></i></span>
                                         </div>
                                     </div>
 
                                 </div>
+
+
                             </div>
                         </div>
 
-                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div id="collapseOne" class="collapse" data-parent="#accordion">
                             <div class="card-body">
                                 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                             </div>
@@ -133,9 +158,10 @@
                     </div>
                     <!--  second elemnt  -->
                     <div class="card">
-                        <div class="card-header list-item " id="headingOne">
+                        <div class="card-header list-item " id="headingTwo">
 
-                            <div class="row h-100" >
+                            <div class="row" >
+                                <!-- checkbox -->
                                 <div class="col-1 nopadding my-auto first-child">
                                     <label class="checkbox-container">
                                         <input type="checkbox">
@@ -143,42 +169,66 @@
                                     </label>
                                 </div>
                                 <!--  banana pic -->
-                                <div class="col-2 my-auto"  data-toggle="collapse" data-target="#collapseOne">
+                                <div class="col-2 nopadding my-auto"  data-toggle="collapse" data-target="#collapseOne">
                                     <img src="http://www.gayalliance.org/wp-content/uploads/2016/02/banana-png-image.jpg"  width="60" height="60"/>
                                 </div>
 
-                                <div class="col"  >
-                                    <div class="row" >
-                                        <div class="col nopadding"  data-toggle="collapse" data-target="#collapseOne">
+                                <div class="col nopadding my-auto">
+                                    <div class="row">
+                                        <div class="col nopadding" data-toggle="collapse" data-target="#collapseTwo">
                                             <h5>Item2</h5>
                                         </div>
-                                        <div class="col-2 nopadding">
-                                            <span><i class="fas fa-pencil-alt item-action-ic last-ic float-right"></i></span>
-                                            <span><i class="fas fa-times item-action-ic float-right"></i></span>
-                                        </div>
                                     </div>
 
-                                    <div class="row"  data-toggle="collapse" data-target="#collapseOne">
-                                        <div class="col nopadding">
-                                            <small>Category 2</small>
+                                    <div class="row " >
+                                        <div class="col nopadding" data-toggle="collapse" data-target="#collapseTwo">
+                                            <small>Category 1</small>
                                         </div>
 
                                     </div>
 
-                                    <div class="row" >
-                                        <div class="col nopadding"  data-toggle="collapse" data-target="#collapseOne">
+                                    <div class="row ">
+                                        <div class="col nopadding" data-toggle="collapse" data-target="#collapseTwo">
                                             <small>Quantity: 2 kg</small>
                                         </div>
-                                        <div class="col-1 nopadding my-auto"  data-toggle="collapse" data-target="#collapseOne">
+                                    </div>
+
+                                </div>
+
+                                <div class="col-2 my-auto">
+                                    <div class="row ">
+                                        <div class="col nopadding">
+                                            <h5 class="float-right">
+                                                <a href="edit">
+                                                    <i class="fas fa-pencil-alt item-action-ic last-ic float-right"></i>
+                                                </a>
+                                                <a href="remove">
+                                                    <i class="fas fa-times item-action-ic float-right"></i>
+                                                </a>
+                                            </h5>
+                                        </div>
+                                    </div>
+
+                                    <div class="row " data-toggle="collapse" data-target="#collapseTwo">
+                                        <div class="col nopadding">
+                                            <small class="float-right">&nbsp;</small>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col nopadding"  data-toggle="collapse" data-target="#collapseTwo">
                                             <span><i class="fas fa-chevron-down item-expand-ic last-ic float-right"></i></span>
                                         </div>
                                     </div>
 
                                 </div>
+
+
                             </div>
                         </div>
 
-                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div id="collapseTwo" class="collapse" data-parent="#accordion">
                             <div class="card-body">
                                 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                             </div>
@@ -186,9 +236,10 @@
                     </div>
                     <!--  third elemnt  -->
                     <div class="card">
-                        <div class="card-header list-item " id="headingOne">
+                        <div class="card-header list-item " id="headingThree">
 
-                            <div class="row h-100" >
+                            <div class="row" >
+                                <!-- checkbox -->
                                 <div class="col-1 nopadding my-auto first-child">
                                     <label class="checkbox-container">
                                         <input type="checkbox">
@@ -196,42 +247,66 @@
                                     </label>
                                 </div>
                                 <!--  banana pic -->
-                                <div class="col-2 my-auto"  data-toggle="collapse" data-target="#collapseOne">
+                                <div class="col-2 nopadding my-auto"  data-toggle="collapse" data-target="#collapseThree">
                                     <img src="http://www.gayalliance.org/wp-content/uploads/2016/02/banana-png-image.jpg"  width="60" height="60"/>
                                 </div>
 
-                                <div class="col"  >
-                                    <div class="row" >
-                                        <div class="col nopadding"  data-toggle="collapse" data-target="#collapseOne">
+                                <div class="col nopadding my-auto">
+                                    <div class="row">
+                                        <div class="col nopadding" data-toggle="collapse" data-target="#collapseThree">
                                             <h5>Item3</h5>
                                         </div>
-                                        <div class="col-2 nopadding">
-                                            <span><i class="fas fa-pencil-alt item-action-ic last-ic float-right"></i></span>
-                                            <span><i class="fas fa-times item-action-ic float-right"></i></span>
-                                        </div>
                                     </div>
 
-                                    <div class="row"  data-toggle="collapse" data-target="#collapseOne">
-                                        <div class="col nopadding">
-                                            <small>Category 3</small>
+                                    <div class="row " >
+                                        <div class="col nopadding" data-toggle="collapse" data-target="#collapseThree"">
+                                            <small>Category 1</small>
                                         </div>
 
                                     </div>
 
-                                    <div class="row" >
-                                        <div class="col nopadding"  data-toggle="collapse" data-target="#collapseOne">
+                                    <div class="row ">
+                                        <div class="col nopadding" data-toggle="collapse" data-target="#collapseThree">
                                             <small>Quantity: 2 kg</small>
                                         </div>
-                                        <div class="col-1 nopadding my-auto"  data-toggle="collapse" data-target="#collapseOne">
+                                    </div>
+
+                                </div>
+
+                                <div class="col-2 my-auto">
+                                    <div class="row ">
+                                        <div class="col nopadding">
+                                            <h5 class="float-right">
+                                                <a href="edit">
+                                                    <i class="fas fa-pencil-alt item-action-ic last-ic float-right"></i>
+                                                </a>
+                                                <a href="remove">
+                                                    <i class="fas fa-times item-action-ic float-right"></i>
+                                                </a>
+                                            </h5>
+                                        </div>
+                                    </div>
+
+                                    <div class="row " data-toggle="collapse" data-target="#collapseThree">
+                                        <div class="col nopadding">
+                                            <small class="float-right">&nbsp;</small>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col nopadding"  data-toggle="collapse" data-target="#collapseThree">
                                             <span><i class="fas fa-chevron-down item-expand-ic last-ic float-right"></i></span>
                                         </div>
                                     </div>
 
                                 </div>
+
+
                             </div>
                         </div>
 
-                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div id="collapseThree" class="collapse" data-parent="#accordion">
                             <div class="card-body">
                                 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                             </div>
