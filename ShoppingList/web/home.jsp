@@ -80,7 +80,7 @@
                     </div>
                     <!--  first elemnt  -->
                     <div class="card">
-                        <div class="card-header list-item " id="headingOne">
+                        <div class="card-header list-item ">
 
                             <div class="row" >
                                 <!-- checkbox -->
@@ -103,7 +103,7 @@
                                     </div>
 
                                     <div class="row " >
-                                        <div class="col " data-toggle="collapse" data-target="#collapseOne"">
+                                        <div class="col " data-toggle="collapse" data-target="#collapseOne">
                                             <small>Category 1</small>
                                         </div>
 
@@ -158,7 +158,7 @@
                     </div>
                     <!--  second elemnt  -->
                     <div class="card">
-                        <div class="card-header list-item " id="headingTwo">
+                        <div class="card-header list-item " >
 
                             <div class="row" >
                                 <!-- checkbox -->
@@ -169,7 +169,7 @@
                                     </label>
                                 </div>
                                 <!--  banana pic -->
-                                <div class="col-xs-2  my-auto"  data-toggle="collapse" data-target="#collapseOne">
+                                <div class="col-xs-2  my-auto"  data-toggle="collapse" data-target="#collapseTwo">
                                     <img src="http://www.gayalliance.org/wp-content/uploads/2016/02/banana-png-image.jpg"  width="60" height="60"/>
                                 </div>
 
@@ -236,7 +236,7 @@
                     </div>
                     <!--  third elemnt  -->
                     <div class="card">
-                        <div class="card-header list-item " id="headingThree">
+                        <div class="card-header list-item " >
 
                             <div class="row" >
                                 <!-- checkbox -->
@@ -259,7 +259,7 @@
                                     </div>
 
                                     <div class="row " >
-                                        <div class="col " data-toggle="collapse" data-target="#collapseThree"">
+                                        <div class="col " data-toggle="collapse" data-target="#collapseThree">
                                             <small>Category 1</small>
                                         </div>
 
@@ -299,10 +299,7 @@
                                             <span><i class="fas fa-chevron-down item-expand-ic last-ic float-right"></i></span>
                                         </div>
                                     </div>
-
                                 </div>
-
-
                             </div>
                         </div>
 
@@ -311,6 +308,7 @@
                                 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                             </div>
                         </div>
+                        
                     </div>
                 </div> <!--  end accordion -->
             </div>
