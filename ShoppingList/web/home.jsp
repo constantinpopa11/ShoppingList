@@ -45,20 +45,20 @@
                 <!-- navbar Content Holder -->
                 <jsp:include page="navbar.jsp" />
 
-                <div id="accordion" >
+                <div id="accordion" class="shopping-list" >
                     <!--  contenitore  roba comune STUFF -->
                     <div class="card">
                         <div class="card-header list-header" id="listHeader">
                             <div class="row h-100">
-                                <div class="col-4 my-auto nopadding first-child">
+                                <div class="col-xs-4 my-auto  first-child">
                                     <h5 class="mb-0 list-name" data-toggle="" >
                                         My shopping list <i class="fas fa-chevron-down list-expand-ic"></i>
                                     </h5>
                                 </div>
-                                <div class="col nopadding" data-toggle="collapse" data-target="#listDetails">
+                                <div class="col " data-toggle="collapse" data-target="#listDetails">
                                 </div>
 
-                                <div class="col-3 my-auto nopadding" id="buttons">
+                                <div class="col-xs-3 my-auto " id="buttons">
                                     <div>
                                         <a class="float-right" href="detailedlist.jsp" ><i class="fas fa-list list-action-ic last-ic"></i></a>
                                         <a class="float-right" href="#removeList" data-toggle="modal"><i class="fas fa-share-alt list-action-ic"></i></a>
@@ -84,42 +84,42 @@
 
                             <div class="row" >
                                 <!-- checkbox -->
-                                <div class="col-1 nopadding my-auto first-child">
+                                <div class="col-xs-1  my-auto first-child">
                                     <label class="checkbox-container">
                                         <input type="checkbox">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
                                 <!--  banana pic -->
-                                <div class="col-2 nopadding my-auto"  data-toggle="collapse" data-target="#collapseOne">
+                                <div class="col-xs-2  my-auto"  data-toggle="collapse" data-target="#collapseOne">
                                     <img src="http://www.gayalliance.org/wp-content/uploads/2016/02/banana-png-image.jpg"  width="60" height="60"/>
                                 </div>
 
-                                <div class="col nopadding my-auto">
+                                <div class="col  my-auto">
                                     <div class="row">
-                                        <div class="col nopadding" data-toggle="collapse" data-target="#collapseOne">
+                                        <div class="col " data-toggle="collapse" data-target="#collapseOne">
                                             <h5>Item1</h5>
                                         </div>
                                     </div>
 
                                     <div class="row " >
-                                        <div class="col nopadding" data-toggle="collapse" data-target="#collapseOne"">
+                                        <div class="col " data-toggle="collapse" data-target="#collapseOne"">
                                             <small>Category 1</small>
                                         </div>
 
                                     </div>
 
                                     <div class="row ">
-                                        <div class="col nopadding" data-toggle="collapse" data-target="#collapseOne">
+                                        <div class="col " data-toggle="collapse" data-target="#collapseOne">
                                             <small>Quantity: 2 kg</small>
                                         </div>
                                     </div>
 
                                 </div>
 
-                                <div class="col-2 my-auto">
+                                <div class="col-xs-2 my-auto">
                                     <div class="row ">
-                                        <div class="col nopadding">
+                                        <div class="col ">
                                             <h5 class="float-right">
                                                 <a href="edit">
                                                     <i class="fas fa-pencil-alt item-action-ic last-ic float-right"></i>
@@ -132,14 +132,14 @@
                                     </div>
 
                                     <div class="row " data-toggle="collapse" data-target="#collapseOne">
-                                        <div class="col nopadding">
+                                        <div class="col ">
                                             <small class="float-right">&nbsp;</small>
                                         </div>
 
                                     </div>
 
                                     <div class="row">
-                                        <div class="col nopadding"  data-toggle="collapse" data-target="#collapseOne">
+                                        <div class="col "  data-toggle="collapse" data-target="#collapseOne">
                                             <span><i class="fas fa-chevron-down item-expand-ic last-ic float-right"></i></span>
                                         </div>
                                     </div>
@@ -162,42 +162,42 @@
 
                             <div class="row" >
                                 <!-- checkbox -->
-                                <div class="col-1 nopadding my-auto first-child">
+                                <div class="col-xs-1  my-auto first-child">
                                     <label class="checkbox-container">
                                         <input type="checkbox">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
                                 <!--  banana pic -->
-                                <div class="col-2 nopadding my-auto"  data-toggle="collapse" data-target="#collapseOne">
+                                <div class="col-xs-2  my-auto"  data-toggle="collapse" data-target="#collapseOne">
                                     <img src="http://www.gayalliance.org/wp-content/uploads/2016/02/banana-png-image.jpg"  width="60" height="60"/>
                                 </div>
 
-                                <div class="col nopadding my-auto">
+                                <div class="col  my-auto">
                                     <div class="row">
-                                        <div class="col nopadding" data-toggle="collapse" data-target="#collapseTwo">
+                                        <div class="col " data-toggle="collapse" data-target="#collapseTwo">
                                             <h5>Item2</h5>
                                         </div>
                                     </div>
 
                                     <div class="row " >
-                                        <div class="col nopadding" data-toggle="collapse" data-target="#collapseTwo">
+                                        <div class="col " data-toggle="collapse" data-target="#collapseTwo">
                                             <small>Category 1</small>
                                         </div>
 
                                     </div>
 
                                     <div class="row ">
-                                        <div class="col nopadding" data-toggle="collapse" data-target="#collapseTwo">
+                                        <div class="col " data-toggle="collapse" data-target="#collapseTwo">
                                             <small>Quantity: 2 kg</small>
                                         </div>
                                     </div>
 
                                 </div>
 
-                                <div class="col-2 my-auto">
+                                <div class="col-xs-2 my-auto">
                                     <div class="row ">
-                                        <div class="col nopadding">
+                                        <div class="col ">
                                             <h5 class="float-right">
                                                 <a href="edit">
                                                     <i class="fas fa-pencil-alt item-action-ic last-ic float-right"></i>
@@ -210,14 +210,14 @@
                                     </div>
 
                                     <div class="row " data-toggle="collapse" data-target="#collapseTwo">
-                                        <div class="col nopadding">
+                                        <div class="col ">
                                             <small class="float-right">&nbsp;</small>
                                         </div>
 
                                     </div>
 
                                     <div class="row">
-                                        <div class="col nopadding"  data-toggle="collapse" data-target="#collapseTwo">
+                                        <div class="col "  data-toggle="collapse" data-target="#collapseTwo">
                                             <span><i class="fas fa-chevron-down item-expand-ic last-ic float-right"></i></span>
                                         </div>
                                     </div>
@@ -240,42 +240,42 @@
 
                             <div class="row" >
                                 <!-- checkbox -->
-                                <div class="col-1 nopadding my-auto first-child">
+                                <div class="col-xs-1  my-auto first-child">
                                     <label class="checkbox-container">
                                         <input type="checkbox">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
                                 <!--  banana pic -->
-                                <div class="col-2 nopadding my-auto"  data-toggle="collapse" data-target="#collapseThree">
+                                <div class="col-xs-2  my-auto"  data-toggle="collapse" data-target="#collapseThree">
                                     <img src="http://www.gayalliance.org/wp-content/uploads/2016/02/banana-png-image.jpg"  width="60" height="60"/>
                                 </div>
 
-                                <div class="col nopadding my-auto">
+                                <div class="col  my-auto">
                                     <div class="row">
-                                        <div class="col nopadding" data-toggle="collapse" data-target="#collapseThree">
+                                        <div class="col " data-toggle="collapse" data-target="#collapseThree">
                                             <h5>Item3</h5>
                                         </div>
                                     </div>
 
                                     <div class="row " >
-                                        <div class="col nopadding" data-toggle="collapse" data-target="#collapseThree"">
+                                        <div class="col " data-toggle="collapse" data-target="#collapseThree"">
                                             <small>Category 1</small>
                                         </div>
 
                                     </div>
 
                                     <div class="row ">
-                                        <div class="col nopadding" data-toggle="collapse" data-target="#collapseThree">
+                                        <div class="col " data-toggle="collapse" data-target="#collapseThree">
                                             <small>Quantity: 2 kg</small>
                                         </div>
                                     </div>
 
                                 </div>
 
-                                <div class="col-2 my-auto">
+                                <div class="col-xs-2 my-auto">
                                     <div class="row ">
-                                        <div class="col nopadding">
+                                        <div class="col ">
                                             <h5 class="float-right">
                                                 <a href="edit">
                                                     <i class="fas fa-pencil-alt item-action-ic last-ic float-right"></i>
@@ -288,14 +288,14 @@
                                     </div>
 
                                     <div class="row " data-toggle="collapse" data-target="#collapseThree">
-                                        <div class="col nopadding">
+                                        <div class="col ">
                                             <small class="float-right">&nbsp;</small>
                                         </div>
 
                                     </div>
 
                                     <div class="row">
-                                        <div class="col nopadding"  data-toggle="collapse" data-target="#collapseThree">
+                                        <div class="col "  data-toggle="collapse" data-target="#collapseThree">
                                             <span><i class="fas fa-chevron-down item-expand-ic last-ic float-right"></i></span>
                                         </div>
                                     </div>
