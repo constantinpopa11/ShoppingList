@@ -28,103 +28,21 @@
         <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" crossorigin="anonymous"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"  crossorigin="anonymous"></script>
 
-
+          <!-- our subpages stylesheets -->
         <link rel="stylesheet" href="css/signup.css">
         <link rel="stylesheet" href="css/navbar.css">
         <link rel="stylesheet" href="css/sidebar.css">
     </head>
-
     <body>
 
         <div class="wrapper">
             <!-- Sidebar Holder -->
-            <nav id="sidebar">
-                <div class="sidebar-header">
-                    <img src="./images/app/sl_logo.png" width="80%">
-                </div>
-
-                <ul class="list-unstyled components">
-                    <p>Dummy Heading</p>
-                    <li class="active">
-                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">My Lists</a>
-                        <ul class="collapse list-unstyled" id="homeSubmenu">
-                            <li>
-                                <a href="#">List 1</a>
-                            </li>
-                            <li>
-                                <a href="#">List 2</a>
-                            </li>
-                            <li>
-                                <a href="#">List 3</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">About</a>
-                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-                        <ul class="collapse list-unstyled" id="pageSubmenu">
-                            <li>
-                                <a href="#">Page 1</a>
-                            </li>
-                            <li>
-                                <a href="#">Page 2</a>
-                            </li>
-                            <li>
-                                <a href="#">Page 3</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">Portfolio</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-
-                <ul class="list-unstyled CTAs">
-                    <li>
-                        <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
-                    </li>
-                    <li>
-                        <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
-                    </li>
-                </ul>
-            </nav>
-
+            <jsp:include page="sidebar.jsp" />
             <!-- Page Content Holder -->
             <div id="content">
 
-                <nav class="navbar navbar-expand navbar-light bg-light">
-
-                    <button type="button" id="sidebarCollapse" class="navbar-btn">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-
-                    <div class="navbar-collapse justify-content-end collapse">
-                        <ul class="navbar-nav pt-1">
-                            <c:set var = "user" scope = "page" value = "${sessionScope.user}"/>
-
-                            <c:if test="${user != null}">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="LogOut"><i class="fas fa-sign-out-alt"></i> Log Out</a>
-                                </li>
-                            </c:if>
-
-                            <c:if test="${user == null}">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="login.jsp"><i class="fas fa-sign-in-alt"></i> Log In</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" href="signup.jsp"><i class="fas fa-user-edit"></i> Sign Up</a>
-                                </li>
-                            </c:if>
-                        </ul>
-                    </div>
-                </nav>
+              <!-- navbar Content Holder -->
+              <jsp:include page="navbar.jsp" />
 
 
 
@@ -136,9 +54,9 @@
 
 
                     <form action="SignUp" method="POST">
-                        
+
                         <input name="prevPage" value="${header.referer}" type="hidden"/>
-                        
+
                         <h2 class="text-center">Sign Up</h2>
                         <p class="text-center signup-tip">Create your account. It's free and only takes a minute.</p>
 
@@ -238,16 +156,6 @@
 
             </div>
         </div>
-
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#sidebarCollapse').on('click', function () {
-                    $('#sidebar').toggleClass('active');
-                    $(this).toggleClass('active');
-                });
-
-            });
-        </script>
     </body>
 
 </html>

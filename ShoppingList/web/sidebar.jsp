@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-
+ <script src="scripts/sidebarscript.js"></script> 
 <!-- Sidebar Holder -->
 <nav id="sidebar">
     <div class="sidebar-header">
@@ -48,10 +48,7 @@
 
     <ul class="list-unstyled CTAs">
         <li>
-            <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
-        </li>
-        <li>
-            <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
+            <a href="www.lemonparty.org" class="download">Don' click here plz</a>
         </li>
     </ul>
 </nav>

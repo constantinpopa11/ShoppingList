@@ -18,7 +18,6 @@
         <!-- Font Awesome JS -->
         <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" crossorigin="anonymous"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"  crossorigin="anonymous"></script>
-
         <!-- Bootstrap CSS CDN -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"  crossorigin="anonymous">
         <!-- jQuery CDN - Slim version (=without AJAX) -->
@@ -30,246 +29,17 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <!-- Our Custom CSS -->
         <link rel="stylesheet" href="css/detailedlist.css">
-
-        <style>
-            /*
-            .btn-remove-list {
-                background-color: #ffffff;
-                border: none;
-                width: 80px;
-                height: 40px;
-                color: #5067c2;
-                padding: 12px 16px;
-                border-radius: 5px;
-                font-size: 14px;
-                cursor: pointer;
-            }
-
-            .btn-remove-list:hover {
-                background-color: #efefef;
-                color: #5067c2;
-                text-decoration: underline;
-            }
-
-            .btn-add-item {
-                background-color: #ffffff;
-                border: none;
-                width: 80px;
-                height: 40px;
-                color: #5067c2;
-                padding: 12px 16px;
-                border-radius: 5px;
-                font-size: 14px;
-                cursor: pointer;
-            }
-
-            .btn-add-item:hover {
-                background-color: #efefef;
-                color: #5067c2;
-                text-decoration: underline;
-            }
-
-            */
-
-            .list-header{
-                height: 80px;
-                background-color: #5067c2;
-            }
-
-            .list-name{
-                color: #fff;
-                font-size: 24px;
-            }
-
-            .list-name:hover{
-                text-decoration: underline;
-                cursor: pointer;
-            }
-
-
-            /* The container */
-            .checkbox-container {
-                display: block;
-                position: relative;
-                padding-left: 35px;
-                margin-bottom: 12px;
-                cursor: pointer;
-                font-size: 22px;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                user-select: none;
-            }
-
-            /* Hide the browser's default checkbox */
-            .checkbox-container input {
-                position: absolute;
-                opacity: 0;
-                cursor: pointer;
-            }
-
-            /* Create a custom checkbox */
-            .checkmark {
-                position: absolute;
-                top: 0;
-                left: 0;
-                height: 25px;
-                width: 25px;
-                background-color: #eee;
-            }
-
-            /* On mouse-over, add a grey background color */
-            .checkbox-container:hover input ~ .checkmark {
-                background-color: #ccc;
-            }
-
-            /* When the checkbox is checked, add a blue background */
-            .checkbox-container input:checked ~ .checkmark {
-                background-color: #5067c2;
-            }
-
-            /* Create the checkmark/indicator (hidden when not checked) */
-            .checkmark:after {
-                content: "";
-                position: absolute;
-                display: none;
-            }
-
-            /* Show the checkmark when checked */
-            .checkbox-container input:checked ~ .checkmark:after {
-                display: block;
-            }
-
-            /* Style the checkmark/indicator */
-            .checkbox-container .checkmark:after {
-                left: 9px;
-                top: 5px;
-                width: 5px;
-                height: 10px;
-                border: solid white;
-                border-width: 0 3px 3px 0;
-                -webkit-transform: rotate(45deg);
-                -ms-transform: rotate(45deg);
-                transform: rotate(45deg);
-            }
-
-            .item-action-ic{
-                color: #727272;
-            }
-
-            .item-action-ic:hover{
-                color: #3d3d3d;
-                cursor: pointer;
-            }
-
-            .list-action-ic{
-                color: #f7f7f7;
-                font-size: 24px;
-                margin-left: 6px;
-                margin-right: 6px;
-            }
-
-            .list-action-ic:hover{
-                color: #e5e5e5;
-                cursor: pointer;
-            }
-
-            .item-expand-ic{
-                color: #969696;
-                font-size: 16px;
-            }
-
-            .item-expand-ic:hover{
-                color: #3d3d3d;
-                cursor: pointer;
-            }
-
-            .list-expand-ic{
-                color: #fff;
-                font-size: 16px;
-            }
-
-
-        </style>
     </head>
 
     <body>
-
-
         <div class="wrapper">
-            <!-- Sidebar Holder -->
-            <nav id="sidebar">
-                <div class="sidebar-header">
-                    <img src="./images/app/sl_logo.png" width="80%">
-                </div>
-
-                <ul class="list-unstyled components">
-                    <p>Dummy Heading</p>
-                    <li class="active">
-                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">My Lists</a>
-                        <ul class="collapse list-unstyled" id="homeSubmenu">
-                            <li>
-                                <a href="#">List 1</a>
-                            </li>
-                            <li>
-                                <a href="#">List 2</a>
-                            </li>
-                            <li>
-                                <a href="#">List 3</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">About</a>
-                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-                        <ul class="collapse list-unstyled" id="pageSubmenu">
-                            <li>
-                                <a href="#">Page 1</a>
-                            </li>
-                            <li>
-                                <a href="#">Page 2</a>
-                            </li>
-                            <li>
-                                <a href="#">Page 3</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">Portfolio</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-            </nav>
-
+          <jsp:include page="sidebar.jsp" />
             <!-- Page Content Holder -->
             <div id="content">
-
-                <nav class="navbar navbar-expand navbar-light bg-light">
-
-                    <button type="button" id="sidebarCollapse" class="navbar-btn">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-
-                    <div class="navbar-collapse justify-content-end collapse">
-
-                        <ul class="navbar-nav pt-1">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Login</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Register</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+              <!-- header -->
+              <jsp:include page="navbar.jsp" />
                 <!-- CARD FOR SHOPPING LIST -->
                 <div id="accordion">
-                  
                     <div class="card">
                         <div class="card-header list-header" id="listHeader">
 
@@ -408,6 +178,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="card">
                         <div class="card-header" id="headingOne">
                             <h5 class="mb-0">
@@ -462,17 +233,21 @@
                         </div>
                     </div>
                     <span class="line">
+                    <hr>
                     <h2>Comments:</h2>
                     <span class="line">
+                      <hr>
                       <!-- comment section-->
-                      <div class="card comment">
+                      <div class="card-comment">
                         <div class="row">
-                            <div class="col">
+                            <div class="col-1">
                               <div class="media"> <!-- comment user's immage -->
-                                <a href="#" class="thumbnail pull-left">
-                                  <img class="img-responsive"  width="100" height="100" src="images/userimages/default.png" alt="user image">
+                                <a href="#" class="thumbnail float-left">
+                                  <img class="img-responsive" src="images/userimages/default.png" alt="user image">
                                 </a>
-
+                                </div>
+                                </div>
+                                  <div class="col-7">
                                   <div class="panel panel-default">
                                   <div class="panel-heading">
                                     <strong>Allenotna apop</strong> <span class="text-muted">commented on <em>22/07/2018 - 12:56</em></span>
@@ -485,12 +260,12 @@
                         </div><!-- row -->
                       </div>
 
-                      <div class="card comment">
+                      <div class="card-comment">
                         <div class="row">
                             <div class="col">
                               <div class="media"> <!-- comment user's immage -->
                                 <a href="#" class="thumbnail pull-left">
-                                  <img class="img-responsive"  width="100" height="100" src="images/userimages/default.png" alt="user image">
+                                  <img class="img-responsive" src="images/userimages/default.png" alt="user image">
                                 </a>
 
                                   <div class="panel panel-default">
@@ -505,12 +280,12 @@
                         </div><!-- row -->
                       </div>
                       <!-- add comment card -->
-                      <div class="card comment">
+                      <div class="cardaddcomment">
                         <div class="row">
                             <div class="col">
                               <div class="media"> <!-- current user's immage -->
                                 <a href="#" class="thumbnail pull-left">
-                                  <img class="img-responsive"  width="100" height="100" src="images/userimages/default.png" alt="user image">
+                                  <img class="img-responsive"   src="images/userimages/default.png" alt="user image">
                                 </a>
 
                                   <div class="panel panel-default">
@@ -538,15 +313,6 @@
 
         </div>
     </div>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-                $(this).toggleClass('active');
-            });
-        });
-    </script>
 </body>
 
 </html>
