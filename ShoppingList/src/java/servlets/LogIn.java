@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import constants.Utils;
 import database.DBConnectionManager;
+import database.ShoppingListQueries;
 import database.UserQueries;
 import java.sql.Connection;
 
@@ -110,6 +111,7 @@ public class LogIn extends HttpServlet {
                     session.setMaxInactiveInterval(Utils.NO_REMEMBER_ME_MAX_INACTIVE_INTERVAL);
                 }
 
+                ShoppingListQueries.getUserShoppingLists(conn, 3);
                 response.sendRedirect("home.jsp");
             }
         }
