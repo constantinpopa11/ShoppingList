@@ -37,12 +37,13 @@
 
 
         <div class="wrapper">
+            <!-- Page Content Holder -->
             <jsp:include page="sidebar.jsp" />
 
-            <!-- Page Content Holder -->
-            <div id="content">
 
-                <jsp:include page="navbar.jsp" />
+            <div id="content">
+                <!-- navbar Content Holder -->
+              <jsp:include page="navbar.jsp" />
 
                 <div id="accordion" >
                   <!--  contenitore  roba comune STUFF -->
@@ -238,21 +239,9 @@
                             </div>
                         </div>
                     </div>
-
-
-
                 </div> <!--  end accordion -->
             </div>
         </div>
-
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#sidebarCollapse').on('click', function () {
-                    $('#sidebar').toggleClass('active');
-                    $(this).toggleClass('active');
-                });
-            });
-        </script>
     </body>
 
 </html>
