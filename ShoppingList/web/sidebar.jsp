@@ -1,10 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
  <script src="scripts/sidebarscript.js"></script>
+ <link rel="stylesheet" href="css/sidebar.css">
 <!-- Sidebar Holder -->
 <nav id="sidebar">
     <div class="sidebar-header">
-        <img src="./images/app/sl_logo.png" width="80%">
+        <img  src="./images/app/sl_logo_pro.svg" width="80%">
     </div>
 
     <ul class="list-unstyled components">
