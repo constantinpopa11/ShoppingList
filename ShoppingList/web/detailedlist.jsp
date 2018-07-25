@@ -47,7 +47,7 @@
 
                 <div id="accordion" class="shopping-list" >
                     <c:set var = "shoppingLists" scope="request" value = "${sessionScope.shoppingLists}"/>
-                    <c:set var = "slItems" scope="request" value = "${sessionScope.slItems}"/>              
+                    <c:set var = "slItems" scope="request" value = "${sessionScope.slItems}"/>
                     <c:set var = "qslName" scope="request" value = "${session.qslName}"/>
 
                     <!--  contenitore  roba comune STUFF -->
@@ -270,7 +270,6 @@
                         <c:forEach items="${commentsList}" var="comment">
 
                             <c:choose>
-
                                 <c:when test = "${comment.type == 0}">
                                     <div class="coomentbox row centere">
                                         <div class="col-sm-1" style="padding:0px 45px 0px 5px;">
@@ -292,12 +291,7 @@
                                 </c:when>
 
                                 <c:when test = "${comment.type == 1}">
-                                    <div class="coomentbox row centere">
-                                        <div class="col-sm-1" style="padding:0px 45px 0px 5px;">
-                                            <div class="thumbnail" >
-                                                <img class="img-responsive user-photo img-rounded" src="images/userimages/default4bob.png">
-                                            </div><!-- /thumbnail -->
-                                        </div><!-- /col-sm-1  foto col -->
+                                    <div class="coomentbox row centere comment-added">
                                         <div class="col-sm-11"> <!-- body comment col -->
                                             <div class="panel panel-default">
                                                 <div class="panel-heading">
@@ -313,12 +307,7 @@
                                 </c:when>
 
                                 <c:when test = "${comment.type == 2}">
-                                    <div class="coomentbox row centere">
-                                        <div class="col-sm-1" style="padding:0px 45px 0px 5px;">
-                                            <div class="thumbnail" >
-                                                <img class="img-responsive user-photo img-rounded" src="images/userimages/default4bob.png">
-                                            </div><!-- /thumbnail -->
-                                        </div><!-- /col-sm-1  foto col -->
+                                    <div class="coomentbox row centere comment-updated">
                                         <div class="col-sm-11"> <!-- body comment col -->
                                             <div class="panel panel-default">
                                                 <div class="panel-heading">
@@ -334,12 +323,7 @@
                                 </c:when>
 
                                 <c:when test = "${comment.type == 3}">
-                                    <div class="coomentbox row centere">
-                                        <div class="col-sm-1" style="padding:0px 45px 0px 5px;">
-                                            <div class="thumbnail" >
-                                                <img class="img-responsive user-photo img-rounded" src="images/userimages/default4bob.png">
-                                            </div><!-- /thumbnail -->
-                                        </div><!-- /col-sm-1  foto col -->
+                                    <div class="coomentbox row centere comment-removed">
                                         <div class="col-sm-11"> <!-- body comment col -->
                                             <div class="panel panel-default">
                                                 <div class="panel-heading">
@@ -353,8 +337,6 @@
                                         </div><!-- /col-sm-5 -->
                                     </div><!-- /container commento copia fino a qua-->
                                 </c:when>
-
-
                             </c:choose>
                             <!-- commmento box2 -->
 
