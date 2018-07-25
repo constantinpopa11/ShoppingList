@@ -241,7 +241,7 @@
                     </div>
 
                     <!-- inizio sezione commenti -->
-                    <hr>
+                    <br>
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center">
                             <li class="page-item disabled">
@@ -255,103 +255,115 @@
                             </li>
                         </ul>
                     </nav>
-                    <hr>
+                    <br>
                     <div class="commentbox">
                         <div class="row">
-                            <hr>
+
                             <div class="col-sm-12">
                                 <h3>Commenti</h3>
                             </div><!-- /col-sm-12 -->
+
                         </div><!-- /row -->
-                        <!-- commento box -->
-                        <div class="coomentbox row">
-                            <div class="col-sm-1" style="padding:0px 50px 0px 5px;">
-                                <div class="thumbnail">
-                                    <img class="img-responsive user-photo" src="images/userimages/default.png">
-                                </div><!-- /thumbnail -->
-                            </div><!-- /col-sm-1  foto col -->
-                            <div class="col-sm-11"> <!-- body comment col -->
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <strong>Party Lemon</strong>  <span class="text-muted float-right "><u><em>24/02/2017 - 12:65</em></u></span>
-                                    </div>
-                                    <div class="panel-body">
-                                        Can you please add milk to the list, i need it plz
-                                    </div><!-- /panel-body -->
-                                </div><!-- /panel panel-default -->
-                            </div><!-- /col-sm-5 -->
-                        </div><!-- /container commento copia fino a qua-->
-                        <!-- inizio sezione aggiungi commento -->
                         <hr>
-                        <!-- commmento box2 -->
-                        <div class="coomentbox row centere">
-                            <div class="col-sm-1" style="padding:0px 45px 0px 5px;">
-                                <div class="thumbnail" >
-                                    <img class="img-responsive user-photo img-rounded" src="images/userimages/default4bob.png">
-                                </div><!-- /thumbnail -->
-                            </div><!-- /col-sm-1  foto col -->
-                            <div class="col-sm-11"> <!-- body comment col -->
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <strong>Rosa Culetto</strong>  <span class="text-muted float-right"><u> <em>26/12/2017 - 12:55</em></u></span>
-                                    </div>
-                                    <div class="panel-body">
-                                        I need more potatoes and some ringo biscuit, mom add them please because i don't have the admin privileges
-                                    </div><!-- /panel-body -->
-                                </div><!-- /panel panel-default -->
-                            </div><!-- /col-sm-5 -->
-                        </div><!-- /container commento copia fino a qua-->
-                        <hr>
-                        <!-- prova log -->
-                        <div class="row " >
-                            <div class="box-gray centered">
-                                <div class="row" style="padding: 10px;">
-                                    <!-- enter user who updated here -->
-                                    <strong style="padding: 0px 10px 0px 5px; " >Mother Rosa Culetto</strong>
-                                    <span class="date"><u>on <em> <!--enter date --> 26/12/2017 - 12:55</em></u></span>
-                                </div>
-                                <div class="row" style="padding: 0px 10px 0px 10px;">
-                                    <u><em>added</em></u>
-                                    <span class="contentlog" style="padding:0px 25px 0px 5px;" >Biscuits to the list</span>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <!-- third comment sample -->
-                        <div class="coomentbox row">
-                            <div class="col-sm-1" style="padding:0px 45px 0px 5px;">
-                                <div class="thumbnail" >
-                                    <img class="img-responsive user-photo img-rounded" src="images/userimages/default3woman.png">
-                                </div><!-- /thumbnail -->
-                            </div><!-- /col-sm-1  foto col -->
-                            <div class="col-sm-11"> <!-- body comment col -->
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <strong>Pino Gerna - F.A.R.T. CEO</strong>  <span class="text-muted float-right"><u> <em>32/12/2017 - 12:85</em></u></span>
-                                    </div>
-                                    <div class="panel-body">
-                                        This is the best shopping list on the internet i couldn't find any better one on the internet it's so material design and responsive yeah!<br>
-                                        Also, i need condoms, add them to the list
-                                    </div><!-- /panel-body -->
-                                </div><!-- /panel panel-default -->
-                            </div><!-- /col-sm-5 -->
-                        </div><!-- /container commento copia fino a qua-->
-                        <hr>
-                        <!-- log di delete qualcosa -->
-                        <div class="row" >
-                            <div class="box-red">
-                                <div class="row" style="padding: 10px;">
-                                    <!-- enter user who updated here -->
-                                    <strong style="padding: 0px 10px 0px 5px; opacity: 1; " >Popa Francesco</strong>
-                                    <span class="date"><u>on <em> <!--enter date --> 26/12/2017 - 12:55</em></u></span>
-                                </div>
-                                <div class="row" style="padding: 0px 10px 0px 10px;">
-                                    <u><em>removed</em></u>
-                                    <span class="contentlog" style="padding:0px 25px 0px 5px;" >Biscuits from the list</span>
-                                </div>
-                            </div>
+                        <c:set var = "commentsList" scope="request" value = "${session.commentsList}"/>
+
+                        <c:forEach items="${commentsList}" var="comment">
+
+                            <c:choose>
+
+                                <c:when test = "${comment.type == 0}">
+                                    <div class="coomentbox row centere">
+                                        <div class="col-sm-1" style="padding:0px 45px 0px 5px;">
+                                            <div class="thumbnail" >
+                                                <img class="img-responsive user-photo img-rounded" src="images/userimages/default4bob.png">
+                                            </div><!-- /thumbnail -->
+                                        </div><!-- /col-sm-1  foto col -->
+                                        <div class="col-sm-11"> <!-- body comment col -->
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <strong>${comment.firstName} ${comment.lastName}</strong>  <span class="text-muted float-right"><em>${comment.date}</em></span>
+                                                </div>
+                                                <div class="panel-body">
+                                                    ${comment.message}
+                                                </div><!-- /panel-body -->
+                                            </div><!-- /panel panel-default -->
+                                        </div><!-- /col-sm-5 -->
+                                    </div><!-- /container commento copia fino a qua-->
+                                </c:when>
+
+                                <c:when test = "${comment.type == 1}">
+                                    <div class="coomentbox row centere">
+                                        <div class="col-sm-1" style="padding:0px 45px 0px 5px;">
+                                            <div class="thumbnail" >
+                                                <img class="img-responsive user-photo img-rounded" src="images/userimages/default4bob.png">
+                                            </div><!-- /thumbnail -->
+                                        </div><!-- /col-sm-1  foto col -->
+                                        <div class="col-sm-11"> <!-- body comment col -->
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <strong>${comment.firstName} ${comment.lastName}</strong>  <span class="text-muted float-right"><em>${comment.date}</em>
+                                                    </span>
+                                                </div>
+                                                <div class="panel-body">
+                                                    "ADDED" ${comment.message}
+                                                </div><!-- /panel-body -->
+                                            </div><!-- /panel panel-default -->
+                                        </div><!-- /col-sm-5 -->
+                                    </div><!-- /container commento copia fino a qua-->
+                                </c:when>
+
+                                <c:when test = "${comment.type == 2}">
+                                    <div class="coomentbox row centere">
+                                        <div class="col-sm-1" style="padding:0px 45px 0px 5px;">
+                                            <div class="thumbnail" >
+                                                <img class="img-responsive user-photo img-rounded" src="images/userimages/default4bob.png">
+                                            </div><!-- /thumbnail -->
+                                        </div><!-- /col-sm-1  foto col -->
+                                        <div class="col-sm-11"> <!-- body comment col -->
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <strong>${comment.firstName} ${comment.lastName}</strong>  <span class="text-muted float-right"><em>${comment.date}</em>
+                                                    </span>
+                                                </div>
+                                                <div class="panel-body">
+                                                    "UPDATED" ${comment.message}
+                                                </div><!-- /panel-body -->
+                                            </div><!-- /panel panel-default -->
+                                        </div><!-- /col-sm-5 -->
+                                    </div><!-- /container commento copia fino a qua-->
+                                </c:when>
+
+                                <c:when test = "${comment.type == 3}">
+                                    <div class="coomentbox row centere">
+                                        <div class="col-sm-1" style="padding:0px 45px 0px 5px;">
+                                            <div class="thumbnail" >
+                                                <img class="img-responsive user-photo img-rounded" src="images/userimages/default4bob.png">
+                                            </div><!-- /thumbnail -->
+                                        </div><!-- /col-sm-1  foto col -->
+                                        <div class="col-sm-11"> <!-- body comment col -->
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <strong>${comment.firstName} ${comment.lastName}</strong>  <span class="text-muted float-right"><em>${comment.date}</em>
+                                                    </span>
+                                                </div>
+                                                <div class="panel-body">
+                                                    "REMOVED" ${comment.message}
+                                                </div><!-- /panel-body -->
+                                            </div><!-- /panel panel-default -->
+                                        </div><!-- /col-sm-5 -->
+                                    </div><!-- /container commento copia fino a qua-->
+                                </c:when>
+
+
+                            </c:choose>
+                            <!-- commmento box2 -->
+
                             <hr>
-                        </div>
+                        </c:forEach>
+
+
+
+
                         <!-- inizio sezione aggiungi commento -->
                         <div class="addcoomentbox row">
                             <div class="col-sm-1" style="padding:0px 45px 0px 5px;">

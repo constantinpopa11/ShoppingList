@@ -12,7 +12,7 @@ package constants;
 public class DBTables {
     public static final String USERS_TABLE = "Users";
     
-    public static final String COMMENTS_TABLE = "Comments";
+    public static final String SL_COMMENTS_TABLE = "SLComments";
     
     public static final String PRODUCT_CAT_TABLE = "ProductCategories";
     

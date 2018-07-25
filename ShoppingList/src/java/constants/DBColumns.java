@@ -20,10 +20,11 @@ public class DBColumns {
     public static final String USERS_PASSWORD_COL = DBTables.USERS_TABLE + "." + "password";
     public static final String USERS_PRIVILEGES_COL = DBTables.USERS_TABLE + "." + "privileges";
 
-    public static final String COMMENTS_UID_COL = DBTables.COMMENTS_TABLE + "." + "uid";
-    public static final String COMMENTS_DATE_COL = DBTables.COMMENTS_TABLE + "." + "date";
-    public static final String COMMENTS_MESSAGE_COL = DBTables.COMMENTS_TABLE + "." + "message";
-    public static final String COMMENTS_SLID_COL = DBTables.COMMENTS_TABLE + "." + "slid";
+    public static final String SL_COMMENTS_UID_COL = DBTables.SL_COMMENTS_TABLE + "." + "uid";
+    public static final String SL_COMMENTS_DATE_COL = DBTables.SL_COMMENTS_TABLE + "." + "date";
+    public static final String SL_COMMENTS_MESSAGE_COL = DBTables.SL_COMMENTS_TABLE + "." + "message";
+    public static final String SL_COMMENTS_SLID_COL = DBTables.SL_COMMENTS_TABLE + "." + "slid";
+    public static final String SL_COMMENTS_TYPE_COL = DBTables.SL_COMMENTS_TABLE + "." + "type";
 
     public static final String SL_CAT_ID_COL = DBTables.SL_CATEGORIES_TABLE + "." + "lcid";
     public static final String SL_CAT_NAME = DBTables.SL_CATEGORIES_TABLE + "." + "name";

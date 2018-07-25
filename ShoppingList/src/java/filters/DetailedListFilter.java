@@ -5,6 +5,7 @@
  */
 package filters;
 
+import beans.SLCommentBean;
 import beans.SLItemBean;
 import beans.ShoppingListBean;
 import constants.LoginStatus;
@@ -14,8 +15,12 @@ import database.ShoppingListQueries;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -52,7 +57,7 @@ public class DetailedListFilter implements Filter {
         String slidParam = req.getParameter("slid");
         HttpSession session = req.getSession();
         Object uidObj = session.getAttribute(Utils.USER_COOKIE);
-        int uid = (uidObj == null) ? LoginStatus.GUEST_USER : (int) uidObj;
+        int uid = (uidObj == null) ? LoginStatus.GUEST_USER : Integer.parseInt(uidObj.toString());
 
         int slid = (slidParam == null) ? -1 : Integer.parseInt(slidParam);
 
@@ -62,6 +67,7 @@ public class DetailedListFilter implements Filter {
 
             List<ShoppingListBean> shoppingLists = (ArrayList<ShoppingListBean>) session.getAttribute("shoppingLists");
             List<SLItemBean> slItems = null;
+            List<SLCommentBean> commentsList = null;
 
             DBConnectionManager dbManager = (DBConnectionManager) req.getServletContext().getAttribute("DBManager");
             Connection conn = dbManager.getConnection();
@@ -92,6 +98,16 @@ public class DetailedListFilter implements Filter {
                                 + " " + item.getPcid() + " " + item.getProdCatName() + " " + item.getProdCatDescr()
                                 + " " + item.getProdMeasureUnit() + " " + item.getQuantity());
                     }
+
+                    commentsList = ShoppingListQueries.getSLComments(conn, slid);
+                    session.setAttribute("commentsList", commentsList);
+
+                    for (SLCommentBean com : commentsList) {
+                        System.out.println(com.getFirstName() + " " + com.getLastName() + com.getAvatarPath()
+                                + " " + com.getDate() + " " + com.getMessage() + " " + com.getType());
+
+                    }
+
                 } else {
                     res.sendRedirect("home.jsp");
                 }

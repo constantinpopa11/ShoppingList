@@ -1,15 +1,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
- <script src="scripts/sidebarscript.js"></script>
- <link rel="stylesheet" href="css/sidebar.css">
+<script src="scripts/sidebarscript.js"></script>
+<link rel="stylesheet" href="css/sidebar.css">
 <!-- Sidebar Holder -->
 <nav id="sidebar">
     <div class="sidebar-header">
-      <p>
-        <a href="home.jsp">
-          <img   src="./images/app/sl_logo_pro.svg" width="80%">
-        </a>
-      </p>
+        <p>
+            <a href="home.jsp">
+                <img   src="./images/app/sl_logo_pro.svg" width="80%">
+            </a>
+        </p>
     </div>
 
     <ul class="list-unstyled components">
@@ -17,15 +17,16 @@
         <li class="active">
             <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">My Lists</a>
             <ul class="collapse list-unstyled" id="homeSubmenu">
-                <li>
-                    <a href="#">List 1</a>
-                </li>
-                <li>
-                    <a href="#">List 2</a>
-                </li>
-                <li>
-                    <a href="#">List 3</a>
-                </li>
+                <c:set var = "shoppingLists" scope="request" value = "${sessionScope.shoppingLists}"/>
+                <c:forEach items="${shoppingLists}" var="sl">
+                    <li>
+                        <a href="detailedlist.jsp?slid=${sl.slid}">${sl.slName}</a>
+                    </li>
+                </c:forEach>
+                    
+                <c:if test="${shoppingLists == null}">
+                    <!-- nuffin -->
+                </c:if>
             </ul>
         </li>
         <li>

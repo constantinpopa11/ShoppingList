@@ -5,17 +5,27 @@
  */
 package database;
 
+import beans.SLCommentBean;
 import beans.SLItemBean;
 import beans.ShoppingListBean;
 import constants.DBColumns;
 import constants.DBTables;
 import constants.LoginStatus;
+import filters.DetailedListFilter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -155,5 +165,80 @@ public class ShoppingListQueries {
         }//end try
 
         return items;
+    }
+
+    public static List<SLCommentBean> getSLComments(Connection conn, int slid) {
+        Statement stmt = null;
+
+        List<SLCommentBean> comments = new ArrayList<>();
+        try {
+
+            stmt = conn.createStatement();
+            String queryStr;
+            queryStr = "SELECT "
+                    + DBColumns.USERS_FIRST_NAME_COL
+                    + ", " + DBColumns.USERS_LAST_NAME_COL
+                    + ", " + DBColumns.USERS_AVATAR_PATH_COL
+                    + ", " + DBColumns.SL_COMMENTS_DATE_COL
+                    + ", " + DBColumns.SL_COMMENTS_MESSAGE_COL
+                    + ", " + DBColumns.SL_COMMENTS_TYPE_COL
+                    + " FROM "
+                    + DBTables.USERS_TABLE
+                    + ", " + DBTables.SL_COMMENTS_TABLE
+                    + " WHERE "
+                    + DBColumns.USERS_ID_COL + "=" + DBColumns.SL_COMMENTS_UID_COL
+                    + " AND " + DBColumns.SL_COMMENTS_SLID_COL + "=" + slid
+                    + " ORDER BY "
+                    + DBColumns.SL_COMMENTS_DATE_COL + " ;";
+
+            ResultSet rs = stmt.executeQuery(queryStr);
+
+            //Extract data from result set
+            while (rs.next()) {
+                //Retrieve by column name, rs indicates query result and not actual website input
+                String firstName = rs.getString(DBColumns.USERS_FIRST_NAME_COL);
+                String lastName = rs.getString(DBColumns.USERS_LAST_NAME_COL);
+                String avatarPath = rs.getString(DBColumns.USERS_AVATAR_PATH_COL);
+                String dateStr = rs.getString(DBColumns.SL_COMMENTS_DATE_COL);
+                String message = rs.getString(DBColumns.SL_COMMENTS_MESSAGE_COL);
+                int type = rs.getInt(DBColumns.SL_COMMENTS_TYPE_COL);
+
+                DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.ITALY);
+                Date date = format.parse(dateStr);
+
+                DateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+                String result = df.format(date);
+
+                SLCommentBean comment = new SLCommentBean();
+                comment.setFirstName(firstName);
+                comment.setLastName(lastName);
+                comment.setAvatarPath(avatarPath);
+                comment.setDate(result);
+                comment.setMessage(message);
+                comment.setType(type);
+                comments.add(comment);
+
+            }
+            //Clean-up environment
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+
+        return comments;
     }
 }
