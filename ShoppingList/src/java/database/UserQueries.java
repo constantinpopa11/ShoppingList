@@ -32,7 +32,8 @@ public class UserQueries {
 
             stmt = conn.createStatement();
             String queryStr;
-            queryStr = "SELECT " + DBColumns.USERS_EMAIL_COL
+            queryStr = "SELECT " + DBColumns.USERS_ID_COL
+                    + ", " + DBColumns.USERS_EMAIL_COL
                     + ", " + DBColumns.USERS_PASSWORD_COL
                     + " FROM " + DBTables.USERS_TABLE
                     + " WHERE "
@@ -42,14 +43,15 @@ public class UserQueries {
 
             //Extract data from result set
             while (rs.next()) {
-                //Retrieve by column name, q indicates query result and not actual website input
-                String qEmail = rs.getString(DBColumns.USERS_EMAIL_COL);
-                String qPassword = rs.getString(DBColumns.USERS_PASSWORD_COL);
+                //Retrieve by column name, rs indicates query result and not actual website input
+                int rsUid = rs.getInt(DBColumns.USERS_ID_COL);
+                String rsEmail = rs.getString(DBColumns.USERS_EMAIL_COL);
+                String rsPassword = rs.getString(DBColumns.USERS_PASSWORD_COL);
 
-                if (email.equals(qEmail) && !password.equals(qPassword)) {
+                if (email.equals(rsEmail) && !password.equals(rsPassword)) {
                     result = LoginStatus.WRONG_PASSWORD;
-                } else if (email.equals(qEmail) && password.equals(qPassword)) {
-                    result = LoginStatus.CORRECT_LOGIN_DETAILS;
+                } else if (email.equals(rsEmail) && password.equals(rsPassword)) {
+                    result = rsUid;
                 }
             }
             //Clean-up environment

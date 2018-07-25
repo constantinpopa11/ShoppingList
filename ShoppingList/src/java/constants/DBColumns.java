@@ -11,6 +11,8 @@ package constants;
  */
 public class DBColumns {
 
+    
+    public static final String USERS_ID_COL = DBTables.USERS_TABLE + "." + "uid";
     public static final String USERS_EMAIL_COL = DBTables.USERS_TABLE + "." + "email";
     public static final String USERS_FIRST_NAME_COL = DBTables.USERS_TABLE + "." + "firstName";
     public static final String USERS_LAST_NAME_COL = DBTables.USERS_TABLE + "." + "lastName";

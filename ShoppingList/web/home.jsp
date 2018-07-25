@@ -49,17 +49,21 @@
 
                 <jsp:include page="navbar.jsp" />
 
-                <c:set var = "shoppingLists" scope="request" value = "${requestScope.shoppingLists}"/>
-                <c:set var = "slItems" scope="request" value = "${requestScope.slItems}"/>
+                <c:set var = "shoppingLists" scope="request" value = "${sessionScope.shoppingLists}"/>
+                <c:set var = "slItems" scope="request" value = "${sessionScope.slItems}"/>
 
-                <div id="accordion" class="shopping-list"  >
+                <div id="accordion">
                     <!--  contenitore  roba comune STUFF -->
                     <div class="card">
                         <div class="card-header list-header" id="listHeader">
                             <div class="row h-100">
                                 <div class="col-xs-4 my-auto  first-child">
                                     <h5 class="mb-0 list-name" data-toggle="" >
-                                        ${shoppingLists[0].slName} <i class="fas fa-chevron-down list-expand-ic"></i>
+                                        ${shoppingLists[0].slName} 
+                                        <c:if test="${shoppingLists[0].slName == null}">
+                                            New shopping list
+                                        </c:if>
+                                        <i class="fas fa-chevron-down list-expand-ic"></i>
                                     </h5>
                                 </div>
                                 <div class="col " data-toggle="collapse" data-target="#listDetails">
@@ -86,8 +90,8 @@
                         </div>
                     </div>
 
-                                    
-                    
+
+
 
                     <!--  first elemnt  -->
 
@@ -177,7 +181,7 @@
                             <div class="row" >
                                 <!--  banana pic -->
                                 <div class="col-xs-2  my-auto first-child"  data-toggle="collapse" data-target="#pid${item.pid}">
-                                    <img src="http://smartyessay.com/wp-content/uploads/2018/05/crazyshit-beef-curtains-crazy-shit-beef-curtain-pussy-house-interiors.jpg"  width="60" height="60"/>
+                                    <img src="http://smartyessay.com/wp-content/uploads/2018/05/crazyshit-beef-curtains-crazy-shit-beef-curtain-pussy-house-interiors.jpg"  width="40" height="40"/>
                                 </div>
 
                                 <div class="col  my-auto">

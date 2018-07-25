@@ -97,43 +97,25 @@ public class LogIn extends HttpServlet {
             DBConnectionManager dbManager = (DBConnectionManager) getServletContext().getAttribute("DBManager");
             Connection conn = dbManager.getConnection();
 
-            int status = UserQueries.verifyUserCredentials(conn, email, passwordHash);
+            int uid = UserQueries.verifyUserCredentials(conn, email, passwordHash);
 
-            if (status == LoginStatus.WRONG_EMAIL) {
+            if (uid == LoginStatus.WRONG_EMAIL) {
                 request.setAttribute("wrongEmail", "There's no account associated to this email address");
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
-            } else if (status == LoginStatus.WRONG_PASSWORD) {
+            } else if (uid == LoginStatus.WRONG_PASSWORD) {
                 request.setAttribute("wrongPassword", "Wrong password");
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
-            } else if (status == LoginStatus.CORRECT_LOGIN_DETAILS) {
+            } else if (uid > 0) {
                 HttpSession session = request.getSession();
-                session.setAttribute(Utils.USER_COOKIE, email);
+                session.setAttribute(Utils.USER_COOKIE, uid);
 
                 if (rememberMe) {
                     session.setMaxInactiveInterval(Utils.REMEMBER_ME_MAX_INACTIVE_INTERVAL);
                 } else {
                     session.setMaxInactiveInterval(Utils.NO_REMEMBER_ME_MAX_INACTIVE_INTERVAL);
                 }
-
-                List<ShoppingListBean> shoppingLists = ShoppingListQueries.getUserShoppingLists(conn, 8);
-
-                for (ShoppingListBean sl  : shoppingLists) {
-                    System.out.println(sl.getSlid() + " - " + sl.getSlName());
-                }
                 
-                List<SLItemBean> slItems = ShoppingListQueries.getShoppingListItems(conn, shoppingLists.get(0).getSlid());
-                
-                for (SLItemBean item  : slItems) {
-                    System.out.println(item.getPid() + " " + item.getProdName()+ item.getProdDescr()
-                    + " " + item.getPcid() + " " + item.getProdCatName() + " " + item.getProdCatDescr() 
-                    + " " + item.getProdMeasureUnit() + " " + item.getQuantity());
-                }
-                
-                request.setAttribute("shoppingLists", shoppingLists);
-                request.setAttribute("slItems", slItems);
-
-                
-                request.getRequestDispatcher("/home.jsp").forward(request, response);
+                response.sendRedirect("home.jsp");
             }
         }
 
