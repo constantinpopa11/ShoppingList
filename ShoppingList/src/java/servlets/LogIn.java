@@ -5,6 +5,8 @@
  */
 package servlets;
 
+import beans.SLItemBean;
+import beans.ShoppingListBean;
 import constants.FormFields;
 import constants.LoginStatus;
 import database.DBConnectionManager;
@@ -21,6 +23,8 @@ import database.DBConnectionManager;
 import database.ShoppingListQueries;
 import database.UserQueries;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -76,7 +80,7 @@ public class LogIn extends HttpServlet {
             response.sendRedirect("login.jsp");
 
         } else if (action.equals("cancel")) { //cancel was pressed
-            
+
             String prevPage = request.getParameter("prevPage");
             if (prevPage == null || prevPage.equals("")) { //login.jsp is first visited page
                 response.sendRedirect("home.jsp");
@@ -111,8 +115,25 @@ public class LogIn extends HttpServlet {
                     session.setMaxInactiveInterval(Utils.NO_REMEMBER_ME_MAX_INACTIVE_INTERVAL);
                 }
 
-                ShoppingListQueries.getUserShoppingLists(conn, 3);
-                response.sendRedirect("home.jsp");
+                List<ShoppingListBean> shoppingLists = ShoppingListQueries.getUserShoppingLists(conn, 8);
+
+                for (ShoppingListBean sl  : shoppingLists) {
+                    System.out.println(sl.getSlid() + " - " + sl.getSlName());
+                }
+                
+                List<SLItemBean> slItems = ShoppingListQueries.getShoppingListItems(conn, shoppingLists.get(0).getSlid());
+                
+                for (SLItemBean item  : slItems) {
+                    System.out.println(item.getPid() + " " + item.getProdName()+ item.getProdDescr()
+                    + " " + item.getPcid() + " " + item.getProdCatName() + " " + item.getProdCatDescr() 
+                    + " " + item.getProdMeasureUnit() + " " + item.getQuantity());
+                }
+                
+                request.setAttribute("shoppingLists", shoppingLists);
+                request.setAttribute("slItems", slItems);
+
+                
+                request.getRequestDispatcher("/home.jsp").forward(request, response);
             }
         }
 
