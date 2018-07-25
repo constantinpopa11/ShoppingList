@@ -190,6 +190,11 @@
 
                                         </div>
 
+                                        <div class="row ">
+                                            <div class="col " data-toggle="collapse" data-target="#pid${item.pid}">
+                                                <small>Quantity: 69</small>
+                                            </div>
+                                        </div>
 
                                     </div>
 
