@@ -30,15 +30,13 @@ Author     : Omar
               <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
                 <!-- Our Custom CSS -->
                 <link rel="stylesheet" href="css/home.css">
-                  <link rel="stylesheet" href="css/sidebar.css">
-                    <link rel="stylesheet" href="css/navbar.css">
-                      <link rel="stylesheet" href="css/detailedlist.css">
-                      </head>
+                <link rel="stylesheet" href="css/detailedlist.css">
+                <link rel="stylesheet" href="css/dropdown.css">
+                <script src="scripts/dropdown.js"></script>
+                </head>
 
                       <!-- body -->
                       <body>
-
-
                         <div class="wrapper">
                           <!-- Page Content Holder -->
                           <jsp:include page="sidebar.jsp" />
@@ -54,9 +52,17 @@ Author     : Omar
                                 <div class="card-header list-header" id="listHeader">
                                   <div class="row h-100">
                                     <div class="col-xs-4 my-auto  first-child">
-                                      <h5 class="mb-0 list-name" data-toggle="" >
-                                        My shopping list <i class="fas fa-chevron-down list-expand-ic"></i>
-                                      </h5>
+                                      <div class="wrap-select efix">
+                                        <div id="dd" class="wrapper-dropdown-3">
+                                          <span class="mb-0 list-name"><strong>My Shopping list</strong></span>
+                                          <ul class="dropdown">
+                                            <li class="mb-0 list-name" ><a href="#">My Shopping listMy Shopping list</a></li>
+                                            <li class="mb-0 list-name"><a href="#">My Shopping list</a></li>
+                                            <li class="mb-0 list-name"><a href="#">My Shopping list</a></li>
+                                            <li class="mb-0 list-name"><a href="#">My Shopping list My Shopping list</a></li>
+                                          </ul>
+                                        </div>
+                                      </div>
                                     </div>
                                     <div class="col " data-toggle="collapse" data-target="#listDetails">
                                     </div>
