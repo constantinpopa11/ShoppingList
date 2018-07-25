@@ -1,4 +1,3 @@
-<%@page import="beans.ShoppingListBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
@@ -32,6 +31,8 @@
         <link rel="stylesheet" href="css/home.css">
         <link rel="stylesheet" href="css/sidebar.css">
         <link rel="stylesheet" href="css/navbar.css">
+        <link rel="stylesheet" href="css/shoppinglist.css">
+
 
     </head>
 
@@ -49,22 +50,33 @@
 
                 <jsp:include page="navbar.jsp" />
 
-                <c:set var = "shoppingLists" scope="request" value = "${sessionScope.shoppingLists}"/>
-                <c:set var = "slItems" scope="request" value = "${sessionScope.slItems}"/>
-
                 <div id="accordion">
+                    <c:set var = "shoppingLists" scope="request" value = "${sessionScope.shoppingLists}"/>
+                    <c:set var = "slItems" scope="request" value = "${sessionScope.slItems}"/>
+
                     <!--  contenitore  roba comune STUFF -->
                     <div class="card">
                         <div class="card-header list-header" id="listHeader">
                             <div class="row h-100">
                                 <div class="col-xs-4 my-auto  first-child">
-                                    <h5 class="mb-0 list-name" data-toggle="" >
-                                        ${shoppingLists[0].slName} 
-                                        <c:if test="${shoppingLists[0].slName == null}">
-                                            New shopping list
-                                        </c:if>
-                                        <i class="fas fa-chevron-down list-expand-ic"></i>
-                                    </h5>
+                                    <div>
+                                        <a class="btn-lg btn-secondary  sl-dropdown" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <c:if test="${shoppingLists[0].slName == null}">
+                                                New List
+                                            </c:if>
+                                            <c:if test="${shoppingLists[0].slName != null}">
+                                                ${shoppingLists[0].slName} <i class="fas fa-chevron-down"></i>
+                                            </c:if>
+                                        </a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <c:forEach items="${shoppingLists}" var="sl">
+                                                <a class="sl-dd-item dropdown-item" href="detailedlist.jsp?slid=${sl.slid}">${sl.slName}</a>
+                                            </c:forEach>
+
+                                        </div>
+                                    </div>
+
                                 </div>
                                 <div class="col " data-toggle="collapse" data-target="#listDetails">
                                 </div>

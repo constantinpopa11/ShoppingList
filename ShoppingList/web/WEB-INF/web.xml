@@ -19,6 +19,14 @@
         <filter-name>ShoppingListsFilter</filter-name>
         <filter-class>filters.ShoppingListsFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>DetailedListFilter</filter-name>
+        <filter-class>filters.DetailedListFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>DetailedListFilter</filter-name>
+        <url-pattern>/detailedlist.jsp</url-pattern>
+    </filter-mapping>
     <filter-mapping>
         <filter-name>ShoppingListsFilter</filter-name>
         <url-pattern>/home.jsp</url-pattern>

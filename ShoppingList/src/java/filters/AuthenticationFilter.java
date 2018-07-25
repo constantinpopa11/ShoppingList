@@ -52,7 +52,7 @@ public class AuthenticationFilter implements Filter {
         if (session.getAttribute(Utils.USER_COOKIE) != null  
                 && (uri.endsWith("login.jsp") || uri.endsWith("signup.jsp"))) {
             
-            res.sendRedirect("ShoppingLists"); //already registered or logged in
+            res.sendRedirect("home.jsp"); //already registered or logged in
         
         } else {
             // pass the request along the filter chain

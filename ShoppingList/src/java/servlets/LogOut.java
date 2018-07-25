@@ -41,6 +41,7 @@ public class LogOut extends HttpServlet {
         session.removeAttribute(Utils.USER_COOKIE);
         session.removeAttribute("shoppingLists");
         session.removeAttribute("itemsList");
+        session.removeAttribute("slName");
         response.sendRedirect("login.jsp");
     }
     

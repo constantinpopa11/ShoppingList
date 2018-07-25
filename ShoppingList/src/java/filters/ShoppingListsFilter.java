@@ -49,8 +49,6 @@ public class ShoppingListsFilter implements Filter {
         String uri = req.getRequestURI();
         System.out.println("Requested Resource::" + uri);
         
-        
-        System.out.println("Filter executed");
 
         HttpSession session = req.getSession();
         Object uidObj = session.getAttribute(Utils.USER_COOKIE);
@@ -69,21 +67,11 @@ public class ShoppingListsFilter implements Filter {
 
             shoppingLists = ShoppingListQueries.getUserShoppingLists(conn, uid);
 
-            for (ShoppingListBean sl : shoppingLists) {
-                System.out.println(sl.getSlid() + " - " + sl.getSlName());
-            }
 
             if (shoppingLists.size() > 0) {
-                slItems = ShoppingListQueries.getShoppingListItems(conn, shoppingLists.get(0).getSlid());
-
-                for (SLItemBean item : slItems) {
-                    System.out.println(item.getPid() + " " + item.getProdName() + item.getProdDescr()
-                            + " " + item.getPcid() + " " + item.getProdCatName() + " " + item.getProdCatDescr()
-                            + " " + item.getProdMeasureUnit() + " " + item.getQuantity());
-                }
+                slItems = ShoppingListQueries.getShoppingListItems(conn, shoppingLists.get(0).getSlid()); 
 
             }
-
         }
 
         session.setAttribute("shoppingLists", shoppingLists);
