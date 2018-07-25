@@ -5,11 +5,15 @@
 <!-- Sidebar Holder -->
 <nav id="sidebar">
     <div class="sidebar-header">
-        <img  src="./images/app/sl_logo_pro.svg" width="80%">
+      <p>
+        <a href="home.jsp">
+          <img   src="./images/app/sl_logo_pro.svg" width="80%">
+        </a>
+      </p>
     </div>
 
     <ul class="list-unstyled components">
-        <p>Dummy Heading</p>
+        <p >Dummy Heading</p>
         <li class="active">
             <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">My Lists</a>
             <ul class="collapse list-unstyled" id="homeSubmenu">
@@ -29,13 +33,13 @@
             <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
             <ul class="collapse list-unstyled" id="pageSubmenu">
                 <li>
-                    <a href="#">Page 1</a>
+                    <a href="detailedlist.jsp">List details</a>
                 </li>
                 <li>
-                    <a href="#">Page 2</a>
+                    <a href="login.jsp">Login </a>
                 </li>
                 <li>
-                    <a href="#">Page 3</a>
+                    <a href="signup.jsp">Signup</a>
                 </li>
             </ul>
         </li>
