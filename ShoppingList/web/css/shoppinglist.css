@@ -1,17 +1,22 @@
-#accordion{
-    width:95% !important;
-}
-
-@media (min-width:641px)  { 
-    #accordion{
-        width:70% !important;
-    }
-}
-
 .nopadding {
     padding: 0 !important;
 }
 
+.itemTitle{
+    font-size: 1.2em;
+}
+
+.itemInfo{
+    font-size: 0.8em;
+}
+
+.slTitle{
+    font-size: 1.4em;
+}
+
+.slInfo{
+    font-size: 1em;
+}
 
 .list-header{
     padding: 3%;
@@ -106,7 +111,7 @@
 .item-action-ic{
     color: #727272;
     font-size: 18px;
-    margin-left: 12px
+    margin-left: 12px;
 }
 
 .item-action-ic:hover{
@@ -116,8 +121,7 @@
 
 .list-action-ic{
     color: #f7f7f7;
-    font-size: 24px;
-    margin-left: 16px;
+    margin-left: 10px;
 }
 .last-ic{
     margin-right: 18px;
@@ -230,6 +234,7 @@
     background-color: #5067c2;
     border:none;
     color:white;
+    font-size: 1.2em;
     min-width: 200px;
 }
 
@@ -239,6 +244,7 @@
     box-shadow: none !important;
     background-color: #5067c2 !important;
     border:none !important;
+    text-decoration: underline;
 }
 
 .sl-dd-item{

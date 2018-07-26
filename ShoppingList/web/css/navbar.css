@@ -1,4 +1,15 @@
 
+body{
+    font-size: 10px !important;
+}
+
+
+@media (min-width:641px)  {
+    body{
+        font-size: 14px !important;
+    }
+}
+
 .wrapper {
     display: flex;
     width: 100%;
@@ -15,11 +26,16 @@
 }
 #accordion {
     margin: auto;
-    max-width: 950px;
-    min-width: 330px;
     padding: 5px;
     min-height: 100vh;
     transition: all 0.3s;
+    width:95% !important;
+}
+
+@media (min-width:641px)  { 
+    #accordion{
+        width:70% !important;
+    }
 }
 
 a, a:hover, a:focus {

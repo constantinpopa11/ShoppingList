@@ -6,52 +6,52 @@
 <div id="accordion">
     <c:set var = "shoppingLists" scope="request" value = "${sessionScope.shoppingLists}"/>
     <c:set var = "slItems" scope="request" value = "${sessionScope.slItems}"/>
+    <c:set var = "qslName" scope="request" value = "${sessionScope.qslName}"/>
+    <c:set var = "qslid" scope="request" value = "${sessionScope.qslid}"/>
 
     <!--  contenitore  roba comune STUFF -->
     <div class="card">
         <div class="card-header list-header" id="listHeader">
-            <div class="row h-100">
-                <div class="col-xs-4 my-auto  first-child">
-                    <div>
-                        <a class="btn-lg btn-secondary  sl-dropdown" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <c:if test="${shoppingLists[0].slName == null}">
-                                No lists to display
-                            </c:if>
-                            <c:if test="${shoppingLists[0].slName != null}">
-                                ${shoppingLists[0].slName} <i class="fas fa-chevron-down"></i>
-                            </c:if>
-                        </a>
 
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <c:forEach items="${shoppingLists}" var="sl">
-                                <a class="sl-dd-item dropdown-item" href="detailedlist.jsp?slid=${sl.slid}">New list <i class="fas fa-plus-circle"></i></a>
-                                <hr class="nomargin">
-                                <a class="sl-dd-item dropdown-item" href="detailedlist.jsp?slid=${sl.slid}">${sl.slName}</a>
-                            </c:forEach>
 
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col " data-toggle="collapse" data-target="#listDetails">
-                </div>
-
-                <div class="col-xs-3 my-auto " id="buttons">
-                    <div>
-                        <a class="float-right" href="detailedlist.jsp" ><i class="fas fa-trash list-action-ic last-ic"></i></a>
-                        <a class="float-right" href="#removeList" data-toggle="modal"><i class="fas fa-share-alt list-action-ic"></i></a>
-                        <a class="float-right" href="#addItem" data-toggle="modal"><i class="fas fa-cart-plus list-action-ic"></i></a>
-
-                        <c:if test="${! fn:endsWith(pageContext.request.requestURI, '/detailedlist.jsp')}">
-                            <a class="float-right" href="#addItem" data-toggle="modal"><i class="fas fa-comment-dots list-action-ic"></i></a>
+            <div class="row" >
+                <div class="slTitle first-child my-auto" >
+                    <a class="btn-md btn-secondary  sl-dropdown" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown">
+                        <c:if test="${qslName != null}">
+                            ${qslName} <i class="fas fa-chevron-down"></i>
                         </c:if>
+                    </a>
 
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="sl-dd-item dropdown-item" href="${pageContext.request.requestURI}?slid=${sl.slid}">New list <i class="fas fa-plus-circle"></i></a>
+
+                        <c:forEach items="${shoppingLists}" var="sl">
+                            <hr class="nomargin">
+                            <a class="sl-dd-item dropdown-item" href="${pageContext.request.requestURI}?slid=${sl.slid}">${sl.slName}</a>
+                        </c:forEach>
 
                     </div>
 
                 </div>
 
+                <div class="col" data-toggle="collapse" data-target="#listDetails">
+                </div>
+
+                <div class="slTitle float-right my-auto" >
+                    <a class="float-right" href="detailedlist.jsp" ><i class="fas fa-trash list-action-ic last-ic"></i></a>
+                    <a class="float-right" href="#removeList"><i class="fas fa-share-alt list-action-ic "></i></a>
+                    <a class="float-right" href="#addItem" ><i class="fas fa-cart-plus list-action-ic"></i></a>
+
+                    <c:if test="${! fn:endsWith(pageContext.request.requestURI, '/detailedlist.jsp')}">
+                        <a class="float-right" href="detailedlist.jsp?slid=${qslid}"><i class="fas fa-comment-dots first-child list-action-ic"></i></a>
+                        </c:if>
+                </div>
             </div>
+
+
+
+
+
         </div>
 
         <div id="listDetails" class="collapse"  data-parent="#accordion">
@@ -85,21 +85,21 @@
 
                     <div class="col  my-auto">
                         <div class="row">
-                            <div class="col " data-toggle="collapse" data-target="#pid${item.pid}">
-                                <h5>${item.prodName}</h5>
+                            <div class="col itemTitle" data-toggle="collapse" data-target="#pid${item.pid}">
+                                ${item.prodName}
                             </div>
                         </div>
 
                         <div class="row " >
-                            <div class="col " data-toggle="collapse" data-target="#pid${item.pid}">
-                                <small>${item.prodCatName}</small>
+                            <div class="col itemInfo" data-toggle="collapse" data-target="#pid${item.pid}">
+                                ${item.prodCatName}
                             </div>
 
                         </div>
 
                         <div class="row ">
-                            <div class="col " data-toggle="collapse" data-target="#pid${item.pid}">
-                                <small>Quantity: ${item.quantity} ${item.prodMeasureUnit}</small>
+                            <div class="col itemInfo" data-toggle="collapse" data-target="#pid${item.pid}">
+                                Quantity: ${item.quantity} ${item.prodMeasureUnit}
                             </div>
                         </div>
 
@@ -107,15 +107,14 @@
 
                     <div class="col-xs-2 my-auto">
                         <div class="row ">
-                            <div class="col ">
-                                <h5 class="float-right">
-                                    <a href="edit">
-                                        <i class="fas fa-pencil-alt item-action-ic last-ic float-right"></i>
-                                    </a>
-                                    <a href="remove">
-                                        <i class="fas fa-times item-action-ic float-right"></i>
-                                    </a>
-                                </h5>
+                            <div class="col itemTitle float-right">
+                                <a href="edit">
+                                    <i class="fas fa-pencil-alt item-action-ic last-ic float-right"></i>
+                                </a>
+                                <a href="remove">
+                                    <i class="fas fa-times item-action-ic float-right"></i>
+                                </a>
+
                             </div>
                         </div>
 
@@ -127,7 +126,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col "  data-toggle="collapse" data-target="#pid${item.pid}">
+                            <div class="col itemTitle"  data-toggle="collapse" data-target="#pid${item.pid}">
                                 <span><i class="fas fa-chevron-down item-expand-ic last-ic float-right"></i></span>
                             </div>
                         </div>
@@ -157,14 +156,14 @@
 
                 <div class="col  my-auto">
                     <div class="row">
-                        <div class="col " data-toggle="collapse" data-target="#pid${item.pid}">
+                        <div class="col itemTitle" data-toggle="collapse" data-target="#pid${item.pid}">
                             item di prova
                         </div>
                     </div>
 
                     <div class="row " >
-                        <div class="col " data-toggle="collapse" data-target="#pid${item.pid}">
-                            <small>cagtararara</small>
+                        <div class="col itemInfo" data-toggle="collapse" data-target="#pid${item.pid}">
+                            cagtararara
                         </div>
 
                     </div>
@@ -190,7 +189,7 @@
                     </div>
 
                     <div class="row add-widget">
-                        <div class="col my-auto" data-toggle="collapse" data-target="#pid${item.pid}">
+                        <div class="col my-auto itemTitle" data-toggle="collapse" data-target="#pid${item.pid}">
                             <i class="fas fa-chevron-down item-expand-ic2  float-right"></i>
                         </div>
                     </div>
