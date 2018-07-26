@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <link rel="stylesheet" href="css/shoppinglist.css">
 
 <div id="accordion">
@@ -40,7 +41,11 @@
                         <a class="float-right" href="detailedlist.jsp" ><i class="fas fa-trash list-action-ic last-ic"></i></a>
                         <a class="float-right" href="#removeList" data-toggle="modal"><i class="fas fa-share-alt list-action-ic"></i></a>
                         <a class="float-right" href="#addItem" data-toggle="modal"><i class="fas fa-cart-plus list-action-ic"></i></a>
-                        <a class="float-right" href="#addItem" data-toggle="modal"><i class="fas fa-comment-dots list-action-ic"></i></a>
+
+                        <c:if test="${! fn:endsWith(pageContext.request.requestURI, '/detailedlist.jsp')}">
+                            <a class="float-right" href="#addItem" data-toggle="modal"><i class="fas fa-comment-dots list-action-ic"></i></a>
+                        </c:if>
+
 
                     </div>
 
