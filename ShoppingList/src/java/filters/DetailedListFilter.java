@@ -114,6 +114,7 @@ public class DetailedListFilter implements Filter {
             }
             session.setAttribute("shoppingLists", shoppingLists);
             session.setAttribute("slItems", slItems);
+            session.setAttribute("qslid", slid);
         }
 
         chain.doFilter(request, response);

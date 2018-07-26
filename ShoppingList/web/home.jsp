@@ -35,7 +35,6 @@
 
     <body>
 
-
         <div class="wrapper">
             <!-- Page Content Holder -->
             <jsp:include page="sidebar.jsp" />
