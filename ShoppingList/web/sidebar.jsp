@@ -2,6 +2,7 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <script src="scripts/sidebarscript.js"></script>
 <link rel="stylesheet" href="css/sidebar.css">
+
 <!-- Sidebar Holder -->
 <nav id="sidebar">
     <div class="sidebar-header">

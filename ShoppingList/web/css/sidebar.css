@@ -1,18 +1,3 @@
-#content {
-    width: 100%;
-    padding: 20px;
-    min-height: 100vh;
-    transition: all 0.3s;
-}
-#accordion {
-    margin: auto;
-    max-width: 950px;
-    width: 100%;
-    padding: 20px;
-    min-height: 100vh;
-    transition: all 0.3s;
-}
-
 #sidebar .sidebar-header {
     padding: 20px;
     background: #6d7fcc;
@@ -43,13 +28,6 @@
     background: #6d7fcc;
 }
 
-.wrapper {
-    display: flex;
-    width: 100%;
-    min-width: 380px;
-    align-items: stretch;
-    perspective: 1500px;
-}
 #sidebar {
     min-width: 250px;
     max-width: 250px;

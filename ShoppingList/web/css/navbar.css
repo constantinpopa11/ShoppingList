@@ -1,3 +1,27 @@
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    min-width: 380px;
+    align-items: stretch;
+    perspective: 1500px;
+}
+
+#content {
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+#accordion {
+    margin: auto;
+    max-width: 950px;
+    min-width: 330px;
+    padding: 5px;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
 a, a:hover, a:focus {
     color: inherit;
     text-decoration: none;

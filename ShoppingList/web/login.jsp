@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
+
 <!DOCTYPE html>
 <html>
 
@@ -30,8 +31,6 @@
 
 
         <link rel="stylesheet" href="css/login.css">
-        <link rel="stylesheet" href="css/sidebar.css">
-        <link rel="stylesheet" href="css/navbar.css">
 
     </head>
 

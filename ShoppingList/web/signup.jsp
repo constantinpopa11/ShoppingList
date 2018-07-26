@@ -30,8 +30,6 @@
 
           <!-- our subpages stylesheets -->
         <link rel="stylesheet" href="css/signup.css">
-        <link rel="stylesheet" href="css/navbar.css">
-        <link rel="stylesheet" href="css/sidebar.css">
     </head>
     <body>
 

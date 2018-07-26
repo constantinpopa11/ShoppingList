@@ -1,5 +1,5 @@
 #accordion{
-    width:90% !important;
+    width:95% !important;
 }
 
 @media (min-width:641px)  { 
@@ -249,4 +249,6 @@
     background-color: #efefef;
 }
 
-    
+hr.nomargin{
+     margin: 3px;
+  }

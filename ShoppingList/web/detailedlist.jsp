@@ -2,9 +2,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
+
 <!DOCTYPE html>
 <html>
-
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,7 +28,6 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <!-- Our Custom CSS -->
-        <link rel="stylesheet" href="css/home.css">
         <link rel="stylesheet" href="css/detailedlist.css">
         <link rel="stylesheet" href="css/shoppinglist.css">
 
@@ -240,8 +239,13 @@
                         </div>
                     </div>
 
+
+                </div>
+
+
+                <div id="comment-section">
                     <!-- inizio sezione commenti -->
-                    <br>
+                    
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center">
                             <li class="page-item disabled">
@@ -255,12 +259,12 @@
                             </li>
                         </ul>
                     </nav>
-                    <br>
+                    
                     <div class="commentbox">
                         <div class="row">
 
                             <div class="col-sm-12">
-                                <h3>Commenti</h3>
+                                <h3>Comments</h3>
                             </div><!-- /col-sm-12 -->
 
                         </div><!-- /row -->
@@ -381,6 +385,8 @@
                     </div>
                 </div>
             </div>
+
+
         </div> <!-- fine wrapper -->
     </body>
 </html>
