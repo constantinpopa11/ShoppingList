@@ -32,8 +32,9 @@ public class FormFields {
     public static final String NEW_SHOP_CAT_IMG_FILE_FIELD = "shopCatImgFile";
     
     public static final String NEW_PROD_CAT_NAME_FIELD = "prodCatName";
-    public static final String NEW_PROD_CAT_DESCR_FIELD = "prodCatDesc";
-    public static final String NEW_PROD_CAT_IMG_FILE_FIELD = "prodCatImgFile";
+    public static final String NEW_PROD_CAT_DESCR_FIELD = "prodCatDescr";
+    public static final String NEW_PROD_CAT_IMG_FILE_FIELD = "prodCatImgFile"; 
+    public static final String NEW_PROD_CAT_SHOP_CAT_ID = "shopCatId";
     
     public static final String NEW_PRODUCT_NAME_FIELD = "prodName";
     public static final String NEW_PRODUCT_SHOP_CAT_FIELD = "shopCategory";

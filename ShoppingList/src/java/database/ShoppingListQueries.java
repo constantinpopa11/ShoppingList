@@ -373,7 +373,7 @@ public class ShoppingListQueries {
                     + ", " + DBColumns.PRODUCTS_DESCR_COL
                     + ", " + DBColumns.PRODUCTS_MEASURE_UNIT_COL
                     + ", " + DBColumns.PRODUCTS_LOGO_PATH_COL
-                    + ", " + DBColumns.PRODUCTS_PCID_COL                
+                    + ", " + DBColumns.PRODUCTS_PCID_COL
                     + ", " + DBColumns.PRODUCTS_CREATED_BY_COL
                     + ") VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -389,14 +389,104 @@ public class ShoppingListQueries {
                 //TODO
             }
             preparedStmt.setInt(5, pcid);
-            
-            int privileges = UserQueries.getUserPrivileges(conn, createdBy);          
+
+            int privileges = UserQueries.getUserPrivilegesByUid(conn, createdBy);
             if (privileges == Privileges.ADMIN_PRIVILEGES) {
                 preparedStmt.setInt(6, -1);
             } else {
                 preparedStmt.setInt(6, createdBy);
             }
 
+            // execute the preparedstatement
+            preparedStmt.execute();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (preparedStmt != null) {
+                    preparedStmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+
+    }
+
+    public static void insertShopCat(Connection conn, String shopCatName, String shopCatDescr, String iconPath) {
+
+        PreparedStatement preparedStmt = null;
+
+        try {
+
+            String queryStr = " INSERT INTO " + DBTables.SL_CATEGORIES_TABLE
+                    + " (" + DBColumns.SL_CAT_NAME
+                    + ", " + DBColumns.SL_CAT_DESCR
+                    + ", " + DBColumns.SL_CAT_ICON_PATH
+                    + ") VALUES (?, ?, ?)";
+
+            // create the mysql insert preparedstatement
+            preparedStmt = conn.prepareStatement(queryStr);
+            preparedStmt.setString(1, shopCatName);
+            preparedStmt.setString(2, shopCatDescr);
+
+            if (iconPath == null) {
+                preparedStmt.setString(3, Utils.DEFAULT_SL_CAT_ICON_PATH);
+            } else {
+                //TODO
+            }
+            
+            // execute the preparedstatement
+            preparedStmt.execute();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (preparedStmt != null) {
+                    preparedStmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+
+    }
+    
+    public static void insertProdCat(Connection conn, int lcid, String prodCatName, String prodCatDescr, String iconPath) {
+
+        PreparedStatement preparedStmt = null;
+
+        try {
+
+            String queryStr = " INSERT INTO " + DBTables.PRODUCT_CAT_TABLE
+                    + " (" + DBColumns.PRODUCT_CAT_LCID_COL
+                    + ", " + DBColumns.PRODUCT_CAT_NAME_COL
+                    + ", " + DBColumns.PRODUCT_CAT_DESCR_COL
+                    + ", " + DBColumns.PRODUCT_CAT_ICON_PATH_COL
+                    + ") VALUES (?, ?, ?, ?)";
+
+            // create the mysql insert preparedstatement
+            preparedStmt = conn.prepareStatement(queryStr);
+            preparedStmt.setInt(1, lcid);
+            preparedStmt.setString(2, prodCatName);
+            preparedStmt.setString(3, prodCatDescr);
+
+            if (iconPath == null) {
+                preparedStmt.setString(4, Utils.PRODUCT_PROD_CAT_ICON_PATH);
+            } else {
+                //TODO
+            }
+            
             // execute the preparedstatement
             preparedStmt.execute();
 

@@ -78,7 +78,7 @@ public class UserQueries {
         return result;
     }
 
-    public static int getUserPrivileges(Connection conn, int uid) {
+    public static int getUserPrivilegesByUid(Connection conn, int uid) {
         Statement stmt = null;
 
         int result = Privileges.GUEST_USER_PRIVILEGES;

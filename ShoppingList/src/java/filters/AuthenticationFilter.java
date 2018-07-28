@@ -56,7 +56,7 @@ public class AuthenticationFilter implements Filter {
         Object uidObj = session.getAttribute(Utils.UID_SESSION_ATTR);
         int uid = (uidObj == null) ? LoginStatus.GUEST_USER : Integer.parseInt(uidObj.toString());
 
-        int privileges = UserQueries.getUserPrivileges(conn, uid);
+        int privileges = UserQueries.getUserPrivilegesByUid(conn, uid);
         session.setAttribute(Utils.PRIVILEGES_SESSION_ATTR, privileges);
 
         if (privileges != Privileges.GUEST_USER_PRIVILEGES) {
@@ -82,6 +82,12 @@ public class AuthenticationFilter implements Filter {
 
             res.sendRedirect("NewProduct"); //already registered or logged in
 
+        }
+        
+        if(privileges != Privileges.ADMIN_PRIVILEGES 
+                && (uri.endsWith("newshopcat.jsp") || (uri.endsWith("newprodcat.jsp")))){
+            
+            res.sendRedirect("home.jsp");
         }
 
         chain.doFilter(request, response);
