@@ -55,6 +55,10 @@
         <servlet-name>ResetPwd</servlet-name>
         <servlet-class>servlets.ResetPwd</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NewProduct</servlet-name>
+        <servlet-class>servlets.NewProduct</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SignUp</servlet-name>
         <url-pattern>/SignUp</url-pattern>
@@ -70,6 +74,10 @@
     <servlet-mapping>
         <servlet-name>ResetPwd</servlet-name>
         <url-pattern>/ResetPwd</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewProduct</servlet-name>
+        <url-pattern>/NewProduct</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

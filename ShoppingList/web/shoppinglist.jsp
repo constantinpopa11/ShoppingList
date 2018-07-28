@@ -14,8 +14,8 @@
         <div class="card-header list-header" id="listHeader">
 
 
-            <div class="row" >
-                <div class="slTitle first-child my-auto" >
+            <div class="row custom-row">
+                <div class="slTitle my-auto" >
                     <a class="btn-md btn-secondary  sl-dropdown" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown">
                         <c:if test="${qslName != null}">
                             ${qslName} <i class="fas fa-chevron-down"></i>
@@ -38,13 +38,18 @@
                 </div>
 
                 <div class="slTitle float-right my-auto" >
-                    <a class="float-right" href="detailedlist.jsp" ><i class="fas fa-trash list-action-ic last-ic"></i></a>
-                    <a class="float-right" href="#removeList"><i class="fas fa-share-alt list-action-ic "></i></a>
+                    <c:if test="${slItems != null}">
+                        <a class="float-right" href="detailedlist.jsp" ><i class="fas fa-trash list-action-ic"></i></a>
+
+                        <a class="float-right" href="#removeList"><i class="fas fa-share-alt list-action-ic "></i></a>
+
+                        <c:if test="${! fn:endsWith(pageContext.request.requestURI, '/detailedlist.jsp')}">
+                            <a class="float-right" href="detailedlist.jsp?slid=${qslid}"><i class="fas fa-comment-dots first-child list-action-ic"></i></a>
+                            </c:if>
+                        </c:if>
+
                     <a class="float-right" href="#addItem" ><i class="fas fa-cart-plus list-action-ic"></i></a>
 
-                    <c:if test="${! fn:endsWith(pageContext.request.requestURI, '/detailedlist.jsp')}">
-                        <a class="float-right" href="detailedlist.jsp?slid=${qslid}"><i class="fas fa-comment-dots first-child list-action-ic"></i></a>
-                        </c:if>
                 </div>
             </div>
 
@@ -55,7 +60,7 @@
         </div>
 
         <div id="listDetails" class="collapse"  data-parent="#accordion">
-            <div class="card-body">
+            <div class="card-body custom-row">
                 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
             </div>
         </div>
@@ -70,14 +75,17 @@
         <div class="card">
             <div class="card-header list-item ">
 
-                <div class="row" >
+                <div class="row custom-row" >
                     <!-- checkbox -->
-                    <div class="col-xs-1  my-auto first-child">
+                    
+                    <div class="col-xs-1  my-auto">
                         <label class="checkbox-container">
                             <input type="checkbox">
                             <span class="checkmark"></span>
                         </label>
                     </div>
+                    
+
                     <!--  banana pic -->
                     <div class="col-xs-2  my-auto"  data-toggle="collapse" data-target="#pid${item.pid}">
                         <img src="http://smartyessay.com/wp-content/uploads/2018/05/crazyshit-beef-curtains-crazy-shit-beef-curtain-pussy-house-interiors.jpg"  width="60" height="60"/>
@@ -109,7 +117,7 @@
                         <div class="row ">
                             <div class="col itemTitle float-right">
                                 <a href="edit">
-                                    <i class="fas fa-pencil-alt item-action-ic last-ic float-right"></i>
+                                    <i class="fas fa-pencil-alt item-action-ic float-right"></i>
                                 </a>
                                 <a href="remove">
                                     <i class="fas fa-times item-action-ic float-right"></i>
@@ -127,7 +135,7 @@
 
                         <div class="row">
                             <div class="col itemTitle"  data-toggle="collapse" data-target="#pid${item.pid}">
-                                <span><i class="fas fa-chevron-down item-expand-ic last-ic float-right"></i></span>
+                                <span><i class="fas fa-chevron-down item-expand-ic float-right"></i></span>
                             </div>
                         </div>
 
@@ -148,9 +156,9 @@
     <div class="card">
         <div class="card-header list-item ">
 
-            <div class="row" >
+            <div class="row custom-row">
                 <!--  banana pic -->
-                <div class="col-xs-2  my-auto first-child"  data-toggle="collapse" data-target="#pid${item.pid}">
+                <div class="col-xs-2  my-auto"  data-toggle="collapse" data-target="#pid${item.pid}">
                     <img src="http://smartyessay.com/wp-content/uploads/2018/05/crazyshit-beef-curtains-crazy-shit-beef-curtain-pussy-house-interiors.jpg"  width="40" height="40"/>
                 </div>
 
@@ -171,9 +179,8 @@
 
 
 
-                <div class="col-xs-3 my-auto last-ic">
-
-                    <div class="row ">
+                <div class="col-xs-3 my-auto">
+                    <div class="row">
                         <div class="col my-auto">
                             <div class="input-group">
                                 <input size="3" class="form-control form-control-sm qty-field" id="inputdefault" type="text" placeholder="Qty">
@@ -200,7 +207,7 @@
 
         </div>
 
-        <div id="pid${item.pid}" class="collapse" data-parent="#accordion">
+        <div id="pid${item.pid}" class="collapse custom-row" data-parent="#accordion">
             <div class="card-body">
                 ${item.prodDescr}
             </div>

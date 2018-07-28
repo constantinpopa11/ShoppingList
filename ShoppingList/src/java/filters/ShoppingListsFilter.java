@@ -52,17 +52,17 @@ public class ShoppingListsFilter implements Filter {
         System.out.println("Requested Resource::" + uri);
         String slidParam = req.getParameter("slid");
         HttpSession session = req.getSession();
+        boolean isNew = session.isNew();
         Object uidObj = session.getAttribute(Utils.USER_COOKIE);
         int uid = (uidObj == null) ? LoginStatus.GUEST_USER : Integer.parseInt(uidObj.toString());
 
         int slid = (slidParam == null) ? -1 : Integer.parseInt(slidParam);
 
-        if (uid == LoginStatus.GUEST_USER) {
-            res.sendRedirect("home.jsp");
-        } else {
+        String qslName = null;
+        List<SLItemBean> slItems = null;
+        List<ShoppingListBean> shoppingLists = (ArrayList<ShoppingListBean>) session.getAttribute("shoppingLists");
 
-            List<ShoppingListBean> shoppingLists = (ArrayList<ShoppingListBean>) session.getAttribute("shoppingLists");
-            List<SLItemBean> slItems = null;
+        if (uid != LoginStatus.GUEST_USER) {
 
             DBConnectionManager dbManager = (DBConnectionManager) req.getServletContext().getAttribute("DBManager");
             Connection conn = dbManager.getConnection();
@@ -72,7 +72,6 @@ public class ShoppingListsFilter implements Filter {
                 shoppingLists = ShoppingListQueries.getUserShoppingLists(conn, uid);
             }
 
-            String qslName = null;
             if (shoppingLists.size() > 0) {
 
                 for (ShoppingListBean sl : shoppingLists) {
@@ -89,25 +88,24 @@ public class ShoppingListsFilter implements Filter {
                 }
 
                 slItems = ShoppingListQueries.getShoppingListItems(conn, slid);
-                
+
                 session.setAttribute("qslid", slid);
 
-                /*
-                        for (SLItemBean item : slItems) {
-                            System.out.println(item.getPid() + " " + item.getProdName() + item.getProdDescr()
-                                    + " " + item.getPcid() + " " + item.getProdCatName() + " " + item.getProdCatDescr()
-                                    + " " + item.getProdMeasureUnit() + " " + item.getQuantity());
-                        }
-                 */
             } else {
                 qslName = "No lists to display";
             }
+        } else {
 
-            
-            session.setAttribute("qslName", qslName);
-            session.setAttribute("shoppingLists", shoppingLists);
-            session.setAttribute("slItems", slItems);
+            if (shoppingLists != null) {
+                qslName = shoppingLists.get(0).getSlName();
+            } else {
+                qslName = "No lists to display";
+            }
         }
+
+        session.setAttribute("qslName", qslName);
+        session.setAttribute("shoppingLists", shoppingLists);
+        session.setAttribute("slItems", slItems);
 
         chain.doFilter(request, response);
 

@@ -256,5 +256,10 @@
 }
 
 hr.nomargin{
-     margin: 3px;
-  }
+    margin: 3px;
+}
+
+.custom-row{
+    margin-left: 0.1%;
+    margin-right: 0.1%;
+}
