@@ -88,7 +88,7 @@ public class NewProduct extends HttpServlet {
 
         System.out.println(">" + prodDescr + "<");
 
-        /*
+        
         int uid = UserQueries.verifyUserCredentials(conn, email, passwordHash);
 
         if (uid == LoginStatus.WRONG_EMAIL) {
@@ -109,7 +109,7 @@ public class NewProduct extends HttpServlet {
 
             response.sendRedirect("home.jsp");
         }
-         */
+         
     }
 
     /**

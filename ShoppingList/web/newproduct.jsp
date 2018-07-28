@@ -54,10 +54,10 @@
                             <p class="h4 mb-4">New Product</p>
 
                             <!-- Name -->
-                            <input type="text" name="prodName" class="form-control mb-4" required placeholder="Product name">
+                            <input type="text" name="prodName" class="form-control mb-4" required autocomplete="off" placeholder="Product name">
 
                             <!-- Shop Category -->
-                            <select class="browser-default custom-select mb-4 " name="shopCategory" required>
+                            <select class="browser-default custom-select mb-4 " name="shopCategory" required autocomplete="off">
                                 <option value="" selected disabled >Select shop category</option>
                                 <option value="1">shop1</option>
                                 <option value="2">shop2</option>
@@ -66,7 +66,7 @@
                             </select>
 
                             <!-- Item Category -->
-                            <select class="browser-default custom-select mb-4 " name="itemCategory" required>
+                            <select class="browser-default custom-select mb-4 " name="itemCategory" required autocomplete="off">
                                 <option value="" selected disabled >Select item category</option>
                                 <option value="1">Item1</option>
                                 <option value="2">Item2</option>
@@ -86,7 +86,7 @@
 
                             <!-- Description -->
                             <div class="form-group">
-                                <textarea class="form-control rounded-0" name="prodDescr" rows="4" placeholder="Product description"></textarea>
+                                <textarea class="form-control rounded-0" name="prodDescr" rows="4" placeholder="Product description" autocomplete="off"></textarea>
                             </div>
 
                             <!-- File input -->
