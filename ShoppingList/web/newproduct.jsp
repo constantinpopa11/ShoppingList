@@ -49,7 +49,7 @@
                 <div class="container">
 
                     <div class="form-container">
-                        <form class="text-center border border-light p-5">
+                        <form class="text-center border border-light p-5" method="POST" action="NewProduct">
 
                             <p class="h4 mb-4">New Product</p>
 
@@ -57,7 +57,7 @@
                             <input type="text" name="prodName" class="form-control mb-4" required placeholder="Product name">
 
                             <!-- Shop Category -->
-                            <select class="browser-default custom-select mb-4 " required>
+                            <select class="browser-default custom-select mb-4 " name="shopCategory" required>
                                 <option value="" selected disabled >Select shop category</option>
                                 <option value="1">shop1</option>
                                 <option value="2">shop2</option>
@@ -66,7 +66,7 @@
                             </select>
 
                             <!-- Item Category -->
-                            <select class="browser-default custom-select mb-4 " required>
+                            <select class="browser-default custom-select mb-4 " name="itemCategory" required>
                                 <option value="" selected disabled >Select item category</option>
                                 <option value="1">Item1</option>
                                 <option value="2">Item2</option>
@@ -74,8 +74,17 @@
                                 <option value="4">Item4</option>
                             </select>
 
+                            <!-- Measure Unit -->
+                            <input type="text" name="measureUnit" class="form-control mb-4" name="measureUnit"
+                                   required placeholder="Measure unit" list="mus" autocomplete="off"/>
+                            <datalist id="mus">
+                                <option>Volvo</option>
+                                <option>Saab</option>
+                                <option>Mercedes</option>
+                                <option>Audi</option>
+                            </datalist>
 
-                            <!-- Message -->
+                            <!-- Description -->
                             <div class="form-group">
                                 <textarea class="form-control rounded-0" name="prodDescr" rows="4" placeholder="Product description"></textarea>
                             </div>
