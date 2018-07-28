@@ -38,7 +38,7 @@
         <div class="wrapper">
             <!-- Page Content Holder -->
             <jsp:include page="sidebar.jsp" />
-            
+
 
             <div id="content">
                 <!-- navbar Content Holder -->
@@ -46,10 +46,10 @@
 
                 <jsp:include page="shoppinglist.jsp" />
 
-                
+
                 <div id="comment-section">
                     <!-- inizio sezione commenti -->
-                    
+
                     <div class="commentbox">
                         <div class="row">
 
@@ -86,49 +86,79 @@
 
                                 <c:when test = "${comment.type == 1}">
                                     <div class="coomentbox row centere comment-added">
-                                        <div class="col-sm-11"> <!-- body comment col -->
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <strong>${comment.firstName} ${comment.lastName}</strong>  <span class="text-muted float-right"><em>${comment.date}</em>
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <!-- nome -->
+                                                <div class="col-md-4">
+                                                    <strong>${comment.firstName} ${comment.lastName}</strong>
+                                                </div>
+                                                <div class="col-md-4">
+                                                </div>
+                                                <!-- data -->
+                                                <div class="col-md-4">
+                                                    <span class="text-muted float-right"><em>${comment.date}</em>
                                                     </span>
                                                 </div>
-                                                <div class="panel-body">
+                                            </div>
+                                            <div class="row">
+                                                <!-- contenuto -->
+                                                <div class="col-md-12">
                                                     "ADDED" ${comment.message}
-                                                </div><!-- /panel-body -->
-                                            </div><!-- /panel panel-default -->
-                                        </div><!-- /col-sm-5 -->
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div><!-- /container commento copia fino a qua-->
                                 </c:when>
 
                                 <c:when test = "${comment.type == 2}">
                                     <div class="coomentbox row centere comment-updated">
-                                        <div class="col-sm-11"> <!-- body comment col -->
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <strong>${comment.firstName} ${comment.lastName}</strong>  <span class="text-muted float-right"><em>${comment.date}</em>
+                                         <div class="col-md-12">
+                                            <div class="row">
+                                                <!-- nome -->
+                                                <div class="col-md-4">
+                                                    <strong>${comment.firstName} ${comment.lastName}</strong>
+                                                </div>
+                                                <div class="col-md-4">
+                                                </div>
+                                                <!-- data -->
+                                                <div class="col-md-4">
+                                                    <span class="text-muted float-right"><em>${comment.date}</em>
                                                     </span>
                                                 </div>
-                                                <div class="panel-body">
-                                                    "UPDATED" ${comment.message}
-                                                </div><!-- /panel-body -->
-                                            </div><!-- /panel panel-default -->
-                                        </div><!-- /col-sm-5 -->
+                                            </div>
+                                            <div class="row">
+                                                <!-- contenuto -->
+                                                <div class="col-md-12">
+                                                    "ADDED" ${comment.message}
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div><!-- /container commento copia fino a qua-->
                                 </c:when>
 
                                 <c:when test = "${comment.type == 3}">
                                     <div class="coomentbox row centere comment-removed">
-                                        <div class="col-sm-11"> <!-- body comment col -->
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <strong>${comment.firstName} ${comment.lastName}</strong>  <span class="text-muted float-right"><em>${comment.date}</em>
+                                         <div class="col-md-12">
+                                            <div class="row">
+                                                <!-- nome -->
+                                                <div class="col-md-4">
+                                                    <strong>${comment.firstName} ${comment.lastName}</strong>
+                                                </div>
+                                                <div class="col-md-4">
+                                                </div>
+                                                <!-- data -->
+                                                <div class="col-md-4">
+                                                    <span class="text-muted float-right"><em>${comment.date}</em>
                                                     </span>
                                                 </div>
-                                                <div class="panel-body">
-                                                    "REMOVED" ${comment.message}
-                                                </div><!-- /panel-body -->
-                                            </div><!-- /panel panel-default -->
-                                        </div><!-- /col-sm-5 -->
+                                            </div>
+                                            <div class="row">
+                                                <!-- contenuto -->
+                                                <div class="col-md-12">
+                                                    "ADDED" ${comment.message}
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div><!-- /container commento copia fino a qua-->
                                 </c:when>
                             </c:choose>
@@ -170,7 +200,6 @@
 
                                 <!-- fine sezione commenti -->
                             </div> <!--  end accordion -->
-
                         </div>
                     </div>
                 </div>

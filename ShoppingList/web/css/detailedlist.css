@@ -20,16 +20,9 @@
   border-style:solid solid outset;
   pointer-events:none;
 }
-.panel>.panel-heading:after{
-  border-width:7px;
-  border-right-color:#f7f7f7;
-  margin-top:1px;
-  margin-left:2px;
-}
-.panel>.panel-heading:before{
-  border-right-color:#ddd;
-  border-width:8px;
-}
+
+
+
 .centered {
   float: none;
   margin-left: auto;
@@ -64,7 +57,7 @@
     width:95% !important;
 }
 
-@media (min-width:641px)  { 
+@media (min-width:641px)  {
     #comment-section{
         width:70% !important;
     }

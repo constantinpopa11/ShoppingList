@@ -36,89 +36,112 @@
             <jsp:include page="sidebar.jsp" />
             <div id="content">
                 <!-- navbar Content Holder -->
+
+
                 <jsp:include page="navbar.jsp" />
-                <!-- shopping list edit -->
+                <!--  contenitore  roba comune STUFF -->
+                <div class="card">
+                    <div class="card-header list-header" id="listHeader">
 
-                <div id="accordion">
-                    <c:set var = "shoppingLists" scope="request" value = "${sessionScope.shoppingLists}"/>
-                    <c:set var = "slItems" scope="request" value = "${sessionScope.slItems}"/>
-                    <!--  contenitore  roba comune STUFF -->
-                    <div class="card">
-                        <div class="card-header list-header" id="listHeader">
-                            <div class="row h-100">
-                                <div class="col-xs-4 my-auto  first-child">
-                                    <div>
-                                        <a class="btn-lg btn-secondary  sl-dropdown" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <c:if test="${shoppingLists[0].slName == null}">
-                                                No lists to display
-                                            </c:if>
-                                            <c:if test="${shoppingLists[0].slName != null}">
-                                                ${shoppingLists[0].slName} <i class="fas fa-chevron-down"></i>
-                                            </c:if>
-                                        </a>
+                        <div class="row custom-row">
+                            <div class="slTitle my-auto" >
+                                <a class="btn-md btn-secondary  sl-dropdown" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown">
+                                      Shopping list<i class="fas fa-chevron-down"></i>
+                                </a>
 
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <c:forEach items="${shoppingLists}" var="sl">
-                                                <a class="sl-dd-item dropdown-item" href="detailedlist.jsp?slid=${sl.slid}">New list <i class="fas fa-plus-circle"></i></a>
-                                                <hr class="nomargin">
-                                                <a class="sl-dd-item dropdown-item" href="detailedlist.jsp?slid=${sl.slid}">${sl.slName}</a>
-                                            </c:forEach>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="sl-dd-item dropdown-item" href="${pageContext.request.requestURI}?slid=${sl.slid}">New list <i class="fas fa-plus-circle"></i></a>
 
-                                        </div>
-                                    </div>
+                                    <c:forEach items="${shoppingLists}" var="sl">
+                                        <hr class="nomargin">
+                                        <a class="sl-dd-item dropdown-item" href="${pageContext.request.requestURI}?slid=${sl.slid}">${sl.slName}</a>
+                                    </c:forEach>
 
                                 </div>
-                                <div class="col " data-toggle="collapse" data-target="#listDetails">
-                                </div>
-                                <!-- da modificare con transizione -->
-                                <div class="col-xs-3 my-auto " id="buttons">
-                                    <div>
-                                        <a class="float-right" href="detailedlist.jsp" ><i class="fas fa-trash list-action-ic last-ic"></i></a>
-                                        <a class="float-right" href="#removeList" data-toggle="modal"><i class="fas fa-share-alt list-action-ic"></i></a>
-                                        <a class="float-right" href="addproduct.jsp" data-toggle="modal"><i class="fas fa-cart-plus list-action-ic"></i></a>
-                                    </div>
-                                </div>
+
                             </div>
-                            <!-- row filter and search -->
-                            <div class="row h-100">
-                                <div class="col-xs-4 my-auto  first-child">
-                                    <div class="filter-1">
-                                    </div>
-                                </div>
 
-                                <!-- search bar  -->
-                                <div class="col-xs-8 " id="searchbar">
-                                  <div id="custom-search">
-                                	<input type="text" name="search" class="search-query" placeholder="Search" />
-                                	<button type="button">
-                                		<i class="fas fa-search fa-2x" aria-hidden="true"></i>
-                                	</button>
-                                	<input type="submit" value="Submit" style="display: none;">
-                                </div>
+                            <div class="col" data-toggle="collapse" data-target="#listDetails">
+                            </div>
+                            <!-- transition -->
+                            <div class="slTitle float-right my-auto " id="buttons">
+                              <div id="contenuto"
+                                <a class="float-right" href="#back" ><i class="fas fa-arrow-circle-left list-action-ic last-ic"></i></a>
+                                <a class="float-right" href="#sort"><i class="fas fa-sort list-action-ic "></i></a>
                                 </div>
                             </div>
                         </div>
+                        <!-- search and filter -->
 
-                        <div id="listDetails" class="collapse"  data-parent="#accordion">
-                            <div class="card-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        <div class="row custom-row">
+                            <div class="slTitle my-auto" id="filterdiv" >
+                              <div class="dropdown">
+                              <button onclick="myFunction()" class="dropbtn">Category <i class="fas fa-filter list-action-ic"></i> </button>
+                                <div id="myDropdown" class="dropdown-content">
+                                  <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                                  <a href="#">Mcelleria</a>
+                                  <a href="#">salumi</a>
+                                  <a href="#">brihcolage</a>
+                                  <a href="#">droghe pesanti</a>
+                                  <a href="#">droghe leggere</a>
+                                  <a href="#">droghe  senza droga</a>
+                                  <a href="#">yep</a>
+                                </div>
+                              </div>
+                              </div>
+
+                            <div class="col" data-toggle="collapse" data-target="#listDetails">
+                            </div>
+                            <!--  search bar -->
+                            <div class="slTitle float-left my-auto" id="search-barid">
+                                <div class="col-xs-8 " id="searchbar">
+                                  <div id="custom-search">
+                                  <input type="text" name="search" class="search-query" placeholder="Search" />
+                                  <button type="button" >
+                                    <i class="fas fa-search list-action-ic"></i>
+                                  </button>
+                                  <input type="submit" value="Submit" style="display: none;">
+                                </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!--  first elemnt  -->
-                </div> <!--  end accordion -->
 
-
+                    <div id="listDetails" class="collapse"  data-parent="#accordion">
+                        <div class="card-body custom-row">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
+                    </div>
+                </div><!-- fine shopping list header -->
             </div>
         </div>
-        <script type="text/javascript">
-        // Focus Covers Full Area
-            $(function() {
-            	$("#custom-search").click(function() {
-            		$(".search-query").focus();
-            	  });
-            });
-        </script>
-    </body>
+        <!--  script after the page is loaded -->
+          <script>
 
+          $(function() {
+          	$("#custom-search").click(function() {
+          		$(".search-query").focus();
+          	  });
+          });
+
+          function myFunction() {
+              document.getElementById("myDropdown").classList.toggle("show");
+          }
+          function filterFunction() {
+              var input, filter, ul, li, a, i;
+              input = document.getElementById("myInput");
+              filter = input.value.toUpperCase();
+              div = document.getElementById("myDropdown");
+              a = div.getElementsByTagName("a");
+              for (i = 0; i < a.length; i++) {
+                  if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                      a[i].style.display = "";
+                  } else {
+                      a[i].style.display = "none";
+                  }
+              }
+}
+          </script>
+
+    </body>
 </html>
