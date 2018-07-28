@@ -50,22 +50,26 @@ public class AuthenticationFilter implements Filter {
         Object uidObj = session.getAttribute(Utils.USER_COOKIE);
         int uid = (uidObj == null) ? LoginStatus.GUEST_USER : Integer.parseInt(uidObj.toString());
 
-
         if (uid != LoginStatus.GUEST_USER
                 && (uri.endsWith("login.jsp") || uri.endsWith("signup.jsp"))) {
 
             res.sendRedirect("home.jsp"); //already registered or logged in
 
         }
-        
+
         if (uid == LoginStatus.GUEST_USER
-                && (uri.endsWith("newproduct.jsp") )) {
+                && (uri.endsWith("newproduct.jsp") || (uri.endsWith("NewProduct")))) {
 
             res.sendRedirect("home.jsp"); //already registered or logged in
 
         }
-        
-        
+
+        if (uid != LoginStatus.GUEST_USER && (uri.endsWith("newproduct.jsp"))) {
+
+            res.sendRedirect("NewProduct"); //already registered or logged in
+
+        }
+
         chain.doFilter(request, response);
     }
 

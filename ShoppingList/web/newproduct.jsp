@@ -29,37 +29,7 @@
         <!-- Our Custom CSS -->
         <link rel="stylesheet" href="css/createtemplates.css">
 
-
-        <script>
-            $(function () {
-
-                // We can attach the `fileselect` event to all file inputs on the page
-                $(document).on('change', ':file', function () {
-                    var input = $(this),
-                            numFiles = input.get(0).files ? input.get(0).files.length : 1,
-                            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-                    input.trigger('fileselect', [numFiles, label]);
-                });
-
-                // We can watch for our custom `fileselect` event like this
-                $(document).ready(function () {
-                    $(':file').on('fileselect', function (event, numFiles, label) {
-
-                        var input = $(this).parents('.input-group').find(':text'),
-                                log = numFiles > 1 ? numFiles + ' files selected' : label;
-
-                        if (input.length) {
-                            input.val(log);
-                        } else {
-                            if (log)
-                                label = input.val().replace(/\\/g, '/').replace(/.*\//, log);
-                        }
-
-                    });
-                });
-
-            });
-        </script>
+        <script src="scripts/custom-file-input.js"></script>
 
 
     </head>
@@ -79,6 +49,12 @@
 
                 <div class="container">
 
+                    <c:set var = "slCategories" scope="request" value = "${requestScope.slCategories}"/>
+                    <c:set var = "prodCategories" scope="request" value = "${requestScope.prodCategories}"/>
+                    <c:set var = "lcid" scope="request" value = "${requestScope.lcid}"/>             
+                    <c:set var = "slCatName" scope="request" value = "${requestScope.slCatName}"/>
+
+
                     <div class="form-container">
                         <form class="text-center border border-light p-5" method="POST" action="NewProduct">
 
@@ -86,20 +62,25 @@
 
                             <!-- Shop Category -->
                             <select class="browser-default custom-select mb-4 " name="shopCategory" required autocomplete="off" onChange="window.location.href = this.value">
-                                <option value="" selected disabled >Select shop category</option>
-                                <option value="NewProduct?shopCat=1">shop1</option>
-                                <option value="NewProduct?shopCat=2">shop2</option>
-                                <option value="NewProduct?shopCat=3">shop3</option>
-                                <option value="NewProduct?shopCat=4">shop4</option>
+
+                                <c:if test="${lcid != null}">
+                                    <option value="${lcid}" selected>${slCatName}</option>
+                                </c:if>
+
+                                <c:if test="${lcid == null}">
+                                    <option value="" selected disabled >Select shop category</option>
+                                    <c:forEach items="${slCategories}" var="slCat">
+                                        <option value="NewProduct?lcid=${slCat.slcid}&slCatName=${slCat.slCatName}">${slCat.slCatName}</option>
+                                    </c:forEach>
+                                </c:if>
                             </select>
 
                             <!-- Item Category -->
                             <select class="browser-default custom-select mb-4 " name="itemCategory" required autocomplete="off ">
                                 <option value="" selected disabled >Select item category</option>
-                                <option value="1">Item1</option>
-                                <option value="2">Item2</option>
-                                <option value="3">Item3</option>
-                                <option value="4">Item4</option>
+                                <c:forEach items="${prodCategories}" var="prodCat">
+                                    <option value="${prodCat.pcid}">${prodCat.prodCatName}</option>
+                                </c:forEach>
                             </select>
 
                             <!-- Name -->
@@ -127,7 +108,7 @@
                             <div class="input-group">
                                 <label class="input-group-btn" >
                                     <span class="btn custom-btn">
-                                        Search <input  type="file" class="file-picker" multiple>
+                                        Search <input  type="file" class="file-picker" single>
                                     </span>
                                 </label>
                                 <input type="text" placeholder="Insert logo" class="form-control file-name-label" readonly>

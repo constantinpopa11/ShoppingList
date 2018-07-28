@@ -46,7 +46,7 @@
             </ul>
         </li>
         <li>
-            <a href="#">Portfolio</a>
+            <a href="NewProduct">New Product</a>
         </li>
         <li>
             <a href="#">Contact</a>

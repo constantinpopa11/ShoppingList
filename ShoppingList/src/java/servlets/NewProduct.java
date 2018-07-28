@@ -5,15 +5,20 @@
  */
 package servlets;
 
+import beans.ProductCategory;
+import beans.SLCategory;
 import constants.FormFields;
 import constants.LoginStatus;
 import constants.ResetPwdStatus;
 import constants.Utils;
 import database.DBConnectionManager;
+import database.ShoppingListQueries;
 import database.UserQueries;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -53,22 +58,34 @@ public class NewProduct extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String prodName = request.getParameter(FormFields.NEW_PRODUCT_NAME_FIELD);
-        String shopCategory = request.getParameter(FormFields.NEW_PRODUCT_SHOP_CAT_FIELD);
-        String itemCategory = request.getParameter(FormFields.NEW_PRODUCT_ITEM_CAT_FIELD);
-        String measureUnit = request.getParameter(FormFields.NEW_PRODUCT_MEASURE_UNIT_FIELD);
-        String prodDescr = request.getParameter(FormFields.NEW_PRODUCT_PROD_DESCR_FIELD);
-        //TODO:FILE
+        HttpSession session = request.getSession();
 
-        System.out.println(">" + prodName + "<");
+        DBConnectionManager dbManager = (DBConnectionManager) request.getServletContext().getAttribute("DBManager");
+        Connection conn = dbManager.getConnection();
 
-        System.out.println(">" + shopCategory + "<");
+        Object uidObj = session.getAttribute(Utils.USER_COOKIE);
+        int uid = (uidObj == null) ? LoginStatus.GUEST_USER : Integer.parseInt(uidObj.toString());
 
-        System.out.println(">" + itemCategory + "<");
+        if (uid != LoginStatus.GUEST_USER) {
 
-        System.out.println(">" + measureUnit + "<");
+            String lcid = request.getParameter("lcid");
+            String slCatName = request.getParameter("slCatName");
 
-        System.out.println(">" + prodDescr + "<");
+            if (lcid == null) {
+
+                List<SLCategory> slCategories = ShoppingListQueries.getSLCategories(conn);
+                request.setAttribute("slCategories", slCategories);
+                request.getRequestDispatcher("/newproduct.jsp").forward(request, response);
+
+            } else {
+                request.setAttribute("lcid", lcid);
+                request.setAttribute("slCatName", slCatName);
+                List<ProductCategory> prodCategories = ShoppingListQueries.getProdCategories(conn, Integer.parseInt(lcid));
+                request.setAttribute("prodCategories", prodCategories);
+                request.getRequestDispatcher("/newproduct.jsp").forward(request, response);
+            }
+        }
+
     }
 
     /**
@@ -83,9 +100,6 @@ public class NewProduct extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        DBConnectionManager dbManager = (DBConnectionManager) getServletContext().getAttribute("DBManager");
-        Connection conn = dbManager.getConnection();
-
         String prodName = request.getParameter(FormFields.NEW_PRODUCT_NAME_FIELD);
         String shopCategory = request.getParameter(FormFields.NEW_PRODUCT_SHOP_CAT_FIELD);
         String itemCategory = request.getParameter(FormFields.NEW_PRODUCT_ITEM_CAT_FIELD);
@@ -102,27 +116,6 @@ public class NewProduct extends HttpServlet {
         System.out.println(">" + measureUnit + "<");
 
         System.out.println(">" + prodDescr + "<");
-
-        int uid = UserQueries.verifyUserCredentials(conn, email, passwordHash);
-
-        if (uid == LoginStatus.WRONG_EMAIL) {
-            request.setAttribute("wrongEmail", "There's no account associated to this email address");
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
-        } else if (uid == LoginStatus.WRONG_PASSWORD) {
-            request.setAttribute("wrongPassword", "Wrong password");
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
-        } else if (uid > 0) {
-            HttpSession session = request.getSession();
-            session.setAttribute(Utils.USER_COOKIE, uid);
-
-            if (rememberMe) {
-                session.setMaxInactiveInterval(Utils.REMEMBER_ME_MAX_INACTIVE_INTERVAL);
-            } else {
-                session.setMaxInactiveInterval(Utils.NO_REMEMBER_ME_MAX_INACTIVE_INTERVAL);
-            }
-
-            response.sendRedirect("home.jsp");
-        }
 
     }
 

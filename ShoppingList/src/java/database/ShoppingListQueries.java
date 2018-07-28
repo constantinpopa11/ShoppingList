@@ -5,6 +5,8 @@
  */
 package database;
 
+import beans.ProductCategory;
+import beans.SLCategory;
 import beans.SLCommentBean;
 import beans.SLItemBean;
 import beans.ShoppingListBean;
@@ -240,5 +242,110 @@ public class ShoppingListQueries {
         }//end try
 
         return comments;
+    }
+
+    public static List<SLCategory> getSLCategories(Connection conn) {
+        Statement stmt = null;
+
+        List<SLCategory> slCategories = new ArrayList<>();
+        try {
+
+            stmt = conn.createStatement();
+            String queryStr = "SELECT * FROM "
+                    + DBTables.SL_CATEGORIES_TABLE;
+
+            ResultSet rs = stmt.executeQuery(queryStr);
+
+            //Extract data from result set
+            while (rs.next()) {
+                //Retrieve by column name, rs indicates query result and not actual website input
+                int slcid = rs.getInt(DBColumns.SL_CAT_ID_COL);
+                String slCatName = rs.getString(DBColumns.SL_CAT_NAME);
+                String slCatDescr = rs.getString(DBColumns.SL_CAT_DESCR);
+                String slCatIconPath = rs.getString(DBColumns.SL_CAT_ICON_PATH);
+
+                SLCategory slCat = new SLCategory();
+                slCat.setSlcid(slcid);
+                slCat.setSlCatName(slCatName);
+                slCat.setSlCatDescr(slCatDescr);
+                slCat.setSlCatIconPath(slCatIconPath);
+                slCategories.add(slCat);
+
+            }
+            //Clean-up environment
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+
+        return slCategories;
+    }
+
+    public static List<ProductCategory> getProdCategories(Connection conn, int lcid) {
+        Statement stmt = null;
+
+        List<ProductCategory> prodCategories = new ArrayList<>();
+        try {
+
+            stmt = conn.createStatement();
+            String queryStr = "SELECT * FROM "
+                    + DBTables.PRODUCT_CAT_TABLE
+                    + " WHERE " 
+                    + DBColumns.PRODUCT_CAT_LCID_COL + "=" + lcid + ";";
+            
+
+            ResultSet rs = stmt.executeQuery(queryStr);
+
+            //Extract data from result set
+            while (rs.next()) {
+                //Retrieve by column name, rs indicates query result and not actual website input
+                int pcid = rs.getInt(DBColumns.PRODUCT_CAT_ID_COL);
+                String prodCatName = rs.getString(DBColumns.PRODUCT_CAT_NAME_COL);
+                String prodCatDescr = rs.getString(DBColumns.PRODUCT_CAT_DESCR_COL);
+                String prodCatIconPath = rs.getString(DBColumns.PRODUCT_CAT_ICON_PATH_COL);
+
+                ProductCategory prodCat = new ProductCategory();
+                prodCat.setPcid(pcid);
+                prodCat.setProdCatName(prodCatName);
+                prodCat.setProdCatDescr(prodCatDescr);
+                prodCat.setProdCatIconPath(prodCatIconPath);
+                prodCategories.add(prodCat);
+
+            }
+            //Clean-up environment
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+
+        return prodCategories;
     }
 }
