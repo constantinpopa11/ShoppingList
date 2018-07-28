@@ -171,8 +171,7 @@
                                     <span class="slider"></span>
                                 </label>
                                 Editable
-                            </div>
-                            <div>
+                           
                                 <label class="switch">
                                     <input type="checkbox">
                                     <span class="slider"></span>
