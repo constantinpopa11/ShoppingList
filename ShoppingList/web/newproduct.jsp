@@ -28,7 +28,38 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <!-- Our Custom CSS -->
         <link rel="stylesheet" href="css/newproduct.css">
+        
+        
+        <script>
+                                $(function() {
 
+                                 // We can attach the `fileselect` event to all file inputs on the page
+                                 $(document).on('change', ':file', function() {
+                                   var input = $(this),
+                                       numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                                       label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                                   input.trigger('fileselect', [numFiles, label]);
+                                 });
+
+                                 // We can watch for our custom `fileselect` event like this
+                                 $(document).ready( function() {
+                                     $(':file').on('fileselect', function(event, numFiles, label) {
+
+                                         var input = $(this).parents('.input-group').find(':text'),
+                                             log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+                                         if( input.length ) {
+                                             input.val(log);
+                                         } else {
+                                             if( log )
+                                              label = input.val().replace(/\\/g, '/').replace(/.*\//, log);
+                                         }
+
+                                     });
+                                 });
+
+                               });           
+        </script>
 
 
     </head>
@@ -92,13 +123,18 @@
 
                             <!-- File input -->
 
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile">
-                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                     
+                            <div class="input-group" style="height: 40px;">
+                                        <label class="input-group-btn" >
+                                            <span class="btn btn-primary">
+                                                Search <input  type="file" style="display: none;" multiple>
+                                            </span>
+                                        </label>
+                                        <input type="text" placeholder="Insert logo" class="form-control" readonly>
                             </div>
 
                             <!-- Send button -->
-                            <button class="btn btn-create btn-block" type="submit">Create product <i class="fas fa-arrow-right"></i></button>
+                            <br><button class="btn btn-create btn-block" type="submit">Create product <i class="fas fa-arrow-right"></i></button>
 
                         </form>
 
