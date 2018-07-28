@@ -53,7 +53,22 @@ public class NewProduct extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        response.sendRedirect("newproduct.jsp");
+        String prodName = request.getParameter(FormFields.NEW_PRODUCT_NAME_FIELD);
+        String shopCategory = request.getParameter(FormFields.NEW_PRODUCT_SHOP_CAT_FIELD);
+        String itemCategory = request.getParameter(FormFields.NEW_PRODUCT_ITEM_CAT_FIELD);
+        String measureUnit = request.getParameter(FormFields.NEW_PRODUCT_MEASURE_UNIT_FIELD);
+        String prodDescr = request.getParameter(FormFields.NEW_PRODUCT_PROD_DESCR_FIELD);
+        //TODO:FILE
+
+        System.out.println(">" + prodName + "<");
+
+        System.out.println(">" + shopCategory + "<");
+
+        System.out.println(">" + itemCategory + "<");
+
+        System.out.println(">" + measureUnit + "<");
+
+        System.out.println(">" + prodDescr + "<");
     }
 
     /**
@@ -68,15 +83,15 @@ public class NewProduct extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        DBConnectionManager dbManager = (DBConnectionManager) getServletContext().getAttribute("DBManager");
+        Connection conn = dbManager.getConnection();
+
         String prodName = request.getParameter(FormFields.NEW_PRODUCT_NAME_FIELD);
         String shopCategory = request.getParameter(FormFields.NEW_PRODUCT_SHOP_CAT_FIELD);
         String itemCategory = request.getParameter(FormFields.NEW_PRODUCT_ITEM_CAT_FIELD);
         String measureUnit = request.getParameter(FormFields.NEW_PRODUCT_MEASURE_UNIT_FIELD);
         String prodDescr = request.getParameter(FormFields.NEW_PRODUCT_PROD_DESCR_FIELD);
         //TODO:FILE
-
-        DBConnectionManager dbManager = (DBConnectionManager) getServletContext().getAttribute("DBManager");
-        Connection conn = dbManager.getConnection();
 
         System.out.println(">" + prodName + "<");
 
@@ -88,7 +103,6 @@ public class NewProduct extends HttpServlet {
 
         System.out.println(">" + prodDescr + "<");
 
-        
         int uid = UserQueries.verifyUserCredentials(conn, email, passwordHash);
 
         if (uid == LoginStatus.WRONG_EMAIL) {
@@ -109,7 +123,7 @@ public class NewProduct extends HttpServlet {
 
             response.sendRedirect("home.jsp");
         }
-         
+
     }
 
     /**

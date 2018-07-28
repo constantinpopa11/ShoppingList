@@ -5,6 +5,7 @@
  */
 package filters;
 
+import constants.LoginStatus;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -27,8 +28,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import constants.Utils;
 
-
-
 @WebFilter(filterName = "AuthenticationFilter", urlPatterns = {"/*"})
 public class AuthenticationFilter implements Filter {
 
@@ -48,17 +47,26 @@ public class AuthenticationFilter implements Filter {
         System.out.println("Requested Resource::" + uri);
 
         HttpSession session = req.getSession(true);
+        Object uidObj = session.getAttribute(Utils.USER_COOKIE);
+        int uid = (uidObj == null) ? LoginStatus.GUEST_USER : Integer.parseInt(uidObj.toString());
 
-        if (session.getAttribute(Utils.USER_COOKIE) != null  
+
+        if (uid != LoginStatus.GUEST_USER
                 && (uri.endsWith("login.jsp") || uri.endsWith("signup.jsp"))) {
-            
-            res.sendRedirect("home.jsp"); //already registered or logged in
-        
-        } else {
-            // pass the request along the filter chain
-            chain.doFilter(request, response);
-        }
 
+            res.sendRedirect("home.jsp"); //already registered or logged in
+
+        }
+        
+        if (uid == LoginStatus.GUEST_USER
+                && (uri.endsWith("newproduct.jsp") )) {
+
+            res.sendRedirect("home.jsp"); //already registered or logged in
+
+        }
+        
+        
+        chain.doFilter(request, response);
     }
 
     public void destroy() {

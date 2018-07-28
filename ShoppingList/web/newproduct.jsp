@@ -53,26 +53,27 @@
 
                             <p class="h4 mb-4">New Product</p>
 
-                            <!-- Name -->
-                            <input type="text" name="prodName" class="form-control mb-4" required autocomplete="off" placeholder="Product name">
-
                             <!-- Shop Category -->
-                            <select class="browser-default custom-select mb-4 " name="shopCategory" required autocomplete="off">
+                            <select class="browser-default custom-select mb-4 " name="shopCategory" required autocomplete="off" onChange="window.location.href = this.value">
                                 <option value="" selected disabled >Select shop category</option>
-                                <option value="1">shop1</option>
-                                <option value="2">shop2</option>
-                                <option value="3">shop3</option>
-                                <option value="4">shop4</option>
+                                <option value="NewProduct?shopCat=1">shop1</option>
+                                <option value="NewProduct?shopCat=2">shop2</option>
+                                <option value="NewProduct?shopCat=3">shop3</option>
+                                <option value="NewProduct?shopCat=4">shop4</option>
                             </select>
 
                             <!-- Item Category -->
-                            <select class="browser-default custom-select mb-4 " name="itemCategory" required autocomplete="off">
+                            <select class="browser-default custom-select mb-4 " name="itemCategory" required autocomplete="off ">
                                 <option value="" selected disabled >Select item category</option>
                                 <option value="1">Item1</option>
                                 <option value="2">Item2</option>
                                 <option value="3">Item3</option>
                                 <option value="4">Item4</option>
                             </select>
+
+                            <!-- Name -->
+                            <input type="text" name="prodName" class="form-control mb-4" required autocomplete="off" placeholder="Product name">
+
 
                             <!-- Measure Unit -->
                             <input type="text" name="measureUnit" class="form-control mb-4" name="measureUnit"

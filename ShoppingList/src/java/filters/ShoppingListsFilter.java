@@ -52,7 +52,6 @@ public class ShoppingListsFilter implements Filter {
         System.out.println("Requested Resource::" + uri);
         String slidParam = req.getParameter("slid");
         HttpSession session = req.getSession();
-        boolean isNew = session.isNew();
         Object uidObj = session.getAttribute(Utils.USER_COOKIE);
         int uid = (uidObj == null) ? LoginStatus.GUEST_USER : Integer.parseInt(uidObj.toString());
 
