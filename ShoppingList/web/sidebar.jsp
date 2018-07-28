@@ -35,10 +35,10 @@
                 <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Admin Panel</a>
                 <ul class="collapse list-unstyled" id="adminSubmenu">
                     <li>
-                        <a href="#">New Shop Category</a>
+                        <a href="newshopcat.jsp">New Shop Category</a>
                     </li>
                     <li>
-                        <a href="#">New Product Category</a>
+                        <a href="NewProdCat">New Product Category</a>
                     </li>
                 </ul>
             </li>
@@ -52,7 +52,7 @@
                         <a href="signup.jsp">Sign Up</a>
                     </li>
                     <li>
-                        <a href="signup.jsp">Log In</a>
+                        <a href="login.jsp">Log In</a>
                     </li>
                 </ul>
             </li>
@@ -82,11 +82,11 @@
             <a href="#">New Shopping List</a>
         </li>
 
-        <li>
-            <a href="NewProduct">New Product</a>
-        </li>
-
         <c:if test="${privileges != -3}">
+            <li>
+                <a href="NewProduct">New Product</a>
+            </li>
+
             <li>
                 <a href="LogOut">Log Out</a>
             </li>
