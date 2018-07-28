@@ -27,38 +27,38 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <!-- Our Custom CSS -->
-        <link rel="stylesheet" href="css/newproduct.css">
-        
-        
+        <link rel="stylesheet" href="css/createtemplates.css">
+
+
         <script>
-                                $(function() {
+            $(function () {
 
-                                 // We can attach the `fileselect` event to all file inputs on the page
-                                 $(document).on('change', ':file', function() {
-                                   var input = $(this),
-                                       numFiles = input.get(0).files ? input.get(0).files.length : 1,
-                                       label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-                                   input.trigger('fileselect', [numFiles, label]);
-                                 });
+                // We can attach the `fileselect` event to all file inputs on the page
+                $(document).on('change', ':file', function () {
+                    var input = $(this),
+                            numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                    input.trigger('fileselect', [numFiles, label]);
+                });
 
-                                 // We can watch for our custom `fileselect` event like this
-                                 $(document).ready( function() {
-                                     $(':file').on('fileselect', function(event, numFiles, label) {
+                // We can watch for our custom `fileselect` event like this
+                $(document).ready(function () {
+                    $(':file').on('fileselect', function (event, numFiles, label) {
 
-                                         var input = $(this).parents('.input-group').find(':text'),
-                                             log = numFiles > 1 ? numFiles + ' files selected' : label;
+                        var input = $(this).parents('.input-group').find(':text'),
+                                log = numFiles > 1 ? numFiles + ' files selected' : label;
 
-                                         if( input.length ) {
-                                             input.val(log);
-                                         } else {
-                                             if( log )
-                                              label = input.val().replace(/\\/g, '/').replace(/.*\//, log);
-                                         }
+                        if (input.length) {
+                            input.val(log);
+                        } else {
+                            if (log)
+                                label = input.val().replace(/\\/g, '/').replace(/.*\//, log);
+                        }
 
-                                     });
-                                 });
+                    });
+                });
 
-                               });           
+            });
         </script>
 
 
@@ -110,31 +110,31 @@
                             <input type="text" name="measureUnit" class="form-control mb-4" name="measureUnit"
                                    required placeholder="Measure unit" list="mus" autocomplete="off"/>
                             <datalist id="mus">
-                                <option>Volvo</option>
-                                <option>Saab</option>
-                                <option>Mercedes</option>
-                                <option>Audi</option>
+                                <option>cm</option>
+                                <option>units</option>
+                                <option>litre</option>
+                                <option>packets</option>
                             </datalist>
 
                             <!-- Description -->
                             <div class="form-group">
-                                <textarea class="form-control rounded-0" name="prodDescr" rows="4" placeholder="Product description" autocomplete="off"></textarea>
+                                <textarea class="form-control rounded-0 descr-area" name="prodDescr" rows="4" placeholder="Product description" autocomplete="off"></textarea>
                             </div>
 
                             <!-- File input -->
 
-                                     
-                            <div class="input-group" style="height: 40px;">
-                                        <label class="input-group-btn" >
-                                            <span class="btn btn-primary">
-                                                Search <input  type="file" style="display: none;" multiple>
-                                            </span>
-                                        </label>
-                                        <input type="text" placeholder="Insert logo" class="form-control" readonly>
+
+                            <div class="input-group">
+                                <label class="input-group-btn" >
+                                    <span class="btn custom-btn">
+                                        Search <input  type="file" class="file-picker" multiple>
+                                    </span>
+                                </label>
+                                <input type="text" placeholder="Insert logo" class="form-control file-name-label" readonly>
                             </div>
 
                             <!-- Send button -->
-                            <br><button class="btn btn-create btn-block" type="submit">Create product <i class="fas fa-arrow-right"></i></button>
+                            <br><button class="btn custom-btn btn-block" type="submit">Create product <i class="fas fa-arrow-right"></i></button>
 
                         </form>
 

@@ -38,13 +38,25 @@
     height: 70px;
 }
 
-.btn-create{
+.custom-btn{
     background-color: #6D7FCC;
     color:white;
 }
 
-.btn-create:hover, .btn-create:focus{
+.custom-btn:hover, .custom-btn:focus{
     background-color: #5067c2;
     outline: none;
     box-shadow: none !important;
+}
+
+.descr-area{
+    resize:none;
+}
+
+.file-name-label{
+    height: 40px;
+}
+
+.file-picker{
+    display: none; 
 }
