@@ -60,3 +60,10 @@
 .file-picker{
     display: none; 
 }
+.title{ 
+    padding:30px; 
+    background-color: #5067c2;
+    color: white;
+    font-size: 30px;
+}
+   

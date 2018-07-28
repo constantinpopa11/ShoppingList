@@ -82,7 +82,7 @@
                     <div class="form-container">
                         <form class="text-center border border-light p-5" method="POST" action="NewProduct">
 
-                            <p class="h4 mb-4">New Product</p>
+                            <p  class="title">New Product</p>
 
                             <!-- Shop Category -->
                             <select class="browser-default custom-select mb-4 " name="shopCategory" required autocomplete="off" onChange="window.location.href = this.value">
