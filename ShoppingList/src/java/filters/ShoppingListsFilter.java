@@ -66,10 +66,7 @@ public class ShoppingListsFilter implements Filter {
             DBConnectionManager dbManager = (DBConnectionManager) req.getServletContext().getAttribute("DBManager");
             Connection conn = dbManager.getConnection();
 
-            //not cached yet
-            if (shoppingLists == null) {
-                shoppingLists = ShoppingListQueries.getUserShoppingLists(conn, uid);
-            }
+            shoppingLists = ShoppingListQueries.getUserShoppingLists(conn, uid);
 
             if (shoppingLists.size() > 0) {
 

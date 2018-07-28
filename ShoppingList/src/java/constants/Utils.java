@@ -21,8 +21,11 @@ public class Utils {
     
     public static final int STANDARD_USER_PRIVILEGES = 1;
     public static final int ADMIN_PRIVILEGES = 0;
+    public static final int GUEST_USER_PRIVILEGES = -1;
+    
     
     public static final String DEFAULT_AVATAR_PATH = "../profilePictures/default_avatar.jpg";
+    public static String DEFAULT_PROD_LOGO_PATH = "../productPictures/default_prod.jpg";
     
     public static final int SL_COMMENT = 0;
     public static final int SL_ADD = 1;

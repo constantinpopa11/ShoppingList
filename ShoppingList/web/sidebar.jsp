@@ -15,7 +15,22 @@
 
     <ul class="list-unstyled components">
         <p >Dummy Heading</p>
-        <li class="active">
+
+        <li>
+            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Join Us</a>
+            <ul class="collapse list-unstyled" id="pageSubmenu">
+                <li>
+                    <a href="login.jsp">Log In</a>
+                </li>
+                <li>
+                    <a href="signup.jsp">Sign Up</a>
+                </li>
+                <li>
+                    <a href="signup.jsp">Log Out</a>
+                </li>
+            </ul>
+        </li>
+        <li>
             <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">My Lists</a>
             <ul class="collapse list-unstyled" id="homeSubmenu">
                 <c:set var = "shoppingLists" scope="request" value = "${sessionScope.shoppingLists}"/>
@@ -24,38 +39,32 @@
                         <a href="detailedlist.jsp?slid=${sl.slid}">${sl.slName}</a>
                     </li>
                 </c:forEach>
-                    
+
                 <c:if test="${shoppingLists == null}">
                     <!-- nuffin -->
                 </c:if>
             </ul>
         </li>
         <li>
-            <a href="#">About</a>
-            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-            <ul class="collapse list-unstyled" id="pageSubmenu">
-                <li>
-                    <a href="detailedlist.jsp">List details</a>
-                </li>
-                <li>
-                    <a href="login.jsp">Login </a>
-                </li>
-                <li>
-                    <a href="signup.jsp">Signup</a>
-                </li>
-            </ul>
+            <a href="#">New Shopping Lists</a>
+        </li>
+        <li>
+            <a href="#">New Shop Category</a>
+        </li>
+        <li>
+            <a href="#">New Product Category</a>
         </li>
         <li>
             <a href="NewProduct">New Product</a>
         </li>
-        <li>
-            <a href="#">Contact</a>
-        </li>
+
+
+
     </ul>
 
     <ul class="list-unstyled CTAs">
         <li>
-            <a href="http://www.lemonparty.org" class="download">Don' click here plz</a>
+            <a href="https://www.pornhub.com/view_video.php?viewkey=ph5af5c6e4ab31c&t=873" class="download">Don' click here plz</a>
         </li>
     </ul>
 </nav>

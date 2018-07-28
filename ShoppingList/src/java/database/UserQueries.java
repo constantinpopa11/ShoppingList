@@ -77,6 +77,51 @@ public class UserQueries {
         return result;
     }
 
+    public static int getUserPrivileges(Connection conn, int uid) {
+        Statement stmt = null;
+
+        int result = Utils.STANDARD_USER_PRIVILEGES;
+
+        try {
+
+            stmt = conn.createStatement();
+            String queryStr;
+            queryStr = "SELECT " + DBColumns.USERS_PRIVILEGES_COL
+                    + " FROM " + DBTables.USERS_TABLE
+                    + " WHERE "
+                    + DBColumns.USERS_ID_COL + "='" + uid + "';";
+
+            ResultSet rs = stmt.executeQuery(queryStr);
+
+            //Extract data from result set
+            while (rs.next()) {
+                //Retrieve by column name, rs indicates query result and not actual website input
+                result = rs.getInt(DBColumns.USERS_PRIVILEGES_COL);
+                
+            }
+            //Clean-up environment
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+
+        return result;
+    }
+    
     public static int checkIfEmailAlreadyExists(Connection conn, String firstName, String lastName, String email, String password) {
         Statement stmt = null;
 

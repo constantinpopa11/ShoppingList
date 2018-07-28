@@ -31,6 +31,12 @@ import javax.servlet.http.HttpSession;
  */
 public class NewProduct extends HttpServlet {
 
+    HttpSession session;
+    DBConnectionManager dbManager;
+    Connection conn;
+    Object uidObj;
+    int uid;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,6 +49,11 @@ public class NewProduct extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        session = request.getSession();
+        dbManager = (DBConnectionManager) request.getServletContext().getAttribute("DBManager");
+        conn = dbManager.getConnection();
+        uidObj = session.getAttribute(Utils.USER_COOKIE);
+        uid = (uidObj == null) ? LoginStatus.GUEST_USER : Integer.parseInt(uidObj.toString());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -58,14 +69,8 @@ public class NewProduct extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
-
-        DBConnectionManager dbManager = (DBConnectionManager) request.getServletContext().getAttribute("DBManager");
-        Connection conn = dbManager.getConnection();
-
-        Object uidObj = session.getAttribute(Utils.USER_COOKIE);
-        int uid = (uidObj == null) ? LoginStatus.GUEST_USER : Integer.parseInt(uidObj.toString());
-
+        processRequest(request, response);
+        
         if (uid != LoginStatus.GUEST_USER) {
 
             String lcid = request.getParameter("lcid");
@@ -100,9 +105,11 @@ public class NewProduct extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        processRequest(request, response);
+        
         String prodName = request.getParameter(FormFields.NEW_PRODUCT_NAME_FIELD);
         String shopCategory = request.getParameter(FormFields.NEW_PRODUCT_SHOP_CAT_FIELD);
-        String itemCategory = request.getParameter(FormFields.NEW_PRODUCT_ITEM_CAT_FIELD);
+        String prodCategory = request.getParameter(FormFields.NEW_PRODUCT_ITEM_CAT_FIELD);
         String measureUnit = request.getParameter(FormFields.NEW_PRODUCT_MEASURE_UNIT_FIELD);
         String prodDescr = request.getParameter(FormFields.NEW_PRODUCT_PROD_DESCR_FIELD);
         //TODO:FILE
@@ -111,12 +118,16 @@ public class NewProduct extends HttpServlet {
 
         System.out.println(">" + shopCategory + "<");
 
-        System.out.println(">" + itemCategory + "<");
+        System.out.println(">" + prodCategory + "<");
 
         System.out.println(">" + measureUnit + "<");
 
         System.out.println(">" + prodDescr + "<");
 
+        //TODO: logo
+        ShoppingListQueries.insertProduct(conn, prodName, prodDescr, measureUnit, null, Integer.parseInt(prodCategory), uid);
+        //TODO: popup
+        response.sendRedirect("home.jsp");
     }
 
     /**

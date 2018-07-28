@@ -42,7 +42,8 @@ public class DBColumns {
     public static final String PRODUCTS_DESCR_COL = DBTables.PRODUCTS_TABLE + "." + "description";
     public static final String PRODUCTS_MEASURE_UNIT_COL = DBTables.PRODUCTS_TABLE + "." + "measureUnit";
     public static final String PRODUCTS_LOGO_PATH_COL = DBTables.PRODUCTS_TABLE + "." + "logoPath";
-    public static final String PRODUCTS_PCID_COL = DBTables.PRODUCTS_TABLE + "." + "pcid";
+    public static final String PRODUCTS_PCID_COL = DBTables.PRODUCTS_TABLE + "." + "pcid";   
+    public static final String PRODUCTS_CREATED_BY_COL = DBTables.PRODUCTS_TABLE + "." + "createdBy";
 
     public static final String SL_PICTURES_PATH_COL = DBTables.SL_PICTURES_TABLE + "." + "path";
     public static final String SL_PICTURES_UID_COL = DBTables.SL_PICTURES_TABLE + "." + "uid";

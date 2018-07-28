@@ -13,8 +13,10 @@ import beans.ShoppingListBean;
 import constants.DBColumns;
 import constants.DBTables;
 import constants.LoginStatus;
+import constants.Utils;
 import filters.DetailedListFilter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -304,9 +306,8 @@ public class ShoppingListQueries {
             stmt = conn.createStatement();
             String queryStr = "SELECT * FROM "
                     + DBTables.PRODUCT_CAT_TABLE
-                    + " WHERE " 
+                    + " WHERE "
                     + DBColumns.PRODUCT_CAT_LCID_COL + "=" + lcid + ";";
-            
 
             ResultSet rs = stmt.executeQuery(queryStr);
 
@@ -347,5 +348,62 @@ public class ShoppingListQueries {
         }//end try
 
         return prodCategories;
+    }
+
+    public static void insertProduct(Connection conn, String name, String descr, String measureUnit,
+            String logoPath, int pcid, int createdBy) {
+
+        PreparedStatement preparedStmt = null;
+
+        try {
+
+            String queryStr = " INSERT INTO " + DBTables.PRODUCTS_TABLE
+                    + " (" + DBColumns.PRODUCTS_NAME_COL
+                    + ", " + DBColumns.PRODUCTS_DESCR_COL
+                    + ", " + DBColumns.PRODUCTS_MEASURE_UNIT_COL
+                    + ", " + DBColumns.PRODUCTS_LOGO_PATH_COL
+                    + ", " + DBColumns.PRODUCTS_PCID_COL                
+                    + ", " + DBColumns.PRODUCTS_CREATED_BY_COL
+                    + ") VALUES (?, ?, ?, ?, ?, ?)";
+
+            // create the mysql insert preparedstatement
+            preparedStmt = conn.prepareStatement(queryStr);
+            preparedStmt.setString(1, name);
+            preparedStmt.setString(2, descr);
+            preparedStmt.setString(3, measureUnit);
+
+            if (logoPath == null) {
+                preparedStmt.setString(4, Utils.DEFAULT_PROD_LOGO_PATH);
+            } else {
+                //TODO
+            }
+            preparedStmt.setInt(5, pcid);
+            
+            int privileges = UserQueries.getUserPrivileges(conn, createdBy);          
+            if (privileges == Utils.ADMIN_PRIVILEGES) {
+                preparedStmt.setInt(6, -1);
+            } else {
+                preparedStmt.setInt(6, createdBy);
+            }
+
+            // execute the preparedstatement
+            preparedStmt.execute();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (preparedStmt != null) {
+                    preparedStmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+
     }
 }
