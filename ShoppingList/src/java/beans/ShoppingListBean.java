@@ -14,6 +14,12 @@ import java.io.Serializable;
 public class ShoppingListBean implements Serializable {
     int slid;
     String slName;
+    String slDescr;
+    String slIconPath;
+    int lcid;
+    boolean removable;
+    boolean editable;
+    int owner;
 
     public ShoppingListBean() {
     }
@@ -33,6 +39,57 @@ public class ShoppingListBean implements Serializable {
     public void setSlName(String slName) {
         this.slName = slName;
     }
+
+    public String getSlDescr() {
+        return slDescr;
+    }
+
+    public void setSlDescr(String slDescr) {
+        this.slDescr = slDescr;
+    }
+
+    public String getSlIconPath() {
+        return slIconPath;
+    }
+
+    public void setSlIconPath(String slIconPath) {
+        this.slIconPath = slIconPath;
+    }
+
+    public int getLcid() {
+        return lcid;
+    }
+
+    public void setLcid(int lcid) {
+        this.lcid = lcid;
+    }
+
+    public boolean isRemovable() {
+        return removable;
+    }
+
+    public void setRemovable(boolean removable) {
+        this.removable = removable;
+    }
+
+    public boolean isEditable() {
+        return editable;
+    }
+
+    public void setEditable(boolean editable) {
+        this.editable = editable;
+    }
+
+    public int getOwner() {
+        return owner;
+    }
+
+    public void setOwner(int owner) {
+        this.owner = owner;
+    }
+
+    
+    
     
     
 }

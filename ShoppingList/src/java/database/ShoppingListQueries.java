@@ -13,6 +13,7 @@ import beans.ShoppingListBean;
 import constants.DBColumns;
 import constants.DBTables;
 import constants.LoginStatus;
+import constants.Privileges;
 import constants.Utils;
 import filters.DetailedListFilter;
 import java.sql.Connection;
@@ -45,9 +46,7 @@ public class ShoppingListQueries {
 
             stmt = conn.createStatement();
             String queryStr;
-            queryStr = "SELECT "
-                    + DBColumns.SHOPPING_LIST_ID_COL
-                    + ", " + DBColumns.SHOPPING_LIST_NAME_COL
+            queryStr = "SELECT *"
                     + " FROM "
                     + DBTables.SHOPPING_LISTS_TABLE
                     + " , " + DBTables.SL_MEMBERS_TABLE
@@ -62,10 +61,22 @@ public class ShoppingListQueries {
                 //Retrieve by column name, q indicates query result and not actual website input
                 int slid = rs.getInt(DBColumns.SHOPPING_LIST_ID_COL);
                 String slName = rs.getString(DBColumns.SHOPPING_LIST_NAME_COL);
+                String slDescr = rs.getString(DBColumns.SHOPPING_LIST_DESCR_COL);
+                String slIconPath = rs.getString(DBColumns.SHOPPING_LIST_ICON_PATH_COL);
+                int lcid = rs.getInt(DBColumns.SHOPPING_LIST_LCID_COL);
+                boolean editable = rs.getBoolean(DBColumns.SHOPPING_LIST_IS_EDITABLE_COL);
+                boolean removable = rs.getBoolean(DBColumns.SHOPPING_LIST_IS_REMOVABLE_COL);
+                int owner = rs.getInt(DBColumns.SHOPPING_LIST_OWNER_COL);
 
                 ShoppingListBean sl = new ShoppingListBean();
                 sl.setSlid(slid);
                 sl.setSlName(slName);
+                sl.setSlDescr(slDescr);
+                sl.setSlIconPath(slIconPath);
+                sl.setLcid(lcid);
+                sl.setEditable(editable);
+                sl.setRemovable(removable);
+                sl.setOwner(owner);
                 shoppingLists.add(sl);
 
             }
@@ -380,7 +391,7 @@ public class ShoppingListQueries {
             preparedStmt.setInt(5, pcid);
             
             int privileges = UserQueries.getUserPrivileges(conn, createdBy);          
-            if (privileges == Utils.ADMIN_PRIVILEGES) {
+            if (privileges == Privileges.ADMIN_PRIVILEGES) {
                 preparedStmt.setInt(6, -1);
             } else {
                 preparedStmt.setInt(6, createdBy);

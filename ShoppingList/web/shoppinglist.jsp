@@ -6,7 +6,7 @@
 <div id="accordion">
     <c:set var = "shoppingLists" scope="request" value = "${sessionScope.shoppingLists}"/>
     <c:set var = "slItems" scope="request" value = "${sessionScope.slItems}"/>
-    <c:set var = "qslName" scope="request" value = "${sessionScope.qslName}"/>
+    <c:set var = "activeSL" scope="request" value = "${sessionScope.activeSL}"/>
     <c:set var = "qslid" scope="request" value = "${sessionScope.qslid}"/>
 
     <!--  contenitore  roba comune STUFF -->
@@ -17,8 +17,11 @@
             <div class="row custom-row">
                 <div class="slTitle my-auto" >
                     <a class="btn-md btn-secondary  sl-dropdown" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown">
-                        <c:if test="${qslName != null}">
-                            ${qslName} <i class="fas fa-chevron-down"></i>
+                        <c:if test="${activeSL != null}">
+                            ${activeSL.slName} <i class="fas fa-chevron-down"></i>
+                        </c:if>
+                        <c:if test="${activeSL == null}">
+                            No lists to display <i class="fas fa-chevron-down"></i>
                         </c:if>
                     </a>
 
@@ -35,6 +38,7 @@
                 </div>
 
                 <div class="col" data-toggle="collapse" data-target="#listDetails">
+                    <!-- empty on purpose -->
                 </div>
 
                 <div class="slTitle float-right my-auto" >
@@ -61,7 +65,9 @@
 
         <div id="listDetails" class="collapse"  data-parent="#accordion">
             <div class="card-body custom-row">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                <c:if test="${activeSL != null}">
+                    ${activeSL.slDescr}
+                </c:if>
             </div>
         </div>
     </div>
@@ -77,14 +83,14 @@
 
                 <div class="row custom-row" >
                     <!-- checkbox -->
-                    
+
                     <div class="col-xs-1  my-auto">
                         <label class="checkbox-container">
                             <input type="checkbox">
                             <span class="checkmark"></span>
                         </label>
                     </div>
-                    
+
 
                     <!--  banana pic -->
                     <div class="col-xs-2  my-auto"  data-toggle="collapse" data-target="#pid${item.pid}">
@@ -213,6 +219,27 @@
             </div>
         </div>
     </div>
+
+    <!--page number -->
+    <nav class="pageNum">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">3</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>
+    </nav>
 
 
 </div> <!--  end accordion -->

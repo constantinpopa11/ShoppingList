@@ -238,13 +238,21 @@
     min-width: 200px;
 }
 
-.sl-dropdown:hover, .sl-dropdown:focus{
+.sl-dropdown:hover{
     outline: none !important;
     color:white !important;
     box-shadow: none !important;
     background-color: #5067c2 !important;
     border:none !important;
     text-decoration: underline;
+}
+
+.sl-dropdown:focus{
+    outline: none !important;
+    color:white !important;
+    box-shadow: none !important;
+    background-color: #5067c2 !important;
+    border:none !important;
 }
 
 .sl-dd-item{
@@ -262,4 +270,8 @@ hr.nomargin{
 .custom-row{
     margin-left: 0.1%;
     margin-right: 0.1%;
+}
+
+.pageNum{
+    margin-top: 20px;
 }

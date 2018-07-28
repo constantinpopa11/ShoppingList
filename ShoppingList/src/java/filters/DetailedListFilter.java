@@ -58,7 +58,7 @@ public class DetailedListFilter implements Filter {
         HttpSession session = req.getSession();
         
        
-        Object uidObj = session.getAttribute(Utils.USER_COOKIE);
+        Object uidObj = session.getAttribute(Utils.UID_SESSION_ATTR);
         int uid = (uidObj == null) ? LoginStatus.GUEST_USER : Integer.parseInt(uidObj.toString());
 
         int slid = (slidParam == null) ? -1 : Integer.parseInt(slidParam);
@@ -80,19 +80,17 @@ public class DetailedListFilter implements Filter {
             }
 
             if (shoppingLists.size() > 0) {
-                String slName = null;
+                ShoppingListBean activeSL = null;
 
                 for (ShoppingListBean sl : shoppingLists) {
-                    System.out.println(sl.getSlid() + " - " + sl.getSlName());
 
-                    //more or less the same as a query
                     if (sl.getSlid() == slid) {
-                        slName = sl.getSlName();
+                        activeSL = sl;
                     }
                 }
 
-                if (slName != null) {
-                    session.setAttribute("qslName", slName);
+                if (activeSL != null) {
+                    session.setAttribute("activeSL", activeSL);
                     slItems = ShoppingListQueries.getShoppingListItems(conn, slid);
 
                     for (SLItemBean item : slItems) {

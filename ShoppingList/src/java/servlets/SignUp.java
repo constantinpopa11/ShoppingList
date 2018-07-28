@@ -106,7 +106,7 @@ public class SignUp extends HttpServlet {
 
             } else if (status == SignupStatus.SIGNUP_SUCCESS) {
 
-                UserQueries.insertUser(conn, email, firstName, lastName, null, passwordHash, Utils.STANDARD_USER_PRIVILEGES);
+                UserQueries.insertUser(conn, email, firstName, lastName, null, passwordHash, Privileges.STANDARD_USER_PRIVILEGES);
 
                 response.setContentType("text/html");
                 PrintWriter out = response.getWriter();

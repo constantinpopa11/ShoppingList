@@ -38,7 +38,7 @@ public class LogOut extends HttpServlet {
         
         HttpSession session = request.getSession(false);
         System.out.println("User = " + session.getAttribute("user") + " logged out");
-        session.removeAttribute(Utils.USER_COOKIE);
+        session.removeAttribute(Utils.UID_SESSION_ATTR);
         session.removeAttribute("shoppingLists");
         session.removeAttribute("itemsList");
         session.removeAttribute("slName");

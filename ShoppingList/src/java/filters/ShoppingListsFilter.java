@@ -52,12 +52,12 @@ public class ShoppingListsFilter implements Filter {
         System.out.println("Requested Resource::" + uri);
         String slidParam = req.getParameter("slid");
         HttpSession session = req.getSession();
-        Object uidObj = session.getAttribute(Utils.USER_COOKIE);
+        Object uidObj = session.getAttribute(Utils.UID_SESSION_ATTR);
         int uid = (uidObj == null) ? LoginStatus.GUEST_USER : Integer.parseInt(uidObj.toString());
 
         int slid = (slidParam == null) ? -1 : Integer.parseInt(slidParam);
 
-        String qslName = null;
+        ShoppingListBean activeSL = null;
         List<SLItemBean> slItems = null;
         List<ShoppingListBean> shoppingLists = (ArrayList<ShoppingListBean>) session.getAttribute("shoppingLists");
 
@@ -73,13 +73,13 @@ public class ShoppingListsFilter implements Filter {
                 for (ShoppingListBean sl : shoppingLists) {
                     //more or less the same as a query
                     if (sl.getSlid() == slid) {
-                        qslName = sl.getSlName();
+                        activeSL = sl;
                     }
                     session.setAttribute("qslid", slid);
                 }
 
-                if (qslName == null) {
-                    qslName = shoppingLists.get(0).getSlName();
+                if (activeSL == null) {
+                    activeSL = shoppingLists.get(0);
                     slid = shoppingLists.get(0).getSlid();
                 }
 
@@ -88,18 +88,20 @@ public class ShoppingListsFilter implements Filter {
                 session.setAttribute("qslid", slid);
 
             } else {
-                qslName = "No lists to display";
+                activeSL = null;
+                shoppingLists = null;
             }
         } else {
 
             if (shoppingLists != null) {
-                qslName = shoppingLists.get(0).getSlName();
+                activeSL = shoppingLists.get(0);
             } else {
-                qslName = "No lists to display";
+                activeSL = null;
+                shoppingLists = null;
             }
         }
 
-        session.setAttribute("qslName", qslName);
+        session.setAttribute("activeSL", activeSL);
         session.setAttribute("shoppingLists", shoppingLists);
         session.setAttribute("slItems", slItems);
 

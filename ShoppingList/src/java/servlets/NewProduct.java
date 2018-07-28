@@ -52,7 +52,7 @@ public class NewProduct extends HttpServlet {
         session = request.getSession();
         dbManager = (DBConnectionManager) request.getServletContext().getAttribute("DBManager");
         conn = dbManager.getConnection();
-        uidObj = session.getAttribute(Utils.USER_COOKIE);
+        uidObj = session.getAttribute(Utils.UID_SESSION_ATTR);
         uid = (uidObj == null) ? LoginStatus.GUEST_USER : Integer.parseInt(uidObj.toString());
     }
 

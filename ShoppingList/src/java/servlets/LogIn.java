@@ -107,7 +107,7 @@ public class LogIn extends HttpServlet {
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
             } else if (uid > 0) {
                 HttpSession session = request.getSession();
-                session.setAttribute(Utils.USER_COOKIE, uid);
+                session.setAttribute(Utils.UID_SESSION_ATTR, uid);
 
                 if (rememberMe) {
                     session.setMaxInactiveInterval(Utils.REMEMBER_ME_MAX_INACTIVE_INTERVAL);
