@@ -23,6 +23,8 @@ public class Utils {
     
     public static final String DEFAULT_AVATAR_PATH = "../profilePictures/default_avatar.jpg";
     public static String DEFAULT_PROD_LOGO_PATH = "../productPictures/default_prod.jpg";
+    public static String DEFAULT_SL_CAT_ICON_PATH = "../slCategories/default_sl_cat.jpg";
+    public static String PRODUCT_PROD_CAT_ICON_PATH = "../prodCategories/default_prod_cat.jpg";
     
     public static final int SL_COMMENT = 0;
     public static final int SL_ADD = 1;

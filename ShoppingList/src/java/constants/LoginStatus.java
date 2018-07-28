@@ -11,8 +11,8 @@ package constants;
  */
 public class LoginStatus {
 
-    public static final int WRONG_EMAIL = -1; //not registered
-    public static final int WRONG_PASSWORD = -2;
-    public static final int GUEST_USER = -3;
+    public static final int WRONG_EMAIL = 0; //not registered
+    public static final int WRONG_PASSWORD = 1;
+    public static final int GUEST_USER = -1;
     public static final int CORRECT_LOGIN_DETAILS = 2; // correct credentials
 }

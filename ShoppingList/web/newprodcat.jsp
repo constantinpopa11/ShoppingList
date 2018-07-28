@@ -48,21 +48,29 @@
                 <jsp:include page="navbar.jsp" />
 
                 <div class="container">
-
+                    <c:set var = "slCategories" scope="request" value = "${requestScope.slCategories}"/>
 
                     <div class="form-container shadow-lg">
-                        <form class="text-center border border-light p-5" method="POST" action="NewShopCat">
+                        <form class="text-center border border-light p-5" method="POST" action="NewProdCat">
 
-                            <p  class="title">New Shop Category</p>
+                            <p  class="title">New Product Category</p>
+
+                            <!-- Shop category-->
+                            <select class="browser-default custom-select mb-4 " name="shopCatId" required autocomplete="off ">
+                                <option value="" selected disabled >Select shop category</option>
+                                <c:forEach items="${slCategories}" var="slCat">
+                                    <option value="${slCat.slcid}">${slCat.slCatName}</option>
+                                </c:forEach>
+                            </select>
 
 
                             <!-- Name -->
-                            <input type="text" name="shopCatName" class="form-control mb-4" required autocomplete="off" placeholder="Shop category name">
+                            <input type="text" name="prodCatName" class="form-control mb-4" required autocomplete="off" placeholder="Product category name">
 
                             <!-- Description -->
                             <div class="form-group">
-                                <textarea class="form-control rounded-0 descr-area" name="shopCatDescr" rows="4" 
-                                          placeholder="Shop category description" autocomplete="off"></textarea>
+                                <textarea class="form-control rounded-0 descr-area" name="prodCatDescr" rows="4" 
+                                          placeholder="Product category description" autocomplete="off"></textarea>
                             </div>
 
                             <!-- File input -->
@@ -78,7 +86,7 @@
                             </div>
 
                             <!-- Send button -->
-                            <br><button class="btn custom-btn btn-block" type="submit">Create shop category <i class="fas fa-arrow-right"></i></button>
+                            <br><button class="btn custom-btn btn-block" type="submit">Create product category <i class="fas fa-arrow-right"></i></button>
 
                         </form>
 
