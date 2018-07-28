@@ -6,6 +6,7 @@ package servlets;
  * and open the template in the editor.
  */
 import constants.FormFields;
+import constants.Privileges;
 import constants.SignupStatus;
 import constants.Utils;
 import database.DBConnectionManager;
@@ -98,7 +99,7 @@ public class SignUp extends HttpServlet {
 
             DBConnectionManager dbManager = (DBConnectionManager) getServletContext().getAttribute("DBManager");
             Connection conn = dbManager.getConnection();
-            int status = UserQueries.checkIfEmailAlreadyExists(conn, firstName, lastName, email, passwordHash);
+            int status = UserQueries.checkIfEmailAlreadyExists(conn, email);
 
             if (status == SignupStatus.ALREADY_REGISTERED) {
                 request.setAttribute("errorMessage", "The email provided is already associated to another account");

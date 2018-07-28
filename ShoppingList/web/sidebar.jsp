@@ -19,30 +19,47 @@
     </div>
 
     <ul class="list-unstyled components">
+        <c:if test="${firstName == null}">
+            <p class="text-center"><i class="fas fa-user-slash"></i> You are not logged in currently</p> 
+        </c:if>
+
+        <c:if test="${firstName != null}">  
+            <p class="text-center"> <i class="fas fa-user"></i> You are logged in as ${firstName}</p> 
+        </c:if>
+
+        <hr>
+
+
+        <c:if test="${privileges == 0}">
+            <li>
+                <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Admin Panel</a>
+                <ul class="collapse list-unstyled" id="adminSubmenu">
+                    <li>
+                        <a href="#">New Shop Category</a>
+                    </li>
+                    <li>
+                        <a href="#">New Product Category</a>
+                    </li>
+                </ul>
+            </li>
+        </c:if>
+
         <c:if test="${privileges == -3}">
-            <p>You are not logged in currently</p>
-        </c:if>
-
-        <c:if test="${privileges != -3}">
-            <p>Hi, </p>
+            <li>
+                <a href="#joinSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Join Us</a>
+                <ul class="collapse list-unstyled" id="joinSubmenu">
+                    <li>
+                        <a href="signup.jsp">Sign Up</a>
+                    </li>
+                    <li>
+                        <a href="signup.jsp">Log In</a>
+                    </li>
+                </ul>
+            </li>
         </c:if>
 
         <li>
-            <a href="#joinusSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Join Us</a>
-            <ul class="collapse list-unstyled" id="joinusSubmenu">
-                <li>
-                    <a href="login.jsp">Log In</a>
-                </li>
-                <li>
-                    <a href="signup.jsp">Sign Up</a>
-                </li>
-                <li>
-                    <a href="signup.jsp">Log Out</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">My Lists</a>
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">My Shopping Lists</a>
             <ul class="collapse list-unstyled" id="homeSubmenu">
                 <c:set var = "shoppingLists" scope="request" value = "${sessionScope.shoppingLists}"/>
 
@@ -69,18 +86,11 @@
             <a href="NewProduct">New Product</a>
         </li>
 
-        <li>
-            <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Admin Panel</a>
-            <ul class="collapse list-unstyled" id="adminSubmenu">
-                <li>
-                    <a href="#">New Shop Category</a>
-                </li>
-                <li>
-                    <a href="#">New Product Category</a>
-                </li>
-            </ul>
-        </li>
-
+        <c:if test="${privileges != -3}">
+            <li>
+                <a href="LogOut">Log Out</a>
+            </li>
+        </c:if>    
 
 
     </ul>

@@ -123,7 +123,7 @@ public class UserQueries {
         return result;
     }
 
-    public static int checkIfEmailAlreadyExists(Connection conn, String firstName, String lastName, String email, String password) {
+    public static int checkIfEmailAlreadyExists(Connection conn, String email) {
         Statement stmt = null;
 
         int result = SignupStatus.SIGNUP_SUCCESS;
@@ -139,7 +139,7 @@ public class UserQueries {
 
             ResultSet rs = stmt.executeQuery(queryStr);
 
-            //If this executes it means there is already an account associated to the email adress
+            //If this executes it means there is already an accousnt associated to the email adress
             while (rs.next()) {
                 result = SignupStatus.ALREADY_REGISTERED;
             }
@@ -265,17 +265,17 @@ public class UserQueries {
 
         return result;
     }
-    
-    public static int getFirstNameByUid(Connection conn, int uid) {
+
+    public static String getFirstNameByUid(Connection conn, int uid) {
         Statement stmt = null;
 
-        int result = Privileges.GUEST_USER_PRIVILEGES;
+        String result = null;
 
         try {
 
             stmt = conn.createStatement();
             String queryStr;
-            queryStr = "SELECT " + DBColumns.USERS_PRIVILEGES_COL
+            queryStr = "SELECT " + DBColumns.USERS_FIRST_NAME_COL
                     + " FROM " + DBTables.USERS_TABLE
                     + " WHERE "
                     + DBColumns.USERS_ID_COL + "='" + uid + "';";
@@ -285,8 +285,8 @@ public class UserQueries {
             //Extract data from result set
             while (rs.next()) {
                 //Retrieve by column name, rs indicates query result and not actual website input
-                result = rs.getInt(DBColumns.USERS_PRIVILEGES_COL);
-                
+                result = rs.getString(DBColumns.USERS_FIRST_NAME_COL);
+
             }
             //Clean-up environment
             rs.close();
@@ -309,4 +309,5 @@ public class UserQueries {
         }//end try
 
         return result;
+    }
 }
