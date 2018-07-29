@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author invidia
  */
-public class SLCategory implements Serializable {
+public class SLCategoryBean implements Serializable {
 
     private int slcid;
     private String slCatName;

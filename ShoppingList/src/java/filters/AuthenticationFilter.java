@@ -32,7 +32,7 @@ import database.DBConnectionManager;
 import database.UserQueries;
 import java.sql.Connection;
 
-@WebFilter(filterName = "AuthenticationFilter", urlPatterns = {"/*"})
+
 public class AuthenticationFilter implements Filter {
 
     private ServletContext context;
@@ -50,6 +50,7 @@ public class AuthenticationFilter implements Filter {
         Connection conn = dbManager.getConnection();
         HttpSession session = req.getSession(true);
 
+        
         String uri = req.getRequestURI();
         System.out.println("Requested Resource::" + uri);
 

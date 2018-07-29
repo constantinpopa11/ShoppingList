@@ -7,12 +7,15 @@ package servlets;
 
 import beans.ProductCategoryBean;
 import beans.SLCategoryBean;
+import beans.ShoppingListBean;
 import constants.FormFields;
 import constants.LoginStatus;
 import constants.Privileges;
+import constants.ResetPwdStatus;
 import constants.Utils;
 import database.DBConnectionManager;
 import database.ShoppingListQueries;
+import database.UserQueries;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,6 +23,7 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletException;
@@ -31,13 +35,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-/**
- *
- * @author invidia
- */
-@WebServlet(urlPatterns = {"/NewShopCat"})
+@WebServlet(urlPatterns = {"/NewShoppingList"})
 @MultipartConfig
-public class NewShopCat extends HttpServlet {
+public class NewShoppingList extends HttpServlet {
 
     HttpSession session;
     Connection conn;
@@ -62,7 +62,6 @@ public class NewShopCat extends HttpServlet {
         Object uidObj = session.getAttribute(Utils.UID_SESSION_ATTR);
         uid = (uidObj == null) ? LoginStatus.GUEST_USER : Integer.parseInt(uidObj.toString());
         privileges = (int) session.getAttribute(Utils.PRIVILEGES_SESSION_ATTR);
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -79,11 +78,9 @@ public class NewShopCat extends HttpServlet {
             throws ServletException, IOException {
 
         processRequest(request, response);
-        if (privileges == Privileges.ADMIN_PRIVILEGES) {
-            response.sendRedirect("newshopcat.jsp");
-        } else {
-            response.sendRedirect("home.jsp");
-        }
+        List<SLCategoryBean> slCategories = ShoppingListQueries.getSLCategories(conn);
+        request.setAttribute("slCategories", slCategories);
+        request.getRequestDispatcher("/newsl.jsp").forward(request, response);
 
     }
 
@@ -101,39 +98,58 @@ public class NewShopCat extends HttpServlet {
 
         processRequest(request, response);
 
-        if (privileges != Privileges.ADMIN_PRIVILEGES) {
+        String slName = request.getParameter(FormFields.NEW_LIST_NAME_FIELD);
+        String slDescr = request.getParameter(FormFields.NEW_LIST_DESCR_FIELD);
+        String slcidField = request.getParameter(FormFields.NEW_LIST_SHOP_CAT);
+        int slcid = Integer.parseInt(slcidField);
+        String removableField = request.getParameter(FormFields.NEW_LIST_REMOVABLE_FIELD);
+        boolean removable = removableField == null ? false : true;
+        String editableField = request.getParameter(FormFields.NEW_LIST_EDITABLE_FIELD);
+        boolean editable = editableField == null ? false : true;
 
-            response.sendRedirect("home");
+        Part filePart = request.getPart(FormFields.NEW_LIST_ICON_FIELD);
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+        String iconPath = Utils.SHOPPING_LIST_ICONS;
 
+        if (fileName == null || fileName.isEmpty()) {
+            iconPath += Utils.DEFAULT_SL_ICON;
         } else {
+            String extension = fileName.substring(fileName.lastIndexOf("."), fileName.length());
 
-            String shopCatName = request.getParameter(FormFields.NEW_SHOP_CAT_NAME_FIELD);
-            String shopCatDescr = request.getParameter(FormFields.NEW_SHOP_CAT_DESCR_FIELD);
+            String newIconName = UUID.randomUUID().toString() + extension;
+            iconPath += newIconName;
 
-            Part filePart = request.getPart(FormFields.NEW_SHOP_CAT_ICON_FIELD);
-            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
-            String iconPath = Utils.SHOP_CATEGORY_ICONS;
-
-            if (fileName == null || fileName.isEmpty()) {
-                iconPath += Utils.DEFAULT_SHOP_CAT_ICON;
-            } else {
-                String extension = fileName.substring(fileName.lastIndexOf("."), fileName.length());
-
-                String newIconName = UUID.randomUUID().toString() + extension;
-                iconPath += newIconName;
-
-                File uploadLocation = new File(request.getRealPath(iconPath));
-                try (InputStream input = filePart.getInputStream();) {
-                    Files.copy(input, uploadLocation.toPath());
-                }
+            File uploadLocation = new File(request.getRealPath(iconPath));
+            try (InputStream input = filePart.getInputStream();) {
+                Files.copy(input, uploadLocation.toPath());
             }
-
-            //TODO: logo
-            ShoppingListQueries.insertShopCat(conn, shopCatName, shopCatDescr, iconPath);
-            //TODO: popup
-            response.sendRedirect("home.jsp");
         }
 
+        if (privileges >= Privileges.ADMIN_PRIVILEGES) {
+            //TODO: logo
+            ShoppingListQueries.insertShoppingList(conn, slcid, slName, slDescr, editable, removable, iconPath, uid);
+            //TODO: popup
+        } else {
+            SLCategoryBean slCat = ShoppingListQueries.getSLCategoryById(conn, slcid);
+            ShoppingListBean newSl = new ShoppingListBean();
+            newSl.setSlName(slName);
+            newSl.setSlDescr(slDescr);
+            newSl.setLcid(slcid);
+            newSl.setSlIconPath(iconPath);
+            newSl.setSlCatName(slCat.getSlCatName());
+            newSl.setSlCatDescr(slCat.getSlCatDescr());
+            newSl.setSlCatIconPath(slCat.getSlCatIconPath());
+            List<ShoppingListBean> shoppingLists = (ArrayList<ShoppingListBean>) session.getAttribute("shoppingLists");
+            
+            if(shoppingLists == null){
+                shoppingLists = new ArrayList<>();
+            }
+            newSl.setSlid(shoppingLists.size()+1);
+            shoppingLists.add(newSl);
+            session.setAttribute("shoppingLists", shoppingLists);
+        }
+
+        response.sendRedirect("home.jsp");
     }
 
     /**

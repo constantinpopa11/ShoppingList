@@ -28,61 +28,8 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <!-- Our Custom CSS -->
         <link rel="stylesheet" href="css/createtemplates.css">
-
         <script src="scripts/custom-file-input.js"></script>
 
-        <style>
-            .switch input { 
-                display:none;
-            }
-            .switch {
-                display:inline-block;
-                width:60px;
-                height:30px;
-                margin:8px;
-                transform:translateY(50%);
-                position:relative;
-            }
-
-            .slider {
-                position:absolute;
-                top:0;
-                bottom:0;
-                left:0;
-                right:0;
-                border-radius:30px;
-                box-shadow:0 0 0 2px #777, 0 0 4px #777;
-                cursor:pointer;
-                border:4px solid transparent;
-                overflow:hidden;
-                transition:.4s;
-            }
-            .slider:before {
-                position:absolute;
-                content:"";
-                width:100%;
-                height:100%;
-                background:#777;
-                border-radius:30px;
-                transform:translateX(-30px);
-                transition:.4s;
-            }
-
-            input:checked + .slider:before {
-                transform:translateX(30px);
-                background: #5067c2;
-            }
-            input:checked + .slider {
-                box-shadow:0 0 0 2px #5067c2,0 0 2px #5067c2;
-            }
-
-
-
-
-
-
-
-        </style>
 
     </head>
 
@@ -101,33 +48,31 @@
 
                 <div class="container">
 
-
+                    <c:set var = "slCategories" scope="request" value = "${requestScope.slCategories}"/>
 
                     <div class="form-container">
                         <form class="border border-light p-5" method="POST" action="NewShoppingList"
                               enctype="multipart/form-data">
 
-                            <p  class="title text-center    ">New List</p>
+                            <p  class="title text-center    ">New Shopping List</p>
 
                             <!-- List Category -->
-                            <input type="text" name="list_category" class="form-control mb-4" name="list_category"
-                                   required placeholder="List Category" list="mus" autocomplete="off"/>
-                            <datalist id="mus">
-                                <option>a</option>
-                                <option>b</option>
-                                <option>c</option>
-                                <option>d</option>
-                            </datalist>
+                            <select class="browser-default custom-select mb-4 " name="shopCategory" required autocomplete="off ">
+                                <option value="" selected disabled >Select shop category</option>
+                                <c:forEach items="${slCategories}" var="slCat">
+                                    <option value="${slCat.slcid}">${slCat.slCatName}</option>
+                                </c:forEach>
+                            </select>
 
 
                             <!-- Name -->
-                            <input type="text" name="prodName" class="form-control mb-4" required autocomplete="off" placeholder="Name">
+                            <input type="text" name="listName" class="form-control mb-4" required autocomplete="off" placeholder="Name">
 
 
 
                             <!-- Description -->
                             <div class="form-group">
-                                <textarea class="form-control rounded-0 descr-area" name="prodDescr" rows="4" placeholder="List description" autocomplete="off"></textarea>
+                                <textarea class="form-control rounded-0 descr-area" name="listDescr" rows="4" placeholder="List description" autocomplete="off"></textarea>
                             </div>
 
 
@@ -135,46 +80,22 @@
                             <div class="input-group">
                                 <label class="input-group-btn" >
                                     <span class="btn custom-btn">
-                                        Search <input name="slIcon" single accept="image/*"  type="file" class="file-picker" >
+                                        Search <input name="listIcon" single accept="image/*"  type="file" class="file-picker" >
                                     </span>
                                 </label>
-                                <input type="text" placeholder="Insert logo" class="form-control file-name-label" readonly>
+                                <input type="text" placeholder="Insert icon" class="form-control file-name-label" readonly>
                             </div>
-
-
-                            <!-- Check option 
-                           <div class="custom-control custom-checkbox mb-1">
-                           <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
-                           <label class="custom-control-label" for="customCheck">Custom checkbox</label>
-                           
-                            </div>     -->                  
-                            <!--
-                             <div class="container  ">
-
-
-                                      <input type="checkbox" checked="checked">
-                                      
-                                    <label class="customcheck">One
-                                      <span class="checkmark"></span>
-                                    </label>
-                                   
-                                      <input type="checkbox">
-                                       <label class="customcheck">Two
-                                      <span class="checkmark"></span>
-                                    </label>
-
-                            </div>-->
 
 
                             <div>
                                 <label class="switch">
-                                    <input type="checkbox">
+                                    <input name="isEditable" type="checkbox">
                                     <span class="slider"></span>
                                 </label>
                                 Editable
 
                                 <label class="switch">
-                                    <input type="checkbox">
+                                    <input name="isRemovable" type="checkbox">
                                     <span class="slider"></span>
                                 </label>
                                 Removable
@@ -185,10 +106,6 @@
 
                             <!-- Send button -->
                             <br><button class="btn custom-btn btn-block" type="submit">Create List <i class="fas fa-arrow-right"></i></button>
-
-
-
-
 
                         </form>
 

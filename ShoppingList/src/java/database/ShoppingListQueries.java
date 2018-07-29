@@ -5,8 +5,8 @@
  */
 package database;
 
-import beans.ProductCategory;
-import beans.SLCategory;
+import beans.ProductCategoryBean;
+import beans.SLCategoryBean;
 import beans.SLCommentBean;
 import beans.SLItemBean;
 import beans.ShoppingListBean;
@@ -151,7 +151,7 @@ public class ShoppingListQueries {
                 String prodDescr = rs.getString(DBColumns.PRODUCTS_DESCR_COL);
                 int pcid = rs.getInt(DBColumns.PRODUCT_CAT_ID_COL);
                 String prodCatName = rs.getString(DBColumns.PRODUCT_CAT_NAME_COL);
-                String prodCatDescr = rs.getString(DBColumns.PRODUCT_CAT_DESCR_COL);         
+                String prodCatDescr = rs.getString(DBColumns.PRODUCT_CAT_DESCR_COL);
                 String prodCatIconPath = rs.getString(DBColumns.PRODUCT_CAT_ICON_PATH_COL);
                 String prodMeasureUnit = rs.getString(DBColumns.PRODUCTS_MEASURE_UNIT_COL);
                 double quantity = rs.getDouble(DBColumns.SL_CARTS_QUANTITY_COL);
@@ -268,10 +268,10 @@ public class ShoppingListQueries {
         return comments;
     }
 
-    public static List<SLCategory> getSLCategories(Connection conn) {
+    public static List<SLCategoryBean> getSLCategories(Connection conn) {
         Statement stmt = null;
 
-        List<SLCategory> slCategories = new ArrayList<>();
+        List<SLCategoryBean> slCategories = new ArrayList<>();
         try {
 
             stmt = conn.createStatement();
@@ -288,7 +288,7 @@ public class ShoppingListQueries {
                 String slCatDescr = rs.getString(DBColumns.SL_CAT_DESCR);
                 String slCatIconPath = rs.getString(DBColumns.SL_CAT_ICON_PATH);
 
-                SLCategory slCat = new SLCategory();
+                SLCategoryBean slCat = new SLCategoryBean();
                 slCat.setSlcid(slcid);
                 slCat.setSlCatName(slCatName);
                 slCat.setSlCatDescr(slCatDescr);
@@ -319,10 +319,59 @@ public class ShoppingListQueries {
         return slCategories;
     }
 
-    public static List<ProductCategory> getProdCategories(Connection conn, int lcid) {
+    public static SLCategoryBean getSLCategoryById(Connection conn, int lcid) {
         Statement stmt = null;
 
-        List<ProductCategory> prodCategories = new ArrayList<>();
+        SLCategoryBean slCategory = new SLCategoryBean();
+        try {
+
+            stmt = conn.createStatement();
+            String queryStr = "SELECT * FROM " + DBTables.SL_CATEGORIES_TABLE
+                    + " WHERE " + DBColumns.SL_CAT_ID_COL + "=" + lcid;;
+
+            ResultSet rs = stmt.executeQuery(queryStr);
+
+            //Extract data from result set
+            while (rs.next()) {
+                //Retrieve by column name, rs indicates query result and not actual website input
+                int slcid = rs.getInt(DBColumns.SL_CAT_ID_COL);
+                String slCatName = rs.getString(DBColumns.SL_CAT_NAME);
+                String slCatDescr = rs.getString(DBColumns.SL_CAT_DESCR);
+                String slCatIconPath = rs.getString(DBColumns.SL_CAT_ICON_PATH);
+
+                slCategory.setSlcid(slcid);
+                slCategory.setSlCatName(slCatName);
+                slCategory.setSlCatDescr(slCatDescr);
+                slCategory.setSlCatIconPath(slCatIconPath);
+
+            }
+            //Clean-up environment
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+
+        return slCategory;
+    }
+
+    public static List<ProductCategoryBean> getProdCategories(Connection conn, int lcid) {
+        Statement stmt = null;
+
+        List<ProductCategoryBean> prodCategories = new ArrayList<>();
         try {
 
             stmt = conn.createStatement();
@@ -341,7 +390,7 @@ public class ShoppingListQueries {
                 String prodCatDescr = rs.getString(DBColumns.PRODUCT_CAT_DESCR_COL);
                 String prodCatIconPath = rs.getString(DBColumns.PRODUCT_CAT_ICON_PATH_COL);
 
-                ProductCategory prodCat = new ProductCategory();
+                ProductCategoryBean prodCat = new ProductCategoryBean();
                 prodCat.setPcid(pcid);
                 prodCat.setProdCatName(prodCatName);
                 prodCat.setProdCatDescr(prodCatDescr);
@@ -485,6 +534,67 @@ public class ShoppingListQueries {
 
             // execute the preparedstatement
             preparedStmt.execute();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (preparedStmt != null) {
+                    preparedStmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+
+    }
+
+    public static void insertShoppingList(Connection conn, int shopCategory, String slName, String slDescr,
+            boolean isEditable, boolean isRemovable, String iconPath, int owner) {
+
+        PreparedStatement preparedStmt = null;
+
+        try {
+
+            String queryStr = " INSERT INTO " + DBTables.SHOPPING_LISTS_TABLE
+                    + " (" + DBColumns.SHOPPING_LIST_LCID_COL
+                    + ", " + DBColumns.SHOPPING_LIST_NAME_COL
+                    + ", " + DBColumns.SHOPPING_LIST_DESCR_COL
+                    + ", " + DBColumns.SHOPPING_LIST_IS_EDITABLE_COL
+                    + ", " + DBColumns.SHOPPING_LIST_IS_REMOVABLE_COL
+                    + ", " + DBColumns.SHOPPING_LIST_ICON_PATH_COL
+                    + ", " + DBColumns.SHOPPING_LIST_OWNER_COL
+                    + ") VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+            // create the mysql insert preparedstatement
+            preparedStmt = conn.prepareStatement(queryStr, Statement.RETURN_GENERATED_KEYS);
+            preparedStmt.setInt(1, shopCategory);
+            preparedStmt.setString(2, slName);
+            preparedStmt.setString(3, slDescr);
+            preparedStmt.setBoolean(4, isEditable);
+            preparedStmt.setBoolean(5, isRemovable);
+            preparedStmt.setString(6, iconPath);
+            preparedStmt.setInt(7, owner);
+
+            // execute the preparedstatement
+            preparedStmt.execute();
+            ResultSet generatedKeys = preparedStmt.getGeneratedKeys();
+            if (generatedKeys.next()) {
+
+                queryStr = " INSERT INTO " + DBTables.SL_MEMBERS_TABLE
+                        + " (" + DBColumns.SL_MEMBERS_SLID_COL
+                        + ", " + DBColumns.SL_MEMBERS_UID_COL
+                        + ") VALUES (?, ?)";
+
+                preparedStmt = conn.prepareStatement(queryStr);
+                preparedStmt.setInt(1, generatedKeys.getInt(1));
+                preparedStmt.setInt(2, owner);
+                preparedStmt.execute();
+            }
 
         } catch (SQLException se) {
             //Handle errors for JDBC

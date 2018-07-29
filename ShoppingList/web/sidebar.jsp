@@ -65,9 +65,19 @@
 
 
                 <c:forEach items="${shoppingLists}" var="sl">
-                    <li>
-                        <a href="detailedlist.jsp?slid=${sl.slid}">${sl.slName}</a>
-                    </li>
+
+                    <c:if test="${privileges >= 0}">
+                        <li>
+                            <a href="detailedlist.jsp?slid=${sl.slid}">${sl.slName}</a>
+                        </li>
+                    </c:if>
+
+                    <c:if test="${privileges < 0}">
+                        <li>
+                            <a href="home.jsp?slid=${sl.slid}">${sl.slName}</a>
+                        </li>
+                    </c:if>
+
                 </c:forEach>
 
                 <c:if test="${shoppingLists == null}">
@@ -79,7 +89,7 @@
         </li>
 
         <li>
-            <a href="#">New Shopping List</a>
+            <a href="NewShoppingList">New Shopping List</a>
         </li>
 
         <c:if test="${privileges >=0 }">

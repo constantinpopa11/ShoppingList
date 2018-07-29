@@ -9,6 +9,7 @@ import beans.SLCommentBean;
 import beans.SLItemBean;
 import beans.ShoppingListBean;
 import constants.LoginStatus;
+import constants.Privileges;
 import constants.Utils;
 import database.DBConnectionManager;
 import database.ShoppingListQueries;
@@ -54,14 +55,15 @@ public class ShoppingListsFilter implements Filter {
         HttpSession session = req.getSession();
         Object uidObj = session.getAttribute(Utils.UID_SESSION_ATTR);
         int uid = (uidObj == null) ? LoginStatus.GUEST_USER : Integer.parseInt(uidObj.toString());
-
+        int privileges = (int) session.getAttribute(Utils.PRIVILEGES_SESSION_ATTR);
+                
         int slid = (slidParam == null) ? -1 : Integer.parseInt(slidParam);
 
         ShoppingListBean activeSL = null;
         List<SLItemBean> slItems = null;
         List<ShoppingListBean> shoppingLists = (ArrayList<ShoppingListBean>) session.getAttribute("shoppingLists");
 
-        if (uid != LoginStatus.GUEST_USER) {
+        if (privileges >= Privileges.ADMIN_PRIVILEGES) {
 
             DBConnectionManager dbManager = (DBConnectionManager) req.getServletContext().getAttribute("DBManager");
             Connection conn = dbManager.getConnection();
@@ -94,7 +96,13 @@ public class ShoppingListsFilter implements Filter {
         } else {
 
             if (shoppingLists != null) {
-                activeSL = shoppingLists.get(0);
+                if(slid == -1){
+                    activeSL = shoppingLists.get(0);
+                } else {
+                    for(ShoppingListBean sl : shoppingLists){
+                        if(sl.getSlid() == slid) activeSL = sl;
+                    }
+                }
             } else {
                 activeSL = null;
                 shoppingLists = null;

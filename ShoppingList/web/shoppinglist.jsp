@@ -26,7 +26,7 @@
                     </a>
 
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="sl-dd-item dropdown-item" href="${pageContext.request.requestURI}?slid=${sl.slid}">New list <i class="fas fa-plus-circle"></i></a>
+                        <a class="sl-dd-item dropdown-item" href="NewShoppingList">New list <i class="fas fa-plus-circle"></i></a>
 
                         <c:forEach items="${shoppingLists}" var="sl">
                             <hr class="nomargin">

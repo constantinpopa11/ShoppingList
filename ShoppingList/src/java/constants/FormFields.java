@@ -48,7 +48,7 @@ public class FormFields {
     public static final String NEW_LIST_SHOP_CAT = "shopCategory";
     public static final String NEW_LIST_REMOVABLE_FIELD = "isRemovable";
     public static final String NEW_LIST_EDITABLE_FIELD = "isEditable";
-    public static final String NEW_LIST_ICON_FIELD = "slIcon";
+    public static final String NEW_LIST_ICON_FIELD = "listIcon";
     
 
 }

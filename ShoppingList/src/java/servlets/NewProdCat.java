@@ -5,8 +5,8 @@
  */
 package servlets;
 
-import beans.ProductCategory;
-import beans.SLCategory;
+import beans.ProductCategoryBean;
+import beans.SLCategoryBean;
 import constants.FormFields;
 import constants.LoginStatus;
 import constants.Privileges;
@@ -76,7 +76,7 @@ public class NewProdCat extends HttpServlet {
 
         processRequest(request, response);
         if (privileges == Privileges.ADMIN_PRIVILEGES) {
-            List<SLCategory> slCategories = ShoppingListQueries.getSLCategories(conn);
+            List<SLCategoryBean> slCategories = ShoppingListQueries.getSLCategories(conn);
             request.setAttribute("slCategories", slCategories);
 
             request.getRequestDispatcher("/newprodcat.jsp").forward(request, response);

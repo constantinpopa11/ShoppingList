@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author invidia
  */
-public class ProductCategory implements Serializable {
+public class ProductCategoryBean implements Serializable {
 
     private int pcid;
     private String prodCatName;

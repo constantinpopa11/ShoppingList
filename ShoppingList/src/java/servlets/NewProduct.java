@@ -1,7 +1,7 @@
 package servlets;
 
-import beans.ProductCategory;
-import beans.SLCategory;
+import beans.ProductCategoryBean;
+import beans.SLCategoryBean;
 import constants.FormFields;
 import constants.LoginStatus;
 import constants.Privileges;
@@ -80,14 +80,14 @@ public class NewProduct extends HttpServlet {
 
             if (lcid == null) {
 
-                List<SLCategory> slCategories = ShoppingListQueries.getSLCategories(conn);
+                List<SLCategoryBean> slCategories = ShoppingListQueries.getSLCategories(conn);
                 request.setAttribute("slCategories", slCategories);
                 request.getRequestDispatcher("/newproduct.jsp").forward(request, response);
 
             } else {
                 request.setAttribute("lcid", lcid);
                 request.setAttribute("slCatName", slCatName);
-                List<ProductCategory> prodCategories = ShoppingListQueries.getProdCategories(conn, Integer.parseInt(lcid));
+                List<ProductCategoryBean> prodCategories = ShoppingListQueries.getProdCategories(conn, Integer.parseInt(lcid));
                 request.setAttribute("prodCategories", prodCategories);
                 request.getRequestDispatcher("/newproduct.jsp").forward(request, response);
             }

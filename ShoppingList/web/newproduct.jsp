@@ -91,13 +91,8 @@
 
                             <!-- Measure Unit -->
                             <input type="text" name="measureUnit" class="form-control mb-4" name="measureUnit"
-                                   required placeholder="Measure unit" list="mus" autocomplete="off"/>
-                            <datalist id="mus">
-                                <option>cm</option>
-                                <option>units</option>
-                                <option>litre</option>
-                                <option>packets</option>
-                            </datalist>
+                                   required placeholder="Measure unit" autocomplete="off"/>
+                            
 
                             <!-- Description -->
                             <div class="form-group">
