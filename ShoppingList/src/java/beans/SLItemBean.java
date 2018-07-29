@@ -20,6 +20,7 @@ public class SLItemBean implements Serializable {
     private int pcid;
     private String prodCatName;
     private String prodCatDescr;
+    private String prodCatIconPath;
     private String prodMeasureUnit;
     private double quantity;
 
@@ -97,5 +98,15 @@ public class SLItemBean implements Serializable {
     public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
+
+    public String getProdCatIconPath() {
+        return prodCatIconPath;
+    }
+
+    public void setProdCatIconPath(String prodCatIconPath) {
+        this.prodCatIconPath = prodCatIconPath;
+    }
+    
+    
 
 }

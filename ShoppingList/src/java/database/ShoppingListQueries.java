@@ -50,9 +50,11 @@ public class ShoppingListQueries {
                     + " FROM "
                     + DBTables.SHOPPING_LISTS_TABLE
                     + " , " + DBTables.SL_MEMBERS_TABLE
+                    + " , " + DBTables.SL_CATEGORIES_TABLE
                     + " WHERE "
                     + DBColumns.SL_MEMBERS_UID_COL + "=" + uid
-                    + " AND " + DBColumns.SHOPPING_LIST_ID_COL + "=" + DBColumns.SL_MEMBERS_SLID_COL + ";";
+                    + " AND " + DBColumns.SHOPPING_LIST_ID_COL + "=" + DBColumns.SL_MEMBERS_SLID_COL
+                    + " AND " + DBColumns.SHOPPING_LIST_LCID_COL + "=" + DBColumns.SL_CAT_ID_COL + ";";
 
             ResultSet rs = stmt.executeQuery(queryStr);
 
@@ -64,6 +66,9 @@ public class ShoppingListQueries {
                 String slDescr = rs.getString(DBColumns.SHOPPING_LIST_DESCR_COL);
                 String slIconPath = rs.getString(DBColumns.SHOPPING_LIST_ICON_PATH_COL);
                 int lcid = rs.getInt(DBColumns.SHOPPING_LIST_LCID_COL);
+                String slCatName = rs.getString(DBColumns.SL_CAT_NAME);
+                String slCatDescr = rs.getString(DBColumns.SL_CAT_DESCR);
+                String slCatIconPath = rs.getString(DBColumns.SL_CAT_ICON_PATH);
                 boolean editable = rs.getBoolean(DBColumns.SHOPPING_LIST_IS_EDITABLE_COL);
                 boolean removable = rs.getBoolean(DBColumns.SHOPPING_LIST_IS_REMOVABLE_COL);
                 int owner = rs.getInt(DBColumns.SHOPPING_LIST_OWNER_COL);
@@ -74,6 +79,9 @@ public class ShoppingListQueries {
                 sl.setSlDescr(slDescr);
                 sl.setSlIconPath(slIconPath);
                 sl.setLcid(lcid);
+                sl.setSlCatName(slCatName);
+                sl.setSlCatDescr(slCatDescr);
+                sl.setSlCatIconPath(slCatIconPath);
                 sl.setEditable(editable);
                 sl.setRemovable(removable);
                 sl.setOwner(owner);
@@ -118,6 +126,7 @@ public class ShoppingListQueries {
                     + ", " + DBColumns.PRODUCTS_DESCR_COL
                     + ", " + DBColumns.PRODUCT_CAT_ID_COL
                     + ", " + DBColumns.PRODUCT_CAT_NAME_COL
+                    + ", " + DBColumns.PRODUCT_CAT_ICON_PATH_COL
                     + ", " + DBColumns.PRODUCT_CAT_DESCR_COL
                     + ", " + DBColumns.PRODUCTS_MEASURE_UNIT_COL
                     + ", " + DBColumns.SL_CARTS_QUANTITY_COL
@@ -142,7 +151,8 @@ public class ShoppingListQueries {
                 String prodDescr = rs.getString(DBColumns.PRODUCTS_DESCR_COL);
                 int pcid = rs.getInt(DBColumns.PRODUCT_CAT_ID_COL);
                 String prodCatName = rs.getString(DBColumns.PRODUCT_CAT_NAME_COL);
-                String prodCatDescr = rs.getString(DBColumns.PRODUCT_CAT_DESCR_COL);
+                String prodCatDescr = rs.getString(DBColumns.PRODUCT_CAT_DESCR_COL);         
+                String prodCatIconPath = rs.getString(DBColumns.PRODUCT_CAT_ICON_PATH_COL);
                 String prodMeasureUnit = rs.getString(DBColumns.PRODUCTS_MEASURE_UNIT_COL);
                 double quantity = rs.getDouble(DBColumns.SL_CARTS_QUANTITY_COL);
 
@@ -154,6 +164,7 @@ public class ShoppingListQueries {
                 item.setPcid(pcid);
                 item.setProdCatName(prodCatName);
                 item.setProdCatDescr(prodCatDescr);
+                item.setProdCatIconPath(prodCatIconPath);
                 item.setProdMeasureUnit(prodMeasureUnit);
                 item.setQuantity(quantity);
                 items.add(item);

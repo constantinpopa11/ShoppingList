@@ -18,6 +18,9 @@ public class ShoppingListBean implements Serializable {
     String slDescr;
     String slIconPath;
     int lcid;
+    String slCatName;
+    String slCatDescr;
+    String slCatIconPath;
     boolean removable;
     boolean editable;
     int owner;
@@ -88,5 +91,31 @@ public class ShoppingListBean implements Serializable {
     public void setOwner(int owner) {
         this.owner = owner;
     }
+
+    public String getSlCatName() {
+        return slCatName;
+    }
+
+    public void setSlCatName(String slCatName) {
+        this.slCatName = slCatName;
+    }
+
+    public String getSlCatDescr() {
+        return slCatDescr;
+    }
+
+    public void setSlCatDescr(String slCatDescr) {
+        this.slCatDescr = slCatDescr;
+    }
+
+    public String getSlCatIconPath() {
+        return slCatIconPath;
+    }
+
+    public void setSlCatIconPath(String slCatIconPath) {
+        this.slCatIconPath = slCatIconPath;
+    }
+    
+    
 
 }

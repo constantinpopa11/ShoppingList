@@ -188,13 +188,7 @@ public class UserQueries {
             preparedStmt.setString(1, email);
             preparedStmt.setString(2, firstName);
             preparedStmt.setString(3, lastName);
-
-            if (avatarPath == null) {
-                preparedStmt.setString(4, Utils.USER_AVATARS);
-            } else {
-                //TODO
-            }
-
+            preparedStmt.setString(4, avatarPath);
             preparedStmt.setString(5, password);
             preparedStmt.setInt(6, privileges);
             preparedStmt.setString(7, verificationCode);
@@ -319,7 +313,7 @@ public class UserQueries {
 
         try {
 
-            String queryStr = "UPDATE " + DBTables.USERS_TABLE 
+            String queryStr = "UPDATE " + DBTables.USERS_TABLE
                     + " SET " + DBColumns.USERS_VERIFICATION_CODE_COL + "=?"
                     + " , " + DBColumns.USERS_PRIVILEGES_COL + "=" + Privileges.VERIFIED_USER_PRIVILEGES
                     + " WHERE " + DBColumns.USERS_VERIFICATION_CODE_COL + "=?";
@@ -328,7 +322,7 @@ public class UserQueries {
             preparedStmt = conn.prepareStatement(queryStr);
             preparedStmt.setString(1, "verified");
             preparedStmt.setString(2, verificationCode);
-           
+
             // execute the preparedstatement
             preparedStmt.execute();
 

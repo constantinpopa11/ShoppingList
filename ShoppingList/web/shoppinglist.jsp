@@ -66,7 +66,20 @@
         <div id="listDetails" class="collapse"  data-parent="#accordion">
             <div class="card-body custom-row">
                 <c:if test="${activeSL != null}">
-                    ${activeSL.slDescr}
+                    <!--TODO-->
+                    <div>
+                        <img width="30" src="${initParam['WEBSERVER_LOCATION']}${activeSL.slIconPath}"/>
+                        ${activeSL.slDescr}
+                    </div>
+                    <hr>
+                    <div>
+                        Shop category description <br>
+                        <img width="30" src="${initParam['WEBSERVER_LOCATION']}${activeSL.slCatIconPath}"/>
+                        ${activeSL.slCatName} <br>
+                        ${activeSL.slCatDescr}
+                    </div>
+
+
                 </c:if>
             </div>
         </div>
@@ -94,7 +107,7 @@
 
                     <!--  banana pic -->
                     <div class="col-xs-2  my-auto"  data-toggle="collapse" data-target="#pid${item.pid}">
-                        <img src="http://smartyessay.com/wp-content/uploads/2018/05/crazyshit-beef-curtains-crazy-shit-beef-curtain-pussy-house-interiors.jpg"  width="60" height="60"/>
+                        <img src="${initParam['WEBSERVER_LOCATION']}${item.logoPath}"  width="60" height="60"/>
                     </div>
 
                     <div class="col  my-auto">
@@ -153,7 +166,13 @@
 
             <div id="pid${item.pid}" class="collapse" data-parent="#accordion">
                 <div class="card-body">
-                    ${item.prodDescr}
+                    <div>
+                        ${item.prodDescr}
+                    </div>
+                    <hr>
+                    <div>Category Info: <img width="30" src="${initParam['WEBSERVER_LOCATION']}${item.prodCatIconPath}"/>
+                        ${item.prodCatDescr}
+                    </div>
                 </div>
             </div>
         </div>
