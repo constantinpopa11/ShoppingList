@@ -12,6 +12,7 @@ import java.io.Serializable;
  * @author invidia
  */
 public class ShoppingListBean implements Serializable {
+
     int slid;
     String slName;
     String slDescr;
@@ -88,8 +89,4 @@ public class ShoppingListBean implements Serializable {
         this.owner = owner;
     }
 
-    
-    
-    
-    
 }

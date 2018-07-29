@@ -42,8 +42,8 @@
             <!-- Page Content Holder -->
             <div id="content">
 
-              <!-- navbar Content Holder -->
-              <jsp:include page="navbar.jsp" />
+                <!-- navbar Content Holder -->
+                <jsp:include page="navbar.jsp" />
 
                 <div class="login-form">
                     <c:set var = "wrongEmail" scope = "page" value = "${param.wrongEmail}"/>

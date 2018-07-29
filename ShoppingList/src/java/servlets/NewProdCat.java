@@ -73,7 +73,7 @@ public class NewProdCat extends HttpServlet {
             System.out.println("ADMIN ALERT");
             List<SLCategory> slCategories = ShoppingListQueries.getSLCategories(conn);
             request.setAttribute("slCategories", slCategories);
-            
+
             request.getRequestDispatcher("/newprodcat.jsp").forward(request, response);
         } else {
             response.sendRedirect("home.jsp");
@@ -105,8 +105,8 @@ public class NewProdCat extends HttpServlet {
             String prodCatName = request.getParameter(FormFields.NEW_PROD_CAT_NAME_FIELD);
             String prodCatDescr = request.getParameter(FormFields.NEW_PROD_CAT_DESCR_FIELD);
 
-            System.out.println(lcid + " " + prodCatName + " "  + prodCatDescr);
-            
+            System.out.println(lcid + " " + prodCatName + " " + prodCatDescr);
+
             //TODO logo
             ShoppingListQueries.insertProdCat(conn, lcid, prodCatName, prodCatDescr, null);
             //TODO: popup

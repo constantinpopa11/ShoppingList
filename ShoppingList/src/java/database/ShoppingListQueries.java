@@ -440,7 +440,7 @@ public class ShoppingListQueries {
             } else {
                 //TODO
             }
-            
+
             // execute the preparedstatement
             preparedStmt.execute();
 
@@ -461,7 +461,7 @@ public class ShoppingListQueries {
         }//end try
 
     }
-    
+
     public static void insertProdCat(Connection conn, int lcid, String prodCatName, String prodCatDescr, String iconPath) {
 
         PreparedStatement preparedStmt = null;
@@ -486,7 +486,7 @@ public class ShoppingListQueries {
             } else {
                 //TODO
             }
-            
+
             // execute the preparedstatement
             preparedStmt.execute();
 

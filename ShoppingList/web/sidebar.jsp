@@ -44,7 +44,7 @@
             </li>
         </c:if>
 
-        <c:if test="${privileges == -3}">
+        <c:if test="${privileges == -1}">
             <li>
                 <a href="#joinSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Join Us</a>
                 <ul class="collapse list-unstyled" id="joinSubmenu">
@@ -82,7 +82,7 @@
             <a href="#">New Shopping List</a>
         </li>
 
-        <c:if test="${privileges != -3}">
+        <c:if test="${privileges != -1}">
             <li>
                 <a href="NewProduct">New Product</a>
             </li>

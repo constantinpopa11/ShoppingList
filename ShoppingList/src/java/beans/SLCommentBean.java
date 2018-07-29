@@ -71,6 +71,4 @@ public class SLCommentBean implements Serializable {
         this.type = type;
     }
 
-    
-
 }

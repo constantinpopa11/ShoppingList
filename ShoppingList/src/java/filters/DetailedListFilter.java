@@ -56,8 +56,7 @@ public class DetailedListFilter implements Filter {
 
         String slidParam = req.getParameter("slid");
         HttpSession session = req.getSession();
-        
-       
+
         Object uidObj = session.getAttribute(Utils.UID_SESSION_ATTR);
         int uid = (uidObj == null) ? LoginStatus.GUEST_USER : Integer.parseInt(uidObj.toString());
 

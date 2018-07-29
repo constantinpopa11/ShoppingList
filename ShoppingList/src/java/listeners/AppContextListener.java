@@ -16,25 +16,25 @@ public class AppContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-    	ServletContext ctx = servletContextEvent.getServletContext();
-    	
-    	String url = ctx.getInitParameter("DBURL");
-    	String user = ctx.getInitParameter("DBUSER");
-    	String pwd = ctx.getInitParameter("DBPWD");
-    	
-    	//create database connection from init parameters and set it to context
-    	DBConnectionManager dbManager = new DBConnectionManager(url, user, pwd);
-    	ctx.setAttribute("DBManager", dbManager);
-    	System.out.println("Database connection initialized for Application.");
+        ServletContext ctx = servletContextEvent.getServletContext();
+
+        String url = ctx.getInitParameter("DBURL");
+        String user = ctx.getInitParameter("DBUSER");
+        String pwd = ctx.getInitParameter("DBPWD");
+
+        //create database connection from init parameters and set it to context
+        DBConnectionManager dbManager = new DBConnectionManager(url, user, pwd);
+        ctx.setAttribute("DBManager", dbManager);
+        System.out.println("Database connection initialized for Application.");
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
-    	ServletContext ctx = servletContextEvent.getServletContext();
-    	DBConnectionManager dbManager = (DBConnectionManager) ctx.getAttribute("DBManager");
-    	dbManager.closeConnection();
-    	System.out.println("Database connection closed for Application.");
-    	
+        ServletContext ctx = servletContextEvent.getServletContext();
+        DBConnectionManager dbManager = (DBConnectionManager) ctx.getAttribute("DBManager");
+        dbManager.closeConnection();
+        System.out.println("Database connection closed for Application.");
+
     }
-	
+
 }

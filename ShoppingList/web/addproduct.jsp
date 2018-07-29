@@ -88,13 +88,13 @@
 
                                 <!-- search bar  -->
                                 <div class="col-xs-8 " id="searchbar">
-                                  <div id="custom-search">
-                                	<input type="text" name="search" class="search-query" placeholder="Search" />
-                                	<button type="button">
-                                		<i class="fas fa-search fa-2x" aria-hidden="true"></i>
-                                	</button>
-                                	<input type="submit" value="Submit" style="display: none;">
-                                </div>
+                                    <div id="custom-search">
+                                        <input type="text" name="search" class="search-query" placeholder="Search" />
+                                        <button type="button">
+                                            <i class="fas fa-search fa-2x" aria-hidden="true"></i>
+                                        </button>
+                                        <input type="submit" value="Submit" style="display: none;">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -112,11 +112,11 @@
             </div>
         </div>
         <script type="text/javascript">
-        // Focus Covers Full Area
-            $(function() {
-            	$("#custom-search").click(function() {
-            		$(".search-query").focus();
-            	  });
+            // Focus Covers Full Area
+            $(function () {
+                $("#custom-search").click(function () {
+                    $(".search-query").focus();
+                });
             });
         </script>
     </body>

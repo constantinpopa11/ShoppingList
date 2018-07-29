@@ -10,6 +10,7 @@ package constants;
  * @author invidia
  */
 public class Privileges {
+
     public static final int STANDARD_USER_PRIVILEGES = 1;
     public static final int ADMIN_PRIVILEGES = 0;
     public static final int GUEST_USER_PRIVILEGES = -1;

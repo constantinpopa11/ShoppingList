@@ -28,7 +28,7 @@
         <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" crossorigin="anonymous"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"  crossorigin="anonymous"></script>
 
-          <!-- our subpages stylesheets -->
+        <!-- our subpages stylesheets -->
         <link rel="stylesheet" href="css/signup.css">
     </head>
     <body>
@@ -39,8 +39,8 @@
             <!-- Page Content Holder -->
             <div id="content">
 
-              <!-- navbar Content Holder -->
-              <jsp:include page="navbar.jsp" />
+                <!-- navbar Content Holder -->
+                <jsp:include page="navbar.jsp" />
 
 
 

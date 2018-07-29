@@ -83,10 +83,10 @@ public class AuthenticationFilter implements Filter {
             res.sendRedirect("NewProduct"); //already registered or logged in
 
         }
-        
-        if(privileges != Privileges.ADMIN_PRIVILEGES 
-                && (uri.endsWith("newshopcat.jsp") || (uri.endsWith("newprodcat.jsp")))){
-            
+
+        if (privileges != Privileges.ADMIN_PRIVILEGES
+                && (uri.endsWith("newshopcat.jsp") || (uri.endsWith("newprodcat.jsp")))) {
+
             res.sendRedirect("home.jsp");
         }
 

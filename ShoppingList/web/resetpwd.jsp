@@ -56,7 +56,7 @@
                         <p class="text-center resetpwd-tip">You can reset your password here.</p>
 
                         <hr>
-                        
+
                         <c:if test="${wrongEmail != null}">
                             <div class="error-msg">${wrongEmail}</div>
                             <!--<a href="signup.jsp"><span class="text-center"><u>Click here to Sign Up</u></span></a>-->

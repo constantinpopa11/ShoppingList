@@ -22,9 +22,9 @@ import constants.Utils;
 public class LogOut extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+
         response.setContentType("text/html");
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
@@ -35,12 +35,12 @@ public class LogOut extends HttpServlet {
                 }
             }
         }
-        
+
         HttpSession session = request.getSession(false);
         System.out.println("User = " + session.getAttribute("user") + " logged out");
         session.removeAttribute(Utils.UID_SESSION_ATTR);
         session.invalidate();
         response.sendRedirect("login.jsp");
     }
-    
+
 }

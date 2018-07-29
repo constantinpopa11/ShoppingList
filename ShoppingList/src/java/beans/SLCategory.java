@@ -49,5 +49,5 @@ public class SLCategory implements Serializable {
     public void setSlCatIconPath(String slCatIconPath) {
         this.slCatIconPath = slCatIconPath;
     }
-    
+
 }

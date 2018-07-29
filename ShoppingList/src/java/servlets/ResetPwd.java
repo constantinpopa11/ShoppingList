@@ -73,7 +73,7 @@ public class ResetPwd extends HttpServlet {
             response.sendRedirect("resetpwd.jsp");
 
         } else if (action.equals("cancel")) { //cancel was pressed
-            
+
             String prevPage = request.getParameter("prevPage");
             if (prevPage == null || prevPage.equals("")) { //resetpwd.jsp is first visited page
                 response.sendRedirect("home.jsp");
@@ -94,7 +94,7 @@ public class ResetPwd extends HttpServlet {
                 request.setAttribute("wrongEmail", "There's no account associated to this email address");
                 request.getRequestDispatcher("/resetpwd.jsp").forward(request, response);
             } else if (status == ResetPwdStatus.CORRECT_EMAIL) {
-                
+
                 response.sendRedirect("home.jsp");
             }
         }

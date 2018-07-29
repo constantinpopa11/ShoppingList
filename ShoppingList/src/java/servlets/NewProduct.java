@@ -68,7 +68,7 @@ public class NewProduct extends HttpServlet {
             throws ServletException, IOException {
 
         processRequest(request, response);
-        
+
         if (uid != LoginStatus.GUEST_USER) {
 
             String lcid = request.getParameter("lcid");
@@ -104,7 +104,7 @@ public class NewProduct extends HttpServlet {
             throws ServletException, IOException {
 
         processRequest(request, response);
-        
+
         String prodName = request.getParameter(FormFields.NEW_PRODUCT_NAME_FIELD);
         String shopCategory = request.getParameter(FormFields.NEW_PRODUCT_SHOP_CAT_FIELD);
         String prodCategory = request.getParameter(FormFields.NEW_PRODUCT_ITEM_CAT_FIELD);

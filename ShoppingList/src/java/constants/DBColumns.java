@@ -11,7 +11,6 @@ package constants;
  */
 public class DBColumns {
 
-    
     public static final String USERS_ID_COL = DBTables.USERS_TABLE + "." + "uid";
     public static final String USERS_EMAIL_COL = DBTables.USERS_TABLE + "." + "email";
     public static final String USERS_FIRST_NAME_COL = DBTables.USERS_TABLE + "." + "firstName";
@@ -42,7 +41,7 @@ public class DBColumns {
     public static final String PRODUCTS_DESCR_COL = DBTables.PRODUCTS_TABLE + "." + "description";
     public static final String PRODUCTS_MEASURE_UNIT_COL = DBTables.PRODUCTS_TABLE + "." + "measureUnit";
     public static final String PRODUCTS_LOGO_PATH_COL = DBTables.PRODUCTS_TABLE + "." + "logoPath";
-    public static final String PRODUCTS_PCID_COL = DBTables.PRODUCTS_TABLE + "." + "pcid";   
+    public static final String PRODUCTS_PCID_COL = DBTables.PRODUCTS_TABLE + "." + "pcid";
     public static final String PRODUCTS_CREATED_BY_COL = DBTables.PRODUCTS_TABLE + "." + "createdBy";
 
     public static final String SL_PICTURES_PATH_COL = DBTables.SL_PICTURES_TABLE + "." + "path";

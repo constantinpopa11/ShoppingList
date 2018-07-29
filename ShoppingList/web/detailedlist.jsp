@@ -38,7 +38,7 @@
         <div class="wrapper">
             <!-- Page Content Holder -->
             <jsp:include page="sidebar.jsp" />
-            
+
 
             <div id="content">
                 <!-- navbar Content Holder -->
@@ -46,10 +46,10 @@
 
                 <jsp:include page="shoppinglist.jsp" />
 
-                
+
                 <div id="comment-section">
                     <!-- inizio sezione commenti -->
-                    
+
                     <div class="commentbox">
                         <div class="row">
 
