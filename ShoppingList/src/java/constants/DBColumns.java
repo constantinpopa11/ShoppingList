@@ -18,6 +18,7 @@ public class DBColumns {
     public static final String USERS_AVATAR_PATH_COL = DBTables.USERS_TABLE + "." + "avatarPath";
     public static final String USERS_PASSWORD_COL = DBTables.USERS_TABLE + "." + "password";
     public static final String USERS_PRIVILEGES_COL = DBTables.USERS_TABLE + "." + "privileges";
+    public static final String USERS_VERIFICATION_CODE_COL = DBTables.USERS_TABLE + "." + "verificationCode";
 
     public static final String SL_COMMENTS_UID_COL = DBTables.SL_COMMENTS_TABLE + "." + "uid";
     public static final String SL_COMMENTS_DATE_COL = DBTables.SL_COMMENTS_TABLE + "." + "date";

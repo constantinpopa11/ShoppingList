@@ -19,10 +19,22 @@ public class Utils {
     public static final String PRIVILEGES_SESSION_ATTR = "privileges";
     public static final String FIRST_NAME_SESSION_ATTR = "firstName";
 
-    public static final String DEFAULT_AVATAR_PATH = "../profilePictures/default_avatar.jpg";
-    public static String DEFAULT_PROD_LOGO_PATH = "../productPictures/default_prod.jpg";
-    public static String DEFAULT_SL_CAT_ICON_PATH = "../slCategories/default_sl_cat.jpg";
-    public static String PRODUCT_PROD_CAT_ICON_PATH = "../prodCategories/default_prod_cat.jpg";
+    //THIS NEEDS TO BE UPDATED
+    public static final String WEBSITE_LOCATION = "http://localhost:8080/ShoppingListApp/";
+
+    public static final String USER_AVATARS = "/images/userAvatars/";
+    public static final String APP_IMAGES = "/images/app/";
+    public static final String PRODUCT_LOGOS = "/images/products/";
+    public static final String SHOP_CATEGORY_ICONS = "/images/shopCategories/";
+    public static final String PROD_CATEGORY_ICONS = "/images/prodCategories/";
+    public static final String SHOPPING_LIST_ICONS = "/images/shoppingLists/";
+    public static final String SL_PHOTOS = "/images/slPhotos/";
+
+    public static final String DEFAULT_USER_AVATAR = "default.png";
+    public static final String DEFAULT_PRODUCT_LOGO = "default.png";
+    public static final String DEFAULT_SHOP_CAT_ICON = "default.png";
+    public static final String DEFAULT_PROD_CAT_ICON = "default.png";
+    public static final String DEFAULT_SL_ICON = "default.png";
 
     public static final int SL_COMMENT = 0;
     public static final int SL_ADD = 1;

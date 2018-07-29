@@ -104,7 +104,8 @@
 
 
                     <div class="form-container">
-                        <form class="border border-light p-5" method="POST" action="NewProduct">
+                        <form class="border border-light p-5" method="POST" action="NewShoppingList"
+                              enctype="multipart/form-data">
 
                             <p  class="title text-center    ">New List</p>
 
@@ -134,7 +135,7 @@
                             <div class="input-group">
                                 <label class="input-group-btn" >
                                     <span class="btn custom-btn">
-                                        Search <input  type="file" class="file-picker" single>
+                                        Search <input name="slIcon" single accept="image/*"  type="file" class="file-picker" >
                                     </span>
                                 </label>
                                 <input type="text" placeholder="Insert logo" class="form-control file-name-label" readonly>

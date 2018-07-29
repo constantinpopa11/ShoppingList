@@ -51,7 +51,8 @@
 
 
                     <div class="form-container shadow-lg">
-                        <form class="text-center border border-light p-5" method="POST" action="NewShopCat">
+                        <form class="text-center border border-light p-5" method="POST" action="NewShopCat"
+                              enctype="multipart/form-data">
 
                             <p  class="title">New Shop Category</p>
 
@@ -71,7 +72,7 @@
                             <div class="input-group">
                                 <label class="input-group-btn" >
                                     <span class="btn custom-btn">
-                                        Search <input  type="file" class="file-picker" single>
+                                        Search <input name="shopCatIcon" single accept="image/*" type="file" class="file-picker">
                                     </span>
                                 </label>
                                 <input type="text" placeholder="Insert logo" class="form-control file-name-label" readonly>

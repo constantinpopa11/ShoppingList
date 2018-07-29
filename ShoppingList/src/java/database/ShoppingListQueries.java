@@ -382,12 +382,7 @@ public class ShoppingListQueries {
             preparedStmt.setString(1, name);
             preparedStmt.setString(2, descr);
             preparedStmt.setString(3, measureUnit);
-
-            if (logoPath == null) {
-                preparedStmt.setString(4, Utils.DEFAULT_PROD_LOGO_PATH);
-            } else {
-                //TODO
-            }
+            preparedStmt.setString(4, logoPath);
             preparedStmt.setInt(5, pcid);
 
             int privileges = UserQueries.getUserPrivilegesByUid(conn, createdBy);
@@ -434,12 +429,7 @@ public class ShoppingListQueries {
             preparedStmt = conn.prepareStatement(queryStr);
             preparedStmt.setString(1, shopCatName);
             preparedStmt.setString(2, shopCatDescr);
-
-            if (iconPath == null) {
-                preparedStmt.setString(3, Utils.DEFAULT_SL_CAT_ICON_PATH);
-            } else {
-                //TODO
-            }
+            preparedStmt.setString(3, iconPath);
 
             // execute the preparedstatement
             preparedStmt.execute();
@@ -480,12 +470,7 @@ public class ShoppingListQueries {
             preparedStmt.setInt(1, lcid);
             preparedStmt.setString(2, prodCatName);
             preparedStmt.setString(3, prodCatDescr);
-
-            if (iconPath == null) {
-                preparedStmt.setString(4, Utils.PRODUCT_PROD_CAT_ICON_PATH);
-            } else {
-                //TODO
-            }
+            preparedStmt.setString(4, iconPath);
 
             // execute the preparedstatement
             preparedStmt.execute();

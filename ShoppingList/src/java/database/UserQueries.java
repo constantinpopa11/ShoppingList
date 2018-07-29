@@ -167,7 +167,7 @@ public class UserQueries {
     }
 
     public static void insertUser(Connection conn, String email, String firstName, String lastName,
-            String avatarPath, String password, int privileges) {
+            String avatarPath, String password, int privileges, String verificationCode) {
 
         PreparedStatement preparedStmt = null;
 
@@ -180,7 +180,8 @@ public class UserQueries {
                     + ", " + DBColumns.USERS_AVATAR_PATH_COL
                     + ", " + DBColumns.USERS_PASSWORD_COL
                     + ", " + DBColumns.USERS_PRIVILEGES_COL
-                    + ") VALUES (?, ?, ?, ?, ?, ?)";
+                    + ", " + DBColumns.USERS_VERIFICATION_CODE_COL
+                    + ") VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             // create the mysql insert preparedstatement
             preparedStmt = conn.prepareStatement(queryStr);
@@ -189,13 +190,14 @@ public class UserQueries {
             preparedStmt.setString(3, lastName);
 
             if (avatarPath == null) {
-                preparedStmt.setString(4, Utils.DEFAULT_AVATAR_PATH);
+                preparedStmt.setString(4, Utils.USER_AVATARS);
             } else {
                 //TODO
             }
 
             preparedStmt.setString(5, password);
             preparedStmt.setInt(6, privileges);
+            preparedStmt.setString(7, verificationCode);
 
             // execute the preparedstatement
             preparedStmt.execute();
@@ -309,5 +311,42 @@ public class UserQueries {
         }//end try
 
         return result;
+    }
+
+    public static void verifyUserEmail(Connection conn, String verificationCode) {
+
+        PreparedStatement preparedStmt = null;
+
+        try {
+
+            String queryStr = "UPDATE " + DBTables.USERS_TABLE 
+                    + " SET " + DBColumns.USERS_VERIFICATION_CODE_COL + "=?"
+                    + " , " + DBColumns.USERS_PRIVILEGES_COL + "=" + Privileges.VERIFIED_USER_PRIVILEGES
+                    + " WHERE " + DBColumns.USERS_VERIFICATION_CODE_COL + "=?";
+
+            // create the mysql insert preparedstatement
+            preparedStmt = conn.prepareStatement(queryStr);
+            preparedStmt.setString(1, "verified");
+            preparedStmt.setString(2, verificationCode);
+           
+            // execute the preparedstatement
+            preparedStmt.execute();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (preparedStmt != null) {
+                    preparedStmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+
     }
 }

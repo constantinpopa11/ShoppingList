@@ -13,7 +13,7 @@
     <div class="sidebar-header">
         <p>
             <a href="home.jsp">
-                <img   src="./images/app/sl_logo_pro.svg" width="80%">
+                <img   src="${initParam['WEBSERVER_LOCATION']}/images/app/sl_logo.png" width="80%">
             </a>
         </p>
     </div>
@@ -44,7 +44,7 @@
             </li>
         </c:if>
 
-        <c:if test="${privileges == -1}">
+        <c:if test="${privileges == -2}">
             <li>
                 <a href="#joinSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Join Us</a>
                 <ul class="collapse list-unstyled" id="joinSubmenu">
@@ -82,15 +82,19 @@
             <a href="#">New Shopping List</a>
         </li>
 
-        <c:if test="${privileges != -1}">
+        <c:if test="${privileges >=0 }">
             <li>
                 <a href="NewProduct">New Product</a>
             </li>
+        </c:if> 
 
+        <c:if test="${privileges >=-1 }">
             <li>
                 <a href="LogOut">Log Out</a>
             </li>
-        </c:if>    
+        </c:if>
+
+
 
 
     </ul>

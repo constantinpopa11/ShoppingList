@@ -13,20 +13,30 @@ import constants.Privileges;
 import constants.Utils;
 import database.DBConnectionManager;
 import database.ShoppingListQueries;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.util.List;
+import java.util.UUID;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author invidia
  */
+@WebServlet(urlPatterns = {"/NewShopCat"})
+@MultipartConfig
 public class NewShopCat extends HttpServlet {
 
     HttpSession session;
@@ -100,8 +110,26 @@ public class NewShopCat extends HttpServlet {
             String shopCatName = request.getParameter(FormFields.NEW_SHOP_CAT_NAME_FIELD);
             String shopCatDescr = request.getParameter(FormFields.NEW_SHOP_CAT_DESCR_FIELD);
 
+            Part filePart = request.getPart(FormFields.NEW_SHOP_CAT_ICON_FIELD);
+            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+            String iconPath = Utils.SHOP_CATEGORY_ICONS;
+
+            if (fileName == null || fileName.isEmpty()) {
+                iconPath += Utils.DEFAULT_SHOP_CAT_ICON;
+            } else {
+                String extension = fileName.substring(fileName.lastIndexOf("."), fileName.length());
+
+                String newIconName = UUID.randomUUID().toString() + extension;
+                iconPath += newIconName;
+
+                File uploadLocation = new File(request.getRealPath(iconPath));
+                try (InputStream input = filePart.getInputStream();) {
+                    Files.copy(input, uploadLocation.toPath());
+                }
+            }
+
             //TODO: logo
-            ShoppingListQueries.insertShopCat(conn, shopCatName, shopCatDescr, null);
+            ShoppingListQueries.insertShopCat(conn, shopCatName, shopCatDescr, iconPath);
             //TODO: popup
             response.sendRedirect("home.jsp");
         }

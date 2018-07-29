@@ -18,7 +18,7 @@ import javax.mail.internet.MimeMessage;
 
 public class SSLMailSender {
 
-    public static void sendVerificationMail(String recipientAddress) {
+    public static void sendVerificationMail(String recipientAddress, String vericationCode) {
 
         final String username = "noreply.shoppinglists@gmail.com";
         final String password = "bybfbnuyypvfmzwd";
@@ -46,14 +46,13 @@ public class SSLMailSender {
                     InternetAddress.parse(recipientAddress));
             message.setSubject("Verify your email address");
 
-            UUID code = UUID.randomUUID();
-
             message.setText("Welcome!\n"
                     + "\n"
-                    + "Thanks for signing up! We just need you to verify your "
+                    + "Thanks for signing up. We just need you to verify your "
                     + "email address to complete setting up your account.\n"
                     + "\n"
-                    + "localhost:8080/ShoppingListApp/VerifyEmail?code=" + code);
+                    + "Copy and paste this link into your browser -> "
+                    + "http://localhost:8080/ShoppingListApp/VerifyEmail?verificationCode=" + vericationCode);
 
             Transport.send(message);
 

@@ -4,6 +4,10 @@
         <welcome-file>home.jsp</welcome-file>
     </welcome-file-list>
     <context-param>
+        <param-name>WEBSERVER_LOCATION</param-name>
+        <param-value>http://localhost:8080/ShoppingListApp</param-value>
+    </context-param>
+    <context-param>
         <param-name>DBUSER</param-name>
         <param-value>sldb_user</param-value>
     </context-param>
@@ -67,6 +71,10 @@
         <servlet-name>NewProdCat</servlet-name>
         <servlet-class>servlets.NewProdCat</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>VerifyEmail</servlet-name>
+        <servlet-class>servlets.VerifyEmail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SignUp</servlet-name>
         <url-pattern>/SignUp</url-pattern>
@@ -83,17 +91,11 @@
         <servlet-name>ResetPwd</servlet-name>
         <url-pattern>/ResetPwd</url-pattern>
     </servlet-mapping>
+
+    
     <servlet-mapping>
-        <servlet-name>NewProduct</servlet-name>
-        <url-pattern>/NewProduct</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>NewShopCat</servlet-name>
-        <url-pattern>/NewShopCat</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>NewProdCat</servlet-name>
-        <url-pattern>/NewProdCat</url-pattern>
+        <servlet-name>VerifyEmail</servlet-name>
+        <url-pattern>/VerifyEmail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

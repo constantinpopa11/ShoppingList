@@ -59,7 +59,7 @@ public class AuthenticationFilter implements Filter {
         int privileges = UserQueries.getUserPrivilegesByUid(conn, uid);
         session.setAttribute(Utils.PRIVILEGES_SESSION_ATTR, privileges);
 
-        if (privileges != Privileges.GUEST_USER_PRIVILEGES) {
+        if (privileges >= Privileges.NOT_VERIFIED_USER_PRIVILEGES) {
             String firstName = UserQueries.getFirstNameByUid(conn, uid);
             session.setAttribute(Utils.FIRST_NAME_SESSION_ATTR, firstName);
         }
@@ -71,14 +71,14 @@ public class AuthenticationFilter implements Filter {
 
         }
 
-        if (privileges == Privileges.GUEST_USER_PRIVILEGES
+        if (privileges <= Privileges.NOT_VERIFIED_USER_PRIVILEGES
                 && (uri.endsWith("newproduct.jsp") || (uri.endsWith("NewProduct")))) {
 
             res.sendRedirect("home.jsp"); //already registered or logged in
 
         }
 
-        if (privileges != Privileges.GUEST_USER_PRIVILEGES && (uri.endsWith("newproduct.jsp"))) {
+        if (privileges >= Privileges.ADMIN_PRIVILEGES && (uri.endsWith("newproduct.jsp"))) {
 
             res.sendRedirect("NewProduct"); //already registered or logged in
 

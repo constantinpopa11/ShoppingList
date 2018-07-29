@@ -13,20 +13,26 @@ import constants.Privileges;
 import constants.Utils;
 import database.DBConnectionManager;
 import database.ShoppingListQueries;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.util.List;
+import java.util.UUID;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
-/**
- *
- * @author invidia
- */
+@WebServlet(urlPatterns = {"/NewProdCat"})
+@MultipartConfig
 public class NewProdCat extends HttpServlet {
 
     HttpSession session;
@@ -70,7 +76,6 @@ public class NewProdCat extends HttpServlet {
 
         processRequest(request, response);
         if (privileges == Privileges.ADMIN_PRIVILEGES) {
-            System.out.println("ADMIN ALERT");
             List<SLCategory> slCategories = ShoppingListQueries.getSLCategories(conn);
             request.setAttribute("slCategories", slCategories);
 
@@ -101,14 +106,30 @@ public class NewProdCat extends HttpServlet {
 
         } else {
 
-            int lcid = Integer.parseInt(request.getParameter(FormFields.NEW_PROD_CAT_SHOP_CAT_ID));
+            int lcid = Integer.parseInt(request.getParameter(FormFields.NEW_PROD_CAT_LCID_FIELD));
             String prodCatName = request.getParameter(FormFields.NEW_PROD_CAT_NAME_FIELD);
             String prodCatDescr = request.getParameter(FormFields.NEW_PROD_CAT_DESCR_FIELD);
 
-            System.out.println(lcid + " " + prodCatName + " " + prodCatDescr);
+            Part filePart = request.getPart(FormFields.NEW_PROD_CAT_ICON_FIELD);
+            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+            String iconPath = Utils.PROD_CATEGORY_ICONS;
 
+            if (fileName == null || fileName.isEmpty()) {
+                iconPath += Utils.DEFAULT_PROD_CAT_ICON;
+            } else {
+                String extension = fileName.substring(fileName.lastIndexOf("."), fileName.length());
+
+                String newIconName = UUID.randomUUID().toString() + extension;
+                iconPath += newIconName;
+
+                File uploadLocation = new File(request.getRealPath(iconPath));
+                try (InputStream input = filePart.getInputStream();) {
+                    Files.copy(input, uploadLocation.toPath());
+                }
+            }
+            System.out.println("QUI ->" + request.getRealPath(iconPath));
             //TODO logo
-            ShoppingListQueries.insertProdCat(conn, lcid, prodCatName, prodCatDescr, null);
+            ShoppingListQueries.insertProdCat(conn, lcid, prodCatName, prodCatDescr, iconPath);
             //TODO: popup
             response.sendRedirect("home.jsp");
         }

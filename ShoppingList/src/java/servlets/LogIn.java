@@ -116,7 +116,6 @@ public class LogIn extends HttpServlet {
                     session.setMaxInactiveInterval(Utils.NO_REMEMBER_ME_MAX_INACTIVE_INTERVAL);
                 }
 
-                SSLMailSender.sendVerificationMail("popa.constantin96@gmail.com");
                 response.sendRedirect("home.jsp");
             }
         }

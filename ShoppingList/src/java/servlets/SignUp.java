@@ -14,10 +14,12 @@ import database.UserQueries;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import mail.SSLMailSender;
 
 /**
  *
@@ -107,32 +109,13 @@ public class SignUp extends HttpServlet {
 
             } else if (status == SignupStatus.SIGNUP_SUCCESS) {
 
-                UserQueries.insertUser(conn, email, firstName, lastName, null, passwordHash, Privileges.STANDARD_USER_PRIVILEGES);
+                String verificationCode = UUID.randomUUID().toString();
+                UserQueries.insertUser(conn, email, firstName, lastName, null, 
+                        passwordHash, Privileges.NOT_VERIFIED_USER_PRIVILEGES, verificationCode);
+                
+                SSLMailSender.sendVerificationMail(email, verificationCode);
 
-                response.setContentType("text/html");
-                PrintWriter out = response.getWriter();
-
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<title>Servlets and forms: Exercise 1</title>");
-                out.println("</head>");
-                out.println("<body bgcolor=\"white\">");
-                out.println("<b>First name entered:</b> " + firstName);
-                out.println("<br/>");
-                out.println("<b>Last name entered :</b> " + lastName);
-                out.println("<br/>");
-                out.println("<b>Email :</b> " + email);
-                out.println("<br/>");
-                out.println("<b>Email confirm:</b> " + emailConfirm);
-                out.println("<br/>");
-                out.println("<b>Password :</b> " + passwordHash);
-                out.println("<br/>");
-                out.println("<b>Password Confirm:</b> " + passwordHash);
-                out.println("<br/>");
-
-                out.println("</body>");
-                out.println("</html>");
-                out.close();
+                response.sendRedirect("home.jsp");
 
             }
         }

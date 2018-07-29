@@ -68,7 +68,7 @@
                                     <div class="coomentbox row centere">
                                         <div class="col-sm-1" style="padding:0px 45px 0px 5px;">
                                             <div class="thumbnail" >
-                                                <img class="img-responsive user-photo img-rounded" src="images/userimages/default4bob.png">
+                                                <img class="img-responsive user-photo img-rounded" src="${initParam['WEBSERVER_LOCATION']}/images/userAvatars/default.png">
                                             </div><!-- /thumbnail -->
                                         </div><!-- /col-sm-1  foto col -->
                                         <div class="col-sm-11"> <!-- body comment col -->
@@ -174,7 +174,7 @@
                         <div class="addcoomentbox row">
                             <div class="col-sm-1" style="padding:0px 45px 0px 5px;">
                                 <div class="thumbnail">
-                                    <img class="img-responsive user-photo img-rounded" src="images/userimages/default2gray.png">
+                                    <img class="img-responsive user-photo img-rounded" src="${initParam['WEBSERVER_LOCATION']}/images/userAvatars/default.png">
                                 </div><!-- /thumbnail -->
                             </div><!-- /col-sm-1  foto col -->
                             <div class="col-sm-11"> <!-- body comment col -->

@@ -51,12 +51,13 @@
                     <c:set var = "slCategories" scope="request" value = "${requestScope.slCategories}"/>
 
                     <div class="form-container shadow-lg">
-                        <form class="text-center border border-light p-5" method="POST" action="NewProdCat">
+                        <form class="text-center border border-light p-5" method="POST" action="NewProdCat"
+                              enctype="multipart/form-data">
 
                             <p  class="title">New Product Category</p>
 
                             <!-- Shop category-->
-                            <select class="browser-default custom-select mb-4 " name="shopCatId" required autocomplete="off ">
+                            <select class="browser-default custom-select mb-4 " name="lcid" required autocomplete="off ">
                                 <option value="" selected disabled >Select shop category</option>
                                 <c:forEach items="${slCategories}" var="slCat">
                                     <option value="${slCat.slcid}">${slCat.slCatName}</option>
@@ -79,7 +80,7 @@
                             <div class="input-group">
                                 <label class="input-group-btn" >
                                     <span class="btn custom-btn">
-                                        Search <input  type="file" class="file-picker" single>
+                                        Search <input name="prodCatIcon" single accept="image/*"  type="file" class="file-picker">
                                     </span>
                                 </label>
                                 <input type="text" placeholder="Insert logo" class="form-control file-name-label" readonly>
