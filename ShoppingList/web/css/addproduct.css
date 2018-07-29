@@ -1,98 +1,157 @@
 #custom-search .search-query {
-    outline: none;
-    padding: 15px;
-    width: 50px;
-    height: 50px;
-    border: 2px solid transparent;
-    background-color: transparent;
-    color: transparent;
-    font-size: 1.2em;
-    -webkit-transition: all 0.8s;
-    transition: all 0.8s;
-    margin-bottom: 0;
+	outline: none;
+  padding: 15px;
+  width: 50px;
+  height: 50px;
+  border: 2px solid transparent;
+  background-color: transparent;
+  color: transparent;
+  font-size: 1.2em;
+  -webkit-transition: all 0.8s;
+  transition: all 0.8s;
+  margin-bottom: 0;
 }
 
 /* Hide Text when unfocused plus fallbacks */
 #custom-search .search-query::placeholder {
-    color: transparent;
-    -webkit-transition: all 0.8s;
-    transition: all 0.8s;
+  color: transparent;
+  -webkit-transition: all 0.8s;
+  transition: all 0.8s;
 }
 
 #custom-search .search-query::-webkit-input-placeholder {
-    color: transparent;
-    -webkit-transition: all 0.8s;
-    transition: all 0.8s;
+  color: transparent;
+  -webkit-transition: all 0.8s;
+  transition: all 0.8s;
 }
 
 #custom-search .search-query::-moz-placeholder {
-    color: transparent;
-    -webkit-transition: all 0.8s;
-    transition: all 0.8s;
+  color: transparent;
+  -webkit-transition: all 0.8s;
+  transition: all 0.8s;
 }
 
 #custom-search .search-query:-moz-placeholder {
-    color: transparent;
-    -webkit-transition: all 0.8s;
-    transition: all 0.8s;
+  color: transparent;
+  -webkit-transition: all 0.8s;
+  transition: all 0.8s;
 }
 
 #custom-search .search-query:-ms-input-placeholder {
-    color: transparent;
-    -webkit-transition: all 0.8s;
-    transition: all 0.8s;
+  color: transparent;
+  -webkit-transition: all 0.8s;
+  transition: all 0.8s;
 }
 
 /* Style when Search is selected */
 #custom-search .search-query:focus {
-    border-radius: 50px;
-    border: 2px solid white;
-    background-color: #5f586a;
-    width: 350px;
-    color: white;
+  border-radius: 50px;
+  border: 2px solid white;
+  background-color: #7a25ff;
+  width: 350px;
+  color: red;
 }
 
 /* Style for placeholder value plus fallbacks */
 #custom-search .search-query:focus::placeholder {
-    color: #cccccc;
+  color: #cccccc;
 }
 
 #custom-search .search-query:focus::-webkit-input-placeholder {
-    color: #cccccc;
+  color: #cccccc;
 }
 
 #custom-search .search-query:focus::-moz-placeholder {
-    color: transparent;
-    -webkit-transition: all 0.8s;
-    transition: all 0.8s;
+  color: transparent;
+  -webkit-transition: all 0.8s;
+  transition: all 0.8s;
 }
 
 #custom-search .search-query:focus::-moz-placeholder {
-    color: transparent;
-    -webkit-transition: all 0.8s;
-    transition: all 0.8s;
+  color: transparent;
+  -webkit-transition: all 0.8s;
+  transition: all 0.8s;
 }
 
 #custom-search .search-query:focus:-ms-input-placeholder {
-    color: #cccccc;
+  color: #cccccc;
 }
 
 /* Style for Button */
 #custom-search button {
-    border: 0;
-    background: none;
-    padding: 0;
-    width: 50px;
-    margin-top: -5px;
-    position: relative;
-    top: 2px;
-    left: -48px;
-    margin-bottom: 0;
-    border-radius: 3px;
+	border: 0;
+	background: none;
+	padding: 0;
+	width: 50px;
+	margin-top: -5px;
+	position: relative;
+	top: 2px;
+	left: -48px;
+	margin-bottom: 0;
+	border-radius: 3px;
 }
 
 /* Font Awesome Icon Style */
 #custom-search button i {
-    margin-left:-13px;
-    color:white;
+	margin-left:3px;
+	color:white;
 }
+
+/* inizio sezione filter */
+#filterbutton {
+	background-color: rgba(32, 52, 232, 0.68) !important;
+
+}
+/* dropdown */
+
+.dropbtn {
+    background-color: #407be2;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #108dd4;
+}
+
+#myInput {
+    border-box: box-sizing;
+    background-image: url('searchicon.png');
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 10px 12px 10px 25px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+}
+
+#myInput:focus {outline: 3px solid #ddd;}
+
+#filterdiv .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+#filterdiv .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f6f6f6;
+    min-width: 230px;
+    overflow: auto;
+    border: 1px solid #ddd;
+    z-index: 1;
+}
+
+#filterdiv .dropdown-content a {
+    color: black;
+    padding: 6px 3px;
+    text-decoration: none;
+    display: block;
+}
+
+#filterdiv .dropdown a:hover {background-color: #ddd;}
+
+#filterdiv .show {display: block;}
