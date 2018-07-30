@@ -87,6 +87,10 @@
         <servlet-name>SearchProducts</servlet-name>
         <servlet-class>servlets.SearchProducts</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditShoppingList</servlet-name>
+        <servlet-class>servlets.EditShoppingList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SignUp</servlet-name>
         <url-pattern>/SignUp</url-pattern>
@@ -110,6 +114,10 @@
     <servlet-mapping>
         <servlet-name>SearchProducts</servlet-name>
         <url-pattern>/SearchProducts</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditShoppingList</servlet-name>
+        <url-pattern>/EditShoppingList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

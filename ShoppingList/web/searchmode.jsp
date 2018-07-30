@@ -160,15 +160,19 @@
                     <div class="col-xs-3 my-auto">
                         <div class="row">
                             <div class="col my-auto">
-                                <div class="input-group">
-                                    <input size="3" class="form-control form-control-sm qty-field" id="inputdefault" type="text" placeholder="Qty">
+                                <form action="EditShoppingList" method="GET">
+                                    <input type="hidden" name="pid" value="${prod.pid}">
+                                    <input type="hidden" name="action" value="add">
+                                    <div class="input-group">
+                                        <input size="3" class="form-control form-control-sm qty-field" name="qty" type="text" placeholder="Qty">
 
-                                    <div class="input-group-append">
-                                        <button class="btn btn-sm btn-add" type="button" id="button-addon2">
-                                            <i class="fas fa-plus"></i>
-                                        </button>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-sm btn-add" type="submit" id="button-addon2">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
 
                         </div>

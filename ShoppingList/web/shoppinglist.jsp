@@ -9,6 +9,7 @@
     <c:set var = "activeSL" scope="request" value = "${sessionScope.activeSL}"/>
     <c:set var = "qslid" scope="request" value = "${sessionScope.qslid}"/>
 
+
     <!--  contenitore  roba comune STUFF -->
     <div class="card">
         <div class="card-header list-header" id="listHeader">
@@ -94,93 +95,96 @@
     <!--  first elemnt  -->
 
     <c:forEach items="${slItems}" var="item">
-        <div class="card">
-            <div class="card-header list-item ">
+        <c:if test="${item.slid == activeSL.slid}">
+           
+            <div class="card">
+                <div class="card-header list-item ">
 
-                <div class="row custom-row" >
-                    <!-- checkbox -->
+                    <div class="row custom-row" >
+                        <!-- checkbox -->
 
-                    <div class="col-xs-1  my-auto">
-                        <label class="checkbox-container">
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                        </label>
-                    </div>
-
-
-                    <!--  banana pic -->
-                    <div class="col-xs-2  my-auto"  data-toggle="collapse" data-target="#pid${item.pid}">
-                        <img src="${initParam['WEBSERVER_LOCATION']}${item.logoPath}"  width="60" height="60"/>
-                    </div>
-
-                    <div class="col  my-auto">
-                        <div class="row">
-                            <div class="col itemTitle" data-toggle="collapse" data-target="#pid${item.pid}">
-                                ${item.prodName}
-                            </div>
+                        <div class="col-xs-1  my-auto">
+                            <label class="checkbox-container">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
                         </div>
 
-                        <div class="row " >
-                            <div class="col itemInfo" data-toggle="collapse" data-target="#pid${item.pid}">
-                                ${item.prodCatName}
-                            </div>
 
+                        <!--  banana pic -->
+                        <div class="col-xs-2  my-auto"  data-toggle="collapse" data-target="#pid${item.pid}">
+                            <img src="${initParam['WEBSERVER_LOCATION']}${item.logoPath}"  width="60" height="60"/>
                         </div>
 
-                        <div class="row ">
-                            <div class="col itemInfo" data-toggle="collapse" data-target="#pid${item.pid}">
-                                Quantity: ${item.quantity} ${item.prodMeasureUnit}
+                        <div class="col  my-auto">
+                            <div class="row">
+                                <div class="col itemTitle" data-toggle="collapse" data-target="#pid${item.pid}">
+                                    ${item.prodName}
+                                </div>
                             </div>
-                        </div>
 
-                    </div>
-
-                    <div class="col-xs-2 my-auto">
-                        <div class="row ">
-                            <div class="col itemTitle float-right">
-                                <a href="edit">
-                                    <i class="fas fa-pencil-alt item-action-ic float-right"></i>
-                                </a>
-                                <a href="remove">
-                                    <i class="fas fa-times item-action-ic float-right"></i>
-                                </a>
+                            <div class="row " >
+                                <div class="col itemInfo" data-toggle="collapse" data-target="#pid${item.pid}">
+                                    ${item.prodCatName}
+                                </div>
 
                             </div>
-                        </div>
 
-                        <div class="row " data-toggle="collapse" data-target="#pid${item.pid}">
-                            <div class="col ">
-                                <small class="float-right">&nbsp;</small>
+                            <div class="row ">
+                                <div class="col itemInfo" data-toggle="collapse" data-target="#pid${item.pid}">
+                                    Quantity: ${item.quantity} ${item.prodMeasureUnit}
+                                </div>
                             </div>
 
                         </div>
 
-                        <div class="row">
-                            <div class="col itemTitle"  data-toggle="collapse" data-target="#pid${item.pid}">
-                                <span><i class="fas fa-chevron-down item-expand-ic float-right"></i></span>
+                        <div class="col-xs-2 my-auto">
+                            <div class="row ">
+                                <div class="col itemTitle float-right">
+                                    <a href="edit">
+                                        <i class="fas fa-pencil-alt item-action-ic float-right"></i>
+                                    </a>
+                                    <a href="remove">
+                                        <i class="fas fa-times item-action-ic float-right"></i>
+                                    </a>
+
+                                </div>
                             </div>
+
+                            <div class="row " data-toggle="collapse" data-target="#pid${item.pid}">
+                                <div class="col ">
+                                    <small class="float-right">&nbsp;</small>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col itemTitle"  data-toggle="collapse" data-target="#pid${item.pid}">
+                                    <span><i class="fas fa-chevron-down item-expand-ic float-right"></i></span>
+                                </div>
+                            </div>
+
                         </div>
 
-                    </div>
 
-
-                </div>
-            </div>
-
-            <div id="pid${item.pid}" class="collapse" data-parent="#accordion">
-                <div class="card-body">
-                    <div>
-                        ${item.prodDescr}
-                    </div>
-                    <hr>
-                    <div>Category Info:
-                        ${item.prodCatName}
-                        <img width="30" src="${initParam['WEBSERVER_LOCATION']}${item.prodCatIconPath}"/><br>
-                        ${item.prodCatDescr}
                     </div>
                 </div>
+
+                <div id="pid${item.pid}" class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                        <div>
+                            ${item.prodDescr}
+                        </div>
+                        <hr>
+                        <div>Category Info:
+                            ${item.prodCatName}
+                            <img width="30" src="${initParam['WEBSERVER_LOCATION']}${item.prodCatIconPath}"/><br>
+                            ${item.prodCatDescr}
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </c:if>
     </c:forEach>
 
 

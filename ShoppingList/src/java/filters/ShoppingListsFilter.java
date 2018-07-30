@@ -59,7 +59,10 @@ public class ShoppingListsFilter implements Filter {
                 
         int slid = (slidParam == null) ? -1 : Integer.parseInt(slidParam);
 
-        ShoppingListBean activeSL = null;
+        ShoppingListBean activeSL = (ShoppingListBean) session.getAttribute("activeSL");
+        if(activeSL != null && slid == -1)
+            slid = activeSL.getSlid();
+        
         List<SLItemBean> slItems = null;
         List<ShoppingListBean> shoppingLists = (ArrayList<ShoppingListBean>) session.getAttribute("shoppingLists");
 
@@ -103,12 +106,14 @@ public class ShoppingListsFilter implements Filter {
                         if(sl.getSlid() == slid) activeSL = sl;
                     }
                 }
+                slItems = (List<SLItemBean>) session.getAttribute("slItems");
             } else {
                 activeSL = null;
                 shoppingLists = null;
             }
         }
-
+        
+        
         session.setAttribute("activeSL", activeSL);
         session.setAttribute("shoppingLists", shoppingLists);
         session.setAttribute("slItems", slItems);

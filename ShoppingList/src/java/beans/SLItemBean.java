@@ -23,6 +23,7 @@ public class SLItemBean implements Serializable {
     private String prodCatIconPath;
     private String prodMeasureUnit;
     private double quantity;
+    private int slid;
 
     public SLItemBean() {
     }
@@ -106,7 +107,15 @@ public class SLItemBean implements Serializable {
     public void setProdCatIconPath(String prodCatIconPath) {
         this.prodCatIconPath = prodCatIconPath;
     }
-    
-    
 
+    public int getSlid() {
+        return slid;
+    }
+
+    public void setSlid(int slid) {
+        this.slid = slid;
+    }
+    
+    
+    
 }

@@ -168,6 +168,7 @@ public class ShoppingListQueries {
                 item.setProdCatIconPath(prodCatIconPath);
                 item.setProdMeasureUnit(prodMeasureUnit);
                 item.setQuantity(quantity);
+                item.setSlid(slid);
                 items.add(item);
 
             }
@@ -641,7 +642,7 @@ public class ShoppingListQueries {
 
             queryStr += " AND (" + DBColumns.PRODUCTS_CREATED_BY_COL + "=" + Utils.CREATED_BY_ADMIN;
 
-            if (uid > 0 ) {
+            if (uid > 0) {
                 queryStr += " OR " + DBColumns.PRODUCTS_CREATED_BY_COL
                         + " IN (SELECT " + DBColumns.SL_MEMBERS_UID_COL
                         + " FROM " + DBTables.SL_MEMBERS_TABLE
@@ -656,10 +657,9 @@ public class ShoppingListQueries {
                 queryStr += DBColumns.PRODUCTS_PCID_COL;
             }
 
-            queryStr += " LIMIT " + ((page - 1) * Utils.SEARCH_RESULTS_NUMBER) + ", " + (Utils.SEARCH_RESULTS_NUMBER+1) + ";";
+            queryStr += " LIMIT " + ((page - 1) * Utils.SEARCH_RESULTS_NUMBER) + ", " + (Utils.SEARCH_RESULTS_NUMBER + 1) + ";";
 
-            System.out.println("QUERY->" + queryStr);
-
+            
             ResultSet rs = stmt.executeQuery(queryStr);
 
             //Extract data from result set
@@ -706,5 +706,82 @@ public class ShoppingListQueries {
         }//end try
 
         return products;
+    }
+
+    public static void addToSLCart(Connection conn, int slid, int pid, double qty) {
+
+        PreparedStatement preparedStmt = null;
+
+        try {
+
+            String queryStr = " INSERT INTO " + DBTables.SL_CARTS_TABLE
+                    + " (" + DBColumns.SL_CARTS_SLID_COL
+                    + ", " + DBColumns.SL_CARTS_PID_COL
+                    + ", " + DBColumns.SL_CARTS_QUANTITY_COL
+                    + ") VALUES (?, ?, ?)";
+            
+            System.out.println("CUIRI-> "  + queryStr);
+
+            // create the mysql insert preparedstatement
+            preparedStmt = conn.prepareStatement(queryStr);
+            preparedStmt.setInt(1, slid);
+            preparedStmt.setInt(2, pid);
+            preparedStmt.setDouble(3, qty);
+
+            // execute the preparedstatement
+            preparedStmt.execute();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (preparedStmt != null) {
+                    preparedStmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+
+    }
+    
+    public static void updateSLCart(Connection conn, int slid, int pid, double qty) {
+
+        Statement stmt = null;
+        
+
+        try {
+            stmt = conn.createStatement();
+            
+            String queryStr = " UPDATE " + DBTables.SL_CARTS_TABLE
+                    + " SET " + DBColumns.SL_CARTS_QUANTITY_COL +"=" + qty
+                    + " WHERE " + DBColumns.SL_CARTS_SLID_COL + "=" + slid
+                    + " AND " + DBColumns.SL_CARTS_PID_COL + "=" + pid;
+
+            
+            System.out.println("CUIRI-> "  + queryStr);
+            
+            stmt.executeUpdate(queryStr);
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+
     }
 }

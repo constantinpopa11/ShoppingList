@@ -93,7 +93,7 @@ public class SearchProducts extends HttpServlet {
 
        
         List<ProductCategoryBean> prodCategories = ShoppingListQueries.getProdCategories(conn, searchParams.getLcid());
-        request.setAttribute("prodCategories", prodCategories);
+        session.setAttribute("prodCategories", prodCategories);
 
         String prodCatParam = request.getParameter("prodCat");
         if (prodCatParam != null && !prodCatParam.isEmpty()) {
