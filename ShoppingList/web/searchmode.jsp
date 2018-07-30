@@ -7,13 +7,10 @@
 <div id="accordion">
     <c:set var = "shoppingLists" scope="request" value = "${sessionScope.shoppingLists}"/>
     <c:set var = "prodCategories" scope="request" value = "${requestScope.prodCategories}"/>
+    <c:set var = "products" scope="request" value = "${requestScope.products}"/>
     <c:set var = "activeSL" scope="request" value = "${sessionScope.activeSL}"/>
 
-    <c:set var = "qlcid" scope="session" value = "${sessionScope.qlcid}"/>
-    <c:set var = "qprodCat" scope="session" value = "${sessionScope.qprodCat}"/>
-    <c:set var = "qsortBy" scope="session" value = "${sessionScope.qsortBy}"/>
-    <c:set var = "qkey" scope="session" value = "${sessionScope.qkey}"/>
-    <c:set var = "qpage" scope="session" value = "${sessionScope.qpage}"/>
+    <c:set var = "searchParams" scope="session" value = "${sessionScope.searchParams}"/>
 
     <!--  contenitore  roba comune STUFF -->
     <div class="card">
@@ -34,9 +31,10 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="sl-dd-item dropdown-item" href="NewShoppingList">New list <i class="fas fa-plus-circle"></i></a>
 
+
                         <c:forEach items="${shoppingLists}" var="sl">
                             <hr class="nomargin">
-                            <a class="sl-dd-item dropdown-item" href="${pageContext.request.requestURI}?slid=${sl.slid}">${sl.slName}</a>
+                            <a class="sl-dd-item dropdown-item" href="SearchProducts?slid=${sl.slid}&lcid=${sl.lcid}">${sl.slName}</a>
                         </c:forEach>
 
                     </div>
@@ -71,6 +69,9 @@
                             <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
 
 
+                            <a href="SearchProducts?prodCat=0">
+                                All categories
+                            </a>
                             <c:forEach items="${prodCategories}" var="prodCat">
                                 <a href="SearchProducts?prodCat=${prodCat.pcid}">
                                     ${prodCat.prodCatName}
@@ -129,26 +130,26 @@
 
     <!--  first elemnt  -->
 
-    <c:forEach items="${slItems}" var="item">
+    <c:forEach items="${products}" var="prod">
         <div class="card">
             <div class="card-header list-item ">
 
                 <div class="row custom-row">
                     <!--  banana pic -->
-                    <div class="col-xs-2  my-auto"  data-toggle="collapse" data-target="#pid${item.pid}">
-                        <img src="http://smartyessay.com/wp-content/uploads/2018/05/crazyshit-beef-curtains-crazy-shit-beef-curtain-pussy-house-interiors.jpg"  width="40" height="40"/>
+                    <div class="col-xs-2  my-auto"  data-toggle="collapse" data-target="#pid${prod.pid}">
+                        <img width="40" src="${initParam['WEBSERVER_LOCATION']}${prod.logoPath}"/><br>
                     </div>
 
                     <div class="col  my-auto">
                         <div class="row">
-                            <div class="col itemTitle" data-toggle="collapse" data-target="#pid${item.pid}">
-                                item di prova
+                            <div class="col itemTitle" data-toggle="collapse" data-target="#pid${prod.pid}">
+                                ${prod.prodName} (${prod.measureUnit})
                             </div>
                         </div>
 
                         <div class="row " >
-                            <div class="col itemInfo" data-toggle="collapse" data-target="#pid${item.pid}">
-                                cagtararara
+                            <div class="col itemInfo" data-toggle="collapse" data-target="#pid${prod.pid}">
+                                ${prod.prodDescr}
                             </div>
 
                         </div>
@@ -184,33 +185,55 @@
 
             </div>
 
-            <div id="pid${item.pid}" class="collapse custom-row" data-parent="#accordion">
+            <div id="pid${prod.pid}" class="collapse custom-row" data-parent="#accordion">
                 <div class="card-body">
-                    ${item.prodDescr}
+                    ${prod.prodDescr}<hr>
+                    ${item.prodCatName}
+                    <img width="30" src="${initParam['WEBSERVER_LOCATION']}${prod.prodCatIconPath}"/><br>
+                    ${prod.prodCatDescr}
                 </div>
             </div>
         </div>
     </c:forEach>
 
+    <c:if test="${fn:length(products) == 0}">
+        <div class="text-center">
+            No results were found :( <br>
+            ...but no worries! You can create a new product <a href="NewProduct">here (click!)</a>
+        </div>
+    </c:if>
+
 
     <!--page number -->
     <nav class="pageNum">
         <ul class="pagination justify-content-center">
+            <c:if test="${searchParams.page <= 1}">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Prev</a>
+                </li>
+            </c:if>
+
+            <c:if test="${searchParams.page > 1}">
+                <li class="page-item">
+                    <a class="page-link" href="SearchProducts?page=${searchParams.page-1}">Prev</a>
+                </li>
+            </c:if>
+
             <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                <a class="page-link" href="#">${searchParams.page}</a>
             </li>
-            <li class="page-item">
-                <a class="page-link" href="#">1</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">3</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-            </li>
+
+
+            <c:if test="${fn:length(products) < 11}">
+                <li class="page-item disabled">
+                    <a class="page-link" href="SearchProducts?page=${searchParams.page+1}">Next</a>
+                </li>
+            </c:if>
+            <c:if test="${fn:length(products) == 11}">
+                <li class="page-item">
+                    <a class="page-link" href="SearchProducts?page=${searchParams.page+1}">Next</a>
+                </li>
+            </c:if>
         </ul>
     </nav>
 

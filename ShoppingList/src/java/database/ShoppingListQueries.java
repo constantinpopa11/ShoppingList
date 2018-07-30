@@ -5,6 +5,7 @@
  */
 package database;
 
+import beans.ProductBean;
 import beans.ProductCategoryBean;
 import beans.SLCategoryBean;
 import beans.SLCommentBean;
@@ -612,5 +613,98 @@ public class ShoppingListQueries {
             }// nothing we can do
         }//end try
 
+    }
+
+    public static List<ProductBean> getProducts(Connection conn, int uid, int lcid, int pcid, int slid,
+            String key, int sortBy, int page) {
+        Statement stmt = null;
+
+        List<ProductBean> products = new ArrayList<>();
+        try {
+
+            stmt = conn.createStatement();
+            String queryStr = "SELECT * FROM "
+                    + DBTables.PRODUCTS_TABLE
+                    + ", " + DBTables.PRODUCT_CAT_TABLE
+                    + " WHERE "
+                    + DBColumns.PRODUCTS_PCID_COL + "=" + DBColumns.PRODUCT_CAT_ID_COL;
+
+            if (pcid == Utils.SEARCH_ANY_PROD_CAT) {
+                queryStr += " AND " + DBColumns.PRODUCTS_PCID_COL
+                        + " IN(SELECT " + DBColumns.PRODUCT_CAT_ID_COL
+                        + " FROM " + DBTables.PRODUCT_CAT_TABLE
+                        + " WHERE " + DBColumns.PRODUCT_CAT_LCID_COL + "=" + lcid + ")";
+            } else {
+                queryStr += " AND " + DBColumns.PRODUCTS_PCID_COL + "=" + pcid;
+            }
+            queryStr += " AND LOWER(" + DBColumns.PRODUCTS_NAME_COL + ") LIKE LOWER('%" + key + "%')";
+
+            queryStr += " AND (" + DBColumns.PRODUCTS_CREATED_BY_COL + "=" + Utils.CREATED_BY_ADMIN;
+
+            if (uid > 0 ) {
+                queryStr += " OR " + DBColumns.PRODUCTS_CREATED_BY_COL
+                        + " IN (SELECT " + DBColumns.SL_MEMBERS_UID_COL
+                        + " FROM " + DBTables.SL_MEMBERS_TABLE
+                        + " WHERE " + DBColumns.SL_MEMBERS_SLID_COL + "=" + slid + ")";
+            }
+
+            queryStr += ")  ORDER BY ";
+
+            if (sortBy == Utils.SORT_PROD_BY_CATEGORY) {
+                queryStr += DBColumns.PRODUCTS_PCID_COL;
+            } else if (sortBy == Utils.SORT_PROD_BY_NAME) {
+                queryStr += DBColumns.PRODUCTS_PCID_COL;
+            }
+
+            queryStr += " LIMIT " + ((page - 1) * Utils.SEARCH_RESULTS_NUMBER) + ", " + (Utils.SEARCH_RESULTS_NUMBER+1) + ";";
+
+            System.out.println("QUERY->" + queryStr);
+
+            ResultSet rs = stmt.executeQuery(queryStr);
+
+            //Extract data from result set
+            while (rs.next()) {
+                int pid = rs.getInt(DBColumns.PRODUCTS_ID_COL);
+                String prodName = rs.getString(DBColumns.PRODUCTS_NAME_COL);
+                String prodDescr = rs.getString(DBColumns.PRODUCTS_DESCR_COL);
+                String measureUnit = rs.getString(DBColumns.PRODUCTS_MEASURE_UNIT_COL);
+                String logoPath = rs.getString(DBColumns.PRODUCTS_LOGO_PATH_COL);
+                String prodCatName = rs.getString(DBColumns.PRODUCT_CAT_NAME_COL);
+                String prodCatDescr = rs.getString(DBColumns.PRODUCT_CAT_DESCR_COL);
+                String prodCatIconPath = rs.getString(DBColumns.PRODUCT_CAT_ICON_PATH_COL);
+
+                ProductBean prod = new ProductBean();
+                prod.setPid(pid);
+                prod.setProdName(prodName);
+                prod.setProdDescr(prodDescr);
+                prod.setMeasureUnit(measureUnit);
+                prod.setLogoPath(logoPath);
+                prod.setProdCatName(prodCatName);
+                prod.setProdCatDescr(prodCatDescr);
+                prod.setProdCatIconPath(prodCatIconPath);
+                products.add(prod);
+
+            }
+            //Clean-up environment
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+
+        return products;
     }
 }

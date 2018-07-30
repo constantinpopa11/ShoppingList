@@ -43,4 +43,8 @@ public class Utils {
 
     public static final int SORT_PROD_BY_CATEGORY = 0;
     public static final int SORT_PROD_BY_NAME = 1;
+    public static final int SEARCH_RESULTS_NUMBER = 10;
+    public static final int SEARCH_ANY_PROD_CAT = 0;
+    public static final int CREATED_BY_ADMIN = -1;
+    
 }

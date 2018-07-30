@@ -52,7 +52,10 @@
                             </c:if>
                         </c:if>
 
-                    <a class="float-right" href="SearchProducts?lcid=${activeSL.lcid}" ><i class="fas fa-cart-plus list-action-ic"></i></a>
+
+                    <c:if test="${not empty shoppingLists}">
+                        <a class="float-right" href="SearchProducts?lcid=${activeSL.lcid}&slid=${activeSL.slid}" ><i class="fas fa-cart-plus list-action-ic"></i></a>
+                        </c:if>
 
                 </div>
             </div>
@@ -170,7 +173,9 @@
                         ${item.prodDescr}
                     </div>
                     <hr>
-                    <div>Category Info: <img width="30" src="${initParam['WEBSERVER_LOCATION']}${item.prodCatIconPath}"/>
+                    <div>Category Info:
+                        ${item.prodCatName}
+                        <img width="30" src="${initParam['WEBSERVER_LOCATION']}${item.prodCatIconPath}"/><br>
                         ${item.prodCatDescr}
                     </div>
                 </div>

@@ -5,7 +5,10 @@
  */
 package servlets;
 
+import beans.ProductBean;
 import beans.ProductCategoryBean;
+import beans.SearchParamsBean;
+import beans.ShoppingListBean;
 import constants.LoginStatus;
 import constants.Utils;
 import database.DBConnectionManager;
@@ -13,6 +16,7 @@ import database.ShoppingListQueries;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -40,7 +44,7 @@ public class SearchProducts extends HttpServlet {
         Object uidObj = session.getAttribute(Utils.UID_SESSION_ATTR);
         uid = (uidObj == null) ? LoginStatus.GUEST_USER : Integer.parseInt(uidObj.toString());
         privileges = (int) session.getAttribute(Utils.PRIVILEGES_SESSION_ATTR);
-        
+
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -56,60 +60,72 @@ public class SearchProducts extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
-        int qlcid = -1;
-        int qprodCat = -1;
-        int qsortBy = Utils.SORT_PROD_BY_CATEGORY;
-        int qpage = 1;
-        String qkey = "";
-        
 
-        String lcidParam = (String) session.getAttribute("qlcid");
-        if(lcidParam != null ){
-            qlcid = Integer.parseInt(lcidParam);   
-        } else {
+        SearchParamsBean searchParams = (SearchParamsBean) session.getAttribute("searchParams");
+
+        //new search
+        String lcidParam = (String) request.getParameter("lcid");
+        int lcid;
+        if (lcidParam != null && !lcidParam.isEmpty()) {
+            lcid = Integer.parseInt(lcidParam);
+            searchParams = new SearchParamsBean();
+            searchParams.setLcid(lcid); 
+            
+        }
+        
+        String slidParam = (String) request.getParameter("slid");
+        int slid;
+        if (slidParam != null && !slidParam.isEmpty()) {
+            slid = Integer.parseInt(slidParam);
+            searchParams.setSlid(slid);    
+        }
+        
+        if(searchParams.getLcid() == -1 || searchParams.getSlid() == -1){
             response.sendRedirect("home.jsp");
         }
         
-        session.setAttribute("qlcid", qlcid);
-        List<ProductCategoryBean> prodCategories = ShoppingListQueries.getProdCategories(conn, qlcid);
+        List<ShoppingListBean> shoppingLists = (ArrayList<ShoppingListBean>) session.getAttribute("shoppingLists");
+        for(ShoppingListBean sl : shoppingLists){
+            if(sl.getSlid() == searchParams.getSlid() ){
+                session.setAttribute("activeSL", sl);
+            }
+        }
+
+       
+        List<ProductCategoryBean> prodCategories = ShoppingListQueries.getProdCategories(conn, searchParams.getLcid());
         request.setAttribute("prodCategories", prodCategories);
-        
-        
-        String prodCatParam = request.getParameter("qprodCat");
-        if(prodCatParam != null && !prodCatParam.isEmpty()){
-            qprodCat = Integer.parseInt(prodCatParam);
+
+        String prodCatParam = request.getParameter("prodCat");
+        if (prodCatParam != null && !prodCatParam.isEmpty()) {
+            searchParams.setProdCat(Integer.parseInt(prodCatParam));
+            searchParams.setPage(1);
+        }
+   
+        String pageParam = request.getParameter("page");
+        if (pageParam != null && !pageParam.isEmpty()) {
+            searchParams.setPage(Integer.parseInt(pageParam));
         }
         
-        session.setAttribute("qprodCat", qprodCat);
-        
-        String sortByParam = (String) session.getAttribute("qsortBy");
-        if(sortByParam != null && !sortByParam.isEmpty()){
-            qsortBy = Integer.parseInt(sortByParam);
-        } else{
-            qsortBy = Utils.SORT_PROD_BY_NAME;
+        String sortByParam = request.getParameter("sortBy");
+        if (sortByParam != null && !sortByParam.isEmpty()) {
+            searchParams.setSortBy(Integer.parseInt(sortByParam));
         }
-        session.setAttribute("qsortBy", qsortBy);
-        
-        String pageParam = (String) session.getAttribute("qpage");
-        if(pageParam != null && !pageParam.isEmpty()){
-            qpage = Integer.parseInt(pageParam);      
-        } else {
-            qpage = 1;
+
+        String keyParam = request.getParameter("key");
+        if (keyParam != null) {
+            searchParams.setKey(keyParam);
+            searchParams.setPage(1);
         }
-        session.setAttribute("qpage", qpage);
+
+        session.setAttribute("searchParams", searchParams);
+
+        List<ProductBean> searchResults = ShoppingListQueries.getProducts(conn, uid, searchParams.getLcid(), searchParams.getProdCat(), 
+                searchParams.getSlid(), searchParams.getKey(), searchParams.getSortBy(), searchParams.getPage());
         
-        qkey = session.getAttribute("qkey");
-        if(qkey != null && !qkey.isEmpty()){
-            session.setAttribute("qkey", qkey);
-        } else {
-            session.setAttribute("qkey", "");
-        }
+        session.setAttribute("products", searchResults);
         
-        
-        
-        System.out.println(qlcid + " " + prodCatParam + " " + sortByParam + " " + pageParam + " " + qkey);
-        System.out.println(qlcid + " " + qprodCat + " " + qsortBy + " " + qpage + " " + qkey);
+        System.out.println(searchParams.getSlid() + " " + searchParams.getLcid() + " " + searchParams.getProdCat() + " " + searchParams.getPage() 
+                + " " + searchParams.getSortBy() + " >" + searchParams.getKey() + "<");
         System.out.println("------------------------------------");
         request.getRequestDispatcher("addproduct.jsp").forward(request, response);
     }
