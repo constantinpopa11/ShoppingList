@@ -166,10 +166,11 @@ public class UserQueries {
         return result;
     }
 
-    public static void insertUser(Connection conn, String email, String firstName, String lastName,
+    public static int insertUser(Connection conn, String email, String firstName, String lastName,
             String avatarPath, String password, int privileges, String verificationCode) {
 
         PreparedStatement preparedStmt = null;
+        int newUid = -1;
 
         try {
 
@@ -184,7 +185,7 @@ public class UserQueries {
                     + ") VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             // create the mysql insert preparedstatement
-            preparedStmt = conn.prepareStatement(queryStr);
+            preparedStmt = conn.prepareStatement(queryStr, Statement.RETURN_GENERATED_KEYS);
             preparedStmt.setString(1, email);
             preparedStmt.setString(2, firstName);
             preparedStmt.setString(3, lastName);
@@ -195,6 +196,12 @@ public class UserQueries {
 
             // execute the preparedstatement
             preparedStmt.execute();
+            
+            ResultSet generatedKeys = preparedStmt.getGeneratedKeys();
+            if (generatedKeys.next()) {
+
+                newUid = generatedKeys.getInt(1);
+            }
 
         } catch (SQLException se) {
             //Handle errors for JDBC
@@ -211,7 +218,7 @@ public class UserQueries {
             } catch (SQLException se2) {
             }// nothing we can do
         }//end try
-
+        return newUid;
     }
 
     public static int resetPassword(Connection conn, String email) {

@@ -2,12 +2,18 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <link rel="stylesheet" href="css/shoppinglist.css">
+<link rel="stylesheet" href="css/searchmode.css">
 
 <div id="accordion">
     <c:set var = "shoppingLists" scope="request" value = "${sessionScope.shoppingLists}"/>
-    <c:set var = "slItems" scope="request" value = "${sessionScope.slItems}"/>
+    <c:set var = "prodCategories" scope="request" value = "${requestScope.prodCategories}"/>
     <c:set var = "activeSL" scope="request" value = "${sessionScope.activeSL}"/>
-    <c:set var = "qslid" scope="request" value = "${sessionScope.qslid}"/>
+
+    <c:set var = "qlcid" scope="session" value = "${sessionScope.qlcid}"/>
+    <c:set var = "qprodCat" scope="session" value = "${sessionScope.qprodCat}"/>
+    <c:set var = "qsortBy" scope="session" value = "${sessionScope.qsortBy}"/>
+    <c:set var = "qkey" scope="session" value = "${sessionScope.qkey}"/>
+    <c:set var = "qpage" scope="session" value = "${sessionScope.qpage}"/>
 
     <!--  contenitore  roba comune STUFF -->
     <div class="card">
@@ -42,23 +48,56 @@
                 </div>
 
                 <div class="slTitle float-right my-auto" >
-                    <c:if test="${slItems != null}">
-                        <a class="float-right" href="detailedlist.jsp" ><i class="fas fa-trash list-action-ic"></i></a>
+                    <a class="float-right" href="home.jsp" ><i class="fas fa-arrow-circle-left list-action-ic"></i></a>
 
-                        <a class="float-right" href="#removeList"><i class="fas fa-share-alt list-action-ic "></i></a>
+                    <span class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-                        <c:if test="${! fn:endsWith(pageContext.request.requestURI, '/detailedlist.jsp')}">
-                            <a class="float-right" href="detailedlist.jsp?slid=${qslid}"><i class="fas fa-comment-dots first-child list-action-ic"></i></a>
-                            </c:if>
-                        </c:if>
-
-                    <a class="float-right" href="SearchProducts?lcid=${activeSL.lcid}" ><i class="fas fa-cart-plus list-action-ic"></i></a>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="SearchProducts?sortBy=0">By product category</a>
+                            <a class="dropdown-item" href="SearchProducts?sortBy=1">By product name</a>
+                        </div>
+                    </span>
 
                 </div>
             </div>
 
+            <div class="row custom-row">
+                <div class="slTitle my-auto" id="filterdiv" >
+                    <div class="dropdown">
+                        <button onclick="myFunction()" class="dropbtn">Category <i class="fas fa-filter list-action-ic"></i> </button>
+                        <div id="myDropdown" class="dropdown-content">
+                            <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
 
 
+                            <c:forEach items="${prodCategories}" var="prodCat">
+                                <a href="SearchProducts?prodCat=${prodCat.pcid}">
+                                    ${prodCat.prodCatName}
+                                </a>
+                            </c:forEach>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col" data-toggle="collapse" data-target="#listDetails">
+                </div>
+                <!--  search bar -->
+                <div class="slTitle float-left my-auto" id="search-barid">
+                    <div class="col-xs-8 " id="searchbar">
+                        <div id="custom-search">
+                            <form action="SearchProducts" method="GET">
+                                <input type="text" name="key" class="search-query" placeholder="Search" autocomplete="off"/>
+                                <button type="button" >
+                                    <i class="fas fa-search list-action-ic"></i>
+                                </button>
+                                <input type="submit" value="Submit" style="display: none;">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
         </div>
@@ -94,85 +133,60 @@
         <div class="card">
             <div class="card-header list-item ">
 
-                <div class="row custom-row" >
-                    <!-- checkbox -->
-
-                    <div class="col-xs-1  my-auto">
-                        <label class="checkbox-container">
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                        </label>
-                    </div>
-
-
+                <div class="row custom-row">
                     <!--  banana pic -->
                     <div class="col-xs-2  my-auto"  data-toggle="collapse" data-target="#pid${item.pid}">
-                        <img src="${initParam['WEBSERVER_LOCATION']}${item.logoPath}"  width="60" height="60"/>
+                        <img src="http://smartyessay.com/wp-content/uploads/2018/05/crazyshit-beef-curtains-crazy-shit-beef-curtain-pussy-house-interiors.jpg"  width="40" height="40"/>
                     </div>
 
                     <div class="col  my-auto">
                         <div class="row">
                             <div class="col itemTitle" data-toggle="collapse" data-target="#pid${item.pid}">
-                                ${item.prodName}
+                                item di prova
                             </div>
                         </div>
 
                         <div class="row " >
                             <div class="col itemInfo" data-toggle="collapse" data-target="#pid${item.pid}">
-                                ${item.prodCatName}
+                                cagtararara
                             </div>
 
                         </div>
-
-                        <div class="row ">
-                            <div class="col itemInfo" data-toggle="collapse" data-target="#pid${item.pid}">
-                                Quantity: ${item.quantity} ${item.prodMeasureUnit}
-                            </div>
-                        </div>
-
                     </div>
 
-                    <div class="col-xs-2 my-auto">
-                        <div class="row ">
-                            <div class="col itemTitle float-right">
-                                <a href="edit">
-                                    <i class="fas fa-pencil-alt item-action-ic float-right"></i>
-                                </a>
-                                <a href="remove">
-                                    <i class="fas fa-times item-action-ic float-right"></i>
-                                </a>
 
-                            </div>
-                        </div>
 
-                        <div class="row " data-toggle="collapse" data-target="#pid${item.pid}">
-                            <div class="col ">
-                                <small class="float-right">&nbsp;</small>
-                            </div>
-
-                        </div>
-
+                    <div class="col-xs-3 my-auto">
                         <div class="row">
-                            <div class="col itemTitle"  data-toggle="collapse" data-target="#pid${item.pid}">
-                                <span><i class="fas fa-chevron-down item-expand-ic float-right"></i></span>
+                            <div class="col my-auto">
+                                <div class="input-group">
+                                    <input size="3" class="form-control form-control-sm qty-field" id="inputdefault" type="text" placeholder="Qty">
+
+                                    <div class="input-group-append">
+                                        <button class="btn btn-sm btn-add" type="button" id="button-addon2">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
 
+                        <div class="row add-widget">
+                            <div class="col my-auto itemTitle" data-toggle="collapse" data-target="#pid${item.pid}">
+                                <i class="fas fa-chevron-down item-expand-ic2  float-right"></i>
+                            </div>
+                        </div>
                     </div>
-
 
                 </div>
+
+
             </div>
 
-            <div id="pid${item.pid}" class="collapse" data-parent="#accordion">
+            <div id="pid${item.pid}" class="collapse custom-row" data-parent="#accordion">
                 <div class="card-body">
-                    <div>
-                        ${item.prodDescr}
-                    </div>
-                    <hr>
-                    <div>Category Info: <img width="30" src="${initParam['WEBSERVER_LOCATION']}${item.prodCatIconPath}"/>
-                        ${item.prodCatDescr}
-                    </div>
+                    ${item.prodDescr}
                 </div>
             </div>
         </div>

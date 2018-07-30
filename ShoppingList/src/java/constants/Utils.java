@@ -41,4 +41,6 @@ public class Utils {
     public static final int SL_UPDATE = 2;
     public static final int SL_REMOVE = 3;
 
+    public static final int SORT_PROD_BY_CATEGORY = 0;
+    public static final int SORT_PROD_BY_NAME = 1;
 }

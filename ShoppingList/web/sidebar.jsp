@@ -82,7 +82,7 @@
 
                 <c:if test="${shoppingLists == null}">
                     <li class="active">
-                        <a href="newlist.jsp">No lists to display</a>
+                        <a href="NewShoppingList">No lists to display</a>
                     </li>
                 </c:if>
             </ul>

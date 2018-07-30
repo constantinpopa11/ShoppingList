@@ -39,7 +39,6 @@ public class VerifyEmail extends HttpServlet {
         conn = dbManager.getConnection();
 
         String verificationCode = request.getParameter("verificationCode");
-        System.out.println("inside this shit " + verificationCode);
         UserQueries.verifyUserEmail(conn, verificationCode);
 
         session.setAttribute(Utils.PRIVILEGES_SESSION_ATTR, Privileges.VERIFIED_USER_PRIVILEGES);

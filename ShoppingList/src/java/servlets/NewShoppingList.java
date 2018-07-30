@@ -134,6 +134,8 @@ public class NewShoppingList extends HttpServlet {
             ShoppingListBean newSl = new ShoppingListBean();
             newSl.setSlName(slName);
             newSl.setSlDescr(slDescr);
+            newSl.setEditable(editable);
+            newSl.setRemovable(removable);
             newSl.setLcid(slcid);
             newSl.setSlIconPath(iconPath);
             newSl.setSlCatName(slCat.getSlCatName());

@@ -83,6 +83,10 @@
         <servlet-name>VerifyEmail</servlet-name>
         <servlet-class>servlets.VerifyEmail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchProducts</servlet-name>
+        <servlet-class>servlets.SearchProducts</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SignUp</servlet-name>
         <url-pattern>/SignUp</url-pattern>
@@ -99,11 +103,13 @@
         <servlet-name>ResetPwd</servlet-name>
         <url-pattern>/ResetPwd</url-pattern>
     </servlet-mapping>
-
-    
     <servlet-mapping>
         <servlet-name>VerifyEmail</servlet-name>
         <url-pattern>/VerifyEmail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchProducts</servlet-name>
+        <url-pattern>/SearchProducts</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

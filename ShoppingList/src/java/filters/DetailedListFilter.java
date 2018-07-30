@@ -92,20 +92,9 @@ public class DetailedListFilter implements Filter {
                     session.setAttribute("activeSL", activeSL);
                     slItems = ShoppingListQueries.getShoppingListItems(conn, slid);
 
-                    for (SLItemBean item : slItems) {
-                        System.out.println(item.getPid() + " " + item.getProdName() + item.getProdDescr()
-                                + " " + item.getPcid() + " " + item.getProdCatName() + " " + item.getProdCatDescr()
-                                + " " + item.getProdMeasureUnit() + " " + item.getQuantity());
-                    }
-
                     commentsList = ShoppingListQueries.getSLComments(conn, slid);
                     session.setAttribute("commentsList", commentsList);
 
-                    for (SLCommentBean com : commentsList) {
-                        System.out.println(com.getFirstName() + " " + com.getLastName() + com.getAvatarPath()
-                                + " " + com.getDate() + " " + com.getMessage() + " " + com.getType());
-
-                    }
 
                 } else {
                     res.sendRedirect("home.jsp");

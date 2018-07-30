@@ -5,20 +5,25 @@ package servlets;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import beans.ShoppingListBean;
 import constants.FormFields;
 import constants.Privileges;
 import constants.SignupStatus;
 import constants.Utils;
 import database.DBConnectionManager;
+import database.ShoppingListQueries;
 import database.UserQueries;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import mail.SSLMailSender;
 
 /**
@@ -89,6 +94,7 @@ public class SignUp extends HttpServlet {
             String emailConfirm = request.getParameter(FormFields.SIGNUP_EMAIL_CONFIRM_FIELD);
             String passwordHash = request.getParameter(FormFields.SIGNUP_PASSWORD_FIELD);
             String passwordConfirmHash = request.getParameter(FormFields.SIGNUP_PASSWORD_CONFIRM_FIELD);
+            String avatarPath = Utils.DEFAULT_USER_AVATAR;
 
             if (!email.equals(emailConfirm)) {
                 request.setAttribute("errorMessage", "The confirmation email doesn't match.");
@@ -110,10 +116,22 @@ public class SignUp extends HttpServlet {
             } else if (status == SignupStatus.SIGNUP_SUCCESS) {
 
                 String verificationCode = UUID.randomUUID().toString();
-                UserQueries.insertUser(conn, email, firstName, lastName, null, 
+                int newUid = UserQueries.insertUser(conn, email, firstName, lastName, avatarPath,
                         passwordHash, Privileges.NOT_VERIFIED_USER_PRIVILEGES, verificationCode);
-                
-                SSLMailSender.sendVerificationMail(email, verificationCode);
+
+                if (newUid != -1) {
+                    SSLMailSender.sendVerificationMail(email, verificationCode);
+
+                    HttpSession session = request.getSession();
+                    List<ShoppingListBean> shoppingLists = (ArrayList<ShoppingListBean>) session.getAttribute("shoppingLists");
+
+                    if (shoppingLists != null) {
+                        for (ShoppingListBean sl : shoppingLists) {
+                            ShoppingListQueries.insertShoppingList(conn, sl.getLcid(), sl.getSlName(), sl.getSlDescr(),
+                                    sl.isEditable(), sl.isRemovable(), sl.getSlIconPath(), newUid);
+                        }
+                    }
+                }
 
                 response.sendRedirect("home.jsp");
 

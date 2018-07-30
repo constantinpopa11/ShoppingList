@@ -127,7 +127,7 @@ public class NewProdCat extends HttpServlet {
                     Files.copy(input, uploadLocation.toPath());
                 }
             }
-            System.out.println("QUI ->" + request.getRealPath(iconPath));
+            
             //TODO logo
             ShoppingListQueries.insertProdCat(conn, lcid, prodCatName, prodCatDescr, iconPath);
             //TODO: popup
