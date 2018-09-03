@@ -57,7 +57,7 @@
 </html>
 
 <script>
-    $('#removeModal').on('show.bs.modal', function (e) {
+    $('#removeItemModal').on('show.bs.modal', function (e) {
         $('input[name="removePid"]').attr('value', e.relatedTarget.id);
     });
 

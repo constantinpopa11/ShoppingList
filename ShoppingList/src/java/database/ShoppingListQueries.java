@@ -557,10 +557,11 @@ public class ShoppingListQueries {
 
     }
 
-    public static void insertShoppingList(Connection conn, int shopCategory, String slName, String slDescr,
+    public static int insertShoppingList(Connection conn, int shopCategory, String slName, String slDescr,
             boolean isEditable, boolean isRemovable, String iconPath, int owner, String shareLink) {
 
         PreparedStatement preparedStmt = null;
+        int slid = -1;
 
         try {
 
@@ -590,7 +591,8 @@ public class ShoppingListQueries {
             preparedStmt.execute();
             ResultSet generatedKeys = preparedStmt.getGeneratedKeys();
             if (generatedKeys.next()) {
-                insertSLMember(conn, generatedKeys.getInt(1), owner);
+                slid = generatedKeys.getInt(1);
+                insertSLMember(conn, slid, owner);
             }
 
         } catch (SQLException se) {
@@ -608,7 +610,7 @@ public class ShoppingListQueries {
             } catch (SQLException se2) {
             }// nothing we can do
         }//end try
-
+        return slid;
     }
 
     public static void insertSLMember(Connection conn, int slid, int uid) {
@@ -748,7 +750,6 @@ public class ShoppingListQueries {
                     + ", " + DBColumns.SL_CARTS_QUANTITY_COL
                     + ") VALUES (?, ?, ?)";
 
-
             // create the mysql insert preparedstatement
             preparedStmt = conn.prepareStatement(queryStr);
             preparedStmt.setInt(1, slid);
@@ -788,7 +789,6 @@ public class ShoppingListQueries {
                     + " WHERE " + DBColumns.SL_CARTS_SLID_COL + "=" + slid
                     + " AND " + DBColumns.SL_CARTS_PID_COL + "=" + pid;
 
-
             stmt.executeUpdate(queryStr);
 
         } catch (SQLException se) {
@@ -808,7 +808,7 @@ public class ShoppingListQueries {
         }//end try
 
     }
-    
+
     public static void removeFromSLCart(Connection conn, int slid, int pid) {
 
         Statement stmt = null;
@@ -819,6 +819,34 @@ public class ShoppingListQueries {
                     + " WHERE " + DBColumns.SL_CARTS_SLID_COL + "=" + slid
                     + " AND " + DBColumns.SL_CARTS_PID_COL + "=" + pid + ";";
 
+            stmt.executeUpdate(queryStr);
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+
+    }
+
+    public static void deleteSLPicturesBySlid(Connection conn, int slid) {
+
+        Statement stmt = null;
+
+        try {
+            stmt = conn.createStatement();
+            String queryStr = "DELETE FROM " + DBTables.SL_PICTURES_TABLE
+                    + " WHERE " + DBColumns.SL_PICTURES_SLID_COL + "=" + slid + ";";
 
             stmt.executeUpdate(queryStr);
 
@@ -840,11 +868,123 @@ public class ShoppingListQueries {
 
     }
 
+    public static void deleteSLMembersBySlid(Connection conn, int slid) {
+
+        Statement stmt = null;
+
+        try {
+            stmt = conn.createStatement();
+            String queryStr = "DELETE FROM " + DBTables.SL_MEMBERS_TABLE
+                    + " WHERE " + DBColumns.SL_MEMBERS_SLID_COL + "=" + slid + ";";
+
+            stmt.executeUpdate(queryStr);
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+    }
+
+    public static void deleteSLCommentsBySlid(Connection conn, int slid) {
+
+        Statement stmt = null;
+
+        try {
+            stmt = conn.createStatement();
+            String queryStr = "DELETE FROM " + DBTables.SL_COMMENTS_TABLE
+                    + " WHERE " + DBColumns.SL_COMMENTS_SLID_COL + "=" + slid + ";";
+
+            stmt.executeUpdate(queryStr);
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+    }
+
+    public static void deleteSLCartBySlid(Connection conn, int slid) {
+
+        Statement stmt = null;
+
+        try {
+            stmt = conn.createStatement();
+            String queryStr = "DELETE FROM " + DBTables.SL_CARTS_TABLE
+                    + " WHERE " + DBColumns.SL_CARTS_SLID_COL + "=" + slid + ";";
+
+            stmt.executeUpdate(queryStr);
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+    }
+
+    public static void deleteShoppingListBySlid(Connection conn, int slid) {
+
+        Statement stmt = null;
+
+        try {
+            stmt = conn.createStatement();
+            String queryStr = "DELETE FROM " + DBTables.SHOPPING_LISTS_TABLE
+                    + " WHERE " + DBColumns.SHOPPING_LIST_ID_COL + "=" + slid + ";";
+
+            stmt.executeUpdate(queryStr);
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+    }
+
     public static int getShoppingListByShareLink(Connection conn, String shareLink) {
         Statement stmt = null;
 
         int slid = -1;
-        
+
         try {
 
             stmt = conn.createStatement();

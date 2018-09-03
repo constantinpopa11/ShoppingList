@@ -21,8 +21,8 @@
     </div>
 </div>
 
-<!-- Remove Modal -->
-<div class="modal fade" id="removeModal" tabindex="-1" role="dialog">
+<!-- Remove Item Modal -->
+<div class="modal fade" id="removeItemModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -37,9 +37,9 @@
             <div class="modal-footer">
                 <form action="EditShoppingList" method="GET">
                     <input type="hidden" name="removePid" value="">
-                    <input type="hidden" name="action" value="remove">
+                    <input type="hidden" name="action" value="removeItem">
 
-                    <input type="submit" class="btn btn-primary" value="Yes" />
+                    <input type="submit" class="btn btn-primary" value="Remove" />
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </form>
 
@@ -72,6 +72,32 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>    
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<!-- Remove SL Modal -->
+<div class="modal fade" id="removeSLModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm action</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to remove this shopping list? All items will be lost.</p>
+            </div>
+            <div class="modal-footer">
+                <form action="EditShoppingList" method="GET">
+                    <input type="hidden" name="action" value="removeSL">
+
+                    <input type="submit" class="btn btn-primary" value="Remove" />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </form>
+
+            </div>
         </div>
     </div>
 </div>

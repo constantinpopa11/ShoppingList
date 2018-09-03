@@ -7,6 +7,7 @@
 <c:set var = "slItems" scope="request" value = "${sessionScope.slItems}"/>
 <c:set var = "activeSL" scope="request" value = "${sessionScope.activeSL}"/>
 <c:set var = "qslid" scope="request" value = "${sessionScope.qslid}"/>
+<c:set var = "privileges" scope="request" value = "${sessionScope.privileges}"/>
 
 <div id="accordion">
 
@@ -43,20 +44,25 @@
                 </div>
 
                 <div class="slTitle float-right my-auto" >
+                    
+                    <c:if test="${not empty shoppingLists}">
+                        <a class="float-right" href="#" data-toggle="modal" data-target="#removeSLModal"><i class="fas fa-trash list-action-ic"></i></a>
+                    </c:if>
+                    
                     <c:if test="${slItems != null}">
-                        <a class="float-right" href="detailedlist.jsp" ><i class="fas fa-trash list-action-ic"></i></a>
+                        <c:if test="${privileges >=0 }">
+                            <a class="float-right" href="#" data-toggle="modal" data-target="#shareModal"><i class="fas fa-share-alt list-action-ic"></i></a>
 
-                        <a class="float-right" href="#" data-toggle="modal" data-target="#shareModal"><i class="fas fa-share-alt list-action-ic"></i></a>
-
-                        <c:if test="${! fn:endsWith(pageContext.request.requestURI, '/detailedlist.jsp')}">
-                            <a class="float-right" href="detailedlist.jsp?slid=${qslid}"><i class="fas fa-comment-dots first-child list-action-ic"></i></a>
+                            <c:if test="${! fn:endsWith(pageContext.request.requestURI, '/detailedlist.jsp')}">
+                                <a class="float-right" href="detailedlist.jsp?slid=${qslid}"><i class="fas fa-comment-dots first-child list-action-ic"></i></a>
                             </c:if>
+                        
                         </c:if>
-
+                    </c:if>
 
                     <c:if test="${not empty shoppingLists}">
                         <a class="float-right" href="SearchProducts?lcid=${activeSL.lcid}&slid=${activeSL.slid}" ><i class="fas fa-cart-plus list-action-ic"></i></a>
-                        </c:if>
+                    </c:if>
 
                 </div>
             </div>
@@ -144,7 +150,7 @@
                                     <a href="#" data-toggle="modal" data-target="#updateModal" id="${item.pid}">
                                         <i class="fas fa-pencil-alt item-action-ic float-right"></i>
                                     </a>
-                                    <a href="#" data-toggle="modal" data-target="#removeModal" id="${item.pid}">
+                                    <a href="#" data-toggle="modal" data-target="#removeItemModal" id="${item.pid}">
                                         <i class="fas fa-times item-action-ic float-right"></i>
                                     </a>
 

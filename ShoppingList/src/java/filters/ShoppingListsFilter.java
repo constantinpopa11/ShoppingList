@@ -46,6 +46,7 @@ public class ShoppingListsFilter implements Filter {
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
+        
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
@@ -66,7 +67,7 @@ public class ShoppingListsFilter implements Filter {
         List<SLItemBean> slItems = null;
         List<ShoppingListBean> shoppingLists = (ArrayList<ShoppingListBean>) session.getAttribute("shoppingLists");
 
-        if (privileges >= Privileges.ADMIN_PRIVILEGES) {
+        if (privileges >= Privileges.NOT_VERIFIED_USER_PRIVILEGES) {
 
             DBConnectionManager dbManager = (DBConnectionManager) req.getServletContext().getAttribute("DBManager");
             Connection conn = dbManager.getConnection();
@@ -76,7 +77,7 @@ public class ShoppingListsFilter implements Filter {
             if (shoppingLists.size() > 0) {
 
                 for (ShoppingListBean sl : shoppingLists) {
-                    //more or less the same as a query
+                    
                     if (sl.getSlid() == slid) {
                         activeSL = sl;
                     }
@@ -88,6 +89,7 @@ public class ShoppingListsFilter implements Filter {
                     slid = shoppingLists.get(0).getSlid();
                 }
 
+                
                 slItems = ShoppingListQueries.getShoppingListItems(conn, slid);
 
                 session.setAttribute("qslid", slid);
@@ -98,7 +100,7 @@ public class ShoppingListsFilter implements Filter {
             }
         } else {
 
-            if (shoppingLists != null) {
+            if (shoppingLists != null && shoppingLists.size() > 0) {
                 if(slid == -1){
                     activeSL = shoppingLists.get(0);
                 } else {

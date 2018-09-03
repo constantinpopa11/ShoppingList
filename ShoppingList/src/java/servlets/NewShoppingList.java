@@ -78,9 +78,15 @@ public class NewShoppingList extends HttpServlet {
             throws ServletException, IOException {
 
         processRequest(request, response);
-        List<SLCategoryBean> slCategories = ShoppingListQueries.getSLCategories(conn);
-        request.setAttribute("slCategories", slCategories);
-        request.getRequestDispatcher("/newsl.jsp").forward(request, response);
+        List<ShoppingListBean> shoppingLists = (ArrayList<ShoppingListBean>) session.getAttribute("shoppingLists");
+
+        if (privileges < Privileges.ADMIN_PRIVILEGES && shoppingLists != null) {
+            response.sendRedirect("home.jsp");
+        } else {
+            List<SLCategoryBean> slCategories = ShoppingListQueries.getSLCategories(conn);
+            request.setAttribute("slCategories", slCategories);
+            request.getRequestDispatcher("/newsl.jsp").forward(request, response);
+        }
 
     }
 
@@ -131,6 +137,8 @@ public class NewShoppingList extends HttpServlet {
             ShoppingListQueries.insertShoppingList(conn, slcid, slName, slDescr, editable, removable, iconPath, uid, shareLink);
             //TODO: popup
         } else {
+            List<ShoppingListBean> shoppingLists = (ArrayList<ShoppingListBean>) session.getAttribute("shoppingLists");
+
             SLCategoryBean slCat = ShoppingListQueries.getSLCategoryById(conn, slcid);
             ShoppingListBean newSl = new ShoppingListBean();
             newSl.setSlName(slName);
@@ -142,14 +150,15 @@ public class NewShoppingList extends HttpServlet {
             newSl.setSlCatName(slCat.getSlCatName());
             newSl.setSlCatDescr(slCat.getSlCatDescr());
             newSl.setSlCatIconPath(slCat.getSlCatIconPath());
-            List<ShoppingListBean> shoppingLists = (ArrayList<ShoppingListBean>) session.getAttribute("shoppingLists");
-            
-            if(shoppingLists == null){
+
+            if (shoppingLists == null) {
                 shoppingLists = new ArrayList<>();
             }
-            newSl.setSlid(shoppingLists.size()+1);
+            newSl.setSlid(shoppingLists.size() + 1);
             shoppingLists.add(newSl);
             session.setAttribute("shoppingLists", shoppingLists);
+            session.setAttribute("activeSL", newSl);
+            
         }
 
         response.sendRedirect("home.jsp");

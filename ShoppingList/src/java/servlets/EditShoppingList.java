@@ -11,6 +11,7 @@ import beans.SLItemBean;
 import beans.SearchParamsBean;
 import beans.ShoppingListBean;
 import constants.LoginStatus;
+import constants.Privileges;
 import constants.Utils;
 import database.DBConnectionManager;
 import database.ShoppingListQueries;
@@ -73,7 +74,6 @@ public class EditShoppingList extends HttpServlet {
                 int pid = -1;
                 if (pidParam != null && !pidParam.isEmpty()) {
                     pid = Integer.parseInt(pidParam);
-
                 }
 
                 String qtyParam = (String) request.getParameter("qty");
@@ -135,30 +135,81 @@ public class EditShoppingList extends HttpServlet {
                 session.setAttribute("products", searchResults);
 
                 request.getRequestDispatcher("addproduct.jsp").forward(request, response);
-            
-            } else if (actionParam.equals("remove")) {
-                
+
+            } else if (actionParam.equals("removeItem")) {
+
                 int pid = Integer.parseInt(request.getParameter("removePid"));
                 ShoppingListBean activeSL = (ShoppingListBean) session.getAttribute("activeSL");
-                
-                if(uid == activeSL.getOwner() || activeSL.isEditable()){
+
+                if (uid == activeSL.getOwner() || activeSL.isEditable()) {
                     ShoppingListQueries.removeFromSLCart(conn, activeSL.getSlid(), pid);
+                } else if (privileges < Privileges.ADMIN_PRIVILEGES){
+                    List<SLItemBean> slItems = (ArrayList<SLItemBean>) session.getAttribute("slItems");
+                    SLItemBean itemToDelete = null;
+                    
+                    if(slItems != null && slItems.size() > 0){
+                        for(SLItemBean item : slItems){
+                            if(item.getPid() == pid)
+                                itemToDelete = item;
+                        }
+                        slItems.remove(itemToDelete);
+                        session.setAttribute("slItems", slItems);
+                    }
                 }
-                
+
                 String referrer = request.getHeader("referer");
                 response.sendRedirect(referrer);
             } else if (actionParam.equals("update")) {
-                
+
                 int pid = Integer.parseInt(request.getParameter("updatePid"));
                 double qty = Double.parseDouble(request.getParameter("qty"));
                 ShoppingListBean activeSL = (ShoppingListBean) session.getAttribute("activeSL");
-                
-                if(uid == activeSL.getOwner() || activeSL.isEditable()){
+
+                if (uid == activeSL.getOwner() || activeSL.isEditable()) {
                     ShoppingListQueries.updateSLCart(conn, activeSL.getSlid(), pid, qty);
+                } else if (privileges < Privileges.ADMIN_PRIVILEGES){
+                    List<SLItemBean> slItems = (ArrayList<SLItemBean>) session.getAttribute("slItems");
+                    
+                    if(slItems != null && slItems.size() > 0){
+                        for(SLItemBean item : slItems){
+                            if(item.getPid() == pid)
+                                item.setQuantity(qty);
+                        }
+                        session.setAttribute("slItems", slItems);
+                    }
                 }
-                
+
                 String referrer = request.getHeader("referer");
                 response.sendRedirect(referrer);
+            } else if (actionParam.equals("removeSL")) {
+                ShoppingListBean activeSL = (ShoppingListBean) session.getAttribute("activeSL");
+
+                if (privileges >= Privileges.NOT_VERIFIED_USER_PRIVILEGES) {
+                    if (uid == activeSL.getOwner() || activeSL.isRemovable()) {
+                        int slid = activeSL.getSlid();
+
+                        ShoppingListQueries.deleteSLCartBySlid(conn, slid);
+                        ShoppingListQueries.deleteSLCommentsBySlid(conn, slid);
+                        ShoppingListQueries.deleteSLMembersBySlid(conn, slid);
+                        ShoppingListQueries.deleteSLPicturesBySlid(conn, slid);
+                        ShoppingListQueries.deleteShoppingListBySlid(conn, slid);
+
+                    } else {
+                        //cant be removed
+                    }
+                }
+
+                List<ShoppingListBean> shoppingLists = (ArrayList<ShoppingListBean>) session.getAttribute("shoppingLists");
+                shoppingLists.remove(activeSL);
+                if (shoppingLists.size() > 0) {
+                    activeSL = shoppingLists.get(0);
+                } else {
+                    activeSL = null;
+                }
+                session.setAttribute("activeSL", activeSL);
+
+                response.sendRedirect("home.jsp");
+
             }
         }
 

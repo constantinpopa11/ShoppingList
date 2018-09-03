@@ -165,7 +165,7 @@
                                         <input type="hidden" name="pid" value="${prod.pid}">
                                         <input type="hidden" name="action" value="add">
                                         <div class="input-group">
-                                            <input size="3" class="form-control form-control-sm qty-field" name="qty" type="text" placeholder="Qty">
+                                            <input size="3" class="form-control form-control-sm qty-field" name="qty" type="text" placeholder="Qty" autocomplete="off" required="required">
 
                                             <div class="input-group-append">
                                                 <button class="btn btn-sm btn-add" type="submit" id="button-addon2">

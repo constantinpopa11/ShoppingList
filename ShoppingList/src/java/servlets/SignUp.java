@@ -5,6 +5,7 @@ package servlets;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import beans.SLItemBean;
 import beans.ShoppingListBean;
 import constants.FormFields;
 import constants.Privileges;
@@ -134,31 +135,39 @@ public class SignUp extends HttpServlet {
 
                         HttpSession session = request.getSession();
                         List<ShoppingListBean> shoppingLists = (ArrayList<ShoppingListBean>) session.getAttribute("shoppingLists");
+                        List<SLItemBean> slItems = (ArrayList<SLItemBean>) session.getAttribute("slItems");
 
-                        if (shoppingLists != null) {
+                        if (shoppingLists != null && shoppingLists.size() > 0) {
                             for (ShoppingListBean sl : shoppingLists) {
                                 String shareLink = UUID.randomUUID().toString();
-                                ShoppingListQueries.insertShoppingList(conn, sl.getLcid(), sl.getSlName(), sl.getSlDescr(),
+                                int newSlid = ShoppingListQueries.insertShoppingList(conn, sl.getLcid(), sl.getSlName(), sl.getSlDescr(),
                                         sl.isEditable(), sl.isRemovable(), sl.getSlIconPath(), newUid, shareLink);
+                                
+                                if (slItems != null && slItems.size() > 0) {
+                                    for (SLItemBean item : slItems) {
+                                        ShoppingListQueries.addToSLCart(conn, newSlid, item.getPid(), item.getQuantity());
+                                    }
+                                }
                             }
                         }
-                    }
 
-                    response.sendRedirect("home.jsp");
+                        response.sendRedirect("home.jsp");
+                    }
                 }
             }
         }
-
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
+        /**
+         * Returns a short description of the servlet.
+         *
+         * @return a String containing servlet description
+         */
+        @Override
+        public String getServletInfo
+        
+            () {
         return "Short description";
-    }// </editor-fold>
+        }// </editor-fold>
 
-}
+    }
