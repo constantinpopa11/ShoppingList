@@ -748,7 +748,6 @@ public class ShoppingListQueries {
                     + ", " + DBColumns.SL_CARTS_QUANTITY_COL
                     + ") VALUES (?, ?, ?)";
 
-            System.out.println("CUIRI-> " + queryStr);
 
             // create the mysql insert preparedstatement
             preparedStmt = conn.prepareStatement(queryStr);
@@ -789,7 +788,37 @@ public class ShoppingListQueries {
                     + " WHERE " + DBColumns.SL_CARTS_SLID_COL + "=" + slid
                     + " AND " + DBColumns.SL_CARTS_PID_COL + "=" + pid;
 
-            System.out.println("CUIRI-> " + queryStr);
+
+            stmt.executeUpdate(queryStr);
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+
+    }
+    
+    public static void removeFromSLCart(Connection conn, int slid, int pid) {
+
+        Statement stmt = null;
+
+        try {
+            stmt = conn.createStatement();
+            String queryStr = "DELETE FROM " + DBTables.SL_CARTS_TABLE
+                    + " WHERE " + DBColumns.SL_CARTS_SLID_COL + "=" + slid
+                    + " AND " + DBColumns.SL_CARTS_PID_COL + "=" + pid + ";";
+
 
             stmt.executeUpdate(queryStr);
 

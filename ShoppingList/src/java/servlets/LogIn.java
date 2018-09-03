@@ -93,7 +93,8 @@ public class LogIn extends HttpServlet {
 
             String email = request.getParameter(FormFields.LOGIN_EMAIL_FIELD);
             String password = request.getParameter(FormFields.LOGIN_PASSWORD_FIELD);
-            String hashedPwd = Utils.sha256(password);
+            //String hashedPwd = Utils.sha256(password);
+            String hashedPwd = password;
             boolean rememberMe = request.getParameter(FormFields.LOGIN_REMEMBER_ME_FLAG) == null ? false : true;
 
             DBConnectionManager dbManager = (DBConnectionManager) getServletContext().getAttribute("DBManager");

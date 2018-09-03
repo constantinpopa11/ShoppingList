@@ -141,10 +141,10 @@
                         <div class="col-xs-2 my-auto">
                             <div class="row ">
                                 <div class="col itemTitle float-right">
-                                    <a href="edit">
+                                    <a href="#" data-toggle="modal" data-target="#editModal" id="${item.pid}">
                                         <i class="fas fa-pencil-alt item-action-ic float-right"></i>
                                     </a>
-                                    <a href="remove">
+                                    <a href="#" data-toggle="modal" data-target="#removeModal" id="${item.pid}">
                                         <i class="fas fa-times item-action-ic float-right"></i>
                                     </a>
 

@@ -82,7 +82,6 @@ public class EditShoppingList extends HttpServlet {
                     qty = Double.parseDouble(qtyParam);
                 }
 
-                
                 List<ProductBean> products = (ArrayList<ProductBean>) session.getAttribute("products");
                 for (ProductBean prod : products) {
                     if (prod.getPid() == pid) {
@@ -130,15 +129,26 @@ public class EditShoppingList extends HttpServlet {
                         }
                     }
                 }
+                List<ProductBean> searchResults = ShoppingListQueries.getProducts(conn, uid, searchParams.getLcid(), searchParams.getProdCat(),
+                        searchParams.getSlid(), searchParams.getKey(), searchParams.getSortBy(), searchParams.getPage());
+
+                session.setAttribute("products", searchResults);
+
+                request.getRequestDispatcher("addproduct.jsp").forward(request, response);
+            
+            } else if (actionParam.equals("remove")) {
+                int pid = Integer.parseInt(request.getParameter("pid"));
+                ShoppingListBean activeSL = (ShoppingListBean) session.getAttribute("activeSL");
+                
+                if(uid == activeSL.getOwner() || activeSL.isEditable()){
+                    ShoppingListQueries.removeFromSLCart(conn, activeSL.getSlid(), pid);
+                }
+                
+                String referrer = request.getHeader("referer");
+                response.sendRedirect(referrer);
             }
         }
 
-        List<ProductBean> searchResults = ShoppingListQueries.getProducts(conn, uid, searchParams.getLcid(), searchParams.getProdCat(),
-                searchParams.getSlid(), searchParams.getKey(), searchParams.getSortBy(), searchParams.getPage());
-
-        session.setAttribute("products", searchResults);
-
-        request.getRequestDispatcher("addproduct.jsp").forward(request, response);
     }
 
     /**
