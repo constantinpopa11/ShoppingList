@@ -137,11 +137,24 @@ public class EditShoppingList extends HttpServlet {
                 request.getRequestDispatcher("addproduct.jsp").forward(request, response);
             
             } else if (actionParam.equals("remove")) {
-                int pid = Integer.parseInt(request.getParameter("pid"));
+                
+                int pid = Integer.parseInt(request.getParameter("removePid"));
                 ShoppingListBean activeSL = (ShoppingListBean) session.getAttribute("activeSL");
                 
                 if(uid == activeSL.getOwner() || activeSL.isEditable()){
                     ShoppingListQueries.removeFromSLCart(conn, activeSL.getSlid(), pid);
+                }
+                
+                String referrer = request.getHeader("referer");
+                response.sendRedirect(referrer);
+            } else if (actionParam.equals("update")) {
+                
+                int pid = Integer.parseInt(request.getParameter("updatePid"));
+                double qty = Double.parseDouble(request.getParameter("qty"));
+                ShoppingListBean activeSL = (ShoppingListBean) session.getAttribute("activeSL");
+                
+                if(uid == activeSL.getOwner() || activeSL.isEditable()){
+                    ShoppingListQueries.updateSLCart(conn, activeSL.getSlid(), pid, qty);
                 }
                 
                 String referrer = request.getHeader("referer");

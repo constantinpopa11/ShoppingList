@@ -61,7 +61,7 @@
         $('input[name="removePid"]').attr('value', e.relatedTarget.id);
     });
 
-    $('#editModal').on('show.bs.modal', function (e) {
-        $('input[name="editPid"]').attr('value', e.relatedTarget.id);
+    $('#updateModal').on('show.bs.modal', function (e) {
+        $('input[name="updatePid"]').attr('value', e.relatedTarget.id);
     });
 </script>

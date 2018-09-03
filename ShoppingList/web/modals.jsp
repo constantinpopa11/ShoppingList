@@ -32,11 +32,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="form-group">
-                    <label for="qty">Quantity </label>
-                    <input type="text" name="qty" id="qty" value=""><br>
-                </div>
-
+                <p>Are you sure you want to remove this item from the list?</p>
             </div>
             <div class="modal-footer">
                 <form action="EditShoppingList" method="GET">
@@ -53,7 +49,7 @@
 </div>
 
 <!-- Edit Qty Modal -->
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog">
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -65,12 +61,12 @@
             <form action="EditShoppingList" method="GET">
                 <div class="modal-body">
                     <label for=foo>Quantity</label>
-                    <input type=text name="qty" required="required" />
+                    <input type=text name="qty" required="required" autocomplete="off" />
                 </div>
                 <div class="modal-footer">
 
-                    <input type="hidden" name="editPid" value="">
-                    <input type="hidden" name="action" value="remove">
+                    <input type="hidden" name="updatePid" value="">
+                    <input type="hidden" name="action" value="update">
 
                     <input type="submit" class="btn btn-primary" value="Update" />
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>    
