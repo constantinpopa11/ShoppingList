@@ -17,7 +17,7 @@
     </context-param>
     <context-param>
         <param-name>DBURL</param-name>
-        <param-value>jdbc:mysql://108.61.205.105/sldb</param-value>
+        <param-value>jdbc:mysql://45.76.90.156/sldb</param-value>
     </context-param>
     <filter>
         <filter-name>AuthenticationFilter</filter-name>

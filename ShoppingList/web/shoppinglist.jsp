@@ -3,12 +3,12 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <link rel="stylesheet" href="css/shoppinglist.css">
 
-<div id="accordion">
-    <c:set var = "shoppingLists" scope="request" value = "${sessionScope.shoppingLists}"/>
-    <c:set var = "slItems" scope="request" value = "${sessionScope.slItems}"/>
-    <c:set var = "activeSL" scope="request" value = "${sessionScope.activeSL}"/>
-    <c:set var = "qslid" scope="request" value = "${sessionScope.qslid}"/>
+<c:set var = "shoppingLists" scope="request" value = "${sessionScope.shoppingLists}"/>
+<c:set var = "slItems" scope="request" value = "${sessionScope.slItems}"/>
+<c:set var = "activeSL" scope="request" value = "${sessionScope.activeSL}"/>
+<c:set var = "qslid" scope="request" value = "${sessionScope.qslid}"/>
 
+<div id="accordion">
 
     <!--  contenitore  roba comune STUFF -->
     <div class="card">
@@ -46,7 +46,7 @@
                     <c:if test="${slItems != null}">
                         <a class="float-right" href="detailedlist.jsp" ><i class="fas fa-trash list-action-ic"></i></a>
 
-                        <a class="float-right" href="#removeList"><i class="fas fa-share-alt list-action-ic "></i></a>
+                        <a class="float-right" href="#" data-toggle="modal" data-target="#shareModal"><i class="fas fa-share-alt list-action-ic"></i></a>
 
                         <c:if test="${! fn:endsWith(pageContext.request.requestURI, '/detailedlist.jsp')}">
                             <a class="float-right" href="detailedlist.jsp?slid=${qslid}"><i class="fas fa-comment-dots first-child list-action-ic"></i></a>
@@ -96,7 +96,7 @@
 
     <c:forEach items="${slItems}" var="item">
         <c:if test="${item.slid == activeSL.slid}">
-           
+
             <div class="card">
                 <div class="card-header list-item ">
 
@@ -187,27 +187,5 @@
         </c:if>
     </c:forEach>
 
-
-    <!--page number -->
-    <nav class="pageNum">
-        <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">Previous</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">1</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">3</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-            </li>
-        </ul>
-    </nav>
-
-
 </div> <!--  end accordion -->
+

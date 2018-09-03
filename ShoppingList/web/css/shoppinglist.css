@@ -275,3 +275,7 @@ hr.nomargin{
 .pageNum{
     margin-top: 20px;
 }
+
+.linkField{
+    width:100%;
+}

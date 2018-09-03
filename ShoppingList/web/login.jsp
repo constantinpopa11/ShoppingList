@@ -1,6 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
+<c:set var = "wrongEmail" scope = "page" value = "${param.wrongEmail}"/>
+<c:set var = "wrongPassword" scope = "page" value = "${param.wrongPassword}"/>
+<c:set var = "email" scope = "page" value = "${param.email}"/>
 
 <!DOCTYPE html>
 <html>
@@ -46,9 +49,6 @@
                 <jsp:include page="navbar.jsp" />
 
                 <div class="login-form">
-                    <c:set var = "wrongEmail" scope = "page" value = "${param.wrongEmail}"/>
-                    <c:set var = "wrongPassword" scope = "page" value = "${param.wrongPassword}"/>
-                    <c:set var = "email" scope = "page" value = "${param.email}"/>
 
                     <form action="LogIn" method="POST">
                         <input name="prevPage" value="${header.referer}" type="hidden"/>

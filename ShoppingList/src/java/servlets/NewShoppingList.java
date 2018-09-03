@@ -106,6 +106,7 @@ public class NewShoppingList extends HttpServlet {
         boolean removable = removableField == null ? false : true;
         String editableField = request.getParameter(FormFields.NEW_LIST_EDITABLE_FIELD);
         boolean editable = editableField == null ? false : true;
+        String shareLink = UUID.randomUUID().toString();
 
         Part filePart = request.getPart(FormFields.NEW_LIST_ICON_FIELD);
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
@@ -127,7 +128,7 @@ public class NewShoppingList extends HttpServlet {
 
         if (privileges >= Privileges.ADMIN_PRIVILEGES) {
             //TODO: logo
-            ShoppingListQueries.insertShoppingList(conn, slcid, slName, slDescr, editable, removable, iconPath, uid);
+            ShoppingListQueries.insertShoppingList(conn, slcid, slName, slDescr, editable, removable, iconPath, uid, shareLink);
             //TODO: popup
         } else {
             SLCategoryBean slCat = ShoppingListQueries.getSLCategoryById(conn, slcid);

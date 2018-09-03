@@ -4,13 +4,13 @@
 <link rel="stylesheet" href="css/shoppinglist.css">
 <link rel="stylesheet" href="css/searchmode.css">
 
-<div id="accordion">
-    <c:set var = "shoppingLists" scope="request" value = "${sessionScope.shoppingLists}"/>
-    <c:set var = "prodCategories" scope="request" value = "${requestScope.prodCategories}"/>
-    <c:set var = "products" scope="request" value = "${requestScope.products}"/>
-    <c:set var = "activeSL" scope="request" value = "${sessionScope.activeSL}"/>
+<c:set var = "shoppingLists" scope="request" value = "${sessionScope.shoppingLists}"/>
+<c:set var = "prodCategories" scope="request" value = "${requestScope.prodCategories}"/>
+<c:set var = "products" scope="request" value = "${requestScope.products}"/>
+<c:set var = "activeSL" scope="request" value = "${sessionScope.activeSL}"/>
+<c:set var = "searchParams" scope="session" value = "${sessionScope.searchParams}"/>
 
-    <c:set var = "searchParams" scope="session" value = "${sessionScope.searchParams}"/>
+<div id="accordion">
 
     <!--  contenitore  roba comune STUFF -->
     <div class="card">
@@ -130,74 +130,76 @@
 
     <!--  first elemnt  -->
 
-    <c:forEach items="${products}" var="prod">
-        <div class="card">
-            <div class="card-header list-item ">
+    <c:forEach items="${products}" var="prod" varStatus="itemStatus">
+        <c:if test="${itemStatus.index < 10}">
+            <div class="card">
+                <div class="card-header list-item ">
 
-                <div class="row custom-row">
-                    <!--  banana pic -->
-                    <div class="col-xs-2  my-auto"  data-toggle="collapse" data-target="#pid${prod.pid}">
-                        <img width="40" src="${initParam['WEBSERVER_LOCATION']}${prod.logoPath}"/><br>
-                    </div>
+                    <div class="row custom-row">
+                        <!--  banana pic -->
+                        <div class="col-xs-2  my-auto"  data-toggle="collapse" data-target="#pid${prod.pid}">
+                            <img width="40" src="${initParam['WEBSERVER_LOCATION']}${prod.logoPath}"/><br>
+                        </div>
 
-                    <div class="col  my-auto">
-                        <div class="row">
-                            <div class="col itemTitle" data-toggle="collapse" data-target="#pid${prod.pid}">
-                                ${prod.prodName} (${prod.measureUnit})
+                        <div class="col  my-auto">
+                            <div class="row">
+                                <div class="col itemTitle" data-toggle="collapse" data-target="#pid${prod.pid}">
+                                    ${prod.prodName} (${prod.measureUnit})
+                                </div>
+                            </div>
+
+                            <div class="row " >
+                                <div class="col itemInfo" data-toggle="collapse" data-target="#pid${prod.pid}">
+                                    ${prod.prodDescr}
+                                </div>
+
                             </div>
                         </div>
 
-                        <div class="row " >
-                            <div class="col itemInfo" data-toggle="collapse" data-target="#pid${prod.pid}">
-                                ${prod.prodDescr}
-                            </div>
-
-                        </div>
-                    </div>
 
 
+                        <div class="col-xs-3 my-auto">
+                            <div class="row">
+                                <div class="col my-auto">
+                                    <form action="EditShoppingList" method="GET">
+                                        <input type="hidden" name="pid" value="${prod.pid}">
+                                        <input type="hidden" name="action" value="add">
+                                        <div class="input-group">
+                                            <input size="3" class="form-control form-control-sm qty-field" name="qty" type="text" placeholder="Qty">
 
-                    <div class="col-xs-3 my-auto">
-                        <div class="row">
-                            <div class="col my-auto">
-                                <form action="EditShoppingList" method="GET">
-                                    <input type="hidden" name="pid" value="${prod.pid}">
-                                    <input type="hidden" name="action" value="add">
-                                    <div class="input-group">
-                                        <input size="3" class="form-control form-control-sm qty-field" name="qty" type="text" placeholder="Qty">
-
-                                        <div class="input-group-append">
-                                            <button class="btn btn-sm btn-add" type="submit" id="button-addon2">
-                                                <i class="fas fa-plus"></i>
-                                            </button>
+                                            <div class="input-group-append">
+                                                <button class="btn btn-sm btn-add" type="submit" id="button-addon2">
+                                                    <i class="fas fa-plus"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
+
                             </div>
 
-                        </div>
-
-                        <div class="row add-widget">
-                            <div class="col my-auto itemTitle" data-toggle="collapse" data-target="#pid${item.pid}">
-                                <i class="fas fa-chevron-down item-expand-ic2  float-right"></i>
+                            <div class="row add-widget">
+                                <div class="col my-auto itemTitle" data-toggle="collapse" data-target="#pid${item.pid}">
+                                    <i class="fas fa-chevron-down item-expand-ic2  float-right"></i>
+                                </div>
                             </div>
                         </div>
+
                     </div>
 
+
                 </div>
 
-
-            </div>
-
-            <div id="pid${prod.pid}" class="collapse custom-row" data-parent="#accordion">
-                <div class="card-body">
-                    ${prod.prodDescr}<hr>
-                    ${item.prodCatName}
-                    <img width="30" src="${initParam['WEBSERVER_LOCATION']}${prod.prodCatIconPath}"/><br>
-                    ${prod.prodCatDescr}
+                <div id="pid${prod.pid}" class="collapse custom-row" data-parent="#accordion">
+                    <div class="card-body">
+                        ${prod.prodDescr}<hr>
+                        ${item.prodCatName}
+                        <img width="30" src="${initParam['WEBSERVER_LOCATION']}${prod.prodCatIconPath}"/><br>
+                        ${prod.prodCatDescr}
+                    </div>
                 </div>
             </div>
-        </div>
+        </c:if>
     </c:forEach>
 
     <c:if test="${fn:length(products) == 0}">

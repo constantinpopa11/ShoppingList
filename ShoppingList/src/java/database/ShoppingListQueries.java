@@ -73,6 +73,7 @@ public class ShoppingListQueries {
                 boolean editable = rs.getBoolean(DBColumns.SHOPPING_LIST_IS_EDITABLE_COL);
                 boolean removable = rs.getBoolean(DBColumns.SHOPPING_LIST_IS_REMOVABLE_COL);
                 int owner = rs.getInt(DBColumns.SHOPPING_LIST_OWNER_COL);
+                String shareLink = rs.getString(DBColumns.SHOPPING_LIST_SHARE_LINK_COL);
 
                 ShoppingListBean sl = new ShoppingListBean();
                 sl.setSlid(slid);
@@ -86,6 +87,7 @@ public class ShoppingListQueries {
                 sl.setEditable(editable);
                 sl.setRemovable(removable);
                 sl.setOwner(owner);
+                sl.setShareLink(shareLink);
                 shoppingLists.add(sl);
 
             }
@@ -556,7 +558,7 @@ public class ShoppingListQueries {
     }
 
     public static void insertShoppingList(Connection conn, int shopCategory, String slName, String slDescr,
-            boolean isEditable, boolean isRemovable, String iconPath, int owner) {
+            boolean isEditable, boolean isRemovable, String iconPath, int owner, String shareLink) {
 
         PreparedStatement preparedStmt = null;
 
@@ -570,7 +572,8 @@ public class ShoppingListQueries {
                     + ", " + DBColumns.SHOPPING_LIST_IS_REMOVABLE_COL
                     + ", " + DBColumns.SHOPPING_LIST_ICON_PATH_COL
                     + ", " + DBColumns.SHOPPING_LIST_OWNER_COL
-                    + ") VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    + ", " + DBColumns.SHOPPING_LIST_SHARE_LINK_COL
+                    + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
             // create the mysql insert preparedstatement
             preparedStmt = conn.prepareStatement(queryStr, Statement.RETURN_GENERATED_KEYS);
@@ -581,22 +584,48 @@ public class ShoppingListQueries {
             preparedStmt.setBoolean(5, isRemovable);
             preparedStmt.setString(6, iconPath);
             preparedStmt.setInt(7, owner);
+            preparedStmt.setString(8, shareLink);
 
             // execute the preparedstatement
             preparedStmt.execute();
             ResultSet generatedKeys = preparedStmt.getGeneratedKeys();
             if (generatedKeys.next()) {
-
-                queryStr = " INSERT INTO " + DBTables.SL_MEMBERS_TABLE
-                        + " (" + DBColumns.SL_MEMBERS_SLID_COL
-                        + ", " + DBColumns.SL_MEMBERS_UID_COL
-                        + ") VALUES (?, ?)";
-
-                preparedStmt = conn.prepareStatement(queryStr);
-                preparedStmt.setInt(1, generatedKeys.getInt(1));
-                preparedStmt.setInt(2, owner);
-                preparedStmt.execute();
+                insertSLMember(conn, generatedKeys.getInt(1), owner);
             }
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (preparedStmt != null) {
+                    preparedStmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+
+    }
+
+    public static void insertSLMember(Connection conn, int slid, int uid) {
+
+        PreparedStatement preparedStmt = null;
+
+        try {
+
+            String queryStr = "INSERT INTO " + DBTables.SL_MEMBERS_TABLE
+                    + " (" + DBColumns.SL_MEMBERS_SLID_COL
+                    + ", " + DBColumns.SL_MEMBERS_UID_COL
+                    + ") VALUES (?, ?)";
+
+            preparedStmt = conn.prepareStatement(queryStr);
+            preparedStmt.setInt(1, slid);
+            preparedStmt.setInt(2, uid);
+            preparedStmt.execute();
 
         } catch (SQLException se) {
             //Handle errors for JDBC
@@ -654,12 +683,11 @@ public class ShoppingListQueries {
             if (sortBy == Utils.SORT_PROD_BY_CATEGORY) {
                 queryStr += DBColumns.PRODUCTS_PCID_COL;
             } else if (sortBy == Utils.SORT_PROD_BY_NAME) {
-                queryStr += DBColumns.PRODUCTS_PCID_COL;
+                queryStr += DBColumns.PRODUCTS_NAME_COL;
             }
 
             queryStr += " LIMIT " + ((page - 1) * Utils.SEARCH_RESULTS_NUMBER) + ", " + (Utils.SEARCH_RESULTS_NUMBER + 1) + ";";
 
-            
             ResultSet rs = stmt.executeQuery(queryStr);
 
             //Extract data from result set
@@ -719,8 +747,8 @@ public class ShoppingListQueries {
                     + ", " + DBColumns.SL_CARTS_PID_COL
                     + ", " + DBColumns.SL_CARTS_QUANTITY_COL
                     + ") VALUES (?, ?, ?)";
-            
-            System.out.println("CUIRI-> "  + queryStr);
+
+            System.out.println("CUIRI-> " + queryStr);
 
             // create the mysql insert preparedstatement
             preparedStmt = conn.prepareStatement(queryStr);
@@ -748,23 +776,21 @@ public class ShoppingListQueries {
         }//end try
 
     }
-    
+
     public static void updateSLCart(Connection conn, int slid, int pid, double qty) {
 
         Statement stmt = null;
-        
 
         try {
             stmt = conn.createStatement();
-            
+
             String queryStr = " UPDATE " + DBTables.SL_CARTS_TABLE
-                    + " SET " + DBColumns.SL_CARTS_QUANTITY_COL +"=" + qty
+                    + " SET " + DBColumns.SL_CARTS_QUANTITY_COL + "=" + qty
                     + " WHERE " + DBColumns.SL_CARTS_SLID_COL + "=" + slid
                     + " AND " + DBColumns.SL_CARTS_PID_COL + "=" + pid;
 
-            
-            System.out.println("CUIRI-> "  + queryStr);
-            
+            System.out.println("CUIRI-> " + queryStr);
+
             stmt.executeUpdate(queryStr);
 
         } catch (SQLException se) {
@@ -783,5 +809,47 @@ public class ShoppingListQueries {
             }// nothing we can do
         }//end try
 
+    }
+
+    public static int getShoppingListByShareLink(Connection conn, String shareLink) {
+        Statement stmt = null;
+
+        int slid = -1;
+        
+        try {
+
+            stmt = conn.createStatement();
+            String queryStr = "SELECT " + DBColumns.SHOPPING_LIST_ID_COL
+                    + " FROM " + DBTables.SHOPPING_LISTS_TABLE
+                    + " WHERE " + DBColumns.SHOPPING_LIST_SHARE_LINK_COL + "='" + shareLink + "';";
+
+            ResultSet rs = stmt.executeQuery(queryStr);
+
+            //Extract data from result set
+            while (rs.next()) {
+                //Retrieve by column name, rs indicates query result and not actual website input
+                slid = rs.getInt(DBColumns.SHOPPING_LIST_ID_COL);
+            }
+            //Clean-up environment
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+
+        return slid;
     }
 }

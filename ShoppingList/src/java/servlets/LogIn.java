@@ -92,13 +92,14 @@ public class LogIn extends HttpServlet {
         } else if (action.equals("login")) { //login was pressed
 
             String email = request.getParameter(FormFields.LOGIN_EMAIL_FIELD);
-            String passwordHash = request.getParameter(FormFields.LOGIN_PASSWORD_FIELD);
+            String password = request.getParameter(FormFields.LOGIN_PASSWORD_FIELD);
+            String hashedPwd = Utils.sha256(password);
             boolean rememberMe = request.getParameter(FormFields.LOGIN_REMEMBER_ME_FLAG) == null ? false : true;
 
             DBConnectionManager dbManager = (DBConnectionManager) getServletContext().getAttribute("DBManager");
             Connection conn = dbManager.getConnection();
 
-            int uid = UserQueries.verifyUserCredentials(conn, email, passwordHash);
+            int uid = UserQueries.verifyUserCredentials(conn, email, hashedPwd);
 
             if (uid == LoginStatus.WRONG_EMAIL) {
                 request.setAttribute("wrongEmail", "There's no account associated to this email address");

@@ -1,6 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
+<c:set var = "firstName" scope = "page" value = "${param.firstName}"/>
+<c:set var = "lastName" scope = "page" value = "${param.lastName}"/>
+<c:set var = "email" scope = "page" value = "${param.email}"/>
+<c:set var = "confirmEmail" scope = "page" value = "${param.confirmEmail}"/>
+
 <!DOCTYPE html>
 <html>
 
@@ -45,11 +50,6 @@
 
 
                 <div class="signup-form">
-                    <c:set var = "firstName" scope = "page" value = "${param.firstName}"/>
-                    <c:set var = "lastName" scope = "page" value = "${param.lastName}"/>
-                    <c:set var = "email" scope = "page" value = "${param.email}"/>
-                    <c:set var = "confirmEmail" scope = "page" value = "${param.confirmEmail}"/>
-
 
                     <form action="SignUp" method="POST">
 

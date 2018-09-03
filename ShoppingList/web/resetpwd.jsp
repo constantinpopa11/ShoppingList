@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
+<c:set var = "wrongEmail" scope = "page" value = "${param.wrongEmail}"/>
 
 <!DOCTYPE html>
 <html>
@@ -46,8 +47,6 @@
                 <jsp:include page="navbar.jsp" />
 
                 <div class="resetpwd-form">
-                    <c:set var = "wrongEmail" scope = "page" value = "${param.wrongEmail}"/>
-
 
                     <form action="ResetPwd" method="POST">
                         <input name="prevPage" value="${header.referer}" type="hidden"/>

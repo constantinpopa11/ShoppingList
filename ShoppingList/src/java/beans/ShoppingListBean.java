@@ -24,6 +24,7 @@ public class ShoppingListBean implements Serializable {
     boolean removable;
     boolean editable;
     int owner;
+    String shareLink;
 
     public ShoppingListBean() {
     }
@@ -115,7 +116,13 @@ public class ShoppingListBean implements Serializable {
     public void setSlCatIconPath(String slCatIconPath) {
         this.slCatIconPath = slCatIconPath;
     }
-    
-    
 
+    public String getShareLink() {
+        return shareLink;
+    }
+
+    public void setShareLink(String shareLink) {
+        this.shareLink = shareLink;
+    }
+    
 }

@@ -3,6 +3,8 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
 
+<c:set var = "commentsList" scope="request" value = "${session.commentsList}"/>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -59,7 +61,6 @@
 
                         </div><!-- /row -->
                         <hr>
-                        <c:set var = "commentsList" scope="request" value = "${session.commentsList}"/>
 
                         <c:forEach items="${commentsList}" var="comment">
 
@@ -112,7 +113,7 @@
 
                                 <c:when test = "${comment.type == 2}">
                                     <div class="coomentbox row centere comment-updated">
-                                         <div class="col-md-12">
+                                        <div class="col-md-12">
                                             <div class="row">
                                                 <!-- nome -->
                                                 <div class="col-md-4">
@@ -138,7 +139,7 @@
 
                                 <c:when test = "${comment.type == 3}">
                                     <div class="coomentbox row centere comment-removed">
-                                         <div class="col-md-12">
+                                        <div class="col-md-12">
                                             <div class="row">
                                                 <!-- nome -->
                                                 <div class="col-md-4">
@@ -204,8 +205,26 @@
                     </div>
                 </div>
             </div>
-
-
         </div> <!-- fine wrapper -->
+
+        <!-- Share Modal -->
+        <div class="modal fade" id="shareModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Share Link</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input class="linkField" type="text" spellcheck="false" value="${initParam['WEBSERVER_LOCATION']}/Share?shareLink=${activeSL.shareLink}"/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

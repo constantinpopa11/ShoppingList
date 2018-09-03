@@ -1,6 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
+<c:set var = "slCategories" scope="request" value = "${requestScope.slCategories}"/>
+
 <!DOCTYPE html>
 <html>
 
@@ -48,8 +50,7 @@
                 <jsp:include page="navbar.jsp" />
 
                 <div class="container">
-                    <c:set var = "slCategories" scope="request" value = "${requestScope.slCategories}"/>
-
+                   
                     <div class="form-container shadow-lg">
                         <form class="text-center border border-light p-5" method="POST" action="NewProdCat"
                               enctype="multipart/form-data">

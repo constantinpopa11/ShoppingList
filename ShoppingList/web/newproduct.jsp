@@ -1,6 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
+<c:set var = "slCategories" scope="request" value = "${requestScope.slCategories}"/>
+<c:set var = "prodCategories" scope="request" value = "${requestScope.prodCategories}"/>
+<c:set var = "lcid" scope="request" value = "${requestScope.lcid}"/>             
+<c:set var = "slCatName" scope="request" value = "${requestScope.slCatName}"/>
+
 <!DOCTYPE html>
 <html>
 
@@ -49,18 +54,12 @@
 
                 <div class="container">
 
-                    <c:set var = "slCategories" scope="request" value = "${requestScope.slCategories}"/>
-                    <c:set var = "prodCategories" scope="request" value = "${requestScope.prodCategories}"/>
-                    <c:set var = "lcid" scope="request" value = "${requestScope.lcid}"/>             
-                    <c:set var = "slCatName" scope="request" value = "${requestScope.slCatName}"/>
-
-
                     <div class="form-container">
                         <form class="text-center border border-light p-5" method="POST" action="NewProduct" 
                               enctype="multipart/form-data">
-                            
-                            
-                            
+
+
+
                             <p  class="title">New Product</p>
                             <!-- Shop Category -->
                             <select class="browser-default custom-select mb-4 " name="shopCategory" required autocomplete="off" onChange="window.location.href = this.value">
@@ -92,7 +91,7 @@
                             <!-- Measure Unit -->
                             <input type="text" name="measureUnit" class="form-control mb-4" name="measureUnit"
                                    required placeholder="Measure unit" autocomplete="off"/>
-                            
+
 
                             <!-- Description -->
                             <div class="form-group">

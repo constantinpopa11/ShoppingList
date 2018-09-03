@@ -92,49 +92,60 @@ public class SignUp extends HttpServlet {
             String lastName = request.getParameter(FormFields.SIGNUP_LAST_NAME_FIELD);
             String email = request.getParameter(FormFields.SIGNUP_EMAIL_FIELD);
             String emailConfirm = request.getParameter(FormFields.SIGNUP_EMAIL_CONFIRM_FIELD);
-            String passwordHash = request.getParameter(FormFields.SIGNUP_PASSWORD_FIELD);
-            String passwordConfirmHash = request.getParameter(FormFields.SIGNUP_PASSWORD_CONFIRM_FIELD);
-            String avatarPath = Utils.DEFAULT_USER_AVATAR;
+            String password = request.getParameter(FormFields.SIGNUP_PASSWORD_FIELD);
+            String passwordConfirm = request.getParameter(FormFields.SIGNUP_PASSWORD_CONFIRM_FIELD);
+            String avatarPath = Utils.USER_AVATARS + Utils.DEFAULT_USER_AVATAR;
 
             if (!email.equals(emailConfirm)) {
                 request.setAttribute("errorMessage", "The confirmation email doesn't match.");
                 request.getRequestDispatcher("/signup.jsp").forward(request, response);
 
-            } else if (!passwordHash.equals(passwordConfirmHash)) {
+            } else if (!password.equals(passwordConfirm)) {
                 request.setAttribute("errorMessage", "The confirmation password doesn't match.");
                 request.getRequestDispatcher("/signup.jsp").forward(request, response);
-            }
+            } else if (password.length() < Utils.MIN_PASSWORD_LENGTH
+                    || !password.matches(".*\\d.*") //has a number
+                    || password.equals(password.toUpperCase()) //has at least one upper case letter
+                    ) {
 
-            DBConnectionManager dbManager = (DBConnectionManager) getServletContext().getAttribute("DBManager");
-            Connection conn = dbManager.getConnection();
-            int status = UserQueries.checkIfEmailAlreadyExists(conn, email);
-
-            if (status == SignupStatus.ALREADY_REGISTERED) {
-                request.setAttribute("errorMessage", "The email provided is already associated to another account");
+                request.setAttribute("errorMessage", "The password must contain "
+                        + "a number[0-9], "
+                        + "an upper case letter[A-Z] "
+                        + "and have at least 8 characters");
                 request.getRequestDispatcher("/signup.jsp").forward(request, response);
+            } else {
+                DBConnectionManager dbManager = (DBConnectionManager) getServletContext().getAttribute("DBManager");
+                Connection conn = dbManager.getConnection();
+                int status = UserQueries.checkIfEmailAlreadyExists(conn, email);
 
-            } else if (status == SignupStatus.SIGNUP_SUCCESS) {
+                if (status == SignupStatus.ALREADY_REGISTERED) {
+                    request.setAttribute("errorMessage", "The email provided is already associated to another account");
+                    request.getRequestDispatcher("/signup.jsp").forward(request, response);
 
-                String verificationCode = UUID.randomUUID().toString();
-                int newUid = UserQueries.insertUser(conn, email, firstName, lastName, avatarPath,
-                        passwordHash, Privileges.NOT_VERIFIED_USER_PRIVILEGES, verificationCode);
+                } else if (status == SignupStatus.SIGNUP_SUCCESS) {
 
-                if (newUid != -1) {
-                    SSLMailSender.sendVerificationMail(email, verificationCode);
+                    String verificationCode = UUID.randomUUID().toString();
+                    String hashedPwd = Utils.sha256(password);
+                    int newUid = UserQueries.insertUser(conn, email, firstName, lastName, avatarPath,
+                            hashedPwd, Privileges.NOT_VERIFIED_USER_PRIVILEGES, verificationCode);
 
-                    HttpSession session = request.getSession();
-                    List<ShoppingListBean> shoppingLists = (ArrayList<ShoppingListBean>) session.getAttribute("shoppingLists");
+                    if (newUid != -1) {
+                        SSLMailSender.sendVerificationMail(email, verificationCode);
 
-                    if (shoppingLists != null) {
-                        for (ShoppingListBean sl : shoppingLists) {
-                            ShoppingListQueries.insertShoppingList(conn, sl.getLcid(), sl.getSlName(), sl.getSlDescr(),
-                                    sl.isEditable(), sl.isRemovable(), sl.getSlIconPath(), newUid);
+                        HttpSession session = request.getSession();
+                        List<ShoppingListBean> shoppingLists = (ArrayList<ShoppingListBean>) session.getAttribute("shoppingLists");
+
+                        if (shoppingLists != null) {
+                            for (ShoppingListBean sl : shoppingLists) {
+                                String shareLink = UUID.randomUUID().toString();
+                                ShoppingListQueries.insertShoppingList(conn, sl.getLcid(), sl.getSlName(), sl.getSlDescr(),
+                                        sl.isEditable(), sl.isRemovable(), sl.getSlIconPath(), newUid, shareLink);
+                            }
                         }
                     }
+
+                    response.sendRedirect("home.jsp");
                 }
-
-                response.sendRedirect("home.jsp");
-
             }
         }
 

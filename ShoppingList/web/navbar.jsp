@@ -2,7 +2,6 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <link rel="stylesheet" href="css/navbar.css">
 
-
 <c:set var = "privileges" scope="request" value = "${sessionScope.privileges}"/>
 
 <nav class="navbar navbar-expand navbar-light bg-light">

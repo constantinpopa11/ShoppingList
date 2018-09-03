@@ -64,4 +64,6 @@ public class DBColumns {
     public static final String SHOPPING_LIST_IS_EDITABLE_COL = DBTables.SHOPPING_LISTS_TABLE + "." + "editable";
     public static final String SHOPPING_LIST_IS_REMOVABLE_COL = DBTables.SHOPPING_LISTS_TABLE + "." + "removable";
     public static final String SHOPPING_LIST_OWNER_COL = DBTables.SHOPPING_LISTS_TABLE + "." + "owner";
+    public static final String SHOPPING_LIST_SHARE_LINK_COL = DBTables.SHOPPING_LISTS_TABLE + "." + "shareLink";
+    
 }

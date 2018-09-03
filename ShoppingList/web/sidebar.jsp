@@ -61,8 +61,7 @@
         <li>
             <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">My Shopping Lists</a>
             <ul class="collapse list-unstyled" id="homeSubmenu">
-                <c:set var = "shoppingLists" scope="request" value = "${sessionScope.shoppingLists}"/>
-
+                
 
                 <c:forEach items="${shoppingLists}" var="sl">
 
@@ -109,9 +108,11 @@
 
     </ul>
 
+    <!--             
     <ul class="list-unstyled CTAs">
         <li>
-            <a href="https://www.pornhub.com/view_video.php?viewkey=ph5af5c6e4ab31c&t=873" class="download">Don' click here plz</a>
+            <a href="#" class="download">button</a>
         </li>
     </ul>
+    -->          
 </nav>
