@@ -1,0 +1,81 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+
+<!-- Share Modal -->
+<div class="modal fade" id="shareModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Share Link</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input class="linkField" type="text" spellcheck="false" value="${initParam['WEBSERVER_LOCATION']}/Share?shareLink=${activeSL.shareLink}"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Remove Modal -->
+<div class="modal fade" id="removeModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm action</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="qty">Quantity </label>
+                    <input type="text" name="qty" id="qty" value=""><br>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <form action="EditShoppingList" method="GET">
+                    <input type="hidden" name="removePid" value="">
+                    <input type="hidden" name="action" value="remove">
+
+                    <input type="submit" class="btn btn-primary" value="Yes" />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Qty Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update quantity</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="EditShoppingList" method="GET">
+                <div class="modal-body">
+                    <label for=foo>Quantity</label>
+                    <input type=text name="qty" required="required" />
+                </div>
+                <div class="modal-footer">
+
+                    <input type="hidden" name="editPid" value="">
+                    <input type="hidden" name="action" value="remove">
+
+                    <input type="submit" class="btn btn-primary" value="Update" />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>    
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
