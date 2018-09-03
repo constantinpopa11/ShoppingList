@@ -50,9 +50,9 @@
 
                     <span class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <!-- <i class="fas fa-arrow-circle-left list-action-ic"></i> -->
                             <a class="dropdown-item" href="SearchProducts?sortBy=0">By product category</a>
                             <a class="dropdown-item" href="SearchProducts?sortBy=1">By product name</a>
                         </div>

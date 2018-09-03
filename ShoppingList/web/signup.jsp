@@ -137,7 +137,7 @@
                         -->
 
                         <div class="form-group text-center">
-                            <label class="checkbox-inline"><input name="acceptCheckbox" type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
+                            <label class="checkbox-inline"><input name="acceptCheckbox" type="checkbox" required="required"> I accept the <a href="https://termsfeed.com/terms-conditions/e6776fb6afc45c1730532410fae5df72">Terms of Use</a> &amp; <a href="https://termsfeed.com/terms-conditions/e6776fb6afc45c1730532410fae5df72">Privacy Policy</a></label>
                         </div>
 
                         <div class="form-group text-center">
