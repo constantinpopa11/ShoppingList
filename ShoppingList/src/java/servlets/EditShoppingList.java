@@ -119,11 +119,19 @@ public class EditShoppingList extends HttpServlet {
                                 slItems.add(newItem);
                                 session.setAttribute("slItems", slItems);
                             } else {
+                                String prodName = ShoppingListQueries.getProductNameById(conn, pid);
+                                String msg = prodName + " was added to the list";
+                                ShoppingListQueries.insertSLComment(conn, Utils.SYSTEM_UID, msg, searchParams.getSlid(), Utils.SL_ADD_TYPE);
+
                                 ShoppingListQueries.addToSLCart(conn, searchParams.getSlid(), pid, qty);
                             }
 
                         } else {
                             if (uid != -1) {
+                                String prodName = ShoppingListQueries.getProductNameById(conn, pid);
+                                String msg = prodName + " quantity was updated from " + oldQty + " to " + (oldQty + qty);
+                                ShoppingListQueries.insertSLComment(conn, Utils.SYSTEM_UID, msg, searchParams.getSlid(), Utils.SL_EDIT_TYPE);
+
                                 ShoppingListQueries.updateSLCart(conn, searchParams.getSlid(), pid, qty + oldQty);
                             }
                         }
@@ -143,14 +151,20 @@ public class EditShoppingList extends HttpServlet {
 
                 if (uid == activeSL.getOwner() || activeSL.isEditable()) {
                     ShoppingListQueries.removeFromSLCart(conn, activeSL.getSlid(), pid);
-                } else if (privileges < Privileges.ADMIN_PRIVILEGES){
+
+                    String prodName = ShoppingListQueries.getProductNameById(conn, pid);
+                    String msg = prodName + " was removed from the list";
+                    ShoppingListQueries.insertSLComment(conn, Utils.SYSTEM_UID, msg, activeSL.getSlid(), Utils.SL_REMOVE_TYPE);
+
+                } else if (privileges < Privileges.ADMIN_PRIVILEGES) {
                     List<SLItemBean> slItems = (ArrayList<SLItemBean>) session.getAttribute("slItems");
                     SLItemBean itemToDelete = null;
-                    
-                    if(slItems != null && slItems.size() > 0){
-                        for(SLItemBean item : slItems){
-                            if(item.getPid() == pid)
+
+                    if (slItems != null && slItems.size() > 0) {
+                        for (SLItemBean item : slItems) {
+                            if (item.getPid() == pid) {
                                 itemToDelete = item;
+                            }
                         }
                         slItems.remove(itemToDelete);
                         session.setAttribute("slItems", slItems);
@@ -164,16 +178,32 @@ public class EditShoppingList extends HttpServlet {
                 int pid = Integer.parseInt(request.getParameter("updatePid"));
                 double qty = Double.parseDouble(request.getParameter("qty"));
                 ShoppingListBean activeSL = (ShoppingListBean) session.getAttribute("activeSL");
+                List<SLItemBean> slItems = (ArrayList<SLItemBean>) session.getAttribute("slItems");
 
                 if (uid == activeSL.getOwner() || activeSL.isEditable()) {
                     ShoppingListQueries.updateSLCart(conn, activeSL.getSlid(), pid, qty);
-                } else if (privileges < Privileges.ADMIN_PRIVILEGES){
-                    List<SLItemBean> slItems = (ArrayList<SLItemBean>) session.getAttribute("slItems");
                     
-                    if(slItems != null && slItems.size() > 0){
-                        for(SLItemBean item : slItems){
-                            if(item.getPid() == pid)
+                    double oldQty = 0.0;
+                    if (slItems != null && slItems.size() > 0) {
+                        for (SLItemBean item : slItems) {
+                            if (item.getPid() == pid) {
+                                oldQty = item.getQuantity();
+                            }
+                        }
+                    }
+
+                    String prodName = ShoppingListQueries.getProductNameById(conn, pid);
+                    String msg = prodName + " quantity was updated from " + oldQty + " to " + qty;
+                    ShoppingListQueries.insertSLComment(conn, Utils.SYSTEM_UID, msg, activeSL.getSlid(), Utils.SL_EDIT_TYPE);
+                    
+                } else if (privileges < Privileges.ADMIN_PRIVILEGES) {
+                    
+
+                    if (slItems != null && slItems.size() > 0) {
+                        for (SLItemBean item : slItems) {
+                            if (item.getPid() == pid) {
                                 item.setQuantity(qty);
+                            }
                         }
                         session.setAttribute("slItems", slItems);
                     }

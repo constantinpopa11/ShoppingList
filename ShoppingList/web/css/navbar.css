@@ -27,7 +27,6 @@ body{
 #accordion {
     margin: auto;
     padding: 5px;
-    min-height: 100vh;
     transition: all 0.3s;
     width:95% !important;
 }

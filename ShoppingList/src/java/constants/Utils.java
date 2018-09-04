@@ -38,19 +38,19 @@ public class Utils {
     public static final String DEFAULT_PROD_CAT_ICON = "default.png";
     public static final String DEFAULT_SL_ICON = "default.png";
 
-    public static final int SL_COMMENT = 0;
-    public static final int SL_ADD = 1;
-    public static final int SL_UPDATE = 2;
-    public static final int SL_REMOVE = 3;
+    public static final int SL_COMMENT_TYPE = 0;
+    public static final int SL_ADD_TYPE = 1;
+    public static final int SL_EDIT_TYPE = 2;
+    public static final int SL_REMOVE_TYPE = 3;
 
     public static final int SORT_PROD_BY_CATEGORY = 0;
     public static final int SORT_PROD_BY_NAME = 1;
     public static final int SEARCH_RESULTS_NUMBER = 10;
     public static final int SEARCH_ANY_PROD_CAT = 0;
     public static final int CREATED_BY_ADMIN = -1;
-    
     public static final int MIN_PASSWORD_LENGTH = 8;
-
+    public static final int SYSTEM_UID = 0;
+    
     public static String sha256(String base) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");

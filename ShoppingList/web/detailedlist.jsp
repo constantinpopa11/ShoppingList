@@ -1,6 +1,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 
 <c:set var = "commentsList" scope="request" value = "${session.commentsList}"/>
@@ -56,120 +57,127 @@
                         <div class="row">
 
                             <div class="col-sm-12">
-                                <h3>Comments</h3>
+                                <h3><br>Comments</h3>
                             </div><!-- /col-sm-12 -->
 
                         </div><!-- /row -->
                         <hr>
 
-                        <c:forEach items="${commentsList}" var="comment">
+                        <c:if test="${fn:length(commentsList) > 0}">
+                            <c:forEach items="${commentsList}" var="comment">
 
-                            <c:choose>
-                                <c:when test = "${comment.type == 0}">
-                                    <div class="coomentbox row centere">
-                                        <div class="col-sm-1" style="padding:0px 45px 0px 5px;">
-                                            <div class="thumbnail" >
-                                                <img class="img-responsive user-photo img-rounded" src="${initParam['WEBSERVER_LOCATION']}/images/userAvatars/default.png">
-                                            </div><!-- /thumbnail -->
-                                        </div><!-- /col-sm-1  foto col -->
-                                        <div class="col-sm-11"> <!-- body comment col -->
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <strong>${comment.firstName} ${comment.lastName}</strong>  <span class="text-muted float-right"><em>${comment.date}</em></span>
-                                                </div>
-                                                <div class="panel-body">
-                                                    ${comment.message}
-                                                </div><!-- /panel-body -->
-                                            </div><!-- /panel panel-default -->
-                                        </div><!-- /col-sm-5 -->
-                                    </div><!-- /container commento copia fino a qua-->
-                                </c:when>
+                                <c:choose>
+                                    <c:when test = "${comment.type == 0}">
+                                        <div class="coomentbox row centere">
+                                            <div class="col-sm-1" style="padding:0px 45px 0px 5px;">
+                                                <div class="thumbnail" >
+                                                    <img class="img-responsive user-photo img-rounded" src="${initParam['WEBSERVER_LOCATION']}/images/userAvatars/default.png">
+                                                </div><!-- /thumbnail -->
+                                            </div><!-- /col-sm-1  foto col -->
+                                            <div class="col-sm-11"> <!-- body comment col -->
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <strong>${comment.firstName} ${comment.lastName}</strong>  <span class="text-muted float-right"><em>${comment.date}</em></span>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        ${comment.message}
+                                                    </div><!-- /panel-body -->
+                                                </div><!-- /panel panel-default -->
+                                            </div><!-- /col-sm-5 -->
+                                        </div><!-- /container commento copia fino a qua-->
+                                    </c:when>
 
-                                <c:when test = "${comment.type == 1}">
-                                    <div class="coomentbox row centere comment-added">
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <!-- nome -->
-                                                <div class="col-md-4">
-                                                    <strong>${comment.firstName} ${comment.lastName}</strong>
+                                    <c:when test = "${comment.type == 1}">
+                                        <div class="coomentbox row centere comment-added">
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <!-- nome -->
+                                                    <div class="col-md-4">
+                                                        <strong>${comment.firstName} ${comment.lastName}</strong>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                    </div>
+                                                    <!-- data -->
+                                                    <div class="col-md-4">
+                                                        <span class="text-muted float-right"><em>${comment.date}</em>
+                                                        </span>
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-4">
-                                                </div>
-                                                <!-- data -->
-                                                <div class="col-md-4">
-                                                    <span class="text-muted float-right"><em>${comment.date}</em>
-                                                    </span>
+                                                <div class="row">
+                                                    <!-- contenuto -->
+                                                    <div class="col-md-12">
+                                                        <i>${comment.message}</i>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <!-- contenuto -->
-                                                <div class="col-md-12">
-                                                    "ADDED" ${comment.message}
+                                        </div><!-- /container commento copia fino a qua-->
+                                    </c:when>
+
+                                    <c:when test = "${comment.type == 2}">
+                                        <div class="coomentbox row centere comment-updated">
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <!-- nome -->
+                                                    <div class="col-md-4">
+                                                        <strong>${comment.firstName} ${comment.lastName}</strong>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                    </div>
+                                                    <!-- data -->
+                                                    <div class="col-md-4">
+                                                        <span class="text-muted float-right"><em>${comment.date}</em>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <!-- contenuto -->
+                                                    <div class="col-md-12">
+                                                        <i>${comment.message}</i>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div><!-- /container commento copia fino a qua-->
-                                </c:when>
+                                        </div><!-- /container commento copia fino a qua-->
+                                    </c:when>
 
-                                <c:when test = "${comment.type == 2}">
-                                    <div class="coomentbox row centere comment-updated">
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <!-- nome -->
-                                                <div class="col-md-4">
-                                                    <strong>${comment.firstName} ${comment.lastName}</strong>
+                                    <c:when test = "${comment.type == 3}">
+                                        <div class="coomentbox row centere comment-removed">
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <!-- nome -->
+                                                    <div class="col-md-4">
+                                                        <strong>${comment.firstName} ${comment.lastName}</strong>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                    </div>
+                                                    <!-- data -->
+                                                    <div class="col-md-4">
+                                                        <span class="text-muted float-right"><em>${comment.date}</em>
+                                                        </span>
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-4">
-                                                </div>
-                                                <!-- data -->
-                                                <div class="col-md-4">
-                                                    <span class="text-muted float-right"><em>${comment.date}</em>
-                                                    </span>
+                                                <div class="row">
+                                                    <!-- contenuto -->
+                                                    <div class="col-md-12">
+                                                        <i>${comment.message}</i>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <!-- contenuto -->
-                                                <div class="col-md-12">
-                                                    "ADDED" ${comment.message}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div><!-- /container commento copia fino a qua-->
-                                </c:when>
+                                        </div><!-- /container commento copia fino a qua-->
+                                    </c:when>
+                                </c:choose>
+                                <!-- commmento box2 -->
 
-                                <c:when test = "${comment.type == 3}">
-                                    <div class="coomentbox row centere comment-removed">
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <!-- nome -->
-                                                <div class="col-md-4">
-                                                    <strong>${comment.firstName} ${comment.lastName}</strong>
-                                                </div>
-                                                <div class="col-md-4">
-                                                </div>
-                                                <!-- data -->
-                                                <div class="col-md-4">
-                                                    <span class="text-muted float-right"><em>${comment.date}</em>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <!-- contenuto -->
-                                                <div class="col-md-12">
-                                                    "ADDED" ${comment.message}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div><!-- /container commento copia fino a qua-->
-                                </c:when>
-                            </c:choose>
-                            <!-- commmento box2 -->
+                                <br>
+                            </c:forEach>
+                        </c:if>
 
-                            <hr>
-                        </c:forEach>
+                        <c:if test="${fn:length(commentsList) == 0}">
+                            <div class="text-center">
+                                <i>There are no posts yet. Be the first to comment! <br><br></i>
+                            </div>
+                        </c:if>
 
-
-
+                        <hr>
 
                         <!-- inizio sezione aggiungi commento -->
                         <div class="addcoomentbox row">
@@ -182,23 +190,19 @@
                                 <div class="panel-body"><!-- form body -->
                                     <div class="widget-area no-padding blank">
                                         <div class="status-upload">
-                                            <form>
+                                            <form action="AddComment" method="POST">
                                                 <div class="row container-fluid">
                                                     <div class="col-9 ">
-                                                        <textarea maxlength="300" class="form-control" rows="3"  placeholder="Add comment on this shopping list "  width="10%" ></textarea><br>
+                                                        <textarea maxlength="300" class="form-control" rows="3" name="msgText" placeholder="Add comment on this shopping list "  width="10%" ></textarea><br>
                                                     </div>
                                                     <div class="col-3 float-right">
-                                                        <button type="submit" class="btn btn-success green"><i class="fa fa-share"></i> Comment</button>
+                                                        <button type="submit" class="btn btn-primary green"><i class="fa fa-share"></i> Comment</button>
                                                     </div>
-                                                    <div >
-                                                        </form>
-                                                    </div><!-- Status Upload  -->
                                                 </div><!-- Widget Area -->
+                                            </form> 
                                         </div>
                                     </div><!-- /container commento copia fino a qua-->
-
                                 </div><!-- fine sezione commenti e aggiungi commenti -->
-
                                 <!-- fine sezione commenti -->
                             </div> <!--  end accordion -->
                         </div>
@@ -226,5 +230,17 @@
                 </div>
             </div>
         </div>
+
+        <jsp:include page="modals.jsp" />
     </body>
 </html>
+
+<script>
+    $('#removeItemModal').on('show.bs.modal', function (e) {
+        $('input[name="removePid"]').attr('value', e.relatedTarget.id);
+    });
+
+    $('#updateModal').on('show.bs.modal', function (e) {
+        $('input[name="updatePid"]').attr('value', e.relatedTarget.id);
+    });
+</script>

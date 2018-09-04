@@ -52,7 +52,7 @@
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <!-- <i class="fas fa-arrow-circle-left list-action-ic"></i> -->
+                            <!-- <i class="fas fa-arrow-circle-left list-action-ic"></i> -->
                             <a class="dropdown-item" href="SearchProducts?sortBy=0">By product category</a>
                             <a class="dropdown-item" href="SearchProducts?sortBy=1">By product name</a>
                         </div>
@@ -203,9 +203,20 @@
     </c:forEach>
 
     <c:if test="${fn:length(products) == 0}">
-        <div class="text-center">
-            No results were found :( <br>
-            ...but no worries! You can create a new product <a href="NewProduct">here (click!)</a>
+        <div class="card">
+            <div class="card-header list-item ">
+
+                <div class="row custom-row">
+                    <!--  banana pic -->
+                    <div class="col my-auto text-center">
+                        <br>
+                        No results were found :( <br>
+                        ...but no worries! You can create a new product by clicking <a href="NewProduct"><u>here</u></a>
+                    </div>
+                </div>
+
+
+            </div>
         </div>
     </c:if>
 

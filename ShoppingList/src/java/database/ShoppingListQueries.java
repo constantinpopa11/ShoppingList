@@ -1021,4 +1021,88 @@ public class ShoppingListQueries {
 
         return slid;
     }
+    
+    public static String getProductNameById(Connection conn, int pid) {
+        Statement stmt = null;
+
+        String prodName = "";
+
+        try {
+
+            stmt = conn.createStatement();
+            String queryStr = "SELECT " + DBColumns.PRODUCTS_NAME_COL
+                    + " FROM " + DBTables.PRODUCTS_TABLE
+                    + " WHERE " + DBColumns.PRODUCTS_ID_COL + "=" + pid + ";";
+
+            ResultSet rs = stmt.executeQuery(queryStr);
+
+            //Extract data from result set
+            while (rs.next()) {
+                //Retrieve by column name, rs indicates query result and not actual website input
+                prodName = rs.getString(DBColumns.PRODUCTS_NAME_COL);
+            }
+            //Clean-up environment
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+
+        return prodName;
+    }
+    
+    public static void insertSLComment(Connection conn, int uid, String message, int slid, int type) {
+
+        PreparedStatement preparedStmt = null;
+
+        try {
+
+            String queryStr = " INSERT INTO " + DBTables.SL_COMMENTS_TABLE
+                    + " (" + DBColumns.SL_COMMENTS_UID_COL
+                    + ", " + DBColumns.SL_COMMENTS_MESSAGE_COL
+                    + ", " + DBColumns.SL_COMMENTS_SLID_COL
+                    + ", " + DBColumns.SL_COMMENTS_TYPE_COL
+                    + ") VALUES (?, ?, ?, ?)";
+
+            // create the mysql insert preparedstatement
+            preparedStmt = conn.prepareStatement(queryStr);
+            preparedStmt.setInt(1, uid);
+            preparedStmt.setString(2, message);
+            preparedStmt.setInt(3, slid);
+            preparedStmt.setInt(4, type);
+
+
+            // execute the preparedstatement
+            preparedStmt.execute();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (preparedStmt != null) {
+                    preparedStmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+
+    }
 }

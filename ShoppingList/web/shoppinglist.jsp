@@ -44,25 +44,25 @@
                 </div>
 
                 <div class="slTitle float-right my-auto" >
-                    
+
                     <c:if test="${not empty shoppingLists}">
                         <a class="float-right" href="#" data-toggle="modal" data-target="#removeSLModal"><i class="fas fa-trash list-action-ic"></i></a>
-                    </c:if>
-                    
+                        </c:if>
+
                     <c:if test="${slItems != null}">
                         <c:if test="${privileges >=0 }">
                             <a class="float-right" href="#" data-toggle="modal" data-target="#shareModal"><i class="fas fa-share-alt list-action-ic"></i></a>
 
                             <c:if test="${! fn:endsWith(pageContext.request.requestURI, '/detailedlist.jsp')}">
                                 <a class="float-right" href="detailedlist.jsp?slid=${qslid}"><i class="fas fa-comment-dots first-child list-action-ic"></i></a>
-                            </c:if>
-                        
+                                </c:if>
+
                         </c:if>
                     </c:if>
 
                     <c:if test="${not empty shoppingLists}">
                         <a class="float-right" href="SearchProducts?lcid=${activeSL.lcid}&slid=${activeSL.slid}" ><i class="fas fa-cart-plus list-action-ic"></i></a>
-                    </c:if>
+                        </c:if>
 
                 </div>
             </div>
@@ -100,98 +100,122 @@
 
     <!--  first elemnt  -->
 
-    <c:forEach items="${slItems}" var="item">
-        <c:if test="${item.slid == activeSL.slid}">
 
-            <div class="card">
-                <div class="card-header list-item ">
+    <c:if test="${fn:length(slItems) > 0}">
+        <c:forEach items="${slItems}" var="item">
+            <c:if test="${item.slid == activeSL.slid}">
 
-                    <div class="row custom-row" >
-                        <!-- checkbox -->
+                <div class="card">
+                    <div class="card-header list-item ">
 
-                        <div class="col-xs-1  my-auto">
-                            <label class="checkbox-container">
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </label>
+                        <div class="row custom-row" >
+                            <!-- checkbox -->
+
+                            <div class="col-xs-1  my-auto">
+                                <label class="checkbox-container">
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+
+
+                            <!--  banana pic -->
+                            <div class="col-xs-2  my-auto"  data-toggle="collapse" data-target="#pid${item.pid}">
+                                <img src="${initParam['WEBSERVER_LOCATION']}${item.logoPath}"  width="60" height="60"/>
+                            </div>
+
+                            <div class="col  my-auto">
+                                <div class="row">
+                                    <div class="col itemTitle" data-toggle="collapse" data-target="#pid${item.pid}">
+                                        ${item.prodName}
+                                    </div>
+                                </div>
+
+                                <div class="row " >
+                                    <div class="col itemInfo" data-toggle="collapse" data-target="#pid${item.pid}">
+                                        ${item.prodCatName}
+                                    </div>
+
+                                </div>
+
+                                <div class="row ">
+                                    <div class="col itemInfo" data-toggle="collapse" data-target="#pid${item.pid}">
+                                        Quantity: ${item.quantity} ${item.prodMeasureUnit}
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-xs-2 my-auto">
+                                <div class="row ">
+                                    <div class="col itemTitle float-right">
+                                        <a href="#" data-toggle="modal" data-target="#updateModal" id="${item.pid}">
+                                            <i class="fas fa-pencil-alt item-action-ic float-right"></i>
+                                        </a>
+                                        <a href="#" data-toggle="modal" data-target="#removeItemModal" id="${item.pid}">
+                                            <i class="fas fa-times item-action-ic float-right"></i>
+                                        </a>
+
+                                    </div>
+                                </div>
+
+                                <div class="row " data-toggle="collapse" data-target="#pid${item.pid}">
+                                    <div class="col ">
+                                        <small class="float-right">&nbsp;</small>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col itemTitle"  data-toggle="collapse" data-target="#pid${item.pid}">
+                                        <span><i class="fas fa-chevron-down item-expand-ic float-right"></i></span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
                         </div>
+                    </div>
 
-
-                        <!--  banana pic -->
-                        <div class="col-xs-2  my-auto"  data-toggle="collapse" data-target="#pid${item.pid}">
-                            <img src="${initParam['WEBSERVER_LOCATION']}${item.logoPath}"  width="60" height="60"/>
+                    <div id="pid${item.pid}" class="collapse" data-parent="#accordion">
+                        <div class="card-body">
+                            <div>
+                                ${item.prodDescr}
+                            </div>
+                            <hr>
+                            <div>Category Info:
+                                ${item.prodCatName}
+                                <img width="30" src="${initParam['WEBSERVER_LOCATION']}${item.prodCatIconPath}"/><br>
+                                ${item.prodCatDescr}
+                            </div>
                         </div>
+                    </div>
+                </div>
+            </c:if>
+        </c:forEach>
+    </c:if>
 
-                        <div class="col  my-auto">
-                            <div class="row">
-                                <div class="col itemTitle" data-toggle="collapse" data-target="#pid${item.pid}">
-                                    ${item.prodName}
-                                </div>
-                            </div>
+    <c:if test="${fn:length(slItems) == 0}">
+        <div class="card">
+            <div class="card-header list-item ">
 
-                            <div class="row " >
-                                <div class="col itemInfo" data-toggle="collapse" data-target="#pid${item.pid}">
-                                    ${item.prodCatName}
-                                </div>
-
-                            </div>
-
-                            <div class="row ">
-                                <div class="col itemInfo" data-toggle="collapse" data-target="#pid${item.pid}">
-                                    Quantity: ${item.quantity} ${item.prodMeasureUnit}
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="col-xs-2 my-auto">
-                            <div class="row ">
-                                <div class="col itemTitle float-right">
-                                    <a href="#" data-toggle="modal" data-target="#updateModal" id="${item.pid}">
-                                        <i class="fas fa-pencil-alt item-action-ic float-right"></i>
-                                    </a>
-                                    <a href="#" data-toggle="modal" data-target="#removeItemModal" id="${item.pid}">
-                                        <i class="fas fa-times item-action-ic float-right"></i>
-                                    </a>
-
-                                </div>
-                            </div>
-
-                            <div class="row " data-toggle="collapse" data-target="#pid${item.pid}">
-                                <div class="col ">
-                                    <small class="float-right">&nbsp;</small>
-                                </div>
-
-                            </div>
-
-                            <div class="row">
-                                <div class="col itemTitle"  data-toggle="collapse" data-target="#pid${item.pid}">
-                                    <span><i class="fas fa-chevron-down item-expand-ic float-right"></i></span>
-                                </div>
-                            </div>
-
-                        </div>
-
-
+                <div class="row custom-row">
+                    <!--  banana pic -->
+                    <div class="col my-auto text-center">
+                        <br>
+                        There are no items in the list <br>
+                        You can add a new product by clicking <a href="SearchProducts?lcid=${activeSL.lcid}&slid=${activeSL.slid}" ><u>here</u></a>
+                        <br>
                     </div>
                 </div>
 
-                <div id="pid${item.pid}" class="collapse" data-parent="#accordion">
-                    <div class="card-body">
-                        <div>
-                            ${item.prodDescr}
-                        </div>
-                        <hr>
-                        <div>Category Info:
-                            ${item.prodCatName}
-                            <img width="30" src="${initParam['WEBSERVER_LOCATION']}${item.prodCatIconPath}"/><br>
-                            ${item.prodCatDescr}
-                        </div>
-                    </div>
-                </div>
+
             </div>
-        </c:if>
-    </c:forEach>
+        </div>
+    </c:if>
+
+
 
 </div> <!--  end accordion -->
 
