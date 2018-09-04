@@ -48,16 +48,6 @@
                 <div class="slTitle float-right my-auto" >
                     <a class="float-right" href="home.jsp" ><i class="fas fa-arrow-circle-left list-action-ic"></i></a>
 
-                    <span class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <!-- <i class="fas fa-arrow-circle-left list-action-ic"></i> -->
-                            <a class="dropdown-item" href="SearchProducts?sortBy=0">By product category</a>
-                            <a class="dropdown-item" href="SearchProducts?sortBy=1">By product name</a>
-                        </div>
-                    </span>
-
                 </div>
             </div>
 
@@ -67,8 +57,6 @@
                         <button onclick="myFunction()" class="dropbtn">Category <i class="fas fa-filter list-action-ic"></i> </button>
                         <div id="myDropdown" class="dropdown-content">
                             <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-
-
                             <a href="SearchProducts?prodCat=0">
                                 All categories
                             </a>
@@ -96,6 +84,18 @@
                                 <input type="submit" value="Submit" style="display: none;">
                             </form>
                         </div>
+                    </div>
+                </div>
+                <div class="slTitle float-left my-auto" id="search-barid">
+                    <div class="col-xs-5 " id="sortBy">
+                      <span class="dropdown">
+                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fas fa-sort-amount-down list-action-ic"></i></button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" href="SearchProducts?sortBy=0">By product category</a>
+                              <a class="dropdown-item" href="SearchProducts?sortBy=1">By product name</a>
+                          </div>
+                      </span>
                     </div>
                 </div>
             </div>
