@@ -45,8 +45,12 @@
                     <!-- empty on purpose -->
                 </div>
 
+                <div class="slTitle float-right my-auto" >
+                    <a class="float-right" href="home.jsp" ><i class="fas fa-arrow-circle-left list-action-ic"></i></a>
+                </div>
             </div>
 
+            <!-- end first row -->
             <div class="row custom-row">
                 <div class="slTitle my-auto" id="filterdiv" >
                     <div class="dropdown">
@@ -69,10 +73,10 @@
                 <div class="col" data-toggle="collapse" data-target="#listDetails">
                 </div>
                 <!--  search bar -->
-                <div class="slTitle float-left my-auto" id="search-barid">
+                <div class="slTitle float-right my-auto" id="search-barid">
                     <div class="col-xs-8 " id="searchbar">
                         <div id="custom-search">
-                            <form action="SearchProducts" method="GET">
+                            <form action="SearchProducts" method="GET" id="searchform">
                                 <input type="text" name="key" class="search-query" placeholder="Search" autocomplete="off"/>
                                 <button type="button" >
                                     <i class="fas fa-search list-action-ic"></i>
@@ -83,11 +87,11 @@
                     </div>
                 </div>
                 <div class="slTitle float-left my-auto" id="search-barid">
-                    <div class="col-xs-5 " id="sortBy">
+                    <div class="col-xs-2 " id="sortBy">
                       <span class="dropdown">
-                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <button class="btn btn-sm dropdown-toggle dropbtn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <i class="fas fa-sort-amount-down list-action-ic"></i></button>
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="filterdiv">
                               <a class="dropdown-item" href="SearchProducts?sortBy=0">By product category</a>
                               <a class="dropdown-item" href="SearchProducts?sortBy=1">By product name</a>
                           </div>
@@ -199,20 +203,9 @@
     </c:forEach>
 
     <c:if test="${fn:length(products) == 0}">
-        <div class="card">
-            <div class="card-header list-item ">
-
-                <div class="row custom-row">
-                    <!--  banana pic -->
-                    <div class="col my-auto text-center">
-                        <br>
-                        No results were found :( <br>
-                        ...but no worries! You can create a new product by clicking <a href="NewProduct"><u>here</u></a>
-                    </div>
-                </div>
-
-
-            </div>
+        <div class="text-center">
+            No results were found :( <br>
+            ...but no worries! You can create a new product <a href="NewProduct">here (click!)</a>
         </div>
     </c:if>
 
