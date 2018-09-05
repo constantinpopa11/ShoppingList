@@ -49,6 +49,60 @@
 
                 <jsp:include page="shoppinglist.jsp" />
 
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-center m-auto">
+                            <h3><br>Pictures</h3>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-12 col-center m-auto">
+                            <div id="picsCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+                                <!-- Carousel indicators -->
+                                <ol class="carousel-indicators">
+                                    <li data-target="#picsCarousel" data-slide-to="0" class="active"></li>
+                                    <li data-target="#picsCarousel" data-slide-to="1"></li>
+                                    <li data-target="#picsCarousel" data-slide-to="2"></li>
+                                </ol>   
+                                <!-- Wrapper for carousel items -->
+                                <div class="carousel-inner">
+                                    <div class="item carousel-item active">
+                                        <div class="row">
+                                            <div class="col-3 no-padding"><div class="img-box"><img width="65%" src="http://www.arcdocendi.com/Forms/images/upload.png" class="img-responsive img-fluid" alt=""></div></div>
+                                            <div class="col-3 no-padding"><div class="img-box"><img src="https://tul.imgix.net/content/article/banana.jpg?auto=format,compress&w=740&h=486&fit=crop&crop=edges" class="img-responsive img-fluid" alt=""></div></div>
+                                            <div class="col-3 no-padding"><div class="img-box"><img src="https://static.boredpanda.com/blog/wp-content/uploads/2015/02/banana-drawings-fruit-art-stephan-brusche-7.jpg" class="img-responsive img-fluid" alt=""></div></div>
+                                            <div class="col-3 no-padding"><div class="img-box"><img width="50%" src="http://files.diarioextra.com/files/Dnews/images/detail/359908_bananos.jpg" class="img-responsive img-fluid" alt=""></div></div>
+                                        </div>
+                                    </div>
+                                    <div class="item carousel-item">
+                                        <div class="row">
+                                            <div class="col-3 no-padding"><div class="img-box"><img src="https://tul.imgix.net/content/article/banana.jpg?auto=format,compress&w=740&h=486&fit=crop&crop=edges" class="img-responsive img-fluid" alt=""></div></div>
+                                            <div class="col-3 no-padding"><div class="img-box"><img src="https://tul.imgix.net/content/article/banana.jpg?auto=format,compress&w=740&h=486&fit=crop&crop=edges" class="img-responsive img-fluid" alt=""></div></div>
+                                            <div class="col-3 no-padding"><div class="img-box"><img src="https://tul.imgix.net/content/article/banana.jpg?auto=format,compress&w=740&h=486&fit=crop&crop=edges" class="img-responsive img-fluid" alt=""></div></div>
+                                            <div class="col-3 no-padding"><div class="img-box"><img src="https://tul.imgix.net/content/article/banana.jpg?auto=format,compress&w=740&h=486&fit=crop&crop=edges" class="img-responsive img-fluid" alt=""></div></div>
+                                        </div>
+                                    </div>
+                                    <div class="item carousel-item">
+                                        <div class="row">
+                                            <div class="col-3 no-padding"><div class="img-box"><img src="https://tul.imgix.net/content/article/banana.jpg?auto=format,compress&w=740&h=486&fit=crop&crop=edges" class="img-responsive img-fluid" alt=""></div></div>
+                                            <div class="col-3 no-padding"><div class="img-box"><img src="https://tul.imgix.net/content/article/banana.jpg?auto=format,compress&w=740&h=486&fit=crop&crop=edges" class="img-responsive img-fluid" alt=""></div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Carousel controls -->
+                                <a class="left carousel-control-prev carousel-control " href="#picsCarousel" data-slide="prev">
+                                    <i class="fa fa-chevron-left"></i>
+                                </a>
+                                <a class="right carousel-control-next carousel-control " href="#picsCarousel" data-slide="next">
+                                    <i class="fa fa-chevron-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
                 <div id="comment-section">
                     <!-- inizio sezione commenti -->
@@ -57,7 +111,7 @@
                         <div class="row">
 
                             <div class="col-sm-12">
-                                <h3><br>Comments</h3>
+                                <h3>Comments</h3>
                             </div><!-- /col-sm-12 -->
 
                         </div><!-- /row -->
@@ -211,25 +265,6 @@
             </div>
         </div> <!-- fine wrapper -->
 
-        <!-- Share Modal -->
-        <div class="modal fade" id="shareModal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Share Link</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <input class="linkField" type="text" spellcheck="false" value="${initParam['WEBSERVER_LOCATION']}/Share?shareLink=${activeSL.shareLink}"/>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <jsp:include page="modals.jsp" />
     </body>
