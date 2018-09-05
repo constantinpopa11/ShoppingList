@@ -102,7 +102,7 @@
                                                         </a>
                                                     </div>
 
-                                                    <c:if test="${picStatus.index == 2 || (picStatus.index > 4 && (picStatus.index+2) %4 == 0)}">
+                                                    <c:if test="${picStatus.index == 2 || (picStatus.index > 4 && (picStatus.index+2) %4 == 0) && fn:length(picturesList) >= picStatus.index + 2 }">
 
                                                     </div>
                                                 </div>
