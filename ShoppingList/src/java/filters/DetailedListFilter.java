@@ -7,6 +7,7 @@ package filters;
 
 import beans.SLCommentBean;
 import beans.SLItemBean;
+import beans.SLPictureBean;
 import beans.ShoppingListBean;
 import constants.LoginStatus;
 import constants.Utils;
@@ -69,6 +70,7 @@ public class DetailedListFilter implements Filter {
             List<ShoppingListBean> shoppingLists = (ArrayList<ShoppingListBean>) session.getAttribute("shoppingLists");
             List<SLItemBean> slItems = null;
             List<SLCommentBean> commentsList = null;
+            List<SLPictureBean> picturesList = null;
 
             DBConnectionManager dbManager = (DBConnectionManager) req.getServletContext().getAttribute("DBManager");
             Connection conn = dbManager.getConnection();
@@ -95,6 +97,9 @@ public class DetailedListFilter implements Filter {
                     commentsList = ShoppingListQueries.getSLComments(conn, slid);
                     session.setAttribute("commentsList", commentsList);
 
+                    picturesList = ShoppingListQueries.getSLPictures(conn, activeSL.getSlid());
+                    session.setAttribute("picturesList", picturesList);
+                    //System.out.println("pictures to load " + picturesList.size());
 
                 } else {
                     res.sendRedirect("home.jsp");

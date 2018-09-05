@@ -50,5 +50,7 @@ public class FormFields {
     public static final String NEW_LIST_EDITABLE_FIELD = "isEditable";
     public static final String NEW_LIST_ICON_FIELD = "listIcon";
     
+    public static final String NEW_SL_PICTURE_IMG_FIELD = "userPic";
+    
 
 }
