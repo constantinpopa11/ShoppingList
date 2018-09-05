@@ -5,8 +5,7 @@
  */
 package servlets;
 
-import beans.ProductCategoryBean;
-import beans.SLCategoryBean;
+import beans.ShoppingListBean;
 import constants.FormFields;
 import constants.LoginStatus;
 import constants.Privileges;
@@ -22,19 +21,21 @@ import java.nio.file.Paths;
 import java.sql.Connection;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-
-@WebServlet(urlPatterns = {"/NewShopCat"})
+/**
+ *
+ * @author invidia
+ */
 @MultipartConfig
-public class NewShopCat extends HttpServlet {
+public class UploadUserPic extends HttpServlet {
 
     HttpSession session;
     Connection conn;
@@ -75,12 +76,7 @@ public class NewShopCat extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        processRequest(request, response);
-        if (privileges == Privileges.ADMIN_PRIVILEGES) {
-            response.sendRedirect("newshopcat.jsp");
-        } else {
-            response.sendRedirect("home.jsp");
-        }
+        response.sendRedirect("home.jsp");
 
     }
 
@@ -98,37 +94,34 @@ public class NewShopCat extends HttpServlet {
 
         processRequest(request, response);
 
-        if (privileges != Privileges.ADMIN_PRIVILEGES) {
+        if (privileges < Privileges.ADMIN_PRIVILEGES) {
 
-            response.sendRedirect("home");
+            response.sendRedirect("home.jsp");
 
         } else {
 
-            String shopCatName = request.getParameter(FormFields.NEW_SHOP_CAT_NAME_FIELD);
-            String shopCatDescr = request.getParameter(FormFields.NEW_SHOP_CAT_DESCR_FIELD);
+            List<Part> fileParts = request.getParts().stream().filter(part -> FormFields.NEW_SL_PICTURE_IMG_FIELD.equals(part.getName())).collect(Collectors.toList());
 
-            Part filePart = request.getPart(FormFields.NEW_SHOP_CAT_ICON_FIELD);
-            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
-            String iconPath = Utils.SHOP_CATEGORY_ICONS;
+            for (Part filePart : fileParts) {
+                String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+                String picPath = Utils.SL_PICTURES;
 
-            if (fileName == null || fileName.isEmpty()) {
-                iconPath += Utils.DEFAULT_SHOP_CAT_ICON;
-            } else {
                 String extension = fileName.substring(fileName.lastIndexOf("."), fileName.length());
 
-                String newIconName = UUID.randomUUID().toString() + extension;
-                iconPath += newIconName;
+                String newPicName = UUID.randomUUID().toString() + extension;
+                picPath += newPicName;
 
-                File uploadLocation = new File(request.getRealPath(iconPath));
+                File uploadLocation = new File(request.getRealPath(picPath));
                 try (InputStream input = filePart.getInputStream();) {
                     Files.copy(input, uploadLocation.toPath());
                 }
+
+                ShoppingListBean activeSL = (ShoppingListBean) session.getAttribute("activeSL");
+                ShoppingListQueries.insertSLPicture(conn, picPath, activeSL.getSlid(), uid);
             }
 
-            //TODO: logo
-            ShoppingListQueries.insertShopCat(conn, shopCatName, shopCatDescr, iconPath);
-            //TODO: popup
-            response.sendRedirect("home.jsp");
+            String referrer = request.getHeader("referer");
+            response.sendRedirect(referrer);
         }
 
     }

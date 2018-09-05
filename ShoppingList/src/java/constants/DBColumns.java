@@ -48,6 +48,7 @@ public class DBColumns {
     public static final String SL_PICTURES_PATH_COL = DBTables.SL_PICTURES_TABLE + "." + "path";
     public static final String SL_PICTURES_UID_COL = DBTables.SL_PICTURES_TABLE + "." + "uid";
     public static final String SL_PICTURES_SLID_COL = DBTables.SL_PICTURES_TABLE + "." + "slid";
+    public static final String SL_PICTURES_DATE_COL = DBTables.SL_PICTURES_TABLE + "." + "date";
 
     public static final String SL_CARTS_SLID_COL = DBTables.SL_CARTS_TABLE + "." + "slid";
     public static final String SL_CARTS_PID_COL = DBTables.SL_CARTS_TABLE + "." + "pid";

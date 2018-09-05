@@ -88,14 +88,14 @@
                 </div>
                 <div class="slTitle float-left my-auto" id="search-barid">
                     <div class="col-xs-2 " id="sortBy">
-                      <span class="dropdown">
-                          <button class="btn btn-sm dropdown-toggle dropbtn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="fas fa-sort-amount-down list-action-ic"></i></button>
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="filterdiv">
-                              <a class="dropdown-item" href="SearchProducts?sortBy=0">By product category</a>
-                              <a class="dropdown-item" href="SearchProducts?sortBy=1">By product name</a>
-                          </div>
-                      </span>
+                        <span class="dropdown">
+                            <button class="btn btn-sm dropdown-toggle dropbtn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-sort-amount-down list-action-ic"></i></button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="filterdiv">
+                                <a class="dropdown-item" href="SearchProducts?sortBy=0">By product category</a>
+                                <a class="dropdown-item" href="SearchProducts?sortBy=1">By product name</a>
+                            </div>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -202,10 +202,23 @@
         </c:if>
     </c:forEach>
 
+
     <c:if test="${fn:length(products) == 0}">
-        <div class="text-center">
-            No results were found :( <br>
-            ...but no worries! You can create a new product <a href="NewProduct">here (click!)</a>
+        <div class="card">
+            <div class="card-header list-item ">
+
+                <div class="row custom-row">
+                    <!--  banana pic -->
+                    <div class="col my-auto text-center">
+                        <br>
+                        No results were found :( <br>
+                        ...but no worries! You can create a new product <a href="NewProduct"><u>here</u></a>
+                        <br><br>
+                    </div>
+                </div>
+
+
+            </div>
         </div>
     </c:if>
 

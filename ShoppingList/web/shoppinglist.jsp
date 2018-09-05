@@ -196,7 +196,7 @@
         </c:forEach>
     </c:if>
 
-    <c:if test="${fn:length(slItems) == 0}">
+    <c:if test="${fn:length(slItems) == 0 && not empty shoppingLists}">
         <div class="card">
             <div class="card-header list-item ">
 
@@ -206,11 +206,9 @@
                         <br>
                         There are no items in the list <br>
                         You can add a new product by clicking <a href="SearchProducts?lcid=${activeSL.lcid}&slid=${activeSL.slid}" ><u>here</u></a>
-                        <br>
+                        <br><br>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </c:if>

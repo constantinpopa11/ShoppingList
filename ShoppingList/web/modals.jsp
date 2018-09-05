@@ -101,3 +101,37 @@
         </div>
     </div>
 </div>
+
+<!-- Upload User Pic Modal -->
+<div class="modal fade" id="uploadUserPic" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Upload picture</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" action="UploadUserPic" enctype="multipart/form-data">
+
+                <div class="modal-body">
+                    <!-- File input -->
+                    <div class="input-group">
+                        <label class="input-group-btn" >
+                            <span class="btn custom-btn">
+                                Search <input name="userPic" single accept="image/*"  type="file" multiple="true" class="file-picker" required="required" >
+                            </span>
+                        </label>
+                        <input type="text" placeholder="Choose file" class="form-control file-name-label" readonly>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary" value="Upload" />
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

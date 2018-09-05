@@ -5,6 +5,7 @@
 
 
 <c:set var = "commentsList" scope="request" value = "${session.commentsList}"/>
+<c:set var = "commentsList" scope="request" value = "${session.picturesList}"/>
 
 <!DOCTYPE html>
 <html>
@@ -30,9 +31,14 @@
         <!-- Bootstrap JS -->
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <!-- Lightbox -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js"></script>
         <!-- Our Custom CSS -->
         <link rel="stylesheet" href="css/detailedlist.css">
         <link rel="stylesheet" href="css/shoppinglist.css">
+        <link rel="stylesheet" href="css/createtemplates.css">
+        <script src="scripts/custom-file-input.js"></script>
 
     </head>
 
@@ -49,64 +55,82 @@
 
                 <jsp:include page="shoppinglist.jsp" />
 
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 col-center m-auto">
-                            <h3><br>Pictures</h3>
-                        </div>
-                    </div>
-                    <hr>
 
-                    <div class="row">
-                        <div class="col-12 col-center m-auto">
-                            <div id="picsCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
-                                <!-- Carousel indicators -->
-                                <ol class="carousel-indicators">
-                                    <li data-target="#picsCarousel" data-slide-to="0" class="active"></li>
-                                    <li data-target="#picsCarousel" data-slide-to="1"></li>
-                                    <li data-target="#picsCarousel" data-slide-to="2"></li>
-                                </ol>   
-                                <!-- Wrapper for carousel items -->
-                                <div class="carousel-inner">
-                                    <div class="item carousel-item active">
-                                        <div class="row">
-                                            <div class="col-3 no-padding"><div class="img-box"><img width="65%" src="http://www.arcdocendi.com/Forms/images/upload.png" class="img-responsive img-fluid" alt=""></div></div>
-                                            <div class="col-3 no-padding"><div class="img-box"><img src="https://tul.imgix.net/content/article/banana.jpg?auto=format,compress&w=740&h=486&fit=crop&crop=edges" class="img-responsive img-fluid" alt=""></div></div>
-                                            <div class="col-3 no-padding"><div class="img-box"><img src="https://static.boredpanda.com/blog/wp-content/uploads/2015/02/banana-drawings-fruit-art-stephan-brusche-7.jpg" class="img-responsive img-fluid" alt=""></div></div>
-                                            <div class="col-3 no-padding"><div class="img-box"><img width="50%" src="http://files.diarioextra.com/files/Dnews/images/detail/359908_bananos.jpg" class="img-responsive img-fluid" alt=""></div></div>
+                <div id="comment-section">
+
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 col-center m-auto">
+                                <h3><br>Pictures</h3>
+                            </div>
+                        </div>
+                        <hr>
+
+
+                        <div class="row">
+                            <div class="col-12 col-center m-auto">
+                                <div id="picsCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+                                    <!-- Carousel indicators -->
+
+                                    <c:set var = "bulletsNum" scope="request" value = "${(fn:length(picturesList) / 4)}"/>
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#picsCarousel" data-slide-to="0" class="active"></li>
+                                        <c:forEach begin="1" end="${bulletsNum}" varStatus="loop">
+                                            <li data-target="#picsCarousel" data-slide-to="${loop.index}"></li>
+                                        </c:forEach>
+                                    </ol>   
+                                    <!-- Wrapper for carousel items -->
+                                    <div class="carousel-inner">
+                                        <div class="item carousel-item active">
+                                            <div class="row">
+                                                <div class="col-3 no-padding">
+                                                    <a href="#" data-toggle="modal" data-target="#uploadUserPic">
+                                                        <div class="img-box">
+                                                            <img src="http://www.arcdocendi.com/Forms/images/upload.png" class="img-responsive img-fluid tn" alt="">
+                                                        </div>
+                                                    </a>
+                                                </div>
+
+
+                                                <c:forEach items="${picturesList}" var="img" varStatus="picStatus">
+                                                    <div class="col-3 no-padding">
+                                                        <a href="${initParam['WEBSERVER_LOCATION']}/${img.picPath}" data-toggle="lightbox" data-gallery="img-gallery">
+                                                            <div class="img-box">
+                                                                <img src="${initParam['WEBSERVER_LOCATION']}/${img.picPath}" class="img-responsive img-fluid tn" alt="">
+                                                            </div>
+                                                        </a>
+                                                    </div>
+
+                                                    <c:if test="${picStatus.index == 2 || (picStatus.index > 4 && (picStatus.index+2) %4 == 0) && fn:length(picturesList) >= picStatus.index + 2 }">
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="item carousel-item">
+                                                    <div class="row">
+                                                    </c:if>
+                                                </c:forEach>
+
+                                            </div>
                                         </div>
+
+
                                     </div>
-                                    <div class="item carousel-item">
-                                        <div class="row">
-                                            <div class="col-3 no-padding"><div class="img-box"><img src="https://tul.imgix.net/content/article/banana.jpg?auto=format,compress&w=740&h=486&fit=crop&crop=edges" class="img-responsive img-fluid" alt=""></div></div>
-                                            <div class="col-3 no-padding"><div class="img-box"><img src="https://tul.imgix.net/content/article/banana.jpg?auto=format,compress&w=740&h=486&fit=crop&crop=edges" class="img-responsive img-fluid" alt=""></div></div>
-                                            <div class="col-3 no-padding"><div class="img-box"><img src="https://tul.imgix.net/content/article/banana.jpg?auto=format,compress&w=740&h=486&fit=crop&crop=edges" class="img-responsive img-fluid" alt=""></div></div>
-                                            <div class="col-3 no-padding"><div class="img-box"><img src="https://tul.imgix.net/content/article/banana.jpg?auto=format,compress&w=740&h=486&fit=crop&crop=edges" class="img-responsive img-fluid" alt=""></div></div>
-                                        </div>
-                                    </div>
-                                    <div class="item carousel-item">
-                                        <div class="row">
-                                            <div class="col-3 no-padding"><div class="img-box"><img src="https://tul.imgix.net/content/article/banana.jpg?auto=format,compress&w=740&h=486&fit=crop&crop=edges" class="img-responsive img-fluid" alt=""></div></div>
-                                            <div class="col-3 no-padding"><div class="img-box"><img src="https://tul.imgix.net/content/article/banana.jpg?auto=format,compress&w=740&h=486&fit=crop&crop=edges" class="img-responsive img-fluid" alt=""></div></div>
-                                        </div>
-                                    </div>
+                                    <!-- Carousel controls -->
+                                    <a class="left carousel-control-prev carousel-control " href="#picsCarousel" data-slide="prev">
+                                        <i class="fa fa-chevron-left"></i>
+                                    </a>
+                                    <a class="right carousel-control-next carousel-control " href="#picsCarousel" data-slide="next">
+                                        <i class="fa fa-chevron-right"></i>
+                                    </a>
                                 </div>
-                                <!-- Carousel controls -->
-                                <a class="left carousel-control-prev carousel-control " href="#picsCarousel" data-slide="prev">
-                                    <i class="fa fa-chevron-left"></i>
-                                </a>
-                                <a class="right carousel-control-next carousel-control " href="#picsCarousel" data-slide="next">
-                                    <i class="fa fa-chevron-right"></i>
-                                </a>
                             </div>
                         </div>
                     </div>
-                </div>
 
 
-                <div id="comment-section">
                     <!-- inizio sezione commenti -->
-
                     <div class="commentbox">
                         <div class="row">
 
@@ -278,4 +302,10 @@
     $('#updateModal').on('show.bs.modal', function (e) {
         $('input[name="updatePid"]').attr('value', e.relatedTarget.id);
     });
+
+    $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });
+
 </script>

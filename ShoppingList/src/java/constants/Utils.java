@@ -30,7 +30,7 @@ public class Utils {
     public static final String SHOP_CATEGORY_ICONS = "/images/shopCategories/";
     public static final String PROD_CATEGORY_ICONS = "/images/prodCategories/";
     public static final String SHOPPING_LIST_ICONS = "/images/shoppingLists/";
-    public static final String SL_PHOTOS = "/images/slPhotos/";
+    public static final String SL_PICTURES = "/images/slPictures/";
 
     public static final String DEFAULT_USER_AVATAR = "default.png";
     public static final String DEFAULT_PRODUCT_LOGO = "default.png";

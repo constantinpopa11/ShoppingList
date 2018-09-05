@@ -10,6 +10,7 @@ import beans.ProductCategoryBean;
 import beans.SLCategoryBean;
 import beans.SLCommentBean;
 import beans.SLItemBean;
+import beans.SLPictureBean;
 import beans.ShoppingListBean;
 import constants.DBColumns;
 import constants.DBTables;
@@ -237,13 +238,13 @@ public class ShoppingListQueries {
                 Date date = format.parse(dateStr);
 
                 DateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-                String result = df.format(date);
+                String formattedDate = df.format(date);
 
                 SLCommentBean comment = new SLCommentBean();
                 comment.setFirstName(firstName);
                 comment.setLastName(lastName);
                 comment.setAvatarPath(avatarPath);
-                comment.setDate(result);
+                comment.setDate(formattedDate);
                 comment.setMessage(message);
                 comment.setType(type);
                 comments.add(comment);
@@ -683,7 +684,7 @@ public class ShoppingListQueries {
             queryStr += ")  ORDER BY ";
 
             if (sortBy == Utils.SORT_PROD_BY_CATEGORY) {
-                queryStr += DBColumns.PRODUCTS_PCID_COL;
+                queryStr += DBColumns.PRODUCT_CAT_NAME_COL;
             } else if (sortBy == Utils.SORT_PROD_BY_NAME) {
                 queryStr += DBColumns.PRODUCTS_NAME_COL;
             }
@@ -1064,6 +1065,46 @@ public class ShoppingListQueries {
         return prodName;
     }
     
+    public static void insertSLPicture(Connection conn, String path, int slid, int uid) {
+
+        PreparedStatement preparedStmt = null;
+
+        try {
+
+            String queryStr = " INSERT INTO " + DBTables.SL_PICTURES_TABLE
+                    + " (" + DBColumns.SL_PICTURES_PATH_COL
+                    + ", " + DBColumns.SL_PICTURES_SLID_COL
+                    + ", " + DBColumns.SL_PICTURES_UID_COL
+                    + ") VALUES (?, ?, ?)";
+
+            // create the mysql insert preparedstatement
+            preparedStmt = conn.prepareStatement(queryStr);
+            preparedStmt.setString(1, path);
+            preparedStmt.setInt(2, slid);
+            preparedStmt.setInt(3, uid);
+
+            // execute the preparedstatement
+            preparedStmt.execute();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (preparedStmt != null) {
+                    preparedStmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+
+    }
+
+    
     public static void insertSLComment(Connection conn, int uid, String message, int slid, int type) {
 
         PreparedStatement preparedStmt = null;
@@ -1104,5 +1145,69 @@ public class ShoppingListQueries {
             }// nothing we can do
         }//end try
 
+    }
+    
+    public static List<SLPictureBean> getSLPictures(Connection conn, int slid) {
+        Statement stmt = null;
+
+        List<SLPictureBean> slPictures = new ArrayList<>();
+        try {
+
+            stmt = conn.createStatement();
+            String queryStr = "SELECT * "
+                    + " FROM " + DBTables.SL_PICTURES_TABLE 
+                    + ", " + DBTables.USERS_TABLE
+                    + " WHERE " + DBColumns.SL_PICTURES_SLID_COL + "=" + slid
+                    + " AND " + DBColumns.USERS_ID_COL + "=" + DBColumns.SL_PICTURES_UID_COL
+                    + " ORDER BY " + DBColumns.SL_PICTURES_DATE_COL;
+
+            ResultSet rs = stmt.executeQuery(queryStr);
+
+            //Extract data from result set
+            while (rs.next()) {
+                //Retrieve by column name, rs indicates query result and not actual website input
+                String picPath = rs.getString(DBColumns.SL_PICTURES_PATH_COL);
+                int uid = rs.getInt(DBColumns.SL_PICTURES_UID_COL);
+                String userFirstName = rs.getString(DBColumns.USERS_FIRST_NAME_COL);
+                String userLastName = rs.getString(DBColumns.USERS_LAST_NAME_COL);
+                String dateStr = rs.getString(DBColumns.SL_PICTURES_DATE_COL);
+
+                DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.ITALY);
+                Date date = format.parse(dateStr);
+
+                DateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+                String formattedDate = df.format(date);
+                
+                SLPictureBean pic = new SLPictureBean();
+                pic.setPicPath(picPath);
+                pic.setSlid(slid);
+                pic.setUid(uid);
+                pic.setUserFirstName(userFirstName);
+                pic.setUserLastName(userLastName);
+                pic.setDate(formattedDate);
+                slPictures.add(pic);
+
+            }
+            //Clean-up environment
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException se2) {
+            }// nothing we can do
+        }//end try
+
+        return slPictures;
     }
 }
