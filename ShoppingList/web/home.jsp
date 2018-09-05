@@ -12,7 +12,7 @@
         <title>Shopping List App</title>
 
         <!-- FA Icons -->
-        <link href="stylesheet" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
         <!-- Font Awesome JS -->
         <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" crossorigin="anonymous"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"  crossorigin="anonymous"></script>
@@ -51,6 +51,7 @@
         </div>
 
         <jsp:include page="modals.jsp" />
+        <jsp:include page="footer.jsp" />
 
     </body>
 

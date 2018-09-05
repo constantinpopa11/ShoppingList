@@ -62,7 +62,7 @@
 
                             <!-- Description -->
                             <div class="form-group">
-                                <textarea class="form-control rounded-0 descr-area" name="shopCatDescr" rows="4" 
+                                <textarea class="form-control rounded-0 descr-area" name="shopCatDescr" rows="4"
                                           placeholder="Shop category description" autocomplete="off"></textarea>
                             </div>
 
@@ -89,6 +89,7 @@
             </div>
         </div>
     </div>
+    <jsp:include page="footer.jsp" />
 </body>
 
 </html>

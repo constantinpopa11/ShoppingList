@@ -62,12 +62,13 @@
                 <!-- navbar Content Holder -->
 
                 <jsp:include page="navbar.jsp" />
-                
+
                 <jsp:include page="searchmode.jsp" />
             </div>
-        </div>
-        <!--  script after the page is loaded -->
 
+        </div>
+        <jsp:include page="footer.jsp" />
+        <!--  script after the page is loaded -->
 
     </body>
 </html>

@@ -242,6 +242,4 @@
             </c:if>
         </ul>
     </nav>
-
-
 </div> <!--  end accordion -->

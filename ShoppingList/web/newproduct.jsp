@@ -3,7 +3,7 @@
 
 <c:set var = "slCategories" scope="request" value = "${requestScope.slCategories}"/>
 <c:set var = "prodCategories" scope="request" value = "${requestScope.prodCategories}"/>
-<c:set var = "lcid" scope="request" value = "${requestScope.lcid}"/>             
+<c:set var = "lcid" scope="request" value = "${requestScope.lcid}"/>
 <c:set var = "slCatName" scope="request" value = "${requestScope.slCatName}"/>
 
 <!DOCTYPE html>
@@ -55,7 +55,7 @@
                 <div class="container">
 
                     <div class="form-container">
-                        <form class="text-center border border-light p-5" method="POST" action="NewProduct" 
+                        <form class="text-center border border-light p-5" method="POST" action="NewProduct"
                               enctype="multipart/form-data">
 
 
@@ -121,6 +121,7 @@
             </div>
         </div>
     </div>
+    <jsp:include page="footer.jsp" />
 </body>
 
 </html>

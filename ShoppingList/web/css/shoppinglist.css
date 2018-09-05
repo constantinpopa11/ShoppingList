@@ -1,3 +1,6 @@
+.accordion {
+  min-width: 350px;
+}
 .nopadding {
     padding: 0 !important;
 }
@@ -169,7 +172,7 @@
     border-color: #6D7FCC;
 }
 
-.btn-add{        
+.btn-add{
     background: #6D7FCC;
     color: white;
 }
@@ -191,7 +194,7 @@
 .search-btn, .filter-cat-btn{
     background-color: #ffffff;
     color: #77787d	;
-    border-color: #5067c2; 
+    border-color: #5067c2;
 }
 
 
@@ -207,12 +210,12 @@
     background-color: #5067c2;
     color: #ffffff;
 
-}   
+}
 
 .search-btn:focus, .search-btn:active , .filter-cat-btn:focus, .filtter-cat-btn:active{
     outline: none !important;
     box-shadow: none;
-}	
+}
 
 .search-field{
     border-color: #5067c2;
@@ -223,7 +226,7 @@
     outline: none !important;
     box-shadow: none;
     border-color: #5067c2;
-}	
+}
 
 .item-expand-ic:hover{
     color: #3d3d3d;

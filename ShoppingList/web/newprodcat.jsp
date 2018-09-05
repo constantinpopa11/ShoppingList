@@ -50,7 +50,7 @@
                 <jsp:include page="navbar.jsp" />
 
                 <div class="container">
-                   
+
                     <div class="form-container shadow-lg">
                         <form class="text-center border border-light p-5" method="POST" action="NewProdCat"
                               enctype="multipart/form-data">
@@ -71,7 +71,7 @@
 
                             <!-- Description -->
                             <div class="form-group">
-                                <textarea class="form-control rounded-0 descr-area" name="prodCatDescr" rows="4" 
+                                <textarea class="form-control rounded-0 descr-area" name="prodCatDescr" rows="4"
                                           placeholder="Product category description" autocomplete="off"></textarea>
                             </div>
 
@@ -98,6 +98,7 @@
             </div>
         </div>
     </div>
+    <jsp:include page="footer.jsp" />
 </body>
 
 </html>
