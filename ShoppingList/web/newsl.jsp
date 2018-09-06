@@ -87,20 +87,23 @@
                                     <input type="text" placeholder="Insert icon" class="form-control file-name-label" readonly>
                                 </div>
 
-
-                                <div>
-                                    <label class="switch">
-                                        <input name="isEditable" type="checkbox">
-                                        <span class="slider"></span>
-                                    </label>
-                                    Editable
-
-                                    <label class="switch">
-                                        <input name="isRemovable" type="checkbox">
-                                        <span class="slider"></span>
-                                    </label>
-                                    Removable
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label class="switch">
+                                            <input name="isEditable" type="checkbox">
+                                            <span class="slider"></span>
+                                        </label>
+                                        Editable
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="switch">
+                                            <input name="isRemovable" type="checkbox">
+                                            <span class="slider"></span>
+                                        </label>
+                                        Removable
+                                    </div >
                                 </div>
+
                             </div>
 
 
