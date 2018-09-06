@@ -55,60 +55,61 @@
 
                 <div class="container">
 
-                    <div class="form-container">
-                        <form class="text-center border border-light p-5" method="POST" action="NewProduct"
+                    <div class="form-container shadow-lg">
+                        <form class="text-center" method="POST" action="NewProduct"
                               enctype="multipart/form-data">
 
+                            <p  class="title">New Product <i class="fas fa-tags"></i></p>
 
+                            <div class="custom-fields">
+                                <!-- Shop Category -->
+                                <select class="browser-default custom-select mb-4 " name="shopCategory" required autocomplete="off" onChange="window.location.href = this.value">
 
-                            <p  class="title">New Product</p>
-                            <!-- Shop Category -->
-                            <select class="browser-default custom-select mb-4 " name="shopCategory" required autocomplete="off" onChange="window.location.href = this.value">
+                                    <c:if test="${lcid != null}">
+                                        <option value="${lcid}" selected>${slCatName}</option>
+                                    </c:if>
 
-                                <c:if test="${lcid != null}">
-                                    <option value="${lcid}" selected>${slCatName}</option>
-                                </c:if>
+                                    <c:if test="${lcid == null}">
+                                        <option value="" selected disabled >Select shop category</option>
+                                        <c:forEach items="${slCategories}" var="slCat">
+                                            <option value="NewProduct?lcid=${slCat.slcid}&slCatName=${slCat.slCatName}">${slCat.slCatName}</option>
+                                        </c:forEach>
+                                    </c:if>
+                                </select>
 
-                                <c:if test="${lcid == null}">
-                                    <option value="" selected disabled >Select shop category</option>
-                                    <c:forEach items="${slCategories}" var="slCat">
-                                        <option value="NewProduct?lcid=${slCat.slcid}&slCatName=${slCat.slCatName}">${slCat.slCatName}</option>
+                                <!-- Item Category -->
+                                <select class="browser-default custom-select mb-4 " name="itemCategory" required autocomplete="off ">
+                                    <option value="" selected disabled >Select item category</option>
+                                    <c:forEach items="${prodCategories}" var="prodCat">
+                                        <option value="${prodCat.pcid}">${prodCat.prodCatName}</option>
                                     </c:forEach>
-                                </c:if>
-                            </select>
+                                </select>
 
-                            <!-- Item Category -->
-                            <select class="browser-default custom-select mb-4 " name="itemCategory" required autocomplete="off ">
-                                <option value="" selected disabled >Select item category</option>
-                                <c:forEach items="${prodCategories}" var="prodCat">
-                                    <option value="${prodCat.pcid}">${prodCat.prodCatName}</option>
-                                </c:forEach>
-                            </select>
-
-                            <!-- Name -->
-                            <input type="text" name="prodName" class="form-control mb-4" required autocomplete="off" placeholder="Product name">
+                                <!-- Name -->
+                                <input type="text" name="prodName" class="form-control mb-4" required autocomplete="off" placeholder="Product name">
 
 
-                            <!-- Measure Unit -->
-                            <input type="text" name="measureUnit" class="form-control mb-4" name="measureUnit"
-                                   required placeholder="Measure unit" autocomplete="off"/>
+                                <!-- Measure Unit -->
+                                <input type="text" name="measureUnit" class="form-control mb-4" name="measureUnit"
+                                       required placeholder="Measure unit" autocomplete="off"/>
 
 
-                            <!-- Description -->
-                            <div class="form-group">
-                                <textarea class="form-control rounded-0 descr-area" name="prodDescr" rows="4" placeholder="Product description" autocomplete="off"></textarea>
-                            </div>
+                                <!-- Description -->
+                                <div class="form-group">
+                                    <textarea class="form-control rounded-0 descr-area" name="prodDescr" rows="4" placeholder="Product description" autocomplete="off"></textarea>
+                                </div>
 
-                            <!-- File input -->
+                                <!-- File input -->
 
 
-                            <div class="input-group">
-                                <label class="input-group-btn" >
-                                    <span class="btn custom-btn">
-                                        Search <input name="prodIcon" single accept="image/*" type="file" class="file-picker"  >
-                                    </span>
-                                </label>
-                                <input type="text" placeholder="Insert logo" class="form-control file-name-label" readonly>
+                                <div class="input-group">
+                                    <label class="input-group-btn" >
+                                        <span class="btn custom-btn">
+                                            Search <input name="prodIcon" single accept="image/*" type="file" class="file-picker"  >
+                                        </span>
+                                    </label>
+                                    <input type="text" placeholder="Insert logo" class="form-control file-name-label" readonly>
+                                </div>
                             </div>
 
                             <!-- Send button -->
