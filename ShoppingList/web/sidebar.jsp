@@ -175,5 +175,5 @@
          */
     }
 
-    setInterval(getUserCoordinates, 1000 * 30, true);
+    setInterval(getUserCoordinates, 1000 * 60 * 5, true);
 </script>
