@@ -24,8 +24,8 @@
 
         <!-- Bootstrap CSS CDN -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"  crossorigin="anonymous">
-        <!-- jQuery CDN -->
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <!-- jQuery CDN - Slim version (=without AJAX) -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <!-- Popper.JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
         <!-- Bootstrap JS -->
@@ -79,7 +79,7 @@
                                         <c:forEach begin="1" end="${bulletsNum}" varStatus="loop">
                                             <li data-target="#picsCarousel" data-slide-to="${loop.index}"></li>
                                         </c:forEach>
-                                    </ol>   
+                                    </ol>
                                     <!-- Wrapper for carousel items -->
                                     <div class="carousel-inner">
                                         <div class="item carousel-item active">
@@ -146,23 +146,25 @@
 
                                 <c:choose>
                                     <c:when test = "${comment.type == 0}">
-                                        <div class="coomentbox row centere">
-                                            <div class="col-sm-1" style="padding:0px 45px 0px 5px;">
-                                                <div class="thumbnail" >
-                                                    <img class="img-responsive user-photo img-rounded" src="${initParam['WEBSERVER_LOCATION']}/images/userAvatars/default.png">
-                                                </div><!-- /thumbnail -->
-                                            </div><!-- /col-sm-1  foto col -->
-                                            <div class="col-sm-11"> <!-- body comment col -->
-                                                <div class="panel panel-default">
-                                                    <div class="panel-heading">
-                                                        <strong>${comment.firstName} ${comment.lastName}</strong>  <span class="text-muted float-right"><em>${comment.date}</em></span>
-                                                    </div>
-                                                    <div class="panel-body">
-                                                        ${comment.message}
-                                                    </div><!-- /panel-body -->
-                                                </div><!-- /panel panel-default -->
-                                            </div><!-- /col-sm-5 -->
-                                        </div><!-- /container commento copia fino a qua-->
+                                      <div class="row coomentbox centere border-up border-bottom">
+                                          <div class="col-sm-12">
+                                          <div class="row">
+                                            <div class="col-sm-2 thumbnail">
+                                              <img alt="user-photo" src="${initParam['WEBSERVER_LOCATION']}/images/userAvatars/default.svg">
+                                            </div>
+                                            <div class="col-sm-10">
+                                              <blockquote class="blockquote">
+                                                <p class="mb-0 ">
+                                                ${comment.message}
+                                                </p>
+                                                <footer class="blockquote-footer">
+                                                  <strong>${comment.firstName} ${comment.lastName}</strong>  <cite>${comment.date}</cite>
+                                                </footer>
+                                              </blockquote>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
                                     </c:when>
 
                                     <c:when test = "${comment.type == 1}">
@@ -258,32 +260,29 @@
                         <hr>
 
                         <!-- inizio sezione aggiungi commento -->
-                        <div class="addcoomentbox row">
-                            <div class="col-sm-1" style="padding:0px 45px 0px 5px;">
-                                <div class="thumbnail">
-                                    <img class="img-responsive user-photo img-rounded" src="${initParam['WEBSERVER_LOCATION']}/images/userAvatars/default.png">
-                                </div><!-- /thumbnail -->
-                            </div><!-- /col-sm-1  foto col -->
-                            <div class="col-sm-11"> <!-- body comment col -->
-                                <div class="panel-body"><!-- form body -->
-                                    <div class="widget-area no-padding blank">
-                                        <div class="status-upload">
-                                            <form action="AddComment" method="POST">
-                                                <div class="row container-fluid">
-                                                    <div class="col-9 ">
-                                                        <textarea maxlength="300" class="form-control" rows="3" name="msgText" placeholder="Add comment on this shopping list "  width="10%" ></textarea><br>
-                                                    </div>
-                                                    <div class="col-3 float-right">
-                                                        <button type="submit" class="btn btn-primary green"><i class="fa fa-share"></i> Comment</button>
-                                                    </div>
-                                                </div><!-- Widget Area -->
-                                            </form> 
-                                        </div>
-                                    </div><!-- /container commento copia fino a qua-->
-                                </div><!-- fine sezione commenti e aggiungi commenti -->
-                                <!-- fine sezione commenti -->
-                            </div> <!--  end accordion -->
-                        </div>
+                        <div class="row addcoomentbox border">
+                        		<div class="col-md-12">
+                        			<div class="row">
+                        				<div class="col-md-2"> <!-- image div-->
+                                  <div class="thumbnail">
+                                      <img class="img-responsive user-photo img-rounded" src="${initParam['WEBSERVER_LOCATION']}/images/userAvatars/default.svg">
+                                  </div><!-- /thumbnail -->
+                        				</div>
+                        				<div class="col-md-10">
+                                  <form action="AddComment" method="POST">
+                        					<div class="row">
+                        						<div class="col-md-8"> <!-- text area div -->
+                                      <textarea maxlength="300" class="form-control" rows="3" name="msgText" placeholder="Add comment on this shopping list "  width="10%" ></textarea><br>
+                        						</div>
+                        						<div class="col-md-4 float-right"><!--button div -->
+                                        <button type="submit" class="btn btn-primary green"><i class="fa fa-share"></i> Comment</button>
+                        						</div>
+                        					</div>
+                                  </form>
+                        				</div>
+                        			</div>
+                        		</div>
+                        	</div><!-- end add comment section -->
                     </div>
                 </div>
             </div>
