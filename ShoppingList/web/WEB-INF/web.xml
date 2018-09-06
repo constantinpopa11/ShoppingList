@@ -95,6 +95,10 @@
         <servlet-name>UploadUserPic</servlet-name>
         <servlet-class>servlets.UploadUserPic</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FindNearShops</servlet-name>
+        <servlet-class>servlets.FindNearShops</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SignUp</servlet-name>
         <url-pattern>/SignUp</url-pattern>
@@ -126,6 +130,10 @@
     <servlet-mapping>
         <servlet-name>UploadUserPic</servlet-name>
         <url-pattern>/UploadUserPic</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FindNearShops</servlet-name>
+        <url-pattern>/FindNearShops</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

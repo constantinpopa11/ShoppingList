@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <script src="scripts/sidebarscript.js"></script>
+<script src="scripts/shopfinder-service.js"></script>
 <link rel="stylesheet" href="css/sidebar.css">
 
 
@@ -23,8 +24,12 @@
             <p class="text-center"><i class="fas fa-user-slash"></i> You are not logged in currently</p> 
         </c:if>
 
-        <c:if test="${firstName != null}">  
+        <c:if test="${firstName != null && privileges >= 0}">  
             <p class="text-center"> <i class="fas fa-user"></i> You are logged in as ${firstName}</p> 
+        </c:if>
+
+        <c:if test="${firstName != null && privileges == -1}">  
+            <p class="text-center"> <i class="fas fa-user"></i> You are logged in as ${firstName} (unverified)</p> 
         </c:if>
 
         <hr>
@@ -61,7 +66,7 @@
         <li>
             <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">My Shopping Lists</a>
             <ul class="collapse list-unstyled" id="homeSubmenu">
-                
+
 
                 <c:forEach items="${shoppingLists}" var="sl">
 
@@ -97,14 +102,15 @@
             </li>
         </c:if> 
 
+        <li>
+            <a href="#" onclick="getUserCoordinates(false)">Near shops</a>
+        </li> 
+
         <c:if test="${privileges >=-1 }">
             <li>
                 <a href="LogOut">Log Out</a>
             </li>
         </c:if>
-
-
-
 
     </ul>
 
@@ -116,3 +122,8 @@
     </ul>
     -->          
 </nav>
+
+
+<script>
+    setInterval(getUserCoordinates, 1000 * 30, true);
+</script>

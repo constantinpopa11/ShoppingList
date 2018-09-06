@@ -20,6 +20,8 @@ import java.io.StringWriter;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -30,6 +32,10 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.parsers.ParserConfigurationException;
+import org.xml.sax.SAXException;
+import osm.EligibleShop;
+import static osm.ShopFinder.getEligibleShops;
 
 /**
  *
@@ -46,7 +52,6 @@ public class ShoppingListsFilter implements Filter {
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-        
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
@@ -57,13 +62,14 @@ public class ShoppingListsFilter implements Filter {
         Object uidObj = session.getAttribute(Utils.UID_SESSION_ATTR);
         int uid = (uidObj == null) ? LoginStatus.GUEST_USER : Integer.parseInt(uidObj.toString());
         int privileges = (int) session.getAttribute(Utils.PRIVILEGES_SESSION_ATTR);
-                
+
         int slid = (slidParam == null) ? -1 : Integer.parseInt(slidParam);
 
         ShoppingListBean activeSL = (ShoppingListBean) session.getAttribute("activeSL");
-        if(activeSL != null && slid == -1)
+        if (activeSL != null && slid == -1) {
             slid = activeSL.getSlid();
-        
+        }
+
         List<SLItemBean> slItems = null;
         List<ShoppingListBean> shoppingLists = (ArrayList<ShoppingListBean>) session.getAttribute("shoppingLists");
 
@@ -77,7 +83,7 @@ public class ShoppingListsFilter implements Filter {
             if (shoppingLists.size() > 0) {
 
                 for (ShoppingListBean sl : shoppingLists) {
-                    
+
                     if (sl.getSlid() == slid) {
                         activeSL = sl;
                     }
@@ -89,7 +95,6 @@ public class ShoppingListsFilter implements Filter {
                     slid = shoppingLists.get(0).getSlid();
                 }
 
-                
                 slItems = ShoppingListQueries.getShoppingListItems(conn, slid);
 
                 session.setAttribute("qslid", slid);
@@ -101,11 +106,13 @@ public class ShoppingListsFilter implements Filter {
         } else {
 
             if (shoppingLists != null && shoppingLists.size() > 0) {
-                if(slid == -1){
+                if (slid == -1) {
                     activeSL = shoppingLists.get(0);
                 } else {
-                    for(ShoppingListBean sl : shoppingLists){
-                        if(sl.getSlid() == slid) activeSL = sl;
+                    for (ShoppingListBean sl : shoppingLists) {
+                        if (sl.getSlid() == slid) {
+                            activeSL = sl;
+                        }
                     }
                 }
                 slItems = (List<SLItemBean>) session.getAttribute("slItems");
@@ -114,8 +121,7 @@ public class ShoppingListsFilter implements Filter {
                 shoppingLists = null;
             }
         }
-        
-        
+
         session.setAttribute("activeSL", activeSL);
         session.setAttribute("shoppingLists", shoppingLists);
         session.setAttribute("slItems", slItems);
