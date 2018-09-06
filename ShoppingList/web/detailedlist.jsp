@@ -265,7 +265,7 @@
                         			<div class="row">
                         				<div class="col-md-2"> <!-- image div-->
                                   <div class="thumbnail">
-                                      <img class="img-responsive user-photo img-rounded" src="${initParam['WEBSERVER_LOCATION']}/images/userAvatars/default.svg">
+                                      <img class="img-responsive user-photo img-rounded" src="${initParam['WEBSERVER_LOCATION']}${avatarPath}">
                                   </div><!-- /thumbnail -->
                         				</div>
                         				<div class="col-md-10">
