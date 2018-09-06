@@ -50,58 +50,58 @@
 
                 <div class="container">
 
-                    <div class="form-container">
-                        <form class="border border-light p-5" method="POST" action="NewShoppingList"
+                    <div class="form-container shadow-lg">
+                        <form class="" method="POST" action="NewShoppingList"
                               enctype="multipart/form-data">
 
-                            <p  class="title text-center    ">New Shopping List</p>
+                            <p  class="title text-center">New Shopping List <i class="fas fa-clipboard-list"></i></p>
 
-                            <!-- List Category -->
-                            <select class="browser-default custom-select mb-4 " name="shopCategory" required autocomplete="off ">
-                                <option value="" selected disabled >Select shop category</option>
-                                <c:forEach items="${slCategories}" var="slCat">
-                                    <option value="${slCat.slcid}">${slCat.slCatName}</option>
-                                </c:forEach>
-                            </select>
-
-
-                            <!-- Name -->
-                            <input type="text" name="listName" class="form-control mb-4" required autocomplete="off" placeholder="Name">
+                            <div class="custom-fields">
+                                <!-- List Category -->
+                                <select class="browser-default custom-select mb-4 " name="shopCategory" required autocomplete="off ">
+                                    <option value="" selected disabled >Select shop category</option>
+                                    <c:forEach items="${slCategories}" var="slCat">
+                                        <option value="${slCat.slcid}">${slCat.slCatName}</option>
+                                    </c:forEach>
+                                </select>
 
 
+                                <!-- Name -->
+                                <input type="text" name="listName" class="form-control mb-4" required autocomplete="off" placeholder="Name">
 
-                            <!-- Description -->
-                            <div class="form-group">
-                                <textarea class="form-control rounded-0 descr-area" name="listDescr" rows="4" placeholder="List description" autocomplete="off"></textarea>
+
+
+                                <!-- Description -->
+                                <div class="form-group">
+                                    <textarea class="form-control rounded-0 descr-area" name="listDescr" rows="4" placeholder="List description" autocomplete="off"></textarea>
+                                </div>
+
+
+                                <!-- File input -->
+                                <div class="input-group">
+                                    <label class="input-group-btn" >
+                                        <span class="btn custom-btn">
+                                            Search <input name="listIcon" single accept="image/*"  type="file" class="file-picker" >
+                                        </span>
+                                    </label>
+                                    <input type="text" placeholder="Insert icon" class="form-control file-name-label" readonly>
+                                </div>
+
+
+                                <div>
+                                    <label class="switch">
+                                        <input name="isEditable" type="checkbox">
+                                        <span class="slider"></span>
+                                    </label>
+                                    Editable
+
+                                    <label class="switch">
+                                        <input name="isRemovable" type="checkbox">
+                                        <span class="slider"></span>
+                                    </label>
+                                    Removable
+                                </div>
                             </div>
-
-
-                            <!-- File input -->
-                            <div class="input-group">
-                                <label class="input-group-btn" >
-                                    <span class="btn custom-btn">
-                                        Search <input name="listIcon" single accept="image/*"  type="file" class="file-picker" >
-                                    </span>
-                                </label>
-                                <input type="text" placeholder="Insert icon" class="form-control file-name-label" readonly>
-                            </div>
-
-
-                            <div>
-                                <label class="switch">
-                                    <input name="isEditable" type="checkbox">
-                                    <span class="slider"></span>
-                                </label>
-                                Editable
-
-                                <label class="switch">
-                                    <input name="isRemovable" type="checkbox">
-                                    <span class="slider"></span>
-                                </label>
-                                Removable
-                            </div>
-
-
 
 
                             <!-- Send button -->

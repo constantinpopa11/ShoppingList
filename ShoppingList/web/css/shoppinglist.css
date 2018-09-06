@@ -9,10 +9,17 @@
 
 .itemInfo{
     font-size: 0.9em;
+    color: #595959;
 }
 
 .slTitle{
     font-size: 1.1em;
+}
+
+@media (min-width:641px)  { 
+    .slTitle{
+        font-size: 1.3em;
+    }
 }
 
 .slInfo{

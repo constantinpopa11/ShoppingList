@@ -51,32 +51,34 @@
 
 
                     <div class="form-container shadow-lg">
-                        <form class="text-center border border-light p-5" method="POST" action="NewShopCat"
+                        <form class="text-center" method="POST" action="NewShopCat"
                               enctype="multipart/form-data">
 
-                            <p  class="title">New Shop Category</p>
+                            <p  class="title">New Shop Category <i class="fas fa-store"></i></p>
+                            
+                            <div class="custom-fields">
+                                <!-- Name -->
+                                <input type="text" name="shopCatName" class="form-control mb-4" required autocomplete="off" placeholder="Shop category name">
+
+                                <!-- Description -->
+                                <div class="form-group">
+                                    <textarea class="form-control rounded-0 descr-area" name="shopCatDescr" rows="4"
+                                              placeholder="Shop category description" autocomplete="off"></textarea>
+                                </div>
+
+                                <!-- File input -->
 
 
-                            <!-- Name -->
-                            <input type="text" name="shopCatName" class="form-control mb-4" required autocomplete="off" placeholder="Shop category name">
-
-                            <!-- Description -->
-                            <div class="form-group">
-                                <textarea class="form-control rounded-0 descr-area" name="shopCatDescr" rows="4"
-                                          placeholder="Shop category description" autocomplete="off"></textarea>
+                                <div class="input-group">
+                                    <label class="input-group-btn" >
+                                        <span class="btn custom-btn">
+                                            Search <input name="shopCatIcon" single accept="image/*" type="file" class="file-picker">
+                                        </span>
+                                    </label>
+                                    <input type="text" placeholder="Insert logo" class="form-control file-name-label" readonly>
+                                </div>
                             </div>
 
-                            <!-- File input -->
-
-
-                            <div class="input-group">
-                                <label class="input-group-btn" >
-                                    <span class="btn custom-btn">
-                                        Search <input name="shopCatIcon" single accept="image/*" type="file" class="file-picker">
-                                    </span>
-                                </label>
-                                <input type="text" placeholder="Insert logo" class="form-control file-name-label" readonly>
-                            </div>
 
                             <!-- Send button -->
                             <br><button class="btn custom-btn btn-block" type="submit">Create shop category <i class="fas fa-arrow-right"></i></button>

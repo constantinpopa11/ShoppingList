@@ -51,40 +51,42 @@
 
                 <div class="container">
 
-                    <div class="form-container shadow-lg" style="margin: 0 auto;">
-                        <form class="text-center border border-light" method="POST" action="NewProdCat"
+                    <div class="form-container shadow-lg">
+                        <form class="text-center" method="POST" action="NewProdCat"
                               enctype="multipart/form-data">
 
-                            <p  class="title">New Product Category <i class="fas fa-pencil-alt"></i></p>
+                            <p  class="title">New Product Category <i class="fas fa-shopping-basket"></i></p>
 
-                            <!-- Shop category-->
-                            <select class="browser-default custom-select mb-4 " name="lcid" required autocomplete="off ">
-                                <option value="" selected disabled >Select shop category</option>
-                                <c:forEach items="${slCategories}" var="slCat">
-                                    <option value="${slCat.slcid}">${slCat.slCatName}</option>
-                                </c:forEach>
-                            </select>
-
-
-                            <!-- Name -->
-                            <input type="text" name="prodCatName" class="form-control mb-4" required autocomplete="off" placeholder="Product category name">
-
-                            <!-- Description -->
-                            <div class="form-group">
-                                <textarea class="form-control rounded-0 descr-area" name="prodCatDescr" rows="4"
-                                          placeholder="Product category description" autocomplete="off"></textarea>
-                            </div>
-
-                            <!-- File input -->
+                            <div class="custom-fields">
+                                <!-- Shop category-->
+                                <select class="browser-default custom-select mb-4 " name="lcid" required autocomplete="off ">
+                                    <option value="" selected disabled >Select shop category</option>
+                                    <c:forEach items="${slCategories}" var="slCat">
+                                        <option value="${slCat.slcid}">${slCat.slCatName}</option>
+                                    </c:forEach>
+                                </select>
 
 
-                            <div class="input-group">
-                                <label class="input-group-btn" >
-                                    <span class="btn custom-btn">
-                                        Search <input name="prodCatIcon" single accept="image/*"  type="file" class="file-picker">
-                                    </span>
-                                </label>
-                                <input type="text" placeholder="Insert logo" class="form-control file-name-label" readonly>
+                                <!-- Name -->
+                                <input type="text" name="prodCatName" class="form-control mb-4" required autocomplete="off" placeholder="Product category name">
+
+                                <!-- Description -->
+                                <div class="form-group">
+                                    <textarea class="form-control rounded-0 descr-area" name="prodCatDescr" rows="4"
+                                              placeholder="Product category description" autocomplete="off"></textarea>
+                                </div>
+
+                                <!-- File input -->
+
+
+                                <div class="input-group">
+                                    <label class="input-group-btn" >
+                                        <span class="btn custom-btn">
+                                            Search <input name="prodCatIcon" single accept="image/*"  type="file" class="file-picker">
+                                        </span>
+                                    </label>
+                                    <input type="text" placeholder="Insert logo" class="form-control file-name-label" readonly>
+                                </div>
                             </div>
 
                             <!-- Send button -->
