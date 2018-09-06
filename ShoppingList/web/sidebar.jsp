@@ -14,22 +14,22 @@
     <div class="sidebar-header">
         <p>
             <a href="home.jsp">
-                <img   src="${initParam['WEBSERVER_LOCATION']}/images/app/sl_logo.png" width="80%">
+                <img   src="${initParam['WEBSERVER_LOCATION']}/images/app/logo_v2.svg" width="80%">
             </a>
         </p>
     </div>
 
     <ul class="list-unstyled components">
         <c:if test="${firstName == null}">
-            <p class="text-center"><i class="fas fa-user-slash"></i> You are not logged in currently</p> 
+            <p class="text-center"><i class="fas fa-user-slash"></i> You are not logged in currently</p>
         </c:if>
 
-        <c:if test="${firstName != null && privileges >= 0}">  
-            <p class="text-center"> <i class="fas fa-user"></i> You are logged in as ${firstName}</p> 
+        <c:if test="${firstName != null && privileges >= 0}">
+            <p class="text-center"> <i class="fas fa-user"></i> You are logged in as ${firstName}</p>
         </c:if>
 
-        <c:if test="${firstName != null && privileges == -1}">  
-            <p class="text-center"> <i class="fas fa-user"></i> You are logged in as ${firstName} (unverified)</p> 
+        <c:if test="${firstName != null && privileges == -1}">
+            <p class="text-center"> <i class="fas fa-user"></i> You are logged in as ${firstName} (unverified)</p>
         </c:if>
 
         <hr>
@@ -100,11 +100,11 @@
             <li>
                 <a href="NewProduct">New Product</a>
             </li>
-        </c:if> 
+        </c:if>
 
         <li>
-            <a href="#" onclick="getUserCoordinates(false)">Near shops</a>
-        </li> 
+            <a href="#" onclick="getUserCoordinates(false)">Nearby shops</a>
+        </li>
 
         <c:if test="${privileges >=-1 }">
             <li>
@@ -114,13 +114,13 @@
 
     </ul>
 
-    <!--             
+    <!--
     <ul class="list-unstyled CTAs">
         <li>
             <a href="#" class="download">button</a>
         </li>
     </ul>
-    -->          
+    -->
 </nav>
 
 
