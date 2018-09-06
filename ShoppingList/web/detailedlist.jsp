@@ -287,9 +287,8 @@
                 </div>
             </div>
         </div> <!-- fine wrapper -->
-
-
         <jsp:include page="modals.jsp" />
+          <jsp:include page="footer.jsp" />
     </body>
 </html>
 
