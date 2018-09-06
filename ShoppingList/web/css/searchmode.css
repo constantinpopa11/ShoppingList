@@ -52,7 +52,7 @@
     border-radius: 50px;
     border: 2px solid white;
     background-color: #fcfcfc;
-    width: 350px;
+    width: 300px;
     color: #4c4c4c;
 }
 
@@ -80,7 +80,14 @@
 #custom-search .search-query:focus:-ms-input-placeholder {
     color: #cccccc;
 }
-
+@media screen and (max-width: 640px) {
+  #custom-search .search-query:focus {
+      border-radius: 30px;
+      border: 1px solid white;
+      background-color: #fcfcfc;
+      max-width: 180px;!important;
+  }
+}
 /* Style for Button */
 #custom-search button {
     border: 0;
