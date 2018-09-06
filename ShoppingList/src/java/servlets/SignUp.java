@@ -16,6 +16,7 @@ import database.ShoppingListQueries;
 import database.UserQueries;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Random;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -96,6 +97,27 @@ public class SignUp extends HttpServlet {
             String password = request.getParameter(FormFields.SIGNUP_PASSWORD_FIELD);
             String passwordConfirm = request.getParameter(FormFields.SIGNUP_PASSWORD_CONFIRM_FIELD);
             String avatarPath = Utils.USER_AVATARS + Utils.DEFAULT_USER_AVATAR;
+            Random rd = new Random();
+            int n_ava = rd.nextInt(8);
+            switch (n_ava) {
+                case 1:
+                     avatarPath = Utils.USER_AVATARS + Utils.DEFAULT_USER_AVATAR;
+                case 2:
+                     avatarPath = Utils.USER_AVATARS + Utils.DEFAULT_USER_AVATAR2;
+                case 3:
+                     avatarPath = Utils.USER_AVATARS + Utils.DEFAULT_USER_AVATAR3;
+                case 4:
+                     avatarPath = Utils.USER_AVATARS + Utils.DEFAULT_USER_AVATAR4;
+                case 5:
+                     avatarPath = Utils.USER_AVATARS + Utils.DEFAULT_USER_AVATAR5;
+                case 6:
+                     avatarPath = Utils.USER_AVATARS + Utils.DEFAULT_USER_AVATAR6;
+                case 7:
+                     avatarPath = Utils.USER_AVATARS + Utils.DEFAULT_USER_AVATAR7;
+                default: 
+                     avatarPath = Utils.USER_AVATARS + Utils.DEFAULT_USER_AVATAR8;
+            }
+            //omar has modified up to here boss
 
             if (!email.equals(emailConfirm)) {
                 request.setAttribute("errorMessage", "The confirmation email doesn't match.");
@@ -142,7 +164,7 @@ public class SignUp extends HttpServlet {
                                 String shareLink = UUID.randomUUID().toString();
                                 int newSlid = ShoppingListQueries.insertShoppingList(conn, sl.getLcid(), sl.getSlName(), sl.getSlDescr(),
                                         sl.isEditable(), sl.isRemovable(), sl.getSlIconPath(), newUid, shareLink);
-                                
+
                                 if (slItems != null && slItems.size() > 0) {
                                     for (SLItemBean item : slItems) {
                                         ShoppingListQueries.addToSLCart(conn, newSlid, item.getPid(), item.getQuantity());
@@ -158,16 +180,14 @@ public class SignUp extends HttpServlet {
         }
     }
 
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo
-        
-            () {
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
         return "Short description";
-        }// </editor-fold>
+    }// </editor-fold>
 
-    }
+}

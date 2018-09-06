@@ -150,7 +150,7 @@
                                           <div class="col-sm-12">
                                           <div class="row">
                                             <div class="col-sm-2 thumbnail">
-                                              <img alt="user-photo" src="${initParam['WEBSERVER_LOCATION']}/images/userAvatars/default.svg">
+                                              <img alt="user-photo" src="${initParam['WEBSERVER_LOCATION']}${comment.avatarPath}">
                                             </div>
                                             <div class="col-sm-10">
                                               <blockquote class="blockquote">

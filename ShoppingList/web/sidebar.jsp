@@ -14,7 +14,7 @@
     <div class="sidebar-header">
         <p>
             <a href="home.jsp">
-                <img   src="${initParam['WEBSERVER_LOCATION']}/images/app/logo_v2.svg" width="80%">
+                <img   src="${initParam['WEBSERVER_LOCATION']}/images/app/logo_v2.svg" width="100%">
             </a>
         </p>
     </div>
