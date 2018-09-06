@@ -32,7 +32,14 @@ public class Utils {
     public static final String SHOPPING_LIST_ICONS = "/images/shoppingLists/";
     public static final String SL_PICTURES = "/images/slPictures/";
 
-    public static final String DEFAULT_USER_AVATAR = "default.png";
+    public static final String DEFAULT_USER_AVATAR = "default.svg";
+    public static final String DEFAULT_USER_AVATAR2 = "default2.svg";
+    public static final String DEFAULT_USER_AVATAR3 = "default3.svg";
+    public static final String DEFAULT_USER_AVATAR4 = "default4.svg";
+    public static final String DEFAULT_USER_AVATAR5 = "default5.svg";
+    public static final String DEFAULT_USER_AVATAR6 = "default6.svg";
+    public static final String DEFAULT_USER_AVATAR7 = "default7.svg";
+    public static final String DEFAULT_USER_AVATAR8 = "default8.svg";
     public static final String DEFAULT_PRODUCT_LOGO = "default.png";
     public static final String DEFAULT_SHOP_CAT_ICON = "default.png";
     public static final String DEFAULT_PROD_CAT_ICON = "default.png";
