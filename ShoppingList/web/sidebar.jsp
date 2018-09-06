@@ -144,8 +144,7 @@
                 userLat: position.coords.latitude,
                 newShopsOnly: newShopsOnly
             },
-            success: function (response) {
-
+            success: function (response) {;
                 if (newShopsOnly && response === "noNewShops") {
                     //do nothing
                 } else if (newShopsOnly && response !== "noNewShops") {
@@ -168,12 +167,12 @@
 
     function gpsFail(err) {
         /*
-        if (err.code == 1) {
-            alert("Error: Access is denied!");
-        } else if (err.code == 2) {
-            alert("Error: Position is unavailable!");
-        }
-        */
+         if (err.code == 1) {
+         alert("Error: Access is denied!");
+         } else if (err.code == 2) {
+         alert("Error: Position is unavailable!");
+         }
+         */
     }
 
     setInterval(getUserCoordinates, 1000 * 30, true);

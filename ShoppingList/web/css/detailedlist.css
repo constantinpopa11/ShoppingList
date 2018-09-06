@@ -137,3 +137,20 @@ h3{
     padding-right: 1% !important;
     padding-left: 1% !important;
 }
+
+.comm-author{
+    padding-left: 15px;
+}
+
+.comm-date{
+    padding-right: 15px;
+}
+
+.comm-text{
+    padding-right: 15px;
+}
+
+.comm-avatar{
+    min-width: 80px;
+    
+}
