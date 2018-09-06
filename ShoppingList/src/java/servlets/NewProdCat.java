@@ -110,6 +110,9 @@ public class NewProdCat extends HttpServlet {
             String prodCatName = request.getParameter(FormFields.NEW_PROD_CAT_NAME_FIELD);
             String prodCatDescr = request.getParameter(FormFields.NEW_PROD_CAT_DESCR_FIELD);
 
+            if(prodCatDescr == null || prodCatDescr.isEmpty())
+                prodCatDescr = Utils.NO_PROD_CAT_DESCRIPTION;
+            
             Part filePart = request.getPart(FormFields.NEW_PROD_CAT_ICON_FIELD);
             String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
             String iconPath = Utils.PROD_CATEGORY_ICONS;

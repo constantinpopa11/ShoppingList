@@ -106,6 +106,10 @@ public class NewShopCat extends HttpServlet {
 
             String shopCatName = request.getParameter(FormFields.NEW_SHOP_CAT_NAME_FIELD);
             String shopCatDescr = request.getParameter(FormFields.NEW_SHOP_CAT_DESCR_FIELD);
+            
+            if(shopCatDescr == null || shopCatDescr.isEmpty()){
+                shopCatDescr = Utils.NO_SHOP_CAT_DESCRIPTION;
+            }
 
             Part filePart = request.getPart(FormFields.NEW_SHOP_CAT_ICON_FIELD);
             String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.

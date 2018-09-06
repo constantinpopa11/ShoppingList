@@ -51,11 +51,11 @@
 
                 <div class="container">
 
-                    <div class="form-container shadow-lg">
-                        <form class="text-center border border-light p-5" method="POST" action="NewProdCat"
+                    <div class="form-container shadow-lg" style="margin: 0 auto;">
+                        <form class="text-center border border-light" method="POST" action="NewProdCat"
                               enctype="multipart/form-data">
 
-                            <p  class="title">New Product Category</p>
+                            <p  class="title">New Product Category <i class="fas fa-pencil-alt"></i></p>
 
                             <!-- Shop category-->
                             <select class="browser-default custom-select mb-4 " name="lcid" required autocomplete="off ">

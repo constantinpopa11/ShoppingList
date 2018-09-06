@@ -113,9 +113,8 @@
                     </div>
                     <hr>
                     <div>
-                        Shop category description <br>
                         <img width="30" src="${initParam['WEBSERVER_LOCATION']}${activeSL.slCatIconPath}"/>
-                        ${activeSL.slCatName} <br>
+                        <b>${activeSL.slCatName}</b> <br>
                         ${activeSL.slCatDescr}
                     </div>
 
@@ -191,10 +190,10 @@
                 </div>
 
                 <div id="pid${prod.pid}" class="collapse custom-row" data-parent="#accordion">
-                    <div class="card-body">
+                    <div class="card-body itemInfo">
                         ${prod.prodDescr}<hr>
-                        ${item.prodCatName}
-                        <img width="30" src="${initParam['WEBSERVER_LOCATION']}${prod.prodCatIconPath}"/><br>
+                        <img width="30" src="${initParam['WEBSERVER_LOCATION']}${prod.prodCatIconPath}"/>
+                        <b>${prod.prodCatName}</b><br>
                         ${prod.prodCatDescr}
                     </div>
                 </div>

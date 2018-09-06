@@ -50,6 +50,11 @@ public class Utils {
     public static final int CREATED_BY_ADMIN = -1;
     public static final int MIN_PASSWORD_LENGTH = 8;
     public static final int SYSTEM_UID = 0;
+    public static final String NO_SHOP_CAT_DESCRIPTION = "There's no description for this shop category";
+    public static final String NO_PROD_CAT_DESCRIPTION = "There's no description for this product category";
+    public static final String NO_PROD_DESCRIPTION = "There's no description for this product";
+    public static final String NO_SL_DESCRIPTION = "There's no description for this shopping list";
+    
     
     public static String sha256(String base) {
         try {

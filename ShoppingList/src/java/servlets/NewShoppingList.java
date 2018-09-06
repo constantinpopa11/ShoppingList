@@ -106,6 +106,11 @@ public class NewShoppingList extends HttpServlet {
 
         String slName = request.getParameter(FormFields.NEW_LIST_NAME_FIELD);
         String slDescr = request.getParameter(FormFields.NEW_LIST_DESCR_FIELD);
+        
+        if(slDescr == null || slDescr.isEmpty()){
+            slDescr = Utils.NO_SL_DESCRIPTION;
+        }
+        
         String slcidField = request.getParameter(FormFields.NEW_LIST_SHOP_CAT);
         int slcid = Integer.parseInt(slcidField);
         String removableField = request.getParameter(FormFields.NEW_LIST_REMOVABLE_FIELD);

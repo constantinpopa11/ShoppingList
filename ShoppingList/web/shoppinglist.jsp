@@ -83,9 +83,8 @@
                     </div>
                     <hr>
                     <div>
-                        Shop category description <br>
                         <img width="30" src="${initParam['WEBSERVER_LOCATION']}${activeSL.slCatIconPath}"/>
-                        ${activeSL.slCatName} <br>
+                        <b>${activeSL.slCatName}</b> <br>
                         ${activeSL.slCatDescr}
                     </div>
 
@@ -109,7 +108,7 @@
                     <div class="card-header list-item ">
 
                         <div class="row custom-row" >
-                            <!-- checkbox -->
+                            <!-- checkbox 
 
                             <div class="col-xs-1  my-auto">
                                 <label class="checkbox-container">
@@ -117,7 +116,7 @@
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-
+                            -->
 
                             <!--  banana pic -->
                             <div class="col-xs-2  my-auto"  data-toggle="collapse" data-target="#pid${item.pid}">
@@ -180,13 +179,13 @@
 
                     <div id="pid${item.pid}" class="collapse" data-parent="#accordion">
                         <div class="card-body">
-                            <div>
+                            <div class="itemInfo">
                                 ${item.prodDescr}
                             </div>
                             <hr>
-                            <div>Category Info:
-                                ${item.prodCatName}
-                                <img width="30" src="${initParam['WEBSERVER_LOCATION']}${item.prodCatIconPath}"/><br>
+                            <div class="itemInfo">
+                                <img width="30" src="${initParam['WEBSERVER_LOCATION']}${item.prodCatIconPath}"/>
+                                <b>${item.prodCatName}</b><br>
                                 ${item.prodCatDescr}
                             </div>
                         </div>

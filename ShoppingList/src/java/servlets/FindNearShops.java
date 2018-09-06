@@ -63,6 +63,8 @@ public class FindNearShops extends HttpServlet {
 
         double lat = Double.parseDouble(request.getParameter("userLat"));
         double lon = Double.parseDouble(request.getParameter("userLong"));
+        
+        System.out.println("Device location: " + lat + ", " + lon);
 
         HttpSession session = request.getSession();
         List<ShoppingListBean> shoppingLists = (List<ShoppingListBean>) session.getAttribute("shoppingLists");

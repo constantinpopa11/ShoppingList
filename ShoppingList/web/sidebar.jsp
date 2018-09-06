@@ -125,5 +125,56 @@
 
 
 <script>
+    var newShopsOnly = false;
+    function getUserCoordinates(option) {
+        newShopsOnly = option;
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(findNearShops, gpsFail, {timeout: 3000});
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+
+    function findNearShops(position) {
+        $.ajax({
+            url: "FindNearShops",
+            type: "get", //send it through get method
+            data: {
+                userLong: position.coords.longitude,
+                userLat: position.coords.latitude,
+                newShopsOnly: newShopsOnly
+            },
+            success: function (response) {
+
+                if (newShopsOnly && response === "noNewShops") {
+                    //do nothing
+                } else if (newShopsOnly && response !== "noNewShops") {
+                    $('#responseBody').empty();
+                    $('#responseBody').append(response);
+                    $('#nearShopsModal').modal("show")
+                } else if (!newShopsOnly) {
+                    $('#responseBody').empty();
+                    $('#responseBody').append(response);
+                    $('#nearShopsModal').modal("show");
+                }
+
+
+            },
+            error: function (xhr) {
+                //alert("There's been an error while searching for near shops");
+            }
+        });
+    }
+
+    function gpsFail(err) {
+        /*
+        if (err.code == 1) {
+            alert("Error: Access is denied!");
+        } else if (err.code == 2) {
+            alert("Error: Position is unavailable!");
+        }
+        */
+    }
+
     setInterval(getUserCoordinates, 1000 * 30, true);
 </script>

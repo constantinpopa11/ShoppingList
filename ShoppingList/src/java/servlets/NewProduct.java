@@ -114,6 +114,10 @@ public class NewProduct extends HttpServlet {
         String prodCategory = request.getParameter(FormFields.NEW_PRODUCT_ITEM_CAT_FIELD);
         String measureUnit = request.getParameter(FormFields.NEW_PRODUCT_MEASURE_UNIT_FIELD);
         String prodDescr = request.getParameter(FormFields.NEW_PRODUCT_PROD_DESCR_FIELD);
+        
+        if(prodDescr == null || prodDescr.isEmpty()){
+            prodDescr = Utils.NO_PROD_DESCRIPTION;
+        }
 
         Part filePart = request.getPart(FormFields.NEW_PRODUCT_ICON_FIELD);
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.

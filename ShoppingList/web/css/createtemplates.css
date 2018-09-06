@@ -1,9 +1,11 @@
 .form-container {
+    margin: 0 auto;
     width:95% !important;
 }
 
 @media (min-width:641px)  { 
     .form-container{
+        margin: 0 auto;
         width:70% !important;
     }
 }
@@ -21,7 +23,7 @@
 }
 
 .custom-select {
-    border-width: 0 0 2px 0 ;
+    border-width: 0 0 1px 0 ;
     border-color: #6D7FCC;
     border-radius: 0;
 }
@@ -39,6 +41,7 @@
 }
 
 .custom-btn{
+    border-radius: 0px;
     background-color: #6D7FCC;
     color:white;
 }
@@ -64,7 +67,7 @@
     padding:30px; 
     background-color: #5067c2;
     color: white;
-    font-size: 30px;
+    font-size: 2em;
 }
 
 .switch input { 
